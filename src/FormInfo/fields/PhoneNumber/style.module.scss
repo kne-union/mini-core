@@ -1,0 +1,15 @@
+.flex{
+  display: flex;
+}
+.code{
+  width: 100px;
+  padding: 0 16px;
+  border-right: solid 2px var(--adm-color-background-line);
+  margin-right: 16px;
+}
+.number{
+  flex: 1;
+}
+.pop-number{
+  padding-top: 24px;
+}

@@ -1,0 +1,18 @@
+.user-list {
+  .avatar {
+    --adm-avatar-size: 80px !important;
+  }
+  :global {
+    .adm-list-item-content-main {
+      font-weight: bold;
+    }
+    .adm-list-item-description{
+      font-weight: normal;
+      margin-top: 6px;
+    }
+    .adm-list-item-content-prefix {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

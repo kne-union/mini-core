@@ -1,0 +1,61 @@
+.form-part {
+  padding: 0 48px;
+
+  :global {
+    .adm-list-item {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+}
+
+.data-select-container {
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 216px);
+
+  :global {
+    .data-select-container-footer {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+  }
+}
+
+.city-select-container {
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 216px - 70px);
+}
+
+.list-header {
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .list-header-title {
+    font-size: var(--adm-font-size-10);
+    font-weight: 500;
+    color: var(--adm-color-text-dafault);
+  }
+}
+
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--line-clamp, 1);
+  text-overflow: ellipsis;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.list-item {
+  :global {
+    .adm-list {
+      --border-top: none;
+    }
+  }
+}
+
+.list-btn {
+  padding: 0;
+}

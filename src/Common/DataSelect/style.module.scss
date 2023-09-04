@@ -1,0 +1,115 @@
+.container {
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 126px - 120px);
+
+  &.is-single {
+    --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 126px);
+  }
+
+  :global {
+    .adm-list {
+      --font-size: var(--adm-font-size-6);
+    }
+
+    .adm-check-list {
+      --font-size: var(--adm-font-size-6);
+    }
+
+    .adm-list-item-content, .adm-list-body {
+      border: none;
+    }
+
+    .adm-check-list-item-active .adm-list-item-content-main {
+      color: var(--adm-color-primary);
+    }
+  }
+}
+
+.menu {
+  &.is-active {
+    color: var(--adm-color-primary);
+    font-weight: bold;
+
+    &:before {
+      content: '';
+      background: var(--adm-color-primary);
+      width: 4px;
+      height: 32px;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.main-view {
+  height: var(--panel-height);
+  padding: 0 32px;
+  overflow: hidden;
+
+  &.has-top-border {
+    border-top: solid 2px var(--adm-color-border);
+  }
+}
+
+.scroller {
+  height: var(--panel-height);
+}
+
+.with-title-scroller {
+  height: calc(var(--panel-height) - 80px);
+  padding-left: 40px;
+  box-sizing: border-box;
+}
+
+.menu-list {
+  border-right: solid 2px var(--adm-color-border);
+
+  :global {
+    .adm-list-body, .adm-list-item-content {
+      border: none;
+    }
+
+    .adm-list-item-content-main {
+      padding: 20px 0;
+    }
+  }
+}
+
+.title {
+  font-size: var(--font-size);
+  font-weight: bold;
+  padding-left: 40px;
+  margin: 24px 0;
+}
+
+.search-bar {
+  padding: 0 32px;
+  margin: 0 0 20px;
+}
+
+.component-body {
+  --safe-bottom: calc(env(safe-area-inset-bottom) * 1);
+  --max-height: calc(100vh - var(--header-container-height) - var(--safe-bottom, 0px));
+  --fix-footer: 112px;
+}
+
+.component-item-body {
+  position: relative;
+  height: calc(var(--max-height) - var(--fix-footer));
+}
+
+.component-fix-footer {
+  height: var(--fix-footer);
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 32px;
+}
+
+.component-wrapper {
+  max-height: calc(var(--max-height) - var(--fix-footer));
+}

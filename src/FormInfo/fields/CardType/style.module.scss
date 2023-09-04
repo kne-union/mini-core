@@ -1,0 +1,13 @@
+.flex{
+  display: flex;
+  word-break: keep-all;
+}
+
+.number{
+  flex: 1;
+}
+
+
+.type{
+  flex-shrink: 0;
+}

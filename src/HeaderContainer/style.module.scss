@@ -1,0 +1,13 @@
+.header-container {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--header-bg-color, #FFFFFF);
+}
+
+.header-title {
+  padding-top: var(--header-title-top);
+  line-height: var(--header-title-height);
+  min-height: var(--header-title-height);
+}

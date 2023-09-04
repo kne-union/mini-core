@@ -1,0 +1,35 @@
+
+.adm-text-area-count {
+  color: var(--adm-color-primary);
+}
+
+.component-item-body {
+  position: relative;
+  height: var(--max-height);
+}
+
+.adm-text-area-wrapper {
+  :global {
+    .adm-text-area {
+      position: relative;
+
+      .adm-text-area-element {
+        padding: 30px 48px;
+      }
+
+      .adm-text-area-count {
+        padding: 4px 48px 16px 48px;
+      }
+
+      &:after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 48px;
+        right: 48px;
+        height: 2px;
+        background: var(--adm-color-background-line);
+      }
+    }
+  }
+}

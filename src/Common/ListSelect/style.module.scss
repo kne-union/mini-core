@@ -1,0 +1,32 @@
+.list-select {
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 100px);
+
+  :global {
+    .adm-check-list {
+      --font-size: var(--adm-font-size-6);
+      --padding-left: 32px;
+      --padding-right: 32px;
+      --prefix-padding-right: 32px;
+    }
+
+    .adm-list-item-content, .adm-list-body {
+      border: none;
+    }
+
+    .adm-list-item-content-main {
+      padding: 20px 0;
+    }
+
+    .adm-check-list-item-active .adm-list-item-content-main {
+      color: var(--adm-color-primary);
+    }
+  }
+}
+
+.list-select-scroller {
+  max-height: calc(var(--panel-height) - 50px);
+}
+
+.search-bar {
+  padding: 8px 32px 20px 32px;
+}

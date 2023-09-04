@@ -1,0 +1,140 @@
+.options-bar {
+  :global {
+    .scroll-header-close:not(.need-scroll) {
+      width: 100%;
+    }
+  }
+
+  &:not(&:global(.scroll-header-open)) {
+    padding-bottom: 16px;
+  }
+
+  &:global(.scroll-header-open) {
+    padding-top: 2px;
+  }
+}
+
+.more-icon {
+  --color: var(--adm-color-weak);
+  --size: var(--adm-font-size-2);
+}
+
+.options-item {
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: var(--adm-font-size-6);
+  margin-right: 16px;
+  color: var(--adm-color-text-secondary);
+  line-height: 50px;
+  position: relative;
+  text-align: center;
+  background: var(--adm-color-box);
+  border: 2px solid var(--adm-color-box);
+  border-radius: 30px;
+  padding: 0 16px;
+  @at-root :global(.scroll-header-open) {
+    .options-item {
+      margin-bottom: 16px;
+    }
+  }
+
+  .icon {
+    --color: var(--adm-color-weak);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.is-active {
+    color: var(--adm-color-primary);
+    border-color: var(--adm-color-primary);
+    background: var(--adm-color-background-primary-opacity-1);
+
+    .icon {
+      --color: var(--adm-color-primary);
+    }
+  }
+}
+
+.location-item {
+  visibility: hidden;
+  line-height: 0;
+
+  &:global {
+    &.adm-button {
+      padding: 0;
+    }
+
+    &:active::before {
+      opacity: 0;
+    }
+  }
+}
+
+.options-label {
+  font-size: var(--adm-font-size-6);
+  display: flex;
+
+  :global(.adm-icon) {
+    margin-left: 8px;
+    line-height: 50px;
+    font-size: 16px;
+  }
+}
+
+.options-label-text {
+  &:not(.is-label) {
+    max-width: 240px;
+  }
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.popup {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.popup-mask {
+  position: absolute;
+}
+
+.popup-body {
+  text-align: left;
+  --max-height: calc(90vh - var(--top, 0px));
+  position: absolute;
+  max-height: var(--max-height);
+  overflow: hidden;
+}
+
+.clean-btn {
+  &:global(.adm-button){
+    font-size: var(--adm-font-size-6);
+  }
+  &.is-open {
+    transform: translateX(-24px);
+  }
+
+  &.is-close {
+    position: absolute;
+    right: 0;
+    padding: 14px 0;
+
+    &:global {
+      &:active::before {
+        opacity: 0;
+      }
+    }
+  }
+
+  :global(.adm-icon) {
+    margin-right: 6px;
+  }
+}

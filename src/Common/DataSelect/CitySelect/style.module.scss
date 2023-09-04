@@ -1,0 +1,32 @@
+.container {
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 196px - 120px);
+
+  :global {
+    .adm-tabs {
+      --title-font-size: var(--adm-font-size-6);
+    }
+
+    .adm-tabs-tab-active {
+      font-weight: bold;
+    }
+
+    .adm-tabs-tab-wrapper {
+      flex: none;
+      padding: 0 32px;
+    }
+
+    .adm-tabs-content {
+      padding: 0;
+    }
+  }
+}
+
+.main-view {
+  padding: 0 32px 0 16px;
+}
+
+.menu-list {
+  :global(.adm-list-item) {
+    padding-left: 12px;
+  }
+}

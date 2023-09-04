@@ -1,0 +1,10 @@
+.collapse {
+  :global {
+    .adm-list{
+      --active-background-color: #FFF;
+    }
+    .adm-collapse-panel-header .adm-list-item-content-main {
+      font-weight: bold;
+    }
+  }
+}

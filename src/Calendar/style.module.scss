@@ -1,0 +1,143 @@
+.week-item {
+  display: flex;
+}
+
+.date-cell {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  height: 100px;
+  font-size: var(--adm-font-size-8);
+
+  &.cell-title .date-item {
+    font-size: var(--adm-font-size-4);
+  }
+
+  &.not-current-month {
+    color: var(--adm-color-light);
+
+    .is-marked:after {
+      background: var(--adm-color-light);
+    }
+  }
+}
+
+.date-item {
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  display: inline-block;
+  border-radius: 50%;
+  font-size: var(--adm-font-size-8);
+  position: relative;
+
+  &.is-today {
+    color: var(--adm-color-primary);
+    background: var(--adm-color-background-primary-opacity-1);
+  }
+
+  &.is-current {
+    background: var(--adm-color-primary);
+    color: #FFFFFF;
+  }
+
+  &.is-marked {
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: -14px;
+      width: 10px;
+      height: 10px;
+      left: calc(50% - 5px);
+      border-radius: 50%;
+      background: var(--adm-color-primary);
+    }
+
+  }
+
+  &.is-disabled {
+    color: var(--adm-color-weak);
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--adm-font-size-12);
+  line-height: 56px;
+  margin-bottom: 14px;
+  margin-top: 32px;
+}
+
+.month-selector-body {
+  .title {
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+}
+
+.title-icon {
+  --size: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+
+.title-current {
+  font-weight: 500;
+}
+
+.title-options {
+  line-height: 44px;
+}
+
+.year-title {
+  font-weight: bold;
+  margin-bottom: 24px;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+.selector {
+  margin-bottom: 64px;
+  padding: 0 32px;
+  box-sizing: border-box;
+
+  & > :global(.adm-space) {
+    margin-right: -16px;
+  }
+
+  :global(.adm-space-horizontal .adm-space-item) {
+    margin-right: 26px;
+    padding-bottom: 26px;
+  }
+
+  :global(.adm-selector-item) {
+    width: 150px;
+  }
+}
+
+.month-selector-scroller {
+  max-height: calc(60vh - 60px);
+}
+
+.month-swiper {
+  height: 600px;
+
+  &.animating {
+    pointer-events: none;
+  }
+}
+
+.divider {
+  margin-top: 0;
+}
+
+.divider-icon {
+  transition: transform 300ms;
+
+  &.is-month {
+    transform: rotate(180deg);
+  }
+}

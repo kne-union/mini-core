@@ -1,0 +1,44 @@
+.state-bar {
+  &:not(&:global(.scroll-header-open)) {
+    padding-bottom: 16px;
+  }
+  margin-bottom: 6px;
+  border-bottom: solid 2px var(--adm-border-color);
+}
+
+.state-item {
+  display: inline-block;
+  font-size: var(--adm-font-size-6);
+  margin-right: 48px;
+  color: var(--adm-color-text-secondary);
+  line-height: 60px;
+  position: relative;
+  min-width: 64px;
+  text-align: center;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:after {
+    content: '';
+    bottom: 0;
+    width: 0;
+    height: 4px;
+    border-radius: 2px;
+    position: absolute;
+    background: var(--adm-color-primary);
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 200ms ease;
+  }
+
+  &.is-active {
+    color: var(--adm-color-text);
+    font-weight: bold;
+
+    &:after {
+      width: 64px;
+    }
+  }
+}
