@@ -9,6 +9,7 @@
     "css": "sass"
   },
   "scripts": {
+    "build:doc": "node scripts/components-doc-generator.js",
     "build:weapp": "taro build --type weapp"
   },
   "browserslist": [

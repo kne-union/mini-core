@@ -1,55 +1,3 @@
-
-# mini-core
-
-
-### 安装
-
-```shell
-npm i --save @kne/mini-core
-```
-
-
-### 概述
-
-这里填写组件概要说明
-
-
-### 示例
-
-#### 示例代码
-
-- 这里填写示例标题
-- 这里填写示例说明
-- miniCore(@kne/mini-core),lodash(lodash)
-
-```jsx
-const BaseExample = ()=>{
-    return '我是一个示例组件';
-};
-
-render(<BaseExample />);
-
-```
-
-- 枚举值
-- 展示获取枚举值和批量获取枚举值
-- miniCore(@kne/mini-core)
-
-```jsx
-const {Enum} = miniCore;
-const BaseExample = () => {
-    return <Enum loading={null} moduleName="degreeEnum" name={30}/>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 筛选
-- 展示条件筛选器
-- miniCore(@kne/mini-core)
-
-```jsx
 const {Enum, Filter} = miniCore;
 const {useState} = React;
 
@@ -96,12 +44,3 @@ const BaseExample = () => {
 };
 
 render(<BaseExample/>);
-
-```
-
-
-### API
-
-|属性名|说明|类型|默认值|
-|  ---  | ---  | --- | --- |
-
