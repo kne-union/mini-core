@@ -1,0 +1,24 @@
+.layout {
+  font-size: 32px;
+  :global {
+    .adm-tab-bar-fixed {
+      width: 100%;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      background: var(--adm-color-white);
+      z-index: 999;
+      padding-top: 18px;
+      border-top: 2px solid var(--adm-color-background-light);
+
+      .adm-tab-bar-wrap {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+.layout-content {
+  padding-bottom: 172px;
+}

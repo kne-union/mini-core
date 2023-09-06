@@ -3,7 +3,7 @@ import {View} from '@tarojs/components';
 import {hooks, InputNumber, Picker, withItem} from "@kne/react-form-antd-taro";
 import style from './style.module.scss';
 import classnames from 'classnames';
-import {Enum} from "@kne/mini-core";
+import Enum from "../../../Enum";
 import isNil from 'lodash/isNil';
 
 const {useDecorator} = hooks;
