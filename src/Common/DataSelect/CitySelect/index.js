@@ -102,7 +102,7 @@ const CityEnumInner = withFetch(({name, data, children, ...props}) => {
   const {getCity} = useMemo(() => createAddressApi(data), [data]);
   const output = getCity(name);
   cityEnumCache.set(name, output);
-  return children(output, props);
+  return children(output, props, data);
 });
 
 export const CityEnum = (props) => {

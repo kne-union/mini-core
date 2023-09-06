@@ -31,3 +31,4 @@ export {default as HeaderContainer} from './HeaderContainer';
 export {default as AvatarPreview} from './AvatarPreview';
 export {default as OssFile, getOssUrl, withOssFile} from './OssFile';
 export {default as Button, FixView, LoadingButton} from './Button';
+export {default as Layout} from './Layout';
