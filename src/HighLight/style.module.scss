@@ -1,0 +1,7 @@
+.text {
+  color: inherit;
+
+  &.high-light {
+    background: var(--adm-color-primary-2);
+  }
+}
