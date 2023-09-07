@@ -1,13 +1,17 @@
-.list-select {
-  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 100px);
+.search-bar {
+  padding: 8px 32px 20px 32px;
+}
 
+.list-select-scroller {
+  --panel-height: calc(var(--max-height) - 100px);
+  max-height: calc(var(--panel-height) - 50px);
   :global {
     .adm-check-list {
       --font-size: var(--adm-font-size-6);
       --padding-left: 32px;
       --padding-right: 32px;
       --prefix-padding-right: 32px;
-      --border-inner: none;
+      --border-inner:none;
     }
 
     .adm-list-item-content, .adm-list-body {
@@ -22,12 +26,4 @@
       color: var(--adm-color-primary);
     }
   }
-}
-
-.list-select-scroller {
-  height: calc(var(--panel-height) - 50px);
-}
-
-.search-bar {
-  padding: 8px 32px 20px 32px;
 }

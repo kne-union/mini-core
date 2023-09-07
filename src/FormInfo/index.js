@@ -1,4 +1,5 @@
 import AdvancedSelect from './fields/AdvancedSelect';
+import AutoComplete from './fields/AutoComplete';
 import CitySelect from './fields/CitySelect';
 import TextArea from './fields/TextArea';
 import FunctionSelect from "./fields/FunctionSelect";
@@ -13,10 +14,10 @@ import {isValidPhoneNumber} from "libphonenumber-js/min";
 
 export * from '@kne/react-form-antd-taro';
 export const fields = {
-    ...baseFields, AdvancedSelect, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber
+    ...baseFields, AdvancedSelect, AutoComplete, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber
 };
 export {
-    AdvancedSelect, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber, Avatar, SalaryInput, CardType
+    AdvancedSelect, AutoComplete, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber, Avatar, SalaryInput, CardType
 };
 export {default as FormList} from './List';
 export {default as FormPart} from './FormPart';

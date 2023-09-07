@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import HeaderContainer from '../HeaderContainer';
 import {GlobalStyle} from '../Global';
 import Taro, {useRouter} from "@tarojs/taro";
-import {Icon, NavBar, TabBar} from '@kne/antd-taro';
+import {Icon, NavBar, SafeArea, TabBar} from '@kne/antd-taro';
 import classnames from "classnames";
 import {View} from '@tarojs/components';
 import style from './style.module.scss';
@@ -48,7 +48,7 @@ const Layout = ({children, showToolBar = false, header, toolBar, toolBarList, cl
         <View className={classnames('layout-content', showToolBar ? style['layout-content'] : "", className)}>
             {children}
         </View>
-        {toolBar || (toolBarList && <ToolBar list={toolBarList}/>)}
+        {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
     </GlobalStyle>;
 };
 
