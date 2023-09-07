@@ -161,123 +161,118 @@ page, body, .adm-root-portal {
       color: var(--adm-color-light);
     }
 
-    .adm-list-body {
-      border-top: none;
-      border-bottom: none;
-    }
-
-    .adm-list-item {
-      padding-right: 0;
-      padding-left: 0;
-
-
-      &:after {
-        left: 0;
-        width: 100%;
-        opacity: 1;
-        background: #F1F1F1;
-        bottom: 0px;
-        border-bottom: none;
-      }
-
-      &.is-error {
-        opacity: 1;
-
-        &:after {
-          left: 0;
-          background: #D14343;
-        }
-      }
-
-      &.is-req {
-        .adm-list-item-title {
-          &:before {
-            font-family: "iconfont" !important;
-            content: "\e614";
-            position: relative;
-            font-size: var(--adm-font-size-2);
-            transform: none;
-            margin-right: 4px;
-            color: #D14343;
-            font-weight: 400;
-          }
-        }
-      }
-
-      &:active:not(.adm-list-item-disabled) {
-        background-color: transparent;
-
-        &:after {
-          background: #F1F1F1;
-          border-bottom: none;
-        }
-      }
-
-      .adm-list-item-title {
-        display: flex;
-        align-items: center;
-        font-size: var(--adm-font-size-6);
-        margin-bottom: 16px;
-        color: var(--adm-color-text-secondary);
-      }
-
-      .adm-list-item-content {
+    > .adm-list {
+      --border-inner: solid 2px var(---adm-color-background-line);
+      --border-top: solid 2px var(--adm-color-background-line);
+      --border-bottom: solid 2px var(--adm-color-background-line);
+      --padding-left: 32px;
+      --padding-right: 32px;
+      >.adm-list-body {
         border-top: none;
-        padding-right: 0;
+        border-bottom: none;
+        >.adm-list-item {
+          padding-right: 0;
+          padding-left: 0;
 
-        .adm-list-item-content-main {
-          padding: 32px 0;
-        }
-      }
 
-      .adm-input-clear {
-        padding-right: 0;
+          &:after {
+            left: 0;
+            width: 100%;
+            opacity: 1;
+            background: #F1F1F1;
+            bottom: 0;
+            border-bottom: none;
+          }
 
-        .adm-component {
-          --size: var(--adm-font-size-10);
-        }
-      }
+          &.is-error {
+            opacity: 1;
 
-      .react-form_decorator-item {
-        position: relative;
-        padding-right: 44px;
+            &:after {
+              left: 0;
+              background: #D14343;
+            }
+          }
 
-        :global(.adm-space-horizontal) {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: var(--line-clamp, 1);
-          text-overflow: ellipsis;
-          word-break: break-all;
-          word-wrap: break-word;
-        }
+          &.is-req {
+            .adm-list-item-title {
+              &:before {
+                font-family: "iconfont" !important;
+                content: "\e614";
+                position: relative;
+                font-size: var(--adm-font-size-2);
+                transform: none;
+                margin-right: 4px;
+                color: #D14343;
+                font-weight: 400;
+              }
+            }
+          }
 
-        &:after {
-          position: absolute;
-          font-family: 'iconfont' !important;
-          content: "\e60a";
-          font-size: var(--adm-font-size-6);
-          color: var(--adm-color-light);
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
+          &:active:not(.adm-list-item-disabled) {
+            background-color: transparent;
+
+            &:after {
+              background: #F1F1F1;
+              border-bottom: none;
+            }
+          }
+
+          .adm-list-item-title {
+            display: flex;
+            align-items: center;
+            font-size: var(--adm-font-size-6);
+            margin-bottom: 16px;
+            color: var(--adm-color-text-secondary);
+          }
+
+          .adm-list-item-content {
+            border-top: none;
+            padding-right: 0;
+
+            .adm-list-item-content-main {
+              padding: 32px 0;
+            }
+          }
+
+          .adm-input-clear {
+            padding-right: 0;
+
+            .adm-component {
+              --size: var(--adm-font-size-10);
+            }
+          }
+
+          .react-form_decorator-item {
+            position: relative;
+            padding-right: 44px;
+
+            :global(.adm-space-horizontal) {
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: var(--line-clamp, 1);
+              text-overflow: ellipsis;
+              word-break: break-all;
+              word-wrap: break-word;
+            }
+
+            &:after {
+              position: absolute;
+              font-family: 'iconfont' !important;
+              content: "\e60a";
+              font-size: var(--adm-font-size-6);
+              color: var(--adm-color-light);
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
         }
       }
     }
   }
 
   .adm-list {
-    --border-inner: solid 2px var(---adm-color-background-line);
-    --border-top: solid 2px var(--adm-color-background-line);
-    --border-bottom: solid 2px var(--adm-color-background-line);
-    --padding-left: 32px;
-    --padding-right: 32px;
-
-    .adm-list-body {
-      border-top: none;
-      border-bottom: none;
-    }
-
     .adm-icon.adm-component.icon-checkout {
       font-family: 'iconfont' !important;
       font-size: var(--adm-font-size-6);

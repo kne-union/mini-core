@@ -7,6 +7,7 @@
       --padding-left: 32px;
       --padding-right: 32px;
       --prefix-padding-right: 32px;
+      --border-inner: none;
     }
 
     .adm-list-item-content, .adm-list-body {
@@ -24,7 +25,7 @@
 }
 
 .list-select-scroller {
-  max-height: calc(var(--panel-height) - 50px);
+  height: calc(var(--panel-height) - 50px);
 }
 
 .search-bar {

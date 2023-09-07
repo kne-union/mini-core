@@ -37,7 +37,27 @@ const BaseExample = () => {
             }, {
                 key: 'mine', label: '我上传的', type: 'SwitchButton'
             }, {
-                key: 'positionUser', label: '职位负责人', type: 'UserListSelect'
+                key: 'positionUser', label: '职位负责人', type: 'UserListSelect', apis: {
+                    getUserList: {
+                        loader: () => {
+                            return {
+                                pageData: degreeEnum.map(({value, description}) => ({
+                                    uid: value, name: description, description
+                                }))
+                            }
+                        }
+                    }
+                }
+            }, {
+                key: 'political', label: '政治面貌', type: "ListSelect", api: {
+                    loader: () => {
+                        return {
+                            pageData: political.map(({value, description}) => ({
+                                value, label: description
+                            }))
+                        }
+                    }
+                }
             }]}/>
         }}</Enum>
     </Filter>;

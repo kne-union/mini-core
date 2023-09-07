@@ -5,4 +5,25 @@
 .list-select-scroller {
   --panel-height: calc(var(--max-height) - 100px);
   max-height: calc(var(--panel-height) - 50px);
+  :global {
+    .adm-check-list {
+      --font-size: var(--adm-font-size-6);
+      --padding-left: 32px;
+      --padding-right: 32px;
+      --prefix-padding-right: 32px;
+      --border-inner:none;
+    }
+
+    .adm-list-item-content, .adm-list-body {
+      border: none;
+    }
+
+    .adm-list-item-content-main {
+      padding: 20px 0;
+    }
+
+    .adm-check-list-item-active .adm-list-item-content-main {
+      color: var(--adm-color-primary);
+    }
+  }
 }
