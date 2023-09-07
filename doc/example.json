@@ -5,11 +5,64 @@
       "title": "这里填写示例标题",
       "description": "这里填写示例说明",
       "code": "./base.js",
-      "scope": [],
-      "__scope_notes": {
-        "name": "这里填写包导出名称(这是一个注释字段，需要添加到[scope]中)",
-        "packageName": "这里填写包名(这是一个注释字段，需要添加到[scope]中)"
-      }
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        }
+      ]
+    },
+    {
+      "title": "枚举值",
+      "description": "展示获取枚举值和批量获取枚举值",
+      "code": "./enum.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        }
+      ]
+    },
+    {
+      "title": "筛选",
+      "description": "展示条件筛选器",
+      "code": "./filter.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        }
+      ]
+    },
+    {
+      "title": "表单组件",
+      "description": "展示表单组件",
+      "code": "./form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        }
+      ]
+    },
+    {
+      "title": "高亮",
+      "description": "展示搜索高亮",
+      "code": "./highLight.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
     }
   ]
 }
