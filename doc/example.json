@@ -37,6 +37,21 @@
           "packageName": "@kne/mini-core"
         }
       ]
+    },
+    {
+      "title": "高亮",
+      "description": "展示搜索高亮",
+      "code": "./highLight.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
     }
   ]
 }
