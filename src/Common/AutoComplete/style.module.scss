@@ -1,0 +1,8 @@
+.search-bar {
+  padding: 8px 32px 20px 32px;
+}
+
+.list-select-scroller {
+  --panel-height: calc(var(--max-height) - 100px);
+  max-height: calc(var(--panel-height) - 50px);
+}

@@ -12,6 +12,7 @@ export {
     ScrollHeader as CommonScrollHeader,
     ScrollLoader as CommonScrollLoader,
     ListSelect as CommonListSelect,
+    AutoComplete as CommonAutoComplete,
     UserListSelect as CommonUserListSelect,
     LoadMoreList as CommonLoadMoreList,
     LoadingView as CommonLoadingView,

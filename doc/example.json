@@ -37,6 +37,17 @@
           "packageName": "@kne/mini-core"
         }
       ]
+    },
+    {
+      "title": "表单组件",
+      "description": "展示表单组件",
+      "code": "./form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        }
+      ]
     }
   ]
 }
