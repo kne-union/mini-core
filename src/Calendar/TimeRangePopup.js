@@ -22,7 +22,7 @@ const TimeRangePopup = ({className, onClose, isRootPortal, value, onChange, ...p
                       onClose?.();
                       setCurrent(value);
                   }}>
-        <TimeRangeView {...props} value={current} onChange={setCurrent}/>
+        {active && <TimeRangeView {...props} value={current} onChange={setCurrent}/>}
         <View className={classnames(`adm-picker-header-button`, style['confirm-btn'])} onClick={() => {
             setActive(false);
             onClose?.();
