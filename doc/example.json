@@ -39,7 +39,7 @@
       ]
     },
     {
-      "title": "表单组件",
+      "title": "表单",
       "description": "展示表单组件",
       "code": "./form.js",
       "scope": [
@@ -61,6 +61,27 @@
         {
           "name": "tarojsComponents",
           "packageName": "@tarojs/components"
+        }
+      ]
+    },{
+      "title": "日历",
+      "description": "展示日历组件",
+      "code": "./calendar.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },{
+          "name": "dayjs",
+          "packageName": "dayjs"
         }
       ]
     }

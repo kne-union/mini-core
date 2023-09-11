@@ -8,16 +8,35 @@ import PhoneNumber from './fields/PhoneNumber';
 import Avatar from './fields/Avatar';
 import SalaryInput from './fields/SalaryInput';
 import CardType from './fields/CardType';
+import {CalendarTimeRange} from './fields/Calendar';
 import {fields as baseFields, interceptors, preset as formPreset, RULES} from '@kne/react-form-antd-taro';
 import {get} from "lodash";
 import {isValidPhoneNumber} from "libphonenumber-js/min";
 
 export * from '@kne/react-form-antd-taro';
 export const fields = {
-    ...baseFields, AdvancedSelect, AutoComplete, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber
+    ...baseFields,
+    AdvancedSelect,
+    AutoComplete,
+    CitySelect,
+    FunctionSelect,
+    IndustrySelect,
+    TextArea,
+    PhoneNumber,
+    CalendarTimeRange
 };
 export {
-    AdvancedSelect, AutoComplete, CitySelect, FunctionSelect, IndustrySelect, TextArea, PhoneNumber, Avatar, SalaryInput, CardType
+    AdvancedSelect,
+    AutoComplete,
+    CitySelect,
+    FunctionSelect,
+    IndustrySelect,
+    TextArea,
+    PhoneNumber,
+    Avatar,
+    SalaryInput,
+    CardType,
+    CalendarTimeRange
 };
 export {default as FormList} from './List';
 export {default as FormPart} from './FormPart';
