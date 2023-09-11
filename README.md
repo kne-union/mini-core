@@ -142,7 +142,8 @@ const BaseExample = () => {
                             },],
                         };
                     }
-                }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
+                }}/>,<CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
+                <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
                 <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
                     loader: ({data}) => {
                         return {
