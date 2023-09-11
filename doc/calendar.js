@@ -23,7 +23,7 @@ const BaseExample = () => {
     return <Space direction="vertical">
         <View>CalendarWeekTitle:展示星期文案</View>
         <CalendarWeekTitle/>
-        <View>CalendarMonthView:展示一个周日期</View>
+        <View>CalendarWeekView:展示一个周日期</View>
         <CalendarWeekView current={value} onChange={onChange} minDate="2020-10-01" maxDate="2030-01-01"
                           marks={['2023-10-01', '2023-09-30']}/>
         <View>CalendarMonthView:展示一个月日期</View>
@@ -45,7 +45,9 @@ const BaseExample = () => {
         <CalendarMonthSwiper current={value} onChange={onChange} minDate="2020" maxDate="2030-01-01"
                              marks={['2023-10-01', '2023-09-30']}/>
         <View>CalendarView:完整日历视图</View>
-        <CalendarView value={value} onChange={onChange}/>
+        <View style={{'--month-selector-height': '600px'}}>
+            <CalendarView value={value} onChange={onChange}/>
+        </View>
         <View>Calendar:完整日历功能</View>
         <Calendar value={value} onChange={onChange}/>
         <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>

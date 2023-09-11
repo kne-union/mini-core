@@ -7,6 +7,7 @@ import style from './style.module.scss';
 const UserListSelect = ({apis: propsApis, ...props}) => {
     const {apis: baseApis} = usePreset();
     const apis = Object.assign({}, baseApis, propsApis ? {user: propsApis} : {});
+
     return <ListSelect {...props} className={style['user-list']}
                        api={Object.assign({}, apis.user.getUserList, {
                            transformData: (data) => {
