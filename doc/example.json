@@ -46,6 +46,10 @@
         {
           "name": "miniCore",
           "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
         }
       ]
     },
@@ -63,7 +67,8 @@
           "packageName": "@tarojs/components"
         }
       ]
-    },{
+    },
+    {
       "title": "日历",
       "description": "展示日历组件",
       "code": "./calendar.js",
@@ -79,7 +84,8 @@
         {
           "name": "tarojsComponents",
           "packageName": "@tarojs/components"
-        },{
+        },
+        {
           "name": "dayjs",
           "packageName": "dayjs"
         }
