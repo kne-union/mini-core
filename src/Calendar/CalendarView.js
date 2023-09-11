@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import useCalendarValue from './useCalendarValue';
 import classnames from "classnames";
-import {Button, Icon, Space} from '@kne/antd-taro';
+import {Button, Icon} from '@kne/antd-taro';
 import style from "./style.module.scss";
 import {View} from "@tarojs/components";
 import dayjs from "dayjs";
@@ -21,11 +21,16 @@ const CalendarView = ({className, ...props}) => {
                 {dayjs(value).format('YYYY年MM月')}
                 <Icon className={classnames('iconfont', style['title-icon'])} type="jiantou-tianchong"/>
             </View>
-            <View className={style['title-options']}>
+            {monthSelector ? <View className={style['title-options']}>
+                <Button size="small" onClick={() => {
+                    onChange(new Date());
+                    setMonthSelector(false);
+                }}>本月</Button>
+            </View> : <View className={style['title-options']}>
                 <Button size="small" onClick={() => {
                     onChange(new Date());
                 }}>今天</Button>
-            </View>
+            </View>}
         </View>
         {monthSelector ? <View className={style['calendar-view-month-selector']}>
             <MonthSelector value={value} onChange={(value) => {
