@@ -1,6 +1,6 @@
 const {FormInfo} = miniCore;
 
-const {FormPart, Form, Input, AdvancedSelect, AutoComplete, SubmitButton} = FormInfo;
+const {FormPart, Form, Input, AdvancedSelect, AutoComplete, CalendarTimeRange, SubmitButton} = FormInfo;
 
 const BaseExample = () => {
     return <Form onSubmit={(data) => {
@@ -11,17 +11,12 @@ const BaseExample = () => {
                 <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" api={{
                     loader: () => {
                         return {
-                            pageData: [
-                                {label: "第一项", value: 1},
-                                {label: "第二项", value: 2, disabled: true},
-                                {
-                                    label: "第三项",
-                                    value: 3,
-                                },
-                            ],
+                            pageData: [{label: "第一项", value: 1}, {label: "第二项", value: 2, disabled: true}, {
+                                label: "第三项", value: 3,
+                            },],
                         };
                     }
-                }}/>,
+                }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                 <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
                     loader: ({data}) => {
                         return {
