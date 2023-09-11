@@ -22,6 +22,7 @@
     "@babel/runtime": "file:../node_modules/@babel/runtime",
     "@kne/lodash-wechat": "file:../node_modules/@kne/lodash-wechat",
     "@kne/mini-core": "file:..",
+    "@kne/antd-taro": "file:../node_modules/@kne/antd-taro",
     "@tarojs/components": "file:../node_modules/@tarojs/components",
     "@tarojs/helper": "file:../node_modules/@tarojs/helper",
     "@tarojs/plugin-framework-react": "file:../node_modules/@tarojs/plugin-framework-react",
