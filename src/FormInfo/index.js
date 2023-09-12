@@ -10,6 +10,7 @@ import SalaryInput from './fields/SalaryInput';
 import CardType from './fields/CardType';
 import Calendar, {CalendarRange, CalendarTimeRange} from './fields/Calendar';
 import UserListSelect from './fields/UserListSelect';
+import Upload from "./fields/Upload";
 import {fields as baseFields, interceptors, preset as formPreset, RULES} from '@kne/react-form-antd-taro';
 import {get} from "lodash";
 import {isValidPhoneNumber} from "libphonenumber-js/min";
@@ -27,7 +28,8 @@ export const fields = {
     CalendarTimeRange,
     Calendar,
     CalendarRange,
-    UserListSelect
+    UserListSelect,
+    Upload
 };
 export {
     AdvancedSelect,
@@ -43,7 +45,8 @@ export {
     CalendarTimeRange,
     Calendar,
     CalendarRange,
-    UserListSelect
+    UserListSelect,
+    Upload
 };
 export {default as FormList} from './List';
 export {default as FormPart} from './FormPart';
@@ -67,6 +70,27 @@ interceptors.input.use('photo-string', value => {
     }
 
     return value;
+});
+
+interceptors.output.use("file-format", (value) => {
+    if (!Array.isArray(value)) {
+        return [];
+    }
+    return value.map((item) => ({
+        id: item.id,
+        originalName: item.fileName || item.originalName
+    }));
+});
+
+interceptors.input.use("file-format", (value) => {
+    if (!Array.isArray(value)) {
+        return [];
+    }
+    return value.map((item) => ({
+        id: item.id,
+        originalName: item.originalName,
+        fileName: item.fileName,
+    }));
 });
 
 const _oldREQ = RULES.REQ;
