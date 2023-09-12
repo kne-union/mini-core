@@ -138,6 +138,7 @@ const {
     CalendarRange,
     UserListSelect,
     InputNumber,
+    InputNumberUnit,
     Upload,
     SubmitButton
 } = FormInfo;
@@ -179,7 +180,8 @@ const BaseExample = () => {
             }
           }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
-          <Calendar.Item name="time2" label="时间"/>, <CalendarRange.Item name="time3" label="时间段"/>,
+          <InputNumberUnit.Item name="date" label="试用期"/>, <Calendar.Item name="time2" label="时间"/>,
+                    <CalendarRange.Item name="time3" label="时间段"/>,
           <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
           <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
           <Upload.Item name="attachment" label="附件" rule="REQ" />,

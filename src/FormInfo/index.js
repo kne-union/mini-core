@@ -10,6 +10,7 @@ import SalaryInput from './fields/SalaryInput';
 import CardType from './fields/CardType';
 import Calendar, {CalendarRange, CalendarTimeRange} from './fields/Calendar';
 import UserListSelect from './fields/UserListSelect';
+import InputNumberUnit from './fields/InputNumberUnit';
 import Upload from "./fields/Upload";
 import {fields as baseFields, interceptors, preset as formPreset, RULES} from '@kne/react-form-antd-taro';
 import {get} from "lodash";
@@ -29,7 +30,8 @@ export const fields = {
     Calendar,
     CalendarRange,
     UserListSelect,
-    Upload
+    Upload,
+    InputNumberUnit
 };
 export {
     AdvancedSelect,
@@ -46,7 +48,8 @@ export {
     Calendar,
     CalendarRange,
     UserListSelect,
-    Upload
+    Upload,
+    InputNumberUnit
 };
 export {default as FormList} from './List';
 export {default as FormPart} from './FormPart';
