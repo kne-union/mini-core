@@ -9,7 +9,7 @@ const UserListSelect = ({apis: propsApis, ...props}) => {
     const apis = Object.assign({}, baseApis, propsApis ? {user: propsApis} : {});
 
     return <ListSelect {...props} className={style['user-list']}
-                       api={Object.assign({}, apis.user.getUserList, {
+                       api={Object.assign({}, {
                            transformData: (data) => {
                                return Object.assign({}, data, {
                                    pageData: data.pageData.map(({name, englishName, orgName, uid, gender}) => {
@@ -17,12 +17,15 @@ const UserListSelect = ({apis: propsApis, ...props}) => {
                                            label: [englishName, name].filter((item) => !!item).join(' '),
                                            description: orgName,
                                            value: uid,
-                                           prefix: <Avatar className={style['avatar']} gender={gender}/>
+                                           prefix: <Avatar className={style['avatar']} gender={gender}/>,
+                                           name,
+                                           englishName,
+                                           gender
                                        });
                                    })
                                });
                            }
-                       })}/>
+                       }, apis.user.getUserList)}/>
 };
 
 UserListSelect.defaultProps = {
