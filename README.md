@@ -121,41 +121,74 @@ render(<BaseExample/>);
 
 - 表单
 - 展示表单组件
-- miniCore(@kne/mini-core)
+- miniCore(@kne/mini-core),lodash(lodash)
 
 ```jsx
-const {FormInfo} = miniCore;
+const {FormInfo, Global} = miniCore;
 
-const {FormPart, Form, Input, AdvancedSelect, AutoComplete, CalendarTimeRange, SubmitButton} = FormInfo;
+const {range} = lodash;
+
+const {
+    FormPart,
+    Form,
+    Input,
+    AdvancedSelect,
+    AutoComplete,
+    CalendarTimeRange,
+    Calendar,
+    CalendarRange,
+    UserListSelect,
+    InputNumber,
+    SubmitButton
+} = FormInfo;
 
 const BaseExample = () => {
-    return <Form onSubmit={(data) => {
-        console.log(data);
-    }}>
-        <FormPart
-            list={[<Input.Item label="姓名" name="name" rule="REQ LEN-0-10"/>,
-                <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" api={{
+    return <Global preset={{
+        apis: {
+            user: {
+                getUserList: {
                     loader: () => {
                         return {
-                            pageData: [{label: "第一项", value: 1}, {label: "第二项", value: 2, disabled: true}, {
-                                label: "第三项", value: 3,
-                            },],
-                        };
+                            pageData: range(0, 20).map((index) => ({
+                                uid: index, name: `用户${index}`, description: `用户${index}`
+                            }))
+                        }
                     }
-                }}/>,<CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
-                <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
-                <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
-                    loader: ({data}) => {
-                        return {
-                            pageData: [{
-                                label: "第一项" + data.searchText, value: 1
-                            }, {label: "第二项" + data.searchText, value: 2, disabled: true}, {
-                                label: "第三项" + data.searchText, value: 3,
-                            },],
-                        };
-                    }
-                }}/>, <SubmitButton>提交</SubmitButton>]}/>
-    </Form>;
+                }
+            }
+        }
+    }}>
+        <Form onSubmit={(data) => {
+            console.log(data);
+        }}>
+            <FormPart
+                list={[<Input.Item label="姓名" name="name" rule="REQ LEN-0-10"/>,
+                    <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" api={{
+                        loader: () => {
+                            return {
+                                pageData: [{label: "第一项", value: 1}, {label: "第二项", value: 2, disabled: true}, {
+                                    label: "第三项", value: 3,
+                                },],
+                            };
+                        }
+                    }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
+                    <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
+                    <Calendar.Item name="time2" label="时间"/>, <CalendarRange.Item name="time3" label="时间段"/>,
+                    <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
+                    <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
+                    <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
+                        loader: ({data}) => {
+                            return {
+                                pageData: [{
+                                    label: "第一项" + data.searchText, value: 1
+                                }, {label: "第二项" + data.searchText, value: 2, disabled: true}, {
+                                    label: "第三项" + data.searchText, value: 3,
+                                },],
+                            };
+                        }
+                    }}/>, <SubmitButton>提交</SubmitButton>]}/>
+        </Form>
+    </Global>;
 };
 
 render(<BaseExample/>);
@@ -203,7 +236,10 @@ const {
     CalendarTimeLengthView,
     CalendarView,
     CalendarTimeRangeView,
-    CalendarTimeRangePopup
+    CalendarTimeRangePopup,
+    CalendarRangeView,
+    CalendarPopup,
+    CalendarRangePopup
 } = miniCore;
 const {Space, Button} = antd;
 const {useState} = React;
@@ -214,10 +250,12 @@ const BaseExample = () => {
     const [timeLength, setTimeLength] = useState(60);
     const [timeRange, setTimeRange] = useState([new Date(), new Date(Date.now() + 60 * 60 * 1000)]);
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
     return <Space direction="vertical">
         <View>CalendarWeekTitle:展示星期文案</View>
         <CalendarWeekTitle/>
-        <View>CalendarMonthView:展示一个周日期</View>
+        <View>CalendarWeekView:展示一个周日期</View>
         <CalendarWeekView current={value} onChange={onChange} minDate="2020-10-01" maxDate="2030-01-01"
                           marks={['2023-10-01', '2023-09-30']}/>
         <View>CalendarMonthView:展示一个月日期</View>
@@ -239,16 +277,30 @@ const BaseExample = () => {
         <CalendarMonthSwiper current={value} onChange={onChange} minDate="2020" maxDate="2030-01-01"
                              marks={['2023-10-01', '2023-09-30']}/>
         <View>CalendarView:完整日历视图</View>
-        <CalendarView value={value} onChange={onChange}/>
+        <View style={{'--month-selector-height': '600px'}}>
+            <CalendarView value={value} onChange={onChange}/>
+        </View>
         <View>Calendar:完整日历功能</View>
         <Calendar value={value} onChange={onChange}/>
         <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>
         <CalendarTimeRangeView value={timeRange} onChange={setTimeRange}/>
+        <View>CalendarRangeView:</View>
+        <CalendarRangeView/>
         <View>CalendarTimeRangePopup:</View>
-        <Button onClick={()=>{
+        <Button onClick={() => {
             setOpen(true);
         }}>点击弹出</Button>
         <CalendarTimeRangePopup open={open} onOpenChange={setOpen} value={timeRange} onChange={setTimeRange}/>
+        <View>CalendarPopup:</View>
+        <Button onClick={() => {
+            setOpen2(true);
+        }}>点击弹出</Button>
+        <CalendarPopup open={open2} onOpenChange={setOpen2}/>
+        <View>CalendarRangePopup:</View>
+        <Button onClick={() => {
+            setOpen3(true);
+        }}>点击弹出</Button>
+        <CalendarRangePopup open={open3} onOpenChange={setOpen3}/>
     </Space>;
 };
 
