@@ -1,3 +1,6 @@
+import React, {forwardRef, useEffect, useState} from 'react';
+import merge from 'lodash/merge';
+import {usePreset} from '../Global';
 import AdvancedSelect from './fields/AdvancedSelect';
 import AutoComplete from './fields/AutoComplete';
 import CitySelect from './fields/CitySelect';
@@ -12,7 +15,13 @@ import Calendar, {CalendarRange, CalendarTimeRange} from './fields/Calendar';
 import UserListSelect from './fields/UserListSelect';
 import InputNumberUnit from './fields/InputNumberUnit';
 import Upload from "./fields/Upload";
-import {fields as baseFields, interceptors, preset as formPreset, RULES} from '@kne/react-form-antd-taro';
+import {
+    fields as baseFields,
+    Form as ReactForm,
+    interceptors,
+    preset as formPreset,
+    RULES
+} from '@kne/react-form-antd-taro';
 import {get} from "lodash";
 import {isValidPhoneNumber} from "libphonenumber-js/min";
 
@@ -97,7 +106,8 @@ interceptors.input.use("file-format", (value) => {
 });
 
 const _oldREQ = RULES.REQ;
-formPreset({
+
+const baseFormPreset = {
     rules: {
         REQ: (...args) => {
             return Object.assign({}, _oldREQ(...args), {errMsg: `%s不能为空`});
@@ -159,4 +169,24 @@ formPreset({
             };
         },
     }
+};
+
+const SetPreset = ({children}) => {
+    const [isPreset, setIsPreset] = useState(false);
+    const preset = usePreset();
+    const formInfo = get(preset, "formInfo", {});
+    useEffect(() => {
+        formPreset(merge({}, baseFormPreset, formInfo));
+        setIsPreset(true);
+    }, [formInfo]);
+    if (!isPreset) {
+        return null;
+    }
+    return children;
+};
+
+export const Form = forwardRef(({children, ...props}, ref) => {
+    return <ReactForm {...props} ref={ref}>
+        <SetPreset>{children}</SetPreset>
+    </ReactForm>
 });
