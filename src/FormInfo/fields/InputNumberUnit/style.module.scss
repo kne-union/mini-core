@@ -1,0 +1,13 @@
+.input-number-unit {
+  width: 100%;
+
+  :global {
+    .adm-space-item:first-child {
+      flex: 1;
+    }
+  }
+}
+
+.unit {
+  min-width: 52px;
+}
