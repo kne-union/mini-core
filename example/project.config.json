@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "example",
   "description": "示例程序",
-  "appid": "wx916441e6e0d8ffe9",
+  "appid": "touristappid",
   "setting": {
     "urlCheck": true,
     "es6": true,
