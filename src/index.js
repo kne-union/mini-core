@@ -37,6 +37,9 @@ export {
     TimeStepView as CalendarTimeStepView,
     TimeLengthView as CalendarTimeLengthView,
     CalendarView,
+    CalendarRangeView,
+    CalendarPopup,
+    CalendarRangePopup,
     TimeRangeView as CalendarTimeRangeView,
     TimeRangePopup as CalendarTimeRangePopup,
     utils as calendarUtils

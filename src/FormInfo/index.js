@@ -8,7 +8,7 @@ import PhoneNumber from './fields/PhoneNumber';
 import Avatar from './fields/Avatar';
 import SalaryInput from './fields/SalaryInput';
 import CardType from './fields/CardType';
-import {CalendarTimeRange} from './fields/Calendar';
+import Calendar, {CalendarRange, CalendarTimeRange} from './fields/Calendar';
 import UserListSelect from './fields/UserListSelect';
 import {fields as baseFields, interceptors, preset as formPreset, RULES} from '@kne/react-form-antd-taro';
 import {get} from "lodash";
@@ -25,6 +25,8 @@ export const fields = {
     TextArea,
     PhoneNumber,
     CalendarTimeRange,
+    Calendar,
+    CalendarRange,
     UserListSelect
 };
 export {
@@ -39,6 +41,8 @@ export {
     SalaryInput,
     CardType,
     CalendarTimeRange,
+    Calendar,
+    CalendarRange,
     UserListSelect
 };
 export {default as FormList} from './List';

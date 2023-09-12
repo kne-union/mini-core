@@ -9,7 +9,10 @@ const {
     CalendarTimeLengthView,
     CalendarView,
     CalendarTimeRangeView,
-    CalendarTimeRangePopup
+    CalendarTimeRangePopup,
+    CalendarRangeView,
+    CalendarPopup,
+    CalendarRangePopup
 } = miniCore;
 const {Space, Button} = antd;
 const {useState} = React;
@@ -20,6 +23,8 @@ const BaseExample = () => {
     const [timeLength, setTimeLength] = useState(60);
     const [timeRange, setTimeRange] = useState([new Date(), new Date(Date.now() + 60 * 60 * 1000)]);
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
     return <Space direction="vertical">
         <View>CalendarWeekTitle:展示星期文案</View>
         <CalendarWeekTitle/>
@@ -52,11 +57,23 @@ const BaseExample = () => {
         <Calendar value={value} onChange={onChange}/>
         <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>
         <CalendarTimeRangeView value={timeRange} onChange={setTimeRange}/>
+        <View>CalendarRangeView:</View>
+        <CalendarRangeView/>
         <View>CalendarTimeRangePopup:</View>
-        <Button onClick={()=>{
+        <Button onClick={() => {
             setOpen(true);
         }}>点击弹出</Button>
         <CalendarTimeRangePopup open={open} onOpenChange={setOpen} value={timeRange} onChange={setTimeRange}/>
+        <View>CalendarPopup:</View>
+        <Button onClick={() => {
+            setOpen2(true);
+        }}>点击弹出</Button>
+        <CalendarPopup open={open2} onOpenChange={setOpen2}/>
+        <View>CalendarRangePopup:</View>
+        <Button onClick={() => {
+            setOpen3(true);
+        }}>点击弹出</Button>
+        <CalendarRangePopup open={open3} onOpenChange={setOpen3}/>
     </Space>;
 };
 

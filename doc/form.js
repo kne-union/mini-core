@@ -2,7 +2,19 @@ const {FormInfo, Global} = miniCore;
 
 const {range} = lodash;
 
-const {FormPart, Form, Input, AdvancedSelect, AutoComplete, CalendarTimeRange, UserListSelect, SubmitButton} = FormInfo;
+const {
+    FormPart,
+    Form,
+    Input,
+    AdvancedSelect,
+    AutoComplete,
+    CalendarTimeRange,
+    Calendar,
+    CalendarRange,
+    UserListSelect,
+    InputNumber,
+    SubmitButton
+} = FormInfo;
 
 const BaseExample = () => {
     return <Global preset={{
@@ -34,6 +46,8 @@ const BaseExample = () => {
                             };
                         }
                     }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
+                    <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
+                    <Calendar.Item name="time2" label="时间"/>, <CalendarRange.Item name="time3" label="时间段"/>,
                     <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
                     <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
                     <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
