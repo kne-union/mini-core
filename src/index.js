@@ -23,7 +23,9 @@ export {
     IndustryEnum as CommonIndustryEnum,
     DataEnum as CommonDataEnum,
     CityEnum as CommonCityEnum,
-    isJSON as CommonIsJSON
+    isJSON as CommonIsJSON,
+    Upload as CommonUpload,
+    FileList as CommonFileList
 } from './Common';
 export {default as StateTag} from './StateTag';
 export {default as Filter} from './Filter';

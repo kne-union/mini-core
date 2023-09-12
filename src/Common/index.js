@@ -22,3 +22,5 @@ export {default as LoadMoreList} from './LoadMoreList';
 export {default as LoadingView} from './LoadingView';
 export {default as createDeferred} from './createDeferred';
 export { isJSON } from './isJSON';
+export {default as FileList} from './FileList';
+export {default as Upload} from './Upload';

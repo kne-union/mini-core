@@ -1,0 +1,16 @@
+.upload {
+  .tips {
+    font-size: var(--adm-font-size-4, 24px);
+    color: var(--adm-color-light, #CCCCCC);
+    margin-bottom: 16px;
+  }
+  .upload-button {
+    padding: 14px 32px;
+    font-size: var(--adm-font-size-6, 28px);
+  }
+  :global {
+    .preview-file-list {
+      margin-top: 16px;
+    }
+  }
+}

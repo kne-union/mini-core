@@ -1,0 +1,29 @@
+.file-list {
+  .file-list-item {
+    background: var(--adm-color-background-grey);
+    border-radius: 4px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .file-name {
+      font-size: var(--adm-font-size-6, 28px);
+      padding-right: 16px;
+      flex: 1;
+    }
+
+    .delete-btn {
+      font-size: var(--adm-font-size-6, 28px);
+      color: #D14343;
+    }
+
+    .options {
+      flex: 0 0 32px;
+    }
+  }
+}
