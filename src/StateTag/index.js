@@ -1,19 +1,9 @@
 import React, {useMemo} from "react";
 import classnames from "classnames";
 import {View} from "@tarojs/components";
+import {stateColors as tagTypeEnum} from '../Common';
 
 import style from "./style.module.scss";
-
-const tagTypeEnum = {
-    default: "#666666",
-    result: "#666666",
-    success: "#027A48",
-    progress: "#F09700",
-    danger: "#D14343",
-    info: "#155ACF",
-    other: "#6740C3",
-    primary: "#5CB8B2"
-};
 
 const StateTag = ({
                       showBorder, text, children, type, showBackground, className, onClick

@@ -90,6 +90,25 @@
           "packageName": "dayjs"
         }
       ]
+    },
+    {
+      "title": "确认对话框",
+      "description": "展示确认对话框",
+      "code": "./modal.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
     }
   ]
 }

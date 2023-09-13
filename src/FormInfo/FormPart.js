@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import {useFormContext} from "@kne/react-form-antd-taro";
 import {View} from '@tarojs/components';
 import groupBy from 'lodash/groupBy';
+import {ListTitle} from '../Common';
 import style from './style.module.scss';
 
 
@@ -46,6 +47,8 @@ const FormPart = ({list, groupArgs, ...props}) => {
     };
 
     return <>
+
+        {props.title && <ListTitle subtitle={props.subtitle} extra={props.extra}>{props.title}</ListTitle>}
         <View style={{display: 'none'}}>
             {(hiddenList || []).map(renderItem)}
         </View>

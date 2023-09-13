@@ -1,0 +1,32 @@
+.modal-body {
+  width: calc(100% - 2 * 48px);
+  padding: 64px 40px;
+  box-sizing: border-box;
+  font-size: var(--adm-font-size-8);
+  border-radius: 4px;
+  background: #FFFFFF;
+}
+
+.content {
+  color: var(--adm-color-weak);
+  margin-bottom: 64px;
+}
+
+.title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :global {
+    .adm-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.title-content {
+
+}

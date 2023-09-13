@@ -25,7 +25,8 @@ export {
     CityEnum as CommonCityEnum,
     isJSON as CommonIsJSON,
     Upload as CommonUpload,
-    FileList as CommonFileList
+    FileList as CommonFileList,
+    ListTitle as CommonListTitle
 } from './Common';
 export {default as StateTag} from './StateTag';
 export {default as Filter} from './Filter';
@@ -52,3 +53,4 @@ export {default as OssFile, getOssUrl, withOssFile} from './OssFile';
 export {default as Button, FixView, LoadingButton} from './Button';
 export {default as Layout} from './Layout';
 export {default as HighLight, HighLightProvider} from './HighLight';
+export {default as Modal, ModalButton} from './Modal';
