@@ -50,6 +50,10 @@
         {
           "name": "lodash",
           "packageName": "lodash"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
         }
       ]
     },

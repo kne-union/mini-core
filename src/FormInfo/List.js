@@ -33,6 +33,7 @@ const List = forwardRef(({
     const allowAdd = !(maxLength && maxLength <= get(formData, `${name}.length`, 0));
     const allowAddRef = useRef(allowAdd);
     allowAddRef.current = allowAdd;
+
     const addItem = useRefCallback(() => {
         if (typeof beforeAdd === "function" ? beforeAdd(name, context) !== false : true) {
             groupRef.current.onAdd({isUnshift: isUnshift});
@@ -56,16 +57,16 @@ const List = forwardRef(({
         add: addItem,
         children: <GroupList name={name} defaultLength={defaultLength} ref={groupRef}>{(...groupArgs) => {
             const [key, {index, onRemove, length}] = groupArgs;
+            const renderList = typeof list === "function" ? list(...groupArgs, context) : list;
             return <FormPart
                 key={key}
                 className={classnames(style["list-item"], 'form-part-list-item')}
-                list={[...(typeof list === "function" ? list(...groupArgs, context) : list), minLength && minLength >= length ? null :
-                    <Button block onClick={() => {
-                        onRemove(key);
-                        afterDelete && afterDelete(...groupArgs, context);
-                    }} color='danger' fill='none'>
-                        <Icon className="iconfont" type="shanchu"/>{removeText}
-                    </Button>]}
+                list={minLength && minLength >= length ? renderList : [...renderList, <Button block onClick={() => {
+                    onRemove(key);
+                    afterDelete && afterDelete(...groupArgs, context);
+                }} color='danger' fill='none'>
+                    <Icon className="iconfont" type="shanchu"/>{removeText}
+                </Button>]}
                 groupArgs={groupArgs}
                 title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
         }}</GroupList>
