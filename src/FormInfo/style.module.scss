@@ -25,19 +25,6 @@
   --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 216px - 70px);
 }
 
-.list-header {
-  padding: 0 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .list-header-title {
-    font-size: var(--adm-font-size-10);
-    font-weight: 500;
-    color: var(--adm-color-text-dafault);
-  }
-}
-
 .ellipsis {
   overflow: hidden;
   display: -webkit-box;
@@ -49,9 +36,20 @@
 }
 
 .list-item {
+  background: #FFFFFF;
+
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
   :global {
     .adm-list {
       --border-top: none;
+    }
+
+    .adm-button-danger {
+      padding-top: 32px;
+      padding-bottom: 32px;
     }
   }
 }
