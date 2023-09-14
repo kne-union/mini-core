@@ -11,6 +11,8 @@ const {
     AutoComplete,
     CalendarTimeRange,
     Calendar,
+    CitySelect,
+    FunctionSelect,
     TimeStep,
     CalendarRange,
     UserListSelect,
@@ -44,6 +46,7 @@ const BaseExample = () => {
         }
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
+        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>
         <Form onSubmit={(data) => {
             console.log(data);
         }}>
@@ -61,7 +64,9 @@ const BaseExample = () => {
                                       },],
                                   };
                               }
-                          }}/>, <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
+                          }}/>, <CitySelect.Item name="city" label="城市选择" multiple={false}/>,
+                          <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
+                          <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
                           <InputNumberUnit.Item name="date" label="试用期"/>,
                           <Calendar.Item name="time2" label="时间"/>,
@@ -81,13 +86,16 @@ const BaseExample = () => {
                                   };
                               }
                           }}/>, <SubmitButton>提交</SubmitButton>]}/>
-            <CommonListTitle subtitle="(填写工作经历)" extra={<Button fill="none" onClick={()=>{
+            <CommonListTitle subtitle="(填写工作经历)" extra={<Button fill="none" onClick={() => {
                 listRef.current.add();
             }}>添加</Button>}>工作经历</CommonListTitle>
-            <FormList ref={listRef} name="list" minLength={1} list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
+            <FormList ref={listRef} name="list" minLength={1}
+                      list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                           <Input.Item name="field1" label="字段1"/>]}/>
-            <FormList name="list2" title="list2" subtitle="副标题" minLength={1} list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
-                <Input.Item name="field1" label="字段1"/>]}/>
+            <FormList name="list2" title="list2" subtitle="副标题" minLength={1}
+                      itemTitle={({index}) => `第${index + 1}项`}
+                      list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
+                          <Input.Item name="field1" label="字段1"/>]}/>
         </Form>
     </Global>;
 }

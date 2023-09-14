@@ -63,6 +63,7 @@ const List = forwardRef(({
             return <FormPart
                 key={key}
                 className={classnames(style["list-item"], 'form-part-list-item')}
+                isSubheading
                 list={minLength && minLength >= length ? renderList : [...renderList, <Button block onClick={() => {
                     onRemove(key);
                     afterDelete && afterDelete(...groupArgs, context);

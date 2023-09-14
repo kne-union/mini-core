@@ -2,7 +2,7 @@
   --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 126px - 120px);
 
   &.is-single {
-    --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 126px);
+    --panel-height: calc(var(--max-height) - 126px);
   }
 
   :global {
