@@ -12,7 +12,7 @@ const TimeRangePopup = ({className, onClose, isRootPortal, value, onChange, ...p
         defaultValue: 'defaultOpen', value: 'open', onChange: 'onOpenChange'
     });
     const [current, setCurrent] = useState(value);
-    return <Popup className={classnames(style['popup'], 'adm-picker-popup')} isRootPortal={false}
+    return <Popup className={classnames(style['popup'], 'adm-picker-popup')} isRootPortal={isRootPortal}
                   position="bottom" open={active}
                   onOpenChange={(open) => {
                       if (open) {
@@ -32,7 +32,7 @@ const TimeRangePopup = ({className, onClose, isRootPortal, value, onChange, ...p
 };
 
 TimeRangePopup.defaultProps = {
-    value: [dayjs(new Date()).startOf('hour'), dayjs(new Date()).startOf('hour').add(1, 'hour')]
+    value: [dayjs(new Date()).startOf('hour'), dayjs(new Date()).startOf('hour').add(1, 'hour')], isRootPortal: false
 };
 
 export default TimeRangePopup;

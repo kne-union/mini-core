@@ -137,6 +137,7 @@ const {
     AutoComplete,
     CalendarTimeRange,
     Calendar,
+    TimeStep,
     CalendarRange,
     UserListSelect,
     InputNumber,
@@ -190,6 +191,7 @@ const BaseExample = () => {
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
                           <InputNumberUnit.Item name="date" label="试用期"/>,
                           <Calendar.Item name="time2" label="时间"/>,
+                          <TimeStep.Item name="timeStep" label="时间2"/>,
                           <CalendarRange.Item name="time3" label="时间段"/>,
                           <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
                           <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
@@ -205,11 +207,13 @@ const BaseExample = () => {
                                   };
                               }
                           }}/>, <SubmitButton>提交</SubmitButton>]}/>
-            <CommonListTitle subtitle="(至少填写一段工作经历)" extra={<Button fill="none" onClick={()=>{
+            <CommonListTitle subtitle="(填写工作经历)" extra={<Button fill="none" onClick={()=>{
                 listRef.current.add();
             }}>添加</Button>}>工作经历</CommonListTitle>
             <FormList ref={listRef} name="list" minLength={1} list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                           <Input.Item name="field1" label="字段1"/>]}/>
+            <FormList name="list2" title="list2" subtitle="副标题" minLength={1} list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
+                <Input.Item name="field1" label="字段1"/>]}/>
         </Form>
     </Global>;
 }
@@ -262,7 +266,8 @@ const {
     CalendarTimeRangePopup,
     CalendarRangeView,
     CalendarPopup,
-    CalendarRangePopup
+    CalendarRangePopup,
+    CalendarTimeStepPopup
 } = miniCore;
 const {Space, Button} = antd;
 const {useState} = React;
@@ -275,6 +280,7 @@ const BaseExample = () => {
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
     const [open3, setOpen3] = useState(false);
+    const [open4, setOpen4] = useState(false);
     return <Space direction="vertical">
         <View>CalendarWeekTitle:展示星期文案</View>
         <CalendarWeekTitle/>
@@ -323,6 +329,11 @@ const BaseExample = () => {
         <Button onClick={() => {
             setOpen3(true);
         }}>点击弹出</Button>
+        <View>CalendarTimeStepPopup:展示一个时间段选择弹窗</View>
+        <Button onClick={() => {
+            setOpen4(true);
+        }}>点击弹出</Button>
+        <CalendarTimeStepPopup open={open4} onOpenChange={setOpen4}/>
         <CalendarRangePopup open={open3} onOpenChange={setOpen3}/>
     </Space>;
 };

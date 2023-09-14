@@ -10,6 +10,7 @@ import useRefCallback from "@kne/use-ref-callback";
 
 const List = forwardRef(({
                              title,
+                             subtitle,
                              addText,
                              removeText,
                              minLength,
@@ -51,6 +52,7 @@ const List = forwardRef(({
     }, [isUnshift, addItem]);
     return <OuterType {...Object.assign({}, outer.props, {
         title,
+        subtitle,
         addText,
         className,
         allowAdd,

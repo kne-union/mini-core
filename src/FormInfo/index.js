@@ -11,7 +11,7 @@ import PhoneNumber from './fields/PhoneNumber';
 import Avatar from './fields/Avatar';
 import SalaryInput from './fields/SalaryInput';
 import CardType from './fields/CardType';
-import Calendar, {CalendarRange, CalendarTimeRange} from './fields/Calendar';
+import Calendar, {CalendarRange, CalendarTimeRange,TimeStep} from './fields/Calendar';
 import UserListSelect from './fields/UserListSelect';
 import InputNumberUnit from './fields/InputNumberUnit';
 import Upload from "./fields/Upload";
@@ -37,6 +37,7 @@ export const fields = {
     PhoneNumber,
     CalendarTimeRange,
     Calendar,
+    TimeStep,
     CalendarRange,
     UserListSelect,
     Upload,
@@ -55,6 +56,7 @@ export {
     CardType,
     CalendarTimeRange,
     Calendar,
+    TimeStep,
     CalendarRange,
     UserListSelect,
     Upload,
