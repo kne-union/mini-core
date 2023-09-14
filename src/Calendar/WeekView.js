@@ -5,11 +5,11 @@ import dayjs from "dayjs";
 import classnames from "classnames";
 import range from 'lodash/range';
 
-const WeekView = ({current, value, onChange, minDate, maxDate, marks}) => {
+const WeekView = ({current, disabledDate, value, onChange, minDate, maxDate, marks}) => {
     return <View className={style['week-item']}>
         {range(0, 7).map((target) => {
             const date = dayjs(current).weekday(target).startOf('day');
-            const isDisabled = date.isBefore(dayjs(minDate).startOf('day')) || date.isAfter(dayjs(maxDate).startOf('day'));
+            const isDisabled = date.isBefore(dayjs(minDate).startOf('day')) || date.isAfter(dayjs(maxDate).startOf('day')) || (typeof disabledDate === 'function' && disabledDate(date));
             const isMarked = marks.find((target) => {
                 return date.isSame(dayjs(target), 'day');
             });

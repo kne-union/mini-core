@@ -66,6 +66,10 @@
 
   &.is-disabled {
     color: var(--adm-color-weak);
+
+    &.is-today, &.is-current {
+      background: var(--adm-color-border);
+    }
   }
 }
 

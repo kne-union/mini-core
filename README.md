@@ -307,7 +307,9 @@ const BaseExample = () => {
                              marks={['2023-10-01', '2023-09-30']}/>
         <View>CalendarView:完整日历视图</View>
         <View style={{'--month-selector-height': '600px'}}>
-            <CalendarView value={value} onChange={onChange}/>
+            <CalendarView value={value} onChange={onChange} disabledDate={(date) => {
+                return dayjs(date).format('YYYY-MM-DD') === '2023-09-15';
+            }}/>
         </View>
         <View>Calendar:完整日历功能</View>
         <Calendar value={value} onChange={onChange}/>
