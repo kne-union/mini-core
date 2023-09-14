@@ -45,6 +45,7 @@ export {
     CalendarRangePopup,
     TimeRangeView as CalendarTimeRangeView,
     TimeRangePopup as CalendarTimeRangePopup,
+    TimeStepPopup as CalendarTimeStepPopup,
     utils as calendarUtils
 } from './Calendar';
 export {default as HeaderContainer} from './HeaderContainer';

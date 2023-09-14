@@ -17,5 +17,6 @@ export {default as TimeRangeView} from './TimeRangeView';
 export {default as TimeRangePopup} from './TimeRangePopup';
 export {default as CalendarPopup} from './CalendarPopup';
 export {default as CalendarRangePopup} from './CalendarRangePopup';
+export {default as TimeStepPopup} from './TimeStepPopup';
 
 export const utils = {minuteToHumanize, minuteRangeToHumanize, timeParse, useCalendarValue};

@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {Popup} from '@kne/antd-taro';
-import style from './style.module.scss';
 import useControlValue from "@kne/use-control-value";
-import CalendarView from './CalendarView';
-import classnames from 'classnames';
-import {View} from '@tarojs/components';
+import TimeStepView from './TimeStepView';
+import classnames from "classnames";
+import style from "./style.module.scss";
+import {View} from "@tarojs/components";
 
-const CalendarPopup = ({className, onClose, onCancel, isRootPortal, value, onChange, placeholder, ...props}) => {
+const TimeStepPopup = ({className, onClose, onCancel, isRootPortal, value, onChange, placeholder, ...props}) => {
     const [active, setActive] = useControlValue(props, {
         defaultValue: 'defaultOpen', value: 'open', onChange: 'onOpenChange'
     });
     const [current, setCurrent] = useState(value);
+
     return <Popup className={classnames(style['popup'], 'adm-picker-popup')} isRootPortal={isRootPortal}
                   position="bottom" open={active}
                   onOpenChange={(open) => {
@@ -21,7 +22,6 @@ const CalendarPopup = ({className, onClose, onCancel, isRootPortal, value, onCha
                       onClose?.();
                       setCurrent(value);
                   }}>
-
         {active && <><View className={`adm-picker-header`}>
             <View
                 className={`adm-picker-header-button`}
@@ -44,12 +44,12 @@ const CalendarPopup = ({className, onClose, onCancel, isRootPortal, value, onCha
             >
                 确定
             </View>
-        </View><CalendarView {...props} value={current} onChange={setCurrent}/></>}
+        </View><TimeStepView {...props} value={current} onChange={setCurrent}/></>}
     </Popup>
 };
 
-CalendarPopup.defaultProps = {
-    value: new Date(), placeholder: '请选择日期', isRootPortal: false
+TimeStepPopup.defaultProps = {
+    isRootPortal: false, value: new Date(), placeholder: '请选择时间'
 };
 
-export default CalendarPopup;
+export default TimeStepPopup;
