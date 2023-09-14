@@ -46,6 +46,7 @@ const BaseExample = () => {
         }
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
+        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>
         <Form onSubmit={(data) => {
             console.log(data);
         }}>
@@ -92,6 +93,7 @@ const BaseExample = () => {
                       list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                           <Input.Item name="field1" label="字段1"/>]}/>
             <FormList name="list2" title="list2" subtitle="副标题" minLength={1}
+                      itemTitle={({index}) => `第${index + 1}项`}
                       list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                           <Input.Item name="field1" label="字段1"/>]}/>
         </Form>

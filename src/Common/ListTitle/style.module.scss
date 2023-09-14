@@ -7,6 +7,25 @@
   background: #FFFFFF;
   line-height: 32px;
 
+  &.is-sub {
+    padding: 20px 48px;
+    height: 48px;
+    border-bottom: none;
+    font-size: var(--adm-font-size-4);
+
+    .main-title {
+      color: var(--adm-color-primary);
+      background: var(--adm-color-background-primary-opacity-1);
+      font-weight: normal;
+      padding: 8px 16px;
+      border-radius: 24px;
+    }
+
+    &:before {
+      content: normal;
+    }
+  }
+
   &:before {
     content: '';
     display: block;
@@ -22,6 +41,7 @@
   font-weight: bold;
   flex: 1;
   display: flex;
+  align-items: center;
 }
 
 .subtitle {
@@ -31,10 +51,11 @@
 }
 
 .extra {
-  font-size: 28px;
+  font-size: var(--adm-font-size-6);
+
   :global {
     .adm-button {
-      font-size: 28px;
+      font-size: var(--adm-font-size-6);
     }
   }
 }

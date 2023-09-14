@@ -50,12 +50,12 @@
     .adm-button-danger {
       padding-top: 32px;
       padding-bottom: 32px;
-      font-size: 28px;
+      font-size: var(--adm-font-size-6);
     }
   }
 }
 
 .list-btn {
   padding: 0;
-  font-size: 28px;
+  font-size: var(--adm-font-size-6);
 }
