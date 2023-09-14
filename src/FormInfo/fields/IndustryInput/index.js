@@ -13,8 +13,8 @@ const IndustrySelectInner = (props) => {
 
 const IndustrySelect = withDecoratorList(({render, placeholder, showPopup, value, valueType}) => {
     const label = useMemo(() => {
-        if (!value || !value?.[0]) {
-            return '';
+        if (!(value && value.length > 0)) {
+            return <View className="react-form__placeholder">{placeholder}</View>;
         }
         return <View className={"ellipsis"} split="," size={0}>{(value || []).map((item, index) => {
             const targetValue = valueType === 'all' ? item.value : item;
@@ -27,5 +27,9 @@ const IndustrySelect = withDecoratorList(({render, placeholder, showPopup, value
         label, value: value || [], placeholder, onClick: showPopup
     });
 })(withPopup(IndustrySelectInner));
+
+IndustrySelect.defaultProps = {
+    multiple: true, value: []
+}
 
 export default IndustrySelect;

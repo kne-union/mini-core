@@ -1,5 +1,8 @@
 .container {
   --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 196px - 120px);
+  &.is-single {
+    --panel-height: calc(var(--max-height) - 196px);
+  }
 
   :global {
     .adm-tabs {

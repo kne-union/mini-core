@@ -1,10 +1,8 @@
 import {withDecoratorList} from '@kne/react-form-antd-taro';
 import React, {useMemo} from "react";
 import classnames from "classnames";
-import isDate from 'lodash/isDate';
 import {View} from "@tarojs/components";
 import {TimeStepPopup} from '../../../Calendar';
-import dayjs from 'dayjs';
 
 const TimeStep = withDecoratorList(({render, placeholder, showPopup, value, ...props}) => {
     const label = useMemo(() => {

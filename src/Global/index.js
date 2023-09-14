@@ -12,6 +12,7 @@ import {PAGE_NO_SCROLL_CHANGE} from '@kne/antd-taro';
 import useRefCallback from "@kne/use-ref-callback";
 import {stateColors} from '../Common';
 import transform from 'lodash/transform';
+import merge from 'lodash/merge';
 
 export const useGlobalContext = (globalKey) => {
     const contextValue = useContext();
@@ -43,7 +44,7 @@ export const SetGlobal = ({globalKey, value, children}) => {
             setGlobal?.(value);
             valueRef.current = value;
         }
-    }, [value]);
+    }, [value, setGlobal]);
     return children;
 };
 
@@ -58,12 +59,13 @@ export const usePreset = () => {
 };
 
 const Global = ({preset, children, ...props}) => {
+    const basePreset = usePreset();
     const [global, setGlobal] = useState(Object.assign({}, get(preset, "global")));
     useLaunch(() => {
         console.log('App launched.')
     }, []);
     return <Provider value={{
-        ...props, preset, global, setGlobal,
+        ...props, preset: merge({}, basePreset, preset), global, setGlobal,
     }}>
         {children}
     </Provider>;
