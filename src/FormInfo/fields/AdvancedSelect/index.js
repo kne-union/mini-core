@@ -14,7 +14,7 @@ const getValue = (value) => {
 
 const AdvancedSelect = withDecoratorList(({render, placeholder, showPopup, value, multiple, ...props}) => {
     const label = useMemo(() => {
-        if (!value) {
+        if (!(value && value.length > 0)) {
             return <View className="react-form__placeholder">{placeholder}</View>;
         }
         return multiple ? <View className={classnames('ellipsis')}>
@@ -31,7 +31,7 @@ const AdvancedSelect = withDecoratorList(({render, placeholder, showPopup, value
 })(withPopup(ListSelectInner));
 
 AdvancedSelect.defaultProps = {
-    multiple: true
+    multiple: true, value: []
 }
 
 export default AdvancedSelect;
