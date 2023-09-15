@@ -1,15 +1,33 @@
-.flex{
+.flex {
   display: flex;
+  align-items: center;
+
+  :global {
+    .adm-divider {
+      margin: 0 24px;
+    }
+  }
 }
-.code{
-  width: 100px;
-  padding: 0 16px;
-  border-right: solid 2px var(--adm-color-background-line);
-  margin-right: 16px;
+
+.code {
+  min-width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  :global {
+    .adm-icon {
+      margin-left: 20px;
+      display: block;
+      --size: var(--adm-font-size-2);
+    }
+  }
 }
-.number{
+
+.number {
   flex: 1;
 }
-.pop-number{
+
+.pop-number {
   padding-top: 24px;
 }
