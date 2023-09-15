@@ -11,7 +11,19 @@ import classnames from "classnames";
 import {View} from '@tarojs/components';
 import style from './style.module.scss';
 
-const TimeRangeView = ({className, minTime, maxTime, maxDurationLength, durationHidden, step, ...props}) => {
+const TimeRangeView = ({
+                           className,
+                           minTime,
+                           maxTime,
+                           maxDurationLength,
+                           durationHidden,
+                           step,
+                           disabledDate,
+                           startDateTitle,
+                           startTimeTitle,
+                           durationTitle,
+                           ...props
+                       }) => {
     const [activeKey, onActiveKeyChange] = useControlValue(props, {
         defaultValue: 'defaultActiveKey', value: 'activeKey', onChange: 'onActiveKeyChange'
     });
@@ -19,8 +31,9 @@ const TimeRangeView = ({className, minTime, maxTime, maxDurationLength, duration
 
     const items = [{
         key: 'calendar', title: dayjs(value[0]).format('YYYY-MM-DD'), children: <>
-            <View className={style['time-range-view-title']}>开始日期</View>
+            <View className={style['time-range-view-title']}>{startDateTitle}</View>
             <CalendarView className={style['time-range-view-calendar']} value={value[0]} minDate={minTime}
+                          disabledDate={disabledDate}
                           maxDate={maxTime} onChange={(value) => {
                 onChange((rangeValue) => {
                     const [start, end] = rangeValue;
@@ -43,7 +56,7 @@ const TimeRangeView = ({className, minTime, maxTime, maxDurationLength, duration
         </>
     }, {
         key: 'start', title: dayjs(value[0]).format('HH:mm'), children: <>
-            <View className={style['time-range-view-title']}>开始时间</View>
+            <View className={style['time-range-view-title']}>{startTimeTitle}</View>
             <TimeStepView value={value[0]} step={step}
                           minTime={dayjs(value[0]).diff(minTime, 'day') === 0 ? minTime : '0:00'}
                           maxTime={dayjs(maxTime).diff(dayjs(value[0]).startOf('day'), 'day') === 0 ? maxTime : '24:00'}
@@ -71,7 +84,7 @@ const TimeRangeView = ({className, minTime, maxTime, maxDurationLength, duration
     if (!durationHidden) {
         items.push({
             key: 'duration', title: minuteRangeToDuration(value), children: <>
-                <View className={style['time-range-view-title']}>时长</View>
+                <View className={style['time-range-view-title']}>{durationTitle}</View>
                 <TimeLengthView value={dayjs(value[1]).diff(value[0], 'minute')} step={step}
                                 maxLength={Math.min(Math.floor(dayjs(maxTime).diff(value[0], 'minute') / step), maxDurationLength)}
                                 onChange={(value) => {
@@ -96,6 +109,9 @@ TimeRangeView.defaultProps = {
     maxTime: dayjs().startOf('date').add(10, 'year').hour(24),
     maxDurationLength: 60,
     durationHidden: false,
+    startDateTitle: '开始日期',
+    startTimeTitle: '开始时间',
+    durationTitle: '时长',
     defaultValue: [dayjs(new Date()).startOf('hour'), dayjs(new Date()).startOf('hour').add(1, 'hour')]
 };
 

@@ -51,6 +51,12 @@
   &.has-top-border {
     border-top: solid 2px var(--adm-color-border);
   }
+
+  :global {
+    .adm-selector-item {
+      min-width: unset;
+    }
+  }
 }
 
 .scroller {
