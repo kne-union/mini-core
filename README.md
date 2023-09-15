@@ -133,6 +133,8 @@ const {
     FormList,
     Form,
     Input,
+    SalaryInput,
+    Picker,
     AdvancedSelect,
     AutoComplete,
     CalendarTimeRange,
@@ -178,13 +180,17 @@ const BaseExample = () => {
         }}>
             <FormPart title="表单标题"
                       list={[<Input.Item label="姓名" name="name" rule="REQ LEN-0-10"/>,
+                          <Picker.DateRangePicker.Item name="date-range" label="时间段"/>,
+                          <SalaryInput.Item name="salary" label="薪资" typeEnum={({render}) => render([{
+                              description: '年薪', value: 6
+                          }, {description: '月薪', value: 5}, {description: '周薪', value: 4}, {
+                              description: '日薪', value: 3
+                          }, {description: '时薪', value: 2}])}/>,
                           <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" api={{
                               loader: () => {
                                   return {
                                       pageData: [{label: "第一项", value: 1}, {
-                                          label: "第二项",
-                                          value: 2,
-                                          disabled: true
+                                          label: "第二项", value: 2, disabled: true
                                       }, {
                                           label: "第三项", value: 3,
                                       },],
@@ -195,8 +201,7 @@ const BaseExample = () => {
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
                           <InputNumberUnit.Item name="date" label="试用期"/>,
-                          <Calendar.Item name="time2" label="时间"/>,
-                          <TimeStep.Item name="timeStep" label="时间2"/>,
+                          <Calendar.Item name="time2" label="时间"/>, <TimeStep.Item name="timeStep" label="时间2"/>,
                           <CalendarRange.Item name="time3" label="时间段"/>,
                           <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
                           <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
