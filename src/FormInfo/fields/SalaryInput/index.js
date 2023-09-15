@@ -10,7 +10,7 @@ import {Divider} from "@kne/antd-taro";
 const {useDecorator} = hooks;
 
 
-const SalaryInputField = ({data, value = {}, typeEnum, onChange, req, ...props}) => {
+const SalaryInputField = ({data, value = {}, typeEnum, onChange, req, hasMonth, ...props}) => {
     value = Object.assign({
         type: 5, value: '', max: null, min: null, month: 12
     }, value);
@@ -54,14 +54,24 @@ const SalaryInputField = ({data, value = {}, typeEnum, onChange, req, ...props})
                                                 }}
                                                 addonAfter={isTenThousand ? "万元" : (value.type !== 7 ? "元" : "")}
                                                 placeholder={props.placeholder || "请输入"}/>}
-        {value.type === 5 ? <><Divider direction="vertical"/><InputNumber.Field className={style['number']} clearable={false} min={1} max={12}
-                                                 value={value.month} onChange={(v) => {
-            onChange(Object.assign({}, {
-                type: value.type, value: value.value, month: v
-            }));
-        }}/><View className={style['unit']}>月</View></> : null}
+        {value.type === 5 && hasMonth ? <><Divider direction="vertical"/><InputNumber.Field className={style['number']}
+                                                                                            clearable={false} min={1}
+                                                                                            max={12}
+                                                                                            value={value.month}
+                                                                                            onChange={(v) => {
+                                                                                                onChange(Object.assign({}, {
+                                                                                                    type: value.type,
+                                                                                                    value: value.value,
+                                                                                                    month: v
+                                                                                                }));
+                                                                                            }}/><View
+            className={style['unit']}>月</View></> : null}
     </View>
 }
+
+SalaryInputField.defaultProps = {
+    hasMonth: false
+};
 
 
 const SalaryInput = (props) => {

@@ -134,6 +134,7 @@ const {
     Form,
     Input,
     SalaryInput,
+    CardType,
     Picker,
     AdvancedSelect,
     AutoComplete,
@@ -181,7 +182,8 @@ const BaseExample = () => {
             <FormPart title="表单标题"
                       list={[<Input.Item label="姓名" name="name" rule="REQ LEN-0-10"/>,
                           <Picker.DateRangePicker.Item name="date-range" label="时间段"/>,
-                          <SalaryInput.Item name="salary" label="薪资" typeEnum={({render}) => render([{
+                          <CardType.Item name="id-card" label="身份证"/>,
+                          <SalaryInput.Item name="salary" label="薪资" hasMonth typeEnum={({render}) => render([{
                               description: '年薪', value: 6
                           }, {description: '月薪', value: 5}, {description: '周薪', value: 4}, {
                               description: '日薪', value: 3
