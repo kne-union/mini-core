@@ -1,13 +1,37 @@
 .flex {
   display: flex;
   word-break: keep-all;
+  align-items: center;
+
+  :global {
+    .adm-divider {
+      margin: 0 24px;
+    }
+  }
 }
 
 .number {
   flex: 1;
+
+  :global {
+    .adm-input-number {
+      padding: 0 10px !important;
+    }
+  }
+}
+
+.unit {
+  margin-left: 16px;
 }
 
 
 .type {
   flex-shrink: 0;
+  padding-right: 40px !important;
+
+  &:after {
+    content: '\e6b3' !important;
+    font-size: var(--adm-font-size-2) !important;
+    color: var(--adm-color-text) !important;
+  }
 }

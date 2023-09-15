@@ -1,8 +1,8 @@
 {
   "name": "@kne/mini-core",
-  "version": "1.0.5-alpha.8",
+  "version": "1.0.5-alpha.9",
   "dependencies": {
-    "@kne/antd-taro": "^1.0.3",
+    "@kne/antd-taro": "^1.0.7",
     "@kne/global-context": "^1.0.0",
     "@kne/lodash-wechat": "^4.17.21",
     "@kne/react-fetch": "^1.4.2",
@@ -26,10 +26,10 @@
     "test": "run-s test:unit test:lint test:build",
     "eject": "react-scripts eject",
     "init": "cd example &&npm i --legacy-peer-deps",
-    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment --alias lodash=@kne/lodash-wechat",
+    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment --alias lodash=@kne/lodash-wechat --assertType inline",
     "build:md": "create-md",
     "start:md": "create-md --watch",
-    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment --alias lodash=@kne/lodash-wechat",
+    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment --alias lodash=@kne/lodash-wechat --assertType inline",
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
@@ -75,7 +75,7 @@
   "devDependencies": {
     "@babel/runtime": "^7.7.7",
     "@kne/md-doc": "^0.1.8",
-    "@kne/microbundle": "^0.15.4",
+    "@kne/microbundle": "^0.15.5",
     "@kne/modules-dev": "^0.1.14",
     "@tarojs/components": "^3.6.15",
     "@tarojs/helper": "3.6.15",
