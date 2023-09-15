@@ -56,7 +56,7 @@ const SalaryInputField = ({data, value = {}, typeEnum, onChange, req, hasMonth, 
                                                 placeholder={props.placeholder || "请输入"}/>}
         {value.type === 5 && hasMonth ? <><Divider direction="vertical"/><InputNumber.Field className={style['number']}
                                                                                             clearable={false} min={1}
-                                                                                            max={12}
+                                                                                            max={99}
                                                                                             value={value.month}
                                                                                             onChange={(v) => {
                                                                                                 onChange(Object.assign({}, {
