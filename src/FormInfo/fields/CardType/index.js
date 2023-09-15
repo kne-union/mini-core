@@ -4,6 +4,7 @@ import {hooks, Input, Picker, withItem} from "@kne/react-form-antd-taro";
 import style from './style.module.scss';
 import classnames from 'classnames';
 import Enum from "../../../Enum";
+import {Divider} from "@kne/antd-taro";
 
 const {useDecorator} = hooks;
 
@@ -31,6 +32,7 @@ const CardTypeField = ({data, value = {}, onChange, req, ...props}) => {
                 />
             }}
         </Enum>
+        <Divider direction="vertical"/>
         <Input.Field
             className={style['number']} label={""} value={value.value}
             onChange={(v) => {
