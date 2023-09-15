@@ -1,6 +1,13 @@
 .flex{
   display: flex;
   word-break: keep-all;
+  align-items: center;
+
+  :global {
+    .adm-divider {
+      margin: 0 24px;
+    }
+  }
 }
 
 .number{
@@ -10,4 +17,9 @@
 
 .type{
   flex-shrink: 0;
+  &:after {
+    content: '\e6b3' !important;
+    font-size: var(--adm-font-size-2) !important;
+    color: var(--adm-color-text) !important;
+  }
 }
