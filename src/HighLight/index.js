@@ -2,6 +2,7 @@ import React, {createElement, useEffect, useState, createContext, useContext} fr
 import {Text} from "@tarojs/components";
 import classnames from "classnames";
 import style from './style.module.scss';
+import {isNil} from "lodash";
 
 const context = createContext({});
 const {
@@ -35,12 +36,14 @@ const splitText = (text, keyword) => {
 };
 
 export const HighLightProvider = ({keyword, children}) => {
-  return <Provider value={{keyword}}>
+  const _keyword = !isNil(keyword) ? keyword.toString() : keyword;
+  return <Provider value={{keyword: _keyword}}>
     {children}
   </Provider>
 }
 
-const HighLight = ({text, className, tagName}) => {
+const HighLight = ({text: _text, className, tagName}) => {
+  const text = !isNil(_text) ? _text.toString() : _text;
   const {keyword} = useHighLightContext();
   const [textArray, setTextArray] = useState([]);
 
@@ -53,7 +56,7 @@ const HighLight = ({text, className, tagName}) => {
   }
 
   useEffect(() => {
-    let textArray = text ? splitTextByKeyword(text, keyword) : [];
+    let textArray = splitTextByKeyword(text, keyword);
     setTextArray(textArray);
   }, [text, keyword]);
 
