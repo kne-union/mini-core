@@ -13,59 +13,64 @@ const useHighLightContext = () => {
   return useContext(context);
 };
 
-const splitText = (text, keyword) => {
-  const result = [];
-  const len = keyword.length;
-  const dfs = (str) => {
-    if (!str) return;
-    const index = str.indexOf(keyword);
-    if (index !== -1) {
-      const pre = str.substr(0, index);
-      const last = str.substr(index + len);
-      if (pre) {
-        result.push(pre);
-      }
-      result.push(keyword);
-      dfs(last);
-    } else {
-      result.push(str);
-    }
-  };
-  dfs(text);
+const escapeSpecialCharacter = (str) => {
+  const pattern =
+    /[`+~!@#_$%^*()=|{}':;,\\[\].<>/?！￥…&（）—【】‘；：”“。，、？\s]/g;
+  return str.replace(pattern, (match) => "\\" + match);
+};
+
+const splitText = (text, keywords, caseSensitive) => {
+  let result = [];
+  const allWordsRe = keywords
+    .map(function (word) {
+      return "(" + escapeSpecialCharacter(word) + ")";
+    })
+    .join("|");
+
+  console.log('>>>>allWordsRe', allWordsRe);
+  const regExp = new RegExp(allWordsRe, caseSensitive ? "gm" : "gim");
+
+  result = text.split(regExp);
+
   return result;
 };
 
-export const HighLightProvider = ({keyword, children}) => {
-  const _keyword = !isNil(keyword) ? keyword.toString() : keyword;
-  return <Provider value={{keyword: _keyword}}>
+export const HighLightProvider = ({keyword, caseSensitive, highlightClassName, children}) => {
+  const _keyword = !isNil(keyword) ? Array.isArray(keyword) ? keyword.map(item => item.toString()) : [keyword.toString()] : [];
+  return <Provider value={{keyword: _keyword, caseSensitive, highlightClassName}}>
     {children}
   </Provider>
 }
 
+HighLightProvider.defaultProps = {
+  caseSensitive: false,  // 区分大小写
+}
+
 const HighLight = ({text: _text, className, tagName}) => {
+  const {keyword, caseSensitive, highlightClassName} = useHighLightContext();
   const text = !isNil(_text) ? _text.toString() : _text;
-  const {keyword} = useHighLightContext();
   const [textArray, setTextArray] = useState([]);
 
-  const splitTextByKeyword = (text, keyword) => {
-    if (keyword && text) {
-      return splitText(text, keyword);
+  const splitTextByKeyword = (text, keyword, caseSensitive) => {
+    if (keyword?.length > 0 && text) {
+      return splitText(text, keyword, caseSensitive);
     } else {
       return [text];
     }
   }
 
   useEffect(() => {
-    let textArray = splitTextByKeyword(text, keyword);
+    let textArray = splitTextByKeyword(text, keyword, caseSensitive);
     setTextArray(textArray);
-  }, [text, keyword]);
+  }, [text, keyword, caseSensitive]);
 
   return createElement(tagName, {
     className,
     children: text ? textArray.map((item, index) => {
-      return item === keyword ? <Text key={index} className={classnames(style['text'], {
-        [style['high-light']]: item === keyword
-      })}>{item}</Text> : item
+      const isHighlight = (keyword || []).some(x => !caseSensitive ? (x || '').toLocaleString() === (item || '').toLowerCase() : x === item)
+      return isHighlight ?
+        <Text key={index}
+              className={classnames(style['text'], style['high-light'], highlightClassName)}>{item}</Text> : item
     }) : text
   });
 }
