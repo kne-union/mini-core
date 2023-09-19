@@ -177,7 +177,13 @@ const BaseExample = () => {
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
         <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>
-        <Form onSubmit={(data) => {
+        <Form data={{
+            'name': "张三",
+            'date-range': ['2010-01-01', '2012-01-02'],
+            'test2': [{label: "第三项", value: 3}],
+            'city': ['020'],
+            'function': ["001001002"]
+        }} onSubmit={(data) => {
             console.log(data);
         }}>
             <FormPart title="表单标题"

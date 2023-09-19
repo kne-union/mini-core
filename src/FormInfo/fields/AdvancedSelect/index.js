@@ -31,7 +31,7 @@ const AdvancedSelect = withDecoratorList(({render, placeholder, showPopup, value
 })(withPopup(ListSelectInner));
 
 AdvancedSelect.defaultProps = {
-    multiple: true, value: []
+    multiple: true
 }
 
 export default AdvancedSelect;
