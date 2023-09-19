@@ -29,7 +29,7 @@ const IndustrySelect = withDecoratorList(({render, placeholder, showPopup, value
 })(withPopup(IndustrySelectInner));
 
 IndustrySelect.defaultProps = {
-    multiple: true, value: []
+    multiple: true
 }
 
 export default IndustrySelect;

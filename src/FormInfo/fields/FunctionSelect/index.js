@@ -30,7 +30,7 @@ const FunctionSelect = withDecoratorList(({render, placeholder, showPopup, value
 })(withPopup(FunctionSelectInner));
 
 FunctionSelect.defaultProps = {
-    multiple: true, value: []
+    multiple: true
 }
 
 export default FunctionSelect;
