@@ -3,7 +3,7 @@ import isDate from 'lodash/isDate';
 import dayjs from 'dayjs';
 
 const timeParse = (time) => {
-    if (isDate(time) || (time.toDate && isDate(time.toDate()))) {
+    if (isDate(time) || (time && time.toDate && isDate(time.toDate()))) {
         const current = dayjs(time);
         return {hour: current.get('hour'), minute: current.get('minute')};
     }
