@@ -125,7 +125,7 @@ const TimeRangeView = ({
 TimeRangeView.defaultProps = {
     defaultActiveKey: 'calendar',
     step: 15,
-    minTime: dayjs().startOf('hour'),
+    minTime: dayjs().startOf('date').subtract(10, 'year').hour(24),
     maxTime: dayjs().startOf('date').add(10, 'year').hour(24),
     startTime: '0:00',
     endTime: '24:00',

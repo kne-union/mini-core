@@ -1,8 +1,13 @@
 .collapse {
   :global {
-    .adm-list{
+    .adm-list {
       --active-background-color: #FFF;
     }
+
+    .adm-list-item:first-child {
+      border-top: none;
+    }
+
     .adm-collapse-panel-header .adm-list-item-content-main {
       font-weight: bold;
     }
