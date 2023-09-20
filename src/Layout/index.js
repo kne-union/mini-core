@@ -45,9 +45,7 @@ const Layout = ({children, showToolBar = false, header, toolBar, toolBarList, cl
                         })
                     }}>{header.title}</NavBar>
         </HeaderContainer>
-        <View className={classnames('layout-content', showToolBar ? style['layout-content'] : "", className)}>
-            {children}
-        </View>
+        {children}
         {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
     </GlobalStyle>;
 };

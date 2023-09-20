@@ -5,17 +5,28 @@ import CalendarView from './CalendarView';
 import dayjs from "dayjs";
 import classnames from "classnames";
 import {View} from '@tarojs/components';
+import get from 'lodash/get';
 import style from './style.module.scss';
 
-const CalendarRangeView = ({className, minDate, maxDate, maxDurationLength, durationHidden, step, ...props}) => {
+const CalendarRangeView = ({
+                               className,
+                               minDate,
+                               maxDate,
+                               startDateTitle,
+                               endDateTitle,
+                               maxDurationLength,
+                               durationHidden,
+                               step,
+                               ...props
+                           }) => {
     const [activeKey, onActiveKeyChange] = useControlValue(props, {
         defaultValue: 'defaultActiveKey', value: 'activeKey', onChange: 'onActiveKeyChange'
     });
     const [value, onChange] = useControlValue(props);
 
     const items = [{
-        key: 'start', title: value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : '开始日期', children: <>
-            <View className={style['time-range-view-title']}>开始日期</View>
+        key: 'start', title: value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : startDateTitle, children: <>
+            <View className={style['time-range-view-title']}>{startDateTitle}</View>
             <CalendarView className={style['time-range-view-calendar']} value={value[0] || new Date()} minDate={minDate}
                           maxDate={maxDate} onChange={(value) => {
                 onChange((rangeValue) => {
@@ -29,8 +40,8 @@ const CalendarRangeView = ({className, minDate, maxDate, maxDurationLength, dura
             }}/>
         </>
     }, {
-        key: 'end', title: value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : '结束日期', children: <>
-            <View className={style['time-range-view-title']}>结束日期</View>
+        key: 'end', title: value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : endDateTitle, children: <>
+            <View className={style['time-range-view-title']}>{endDateTitle}</View>
             <CalendarView className={style['time-range-view-calendar']} value={value[1] || new Date()}
                           minDate={value[0] || minDate}
                           maxDate={maxDate} onChange={(value) => {
@@ -46,12 +57,14 @@ const CalendarRangeView = ({className, minDate, maxDate, maxDurationLength, dura
         </>
     }];
 
-    return <Tabs className={classnames(className, style['time-range-view'])} activeKey={activeKey}
-                 onChange={onActiveKeyChange} items={items}/>
+    return <><Tabs.Header className={classnames(className, style['time-range-view'])} activeKey={activeKey}
+                          onChange={onActiveKeyChange} items={items}/>
+        {get(items.find((item) => item.key === activeKey), 'children', null)}
+    </>
 };
 
 CalendarRangeView.defaultProps = {
-    defaultActiveKey: 'start', defaultValue: []
+    defaultActiveKey: 'start', defaultValue: [], startDateTitle: '开始日期', endDateTitle: '结束日期'
 };
 
 export default CalendarRangeView;

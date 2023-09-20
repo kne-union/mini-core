@@ -178,7 +178,7 @@ page, body, .adm-root-portal {
       color: var(--adm-color-light);
     }
 
-    > .adm-list {
+    &.adm-list {
       --border-inner: solid 2px var(---adm-color-background-line);
       --border-top: solid 2px var(--adm-color-background-line);
       --border-bottom: solid 2px var(--adm-color-background-line);
