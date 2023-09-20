@@ -79,7 +79,7 @@ const BaseExample = () => {
                                       },],
                                   };
                               }
-                          }}/>, <CitySelect.Item name="city" label="城市选择" multiple={false}/>,
+                          }}/>, <CitySelect.Item name="city" label="城市选择"/>,
                           <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
