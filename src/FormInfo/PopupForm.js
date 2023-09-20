@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import HeaderContainer from '../HeaderContainer';
 import {FixView} from '../Button';
-import {NavBar, Popup} from '@kne/antd-taro';
+import {NavBar, Popup, toCSSLength} from '@kne/antd-taro';
 import useControlValue from "@kne/use-control-value";
 import Form from './Form';
 import classnames from 'classnames';
@@ -13,11 +13,15 @@ const PopupForm = ({
     const [active, setActive] = useControlValue(props, {
         defaultValue: 'defaultOpen', value: 'open', onChange: 'onOpenChange'
     });
-
+    const [headerHeight, setHeaderHeight] = useState();
     return <Popup isRootPortal={isRootPortal} className={className} open={active} onOpenChange={setActive}
                   position={position} bodyClassName={classnames(bodyClassName, style['popup-form-body'])}
-                  hasSafeArea={false}>
-        <HeaderContainer><NavBar onBack={() => {
+                  hasSafeArea={false} bodyStyle={headerHeight ? {
+        '--header-container-height': toCSSLength(headerHeight)
+    } : {}}>
+        <HeaderContainer onHeightChange={(height) => {
+            setHeaderHeight(height);
+        }}><NavBar onBack={() => {
             setActive(false);
         }}>{navTitle}</NavBar></HeaderContainer>
         <Form {...formProps} onSubmit={async (...args) => {
