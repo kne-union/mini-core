@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Popup} from '@kne/antd-taro';
+import {Popup, SafeArea} from '@kne/antd-taro';
 import style from './style.module.scss';
 import useControlValue from "@kne/use-control-value";
 import CalendarRangeView from './CalendarRangeView';
@@ -11,7 +11,7 @@ const CalendarRangePopup = ({className, onClose, onCancel, isRootPortal, value, 
         defaultValue: 'defaultOpen', value: 'open', onChange: 'onOpenChange'
     });
     const [current, setCurrent] = useState(value);
-    return <Popup className={classnames(style['popup'], 'adm-picker-popup')} isRootPortal={false}
+    return <Popup className={classnames(style['popup'], 'adm-picker-popup')} isRootPortal={false} hasSafeArea={false}
                   position="bottom" open={active}
                   onOpenChange={(open) => {
                       if (open) {
@@ -28,6 +28,7 @@ const CalendarRangePopup = ({className, onClose, onCancel, isRootPortal, value, 
             onClose?.();
             onChange?.(current);
         }}>确定</View>
+        <SafeArea position="bottom"/>
     </Popup>
 };
 
