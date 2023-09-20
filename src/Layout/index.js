@@ -4,7 +4,6 @@ import {GlobalStyle} from '../Global';
 import Taro, {useRouter} from "@tarojs/taro";
 import {Icon, NavBar, SafeArea, TabBar} from '@kne/antd-taro';
 import classnames from "classnames";
-import {View} from '@tarojs/components';
 import style from './style.module.scss';
 
 const ToolBar = ({list}) => {
