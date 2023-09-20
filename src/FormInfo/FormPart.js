@@ -52,7 +52,7 @@ const FormPart = ({list, groupArgs, ...props}) => {
         <View style={{display: 'none'}}>
             {(hiddenList || []).map(renderItem)}
         </View>
-        <List className={classnames(style['form-part'], props.className)}>
+        <List className={classnames('react-form',style['form-part'], props.className)}>
             {(displayList || []).map(renderItem)}
         </List>
     </>

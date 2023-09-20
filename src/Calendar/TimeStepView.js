@@ -4,22 +4,27 @@ import dayjs from 'dayjs';
 import range from 'lodash/range';
 import classnames from 'classnames';
 import timeParse from './timeParse';
+import useRefCallback from '@kne/use-ref-callback';
 import style from './style.module.scss';
 
 const TimeStepView = ({className, value, onChange, step, minTime, maxTime, lineHeight}) => {
     const min = dayjs(timeParse(minTime)), max = dayjs(timeParse(maxTime)), current = dayjs(timeParse(value));
     const currentValue = Math.floor(current.diff(min, 'minute') / step);
+
+    const formatTime = useRefCallback((currentValue) => {
+        return min.add(currentValue * step, 'minute').format('HH:mm')
+    });
+
     return <PickerView className={classnames(style['picker-view'], className)} immediateChange
                        indicatorStyle={`height:${lineHeight};`}
                        value={[currentValue]} onChange={(e) => {
         const value = e.detail.value;
-        onChange?.(min.add(value[0] * step, 'minute').format('HH:mm'));
+        onChange?.(formatTime(value[0]));
     }}>
         <PickerViewColumn>{range(Math.floor(max.diff(min, 'minute') / step)).map((i, index) => {
             return <View className={classnames(style['picker-column'], {
                 [style['is-active']]: currentValue === index
-            })}
-                         style={{lineHeight}}>{min.add(i * step, 'minute').format('HH:mm')}</View>
+            })} style={{lineHeight}}>{min.add(i * step, 'minute').format('HH:mm')}</View>
         })}</PickerViewColumn>
     </PickerView>
 };

@@ -56,6 +56,24 @@
           "packageName": "@kne/antd-taro"
         }
       ]
+    },{
+      "title": "popup里面的表单",
+      "description": "展示popup里面的表单组件",
+      "code": "./popup-form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
     },
     {
       "title": "高亮",
