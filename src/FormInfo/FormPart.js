@@ -48,11 +48,13 @@ const FormPart = ({list, groupArgs, ...props}) => {
 
     return <>
 
-        {props.title && <ListTitle subtitle={props.subtitle} isSubheading={props.isSubheading} extra={props.extra}>{props.title}</ListTitle>}
+        {props.title &&
+            <ListTitle subtitle={props.subtitle} isSubheading={props.isSubheading}
+                       extra={props.extra}>{props.title}</ListTitle>}
         <View style={{display: 'none'}}>
             {(hiddenList || []).map(renderItem)}
         </View>
-        <List className={classnames('react-form',style['form-part'], props.className)}>
+        <List className={classnames('react-form', style['form-part'], props.className)}>
             {(displayList || []).map(renderItem)}
         </List>
     </>

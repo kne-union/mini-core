@@ -4,7 +4,7 @@ import style from './style.module.scss';
 import classnames from 'classnames';
 
 const ListTitle = ({className, subtitle, isSubheading, extra, children}) => {
-    return <View className={classnames(style['list-title'], className, {
+    return <View className={classnames(style['list-title'], 'list-title', className, {
         [style['is-sub']]: isSubheading
     })}>
         <View className={style['title']}>

@@ -30,7 +30,7 @@ const Calendar = ({className, ...props}) => {
                 }}>今天</Button>
             </View>
         </View>
-        <View>
+        <View className={style['calendar']}>
             <Popup open={monthSelectOpen} bodyClassName={style['month-selector-body']} hasSafeArea={false}
                    position="top"
                    onMaskClick={() => setMonthSelectOpen(false)}>
