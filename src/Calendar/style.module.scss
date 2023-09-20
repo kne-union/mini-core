@@ -3,11 +3,13 @@
 }
 
 .week-title {
-  padding-top: 38px;
-
   .date-cell {
     height: auto;
   }
+}
+
+.calendar-view .date-cell {
+  height: 80px;
 }
 
 .date-cell {
@@ -120,7 +122,7 @@
   box-sizing: border-box;
 
   & > :global(.adm-space) {
-    margin-right: -16px;
+    margin-right: -26px;
   }
 
   :global(.adm-space-horizontal .adm-space-item) {
@@ -132,7 +134,8 @@
 
   :global(.adm-selector-item) {
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
+    min-width: auto;
   }
 }
 
@@ -141,7 +144,7 @@
 }
 
 .month-swiper {
-  height: 600px;
+  height: 540px;
 
   &.animating {
     pointer-events: none;
@@ -161,7 +164,7 @@
 }
 
 .picker-view {
-  height: var(--picker-height, 784px);
+  height: var(--picker-height, 686px);
   --item-font-size: var(--adm-font-size-8);
 }
 
@@ -177,7 +180,7 @@
 }
 
 .time-range-view {
-  --month-selector-height: 700px;
+  --month-selector-height: 602px;
 
   :global(.adm-tabs-tab-wrapper) {
     flex: none;
@@ -205,7 +208,7 @@
 }
 
 .popup {
-  --month-selector-height: 700px;
+  --month-selector-height: 602px;
 }
 
 .confirm-btn {
