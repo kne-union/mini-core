@@ -69,7 +69,9 @@ const BaseExample = () => {
                           }, {description: '月薪', value: 5}, {description: '周薪', value: 4}, {
                               description: '日薪', value: 3
                           }, {description: '时薪', value: 2}])}/>,
-                          <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" api={{
+                          <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" getSearchProps={()=>{
+                              return {};
+                          }} api={{
                               loader: () => {
                                   return {
                                       pageData: [{label: "第一项", value: 1}, {

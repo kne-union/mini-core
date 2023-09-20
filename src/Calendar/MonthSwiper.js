@@ -20,7 +20,7 @@ const getGroups = (target, mainIndex) => {
     return null;
 };
 
-const MonthSwiper = ({current, disabledDate, onChange, minDate, maxDate, marks}) => {
+const MonthSwiper = ({className, current, disabledDate, onChange, minDate, maxDate, marks}) => {
     const [animating, setAnimating] = useState(false);
     const indexRef = useRef(1);
     const touchLocation = useRef(null);
@@ -41,7 +41,7 @@ const MonthSwiper = ({current, disabledDate, onChange, minDate, maxDate, marks})
             onChange(target.toDate());
         })();
         setAnimating(false);
-    }} className={classnames(style['month-swiper'], {
+    }} className={classnames(style['month-swiper'], className, {
         [style['animating']]: animating
     })} onChange={() => {
         setAnimating(true);
@@ -58,7 +58,8 @@ const MonthSwiper = ({current, disabledDate, onChange, minDate, maxDate, marks})
     }}>
         {listGroup.map((item, key) => {
             return <SwiperItem key={key} itemId={key.toString()}>
-                <MonthView current={item} disabledDate={disabledDate} onChange={onChange} minDate={minDate} maxDate={maxDate} marks={marks}/>
+                <MonthView current={item} disabledDate={disabledDate} onChange={onChange} minDate={minDate}
+                           maxDate={maxDate} marks={marks}/>
             </SwiperItem>
         })}
     </Swiper>

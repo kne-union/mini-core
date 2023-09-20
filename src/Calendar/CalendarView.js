@@ -39,7 +39,8 @@ const CalendarView = ({className, ...props}) => {
             }} maxDate={props.maxDate} minDate={props.minDate}/>
         </View> : <>
             <WeekTitle/>
-            <MonthSwiper current={value} onChange={onChange} disabledDate={props.disabledDate} minDate={props.minDate} maxDate={props.maxDate}
+            <MonthSwiper className={style['calendar-view']} current={value} onChange={onChange}
+                         disabledDate={props.disabledDate} minDate={props.minDate} maxDate={props.maxDate}
                          marks={props.marks}/>
         </>}
 
