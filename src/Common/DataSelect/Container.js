@@ -73,7 +73,7 @@ const Container = (props) => {
                 searchRef.current.clear();
             }}/>
         </ScrollViewVertical> : props.children({value, onChange})}
-        {props.multiple ? <View className={classnames(style['footer'], 'data-select-container-footer')}>
+        {props.multiple ? <>
             <SelectedLabel value={value && value.map((id) => {
                 const data = props.getTargetItem(id);
                 return {value: id, label: data.label};
@@ -94,7 +94,7 @@ const Container = (props) => {
                 changeHandler(value);
             }}/>
             {props.hasSafeArea && <SafeArea position="bottom"/>}
-        </View> : (props.hasSafeArea && <SafeArea position="bottom"/>)}
+        </> : (props.hasSafeArea && <SafeArea position="bottom"/>)}
     </View>
 };
 

@@ -1,8 +1,8 @@
-import React, {createElement, useEffect, useState, createContext, useContext} from "react";
+import React, {createContext, createElement, useContext, useEffect, useId, useRef, useState} from "react";
 import {Text} from "@tarojs/components";
 import classnames from "classnames";
 import style from './style.module.scss';
-import {isNil} from "lodash";
+import {isNil, range} from "lodash";
 
 const context = createContext({});
 const {
@@ -26,8 +26,6 @@ const splitText = (text, keywords, caseSensitive) => {
       return "(" + escapeSpecialCharacter(word) + ")";
     })
     .join("|");
-
-  console.log('>>>>allWordsRe', allWordsRe);
   const regExp = new RegExp(allWordsRe, caseSensitive ? "gm" : "gim");
 
   result = text.split(regExp);
@@ -46,10 +44,22 @@ HighLightProvider.defaultProps = {
   caseSensitive: false,  // 区分大小写
 }
 
+const cutArray = (array, size) => {
+  let index = 0;
+  let newArr = [];
+  while (index < array.length) {
+    newArr.push(array.slice(index, index += size));
+  }
+  return newArr;
+}
+
 const HighLight = ({text: _text, className, tagName}) => {
+  const containerId = useId().replace(/:/g, '_');
   const {keyword, caseSensitive, highlightClassName} = useHighLightContext();
   const text = !isNil(_text) ? _text.toString() : _text;
-  const [textArray, setTextArray] = useState([]);
+  const splitArrayRef = useRef([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [time, setTime] = useState(null);
 
   const splitTextByKeyword = (text, keyword, caseSensitive) => {
     if (keyword?.length > 0 && text) {
@@ -57,20 +67,35 @@ const HighLight = ({text: _text, className, tagName}) => {
     } else {
       return [text];
     }
-  }
+  };
 
   useEffect(() => {
-    let textArray = splitTextByKeyword(text, keyword, caseSensitive);
-    setTextArray(textArray);
+    if (text && (keyword || []).length > 0) {
+      let textArray = splitTextByKeyword(text, keyword, caseSensitive);
+      const newArray = textArray.slice(0).filter(x => !!x);
+      const pageSize = 100;
+      let totalPage = textArray.length ? Math.ceil(textArray.length / pageSize) : 0 // 计算总页数
+      setTotalPage(totalPage);
+      const cutArrayList = cutArray(newArray, pageSize);
+      splitArrayRef.current = cutArrayList;
+      setTime(new Date().getTime())
+    }
   }, [text, keyword, caseSensitive]);
 
   return createElement(tagName, {
+    id: `high-light-${containerId}`,
     className,
-    children: text ? textArray.map((item, index) => {
-      const isHighlight = (keyword || []).some(x => !caseSensitive ? (x || '').toLocaleString() === (item || '').toLowerCase() : x === item)
-      return isHighlight ?
-        <Text key={index}
-              className={classnames(style['text'], style['high-light'], highlightClassName)}>{item}</Text> : item
+    key: time,
+    children: text && (keyword || []).length > 0 && totalPage > 0 ? range(0, totalPage).map(row => {
+      return (splitArrayRef.current[row] || []).map((item, index) => {
+        const isHighlight = (keyword || []).some(x => !caseSensitive ? (x || '').toLocaleString() === (item || '').toLowerCase() : x === item)
+        return isHighlight ?
+          <Text
+            key={index}
+            className={classnames(style['text'], style['high-light'], highlightClassName)}>
+            {item}
+          </Text> : item
+      })
     }) : text
   });
 }

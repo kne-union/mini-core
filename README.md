@@ -205,7 +205,7 @@ const BaseExample = () => {
                                       },],
                                   };
                               }
-                          }}/>, <CitySelect.Item name="city" label="城市选择" multiple={false}/>,
+                          }}/>, <CitySelect.Item name="city" label="城市选择"/>,
                           <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
@@ -239,6 +239,39 @@ const BaseExample = () => {
         </Form>
     </Global>;
 }
+
+render(<BaseExample/>);
+
+```
+
+- popup里面的表单
+- 展示popup里面的表单组件
+- miniCore(@kne/mini-core),lodash(lodash),antd(@kne/antd-taro)
+
+```jsx
+const {FormInfo, HeaderContainer, FixView} = miniCore;
+const {range} = lodash;
+const {Button, Popup, NavBar} = antd;
+
+const {useState} = React;
+
+const {
+    FormPart, Input, CalendarTimeRange, Calendar, CitySelect, FunctionSelect, UserListSelect, SubmitButton, PopupForm
+} = FormInfo;
+
+const BaseExample = () => {
+    const [open, setOpen] = useState(false);
+    return <>
+        <Button onClick={() => {
+            setOpen(true);
+        }}>点击弹出popup</Button>
+        <PopupForm open={open} onOpenChange={setOpen} footer={<SubmitButton>提交</SubmitButton>}>
+            <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
+                <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
+                <CitySelect.Item name="city" label="城市"/>]}/>
+        </PopupForm>
+    </>;
+};
 
 render(<BaseExample/>);
 
@@ -341,7 +374,7 @@ const BaseExample = () => {
         <View>Calendar:完整日历功能</View>
         <Calendar value={value} onChange={onChange}/>
         <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>
-        <CalendarTimeRangeView value={timeRange} onChange={setTimeRange}/>
+        <CalendarTimeRangeView value={timeRange} startTime="15:00" endTime="21:00" onChange={setTimeRange}/>
         <View>CalendarRangeView:</View>
         <CalendarRangeView/>
         <View>CalendarTimeRangePopup:</View>

@@ -9,12 +9,26 @@ import timeParse from './timeParse';
 import {minuteRangeToDuration} from "./minuteToHumanize";
 import classnames from "classnames";
 import {View} from '@tarojs/components';
+import get from 'lodash/get';
 import style from './style.module.scss';
+
+const timeRangeFix = (value, {startTime, endTime}) => {
+    const start = timeParse(startTime), end = timeParse(endTime);
+    if (dayjs(value).isBefore(dayjs(start))) {
+        return dayjs(value).set('hour', start.hour).set('minute', start.minute).toDate();
+    }
+    if (dayjs(value).isAfter(dayjs(end))) {
+        return dayjs(value).set('hour', end.hour).set('minute', end.minute).toDate();
+    }
+    return value;
+};
 
 const TimeRangeView = ({
                            className,
                            minTime,
                            maxTime,
+                           startTime,
+                           endTime,
                            maxDurationLength,
                            durationHidden,
                            step,
@@ -58,8 +72,12 @@ const TimeRangeView = ({
         key: 'start', title: dayjs(value[0]).format('HH:mm'), children: <>
             <View className={style['time-range-view-title']}>{startTimeTitle}</View>
             <TimeStepView value={value[0]} step={step}
-                          minTime={dayjs(value[0]).diff(minTime, 'day') === 0 ? minTime : '0:00'}
-                          maxTime={dayjs(maxTime).diff(dayjs(value[0]).startOf('day'), 'day') === 0 ? maxTime : '24:00'}
+                          minTime={dayjs(value[0]).diff(minTime, 'day') === 0 ? timeRangeFix(minTime, {
+                              startTime, endTime
+                          }) : startTime}
+                          maxTime={dayjs(maxTime).diff(dayjs(value[0]).startOf('day'), 'day') === 0 ? timeRangeFix(maxTime, {
+                              startTime, endTime
+                          }) : endTime}
                           onChange={(value) => {
                               onChange((rangeValue) => {
                                   const [start, end] = rangeValue;
@@ -98,8 +116,10 @@ const TimeRangeView = ({
         });
     }
 
-    return <Tabs className={classnames(className, style['time-range-view'])} activeKey={activeKey}
-                 onChange={onActiveKeyChange} items={items}/>
+    return <><Tabs.Header className={classnames(className, style['time-range-view'])} activeKey={activeKey}
+                          onChange={onActiveKeyChange} items={items}/>
+        {get(items.find((item) => item.key === activeKey), 'children', null)}
+    </>
 };
 
 TimeRangeView.defaultProps = {
@@ -107,6 +127,8 @@ TimeRangeView.defaultProps = {
     step: 15,
     minTime: dayjs().startOf('hour'),
     maxTime: dayjs().startOf('date').add(10, 'year').hour(24),
+    startTime: '0:00',
+    endTime: '24:00',
     maxDurationLength: 60,
     durationHidden: false,
     startDateTitle: '开始日期',
