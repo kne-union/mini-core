@@ -1,0 +1,36 @@
+{
+  "miniprogramRoot": "dist/",
+  "description": "示例程序",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "compileHotReLoad": false,
+    "postcss": false,
+    "minified": true,
+    "ignoreUploadUnusedFiles": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "condition": false,
+    "packNpmRelationList": [],
+    "coverView": false,
+    "showShadowRootInWxmlPanel": false
+  },
+  "compileType": "miniprogram",
+  "srcMiniprogramRoot": "dist/",
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "libVersion": "2.24.6",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "projectname": "example",
+  "appid": "wx916441e6e0d8ffe9"
+}

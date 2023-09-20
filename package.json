@@ -1,12 +1,12 @@
 {
   "name": "@kne/mini-core",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "dependencies": {
     "@kne/antd-taro": "^1.0.8",
     "@kne/global-context": "^1.0.0",
     "@kne/lodash-wechat": "^4.17.21",
     "@kne/react-fetch": "^1.4.2",
-    "@kne/react-form-antd-taro": "^1.0.3",
+    "@kne/react-form-antd-taro": "^1.0.4",
     "@kne/use-control-value": "^0.1.8",
     "@kne/use-ref-callback": "^0.1.2",
     "classnames": "^2.3.2",
