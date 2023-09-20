@@ -1,6 +1,6 @@
 {
   "name": "@kne/mini-core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "dependencies": {
     "@kne/antd-taro": "^1.0.8",
     "@kne/global-context": "^1.0.0",
