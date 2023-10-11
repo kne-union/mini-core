@@ -1,8 +1,8 @@
 {
   "name": "@kne/mini-core",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "dependencies": {
-    "@kne/antd-taro": "^1.0.9",
+    "@kne/antd-taro": "^1.0.10",
     "@kne/global-context": "^1.0.0",
     "@kne/lodash-wechat": "^4.17.21",
     "@kne/react-fetch": "^1.4.2",

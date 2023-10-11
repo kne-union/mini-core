@@ -55,3 +55,4 @@ export {default as Button, FixView, LoadingButton} from './Button';
 export {default as Layout} from './Layout';
 export {default as HighLight, HighLightProvider} from './HighLight';
 export {default as Modal, ModalButton} from './Modal';
+export {default as preset} from './preset';

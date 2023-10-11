@@ -10,3 +10,7 @@ const stateColors = {
 };
 
 export default stateColors;
+
+export const presetStateColors = (colors) => {
+    Object.assign(stateColors, colors);
+};
