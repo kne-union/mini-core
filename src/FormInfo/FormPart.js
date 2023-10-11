@@ -54,9 +54,12 @@ const FormPart = ({list, groupArgs, ...props}) => {
         <View style={{display: 'none'}}>
             {(hiddenList || []).map(renderItem)}
         </View>
-        <List className={classnames('react-form', style['form-part'], props.className)}>
+        <List className={classnames('react-form', 'form-part', style['form-part'], props.className)}>
             {(displayList || []).map(renderItem)}
         </List>
+        <View className={classnames(style["list-item-split"], 'form-part-list-split', {
+            'bg-split': props.isSubheading || props.title
+        })}/>
     </>
 };
 

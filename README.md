@@ -23,11 +23,16 @@ npm i --save @kne/mini-core
 - miniCore(@kne/mini-core),lodash(lodash)
 
 ```jsx
-const BaseExample = ()=>{
-    return '我是一个示例组件';
+const {StateTag, preset} = miniCore;
+
+preset({
+    stateColors: {primary: '#4F185A'}
+});
+const BaseExample = () => {
+    return <StateTag type="primary">哈哈哈</StateTag>;
 };
 
-render(<BaseExample />);
+render(<BaseExample/>);
 
 ```
 
