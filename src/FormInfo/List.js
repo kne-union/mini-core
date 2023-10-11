@@ -3,6 +3,7 @@ import FormPart from './FormPart';
 import {GroupList, useFormContext} from '@kne/react-form-antd-taro';
 import get from "lodash/get";
 import {Button, Icon} from '@kne/antd-taro';
+import {View} from '@tarojs/components';
 import style from "./style.module.scss";
 import {ListTitle} from '../Common';
 import classnames from "classnames";
@@ -61,17 +62,17 @@ const List = forwardRef(({
             const [key, {index, onRemove, length}] = groupArgs;
             const renderList = typeof list === "function" ? list(...groupArgs, context) : list;
             return <FormPart
-                key={key}
-                className={classnames(style["list-item"], 'form-part-list-item')}
-                isSubheading
-                list={minLength && minLength >= length ? renderList : [...renderList, <Button block onClick={() => {
-                    onRemove(key);
-                    afterDelete && afterDelete(...groupArgs, context);
-                }} color='danger' fill='none'>
-                    <Icon className="iconfont" type="shanchu"/>{removeText}
-                </Button>]}
-                groupArgs={groupArgs}
-                title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
+                    key={key}
+                    className={classnames(style["list-item"], 'form-part-list-item')}
+                    isSubheading
+                    list={minLength && minLength >= length ? renderList : [...renderList, <Button className={style['list-btn-del']} block onClick={() => {
+                        onRemove(key);
+                        afterDelete && afterDelete(...groupArgs, context);
+                    }} color='danger' fill='none'>
+                        <Icon className="iconfont" type="shanchu"/>{removeText}
+                    </Button>]}
+                    groupArgs={groupArgs}
+                    title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
         }}</GroupList>
     })}/>;
 });
