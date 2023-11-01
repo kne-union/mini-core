@@ -26,8 +26,9 @@ export {
     isJSON as CommonIsJSON,
     Upload as CommonUpload,
     FileList as CommonFileList,
-    ListTitle as CommonListTitle
+    ListTitle as CommonListTitle,
 } from './Common';
+export {stateColors} from './Common';
 export {default as StateTag} from './StateTag';
 export {default as Filter} from './Filter';
 export {
