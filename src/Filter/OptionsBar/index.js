@@ -26,7 +26,7 @@ const OptionsItem = (props) => {
       <View className={classnames(style['options-label-text'], {
         [style['is-label']]: !isNotLabel
       })}>
-        {isNotLabel && props.value.length === 1 ? props.value.map((value) => value.label || value.value).join(',') : props.label + (props.value ? ` · ${props.value.length}` : '')}
+        {isNotLabel && props.value.length === 1 ? props.value.map((value) => value.label || value.value).join(',') : props.label + (isNotLabel ? ` · ${props.value.length}` : '')}
       </View>
       {!props.iconHidden && <Icon type="down-fill" className={classnames("adm-component", style['icon'])}/>}
     </View>

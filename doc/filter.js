@@ -2,7 +2,7 @@ const {Enum, Filter} = miniCore;
 const {useState} = React;
 
 const BaseExample = () => {
-    const [filter, setFilter] = useState([]);
+    const [filter, setFilter] = useState({});
     return <Filter filter={filter} onChange={setFilter}>
         <Filter.SearchBar name="keyword"/>
         <Filter.StateBar name="state" items={[{
