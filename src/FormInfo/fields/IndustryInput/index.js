@@ -19,7 +19,11 @@ const IndustrySelect = withDecoratorList(({render, placeholder, showPopup, value
         return <View className={"ellipsis"} split="," size={0}>{(value || []).map((item, index) => {
             const targetValue = valueType === 'all' ? item.value : item;
             return <>
-                <IndustryEnum key={targetValue} name={targetValue}/>{index !== value.length - 1 && "，"}
+                <IndustryEnum key={targetValue} name={targetValue}>
+                    {
+                        data => data || '-'
+                    }
+                </IndustryEnum>{index !== value.length - 1 && "，"}
             </>
         })}</View>;
     }, [value, valueType]);

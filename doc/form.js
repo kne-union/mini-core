@@ -16,6 +16,7 @@ const {
     CalendarTimeRange,
     Calendar,
     CitySelect,
+    IndustrySelect,
     FunctionSelect,
     TimeStep,
     CalendarRange,
@@ -46,7 +47,28 @@ const BaseExample = () => {
                         }
                     }
                 }
+            },
+          staticData: {
+            industryData: {
+              loader: () => {
+                return {
+                  data: [
+                    {
+                      chName: "互联网/电子通信/软件",
+                      code: "001",
+                      enName: "Internet/Telecoms/Software",
+                      level: "0",
+                      parentCode: "",
+                      pinyin: "hulianwang/dianzitongxin/ruanjian",
+                      seoUri: "",
+                      shortName: "",
+                      spelling: "hlwdztxrj"
+                    }
+                  ]
+                }
+              }
             }
+          }
         }
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
@@ -56,6 +78,7 @@ const BaseExample = () => {
             'date-range': ['2010-01-01', '2012-01-02'],
             'test2': [{label: "第三项", value: 3}],
             'city': ['020'],
+            'industry': ["002"],
             'function': ["001001002"]
         }} onSubmit={(data) => {
             console.log(data);
@@ -82,6 +105,7 @@ const BaseExample = () => {
                                   };
                               }
                           }}/>, <CitySelect.Item name="city" label="城市选择"/>,
+                          <IndustrySelect.Item name="industry" label="行业选择" multiple={false}/>,
                           <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
