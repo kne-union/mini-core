@@ -179,27 +179,6 @@ const BaseExample = () => {
                     }
                 }
             },
-          staticData: {
-            industryData: {
-              loader: () => {
-                return {
-                  data: [
-                    {
-                      chName: "互联网/电子通信/软件",
-                      code: "001",
-                      enName: "Internet/Telecoms/Software",
-                      level: "0",
-                      parentCode: "",
-                      pinyin: "hulianwang/dianzitongxin/ruanjian",
-                      seoUri: "",
-                      shortName: "",
-                      spelling: "hlwdztxrj"
-                    }
-                  ]
-                }
-              }
-            }
-          }
         }
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
