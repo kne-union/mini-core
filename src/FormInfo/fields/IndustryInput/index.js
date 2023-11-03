@@ -20,7 +20,7 @@ const IndustrySelect = withDecoratorList(({render, placeholder, showPopup, value
       const targetValue = valueType === 'all' ? item.value : item;
       return <>
         <IndustryEnum key={targetValue} name={targetValue}>
-          {data => data || <View className="react-form__placeholder">{placeholder}</View>}
+          {data => data?.label || '-'}
         </IndustryEnum>{index !== value.length - 1 && "，"}
       </>
     })}</View>;
