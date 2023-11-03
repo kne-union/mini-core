@@ -57,7 +57,7 @@ const BaseExample = () => {
             'date-range': ['2010-01-01', '2012-01-02'],
             'test2': [{label: "第三项", value: 3}],
             'city': ['020'],
-            'industry': ["002"],
+            'industry':["00100d4"],
             'function': ["001001002"]
         }} onSubmit={(data) => {
             console.log(data);
@@ -84,7 +84,7 @@ const BaseExample = () => {
                                   };
                               }
                           }}/>, <CitySelect.Item name="city" label="城市选择"/>,
-                          <IndustrySelect.Item name="industry" label="行业选择" multiple={false}/>,
+                          <IndustrySelect.Item name="industry" label="行业选择" multiple />,
                           <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
