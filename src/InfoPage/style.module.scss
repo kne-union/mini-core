@@ -1,0 +1,217 @@
+.info-page {
+  :global {
+    .adm-steps {
+      padding: 0;
+    }
+
+    .adm-step-status-finish {
+      .adm-step-icon-dot {
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: transparent;
+
+        &:before {
+          display: block;
+          font-size: 32px;
+          font-family: iconfont !important;
+          content: '\e603';
+        }
+      }
+    }
+
+    .adm-step-title {
+      font-weight: bold;
+      font-size: var(--adm-font-size-6);
+    }
+
+    .adm-step-status-process .adm-step-title {
+      color: var(--adm-color-text);
+    }
+
+    .adm-step-description {
+      font-size: var(--adm-font-size-4);
+      color: var(--adm-color-text-secondary);
+    }
+
+    .adm-step-status-wait {
+      .adm-step-title, .adm-step-description {
+        color: var(--adm-color-light) !important;
+      }
+    }
+
+    .adm-step-status-process {
+      .adm-step-icon-dot {
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: var(--adm-color-primary-2);
+
+        &:before {
+          content: '';
+          width: 16px;
+          height: 16px;
+          display: block;
+          background: var(--adm-color-primary);
+          border-radius: 8px;
+          transform: translate(8px, 8px);
+        }
+      }
+    }
+
+    .adm-step-status-wait {
+      .adm-step-icon-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 14px;
+        background: #FFFFFF;
+        border: solid 2px var(--adm-color-border);
+      }
+    }
+
+    .adm-steps-vertical .adm-step .adm-step-indicator::after {
+      height: calc(100% - 48px);
+      top: calc(var(--title-font-size) * 1.5 / 2 + 24px);
+    }
+
+    .adm-steps-horizontal .adm-step .adm-step-indicator::after {
+      width: calc(100% - 48px);
+      left: calc(50% + 24px);
+    }
+  }
+}
+
+.part {
+  :global {
+    .adm-card {
+      padding: 0;
+    }
+
+    .adm-card-header {
+      height: 64px;
+      line-height: 64px;
+      background: var(--adm-color-primary-1);
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 0;
+      box-sizing: border-box;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 64px;
+        background: var(--adm-color-primary);
+        margin-right: 26px;
+      }
+    }
+
+    .adm-card-body {
+      padding: 32px 0;
+      font-size: var(--adm-font-size-6);
+    }
+  }
+
+  .part {
+    &:first-child {
+      &:global(.no-title) {
+        :global(.adm-card-body) {
+          padding-top: 0;
+        }
+      }
+    }
+
+    &:not(:first-child) {
+      :global {
+        .adm-card-header {
+          margin-top: 32px;
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--adm-color-border);
+        margin-top: 32px;
+      }
+    }
+
+    :global {
+      .adm-card-header {
+        height: 48px;
+        line-height: 48px;
+        border-bottom: none;
+        background: transparent;
+
+        .adm-card-header-title {
+          font-weight: normal;
+          font-size: var(--adm-font-size-4);
+          color: var(--adm-color-primary);
+          background: var(--adm-color-primary-1);
+          border-radius: 24px;
+          padding: 8px 16px;
+        }
+
+        &:before {
+          content: normal;
+        }
+      }
+
+      .adm-card-body {
+        padding-bottom: 0;
+        padding-top: 16px;
+      }
+    }
+  }
+}
+
+.collapse {
+  :global {
+    .adm-list-item-content-arrow {
+      display: none;
+    }
+
+    .adm-collapse-panel-header {
+      background: var(--adm-color-background-grey);
+      border-bottom: solid 2px var(--adm-color-border);
+
+      .adm-list-item-content-main {
+        padding: 16px 0;
+        font-size: var(--adm-font-size-6);
+        display: flex;
+        align-items: center;
+
+        &:before {
+          content: '\e6af';
+          font-family: iconfont !important;
+          display: block;
+          font-size: 12px;
+          transform: rotate(-90deg);
+          margin-right: 14px;
+          transition: transform 300ms;
+        }
+      }
+
+      &.is-active {
+        .adm-list-item-content-main:before {
+          transform: rotate(0deg);
+        }
+      }
+    }
+
+    .adm-collapse-panel-content {
+      color: unset;
+
+      .adm-list-item {
+        font-size: var(--adm-font-size-6);
+      }
+    }
+  }
+
+  border: solid 2px var(--adm-color-border);
+}
