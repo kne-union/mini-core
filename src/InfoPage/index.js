@@ -1,7 +1,13 @@
 import React from 'react';
-import {Card, Space} from "@kne/antd-taro";
+import {Card, Collapse as AntdCollapse} from "@kne/antd-taro";
+import {View} from '@tarojs/components';
 import classnames from "classnames";
 import style from "./style.module.scss";
+
+const Collapse = ({className, ...props}) => {
+    return <AntdCollapse {...props} className={classnames(className, style['collapse'])}
+                         defaultActiveKey={props.items.map(({key}) => key)}/>
+};
 
 const Part = ({className, title, extra, children, ...props}) => {
     return (<Card
@@ -18,10 +24,11 @@ const Part = ({className, title, extra, children, ...props}) => {
 };
 
 const InfoPage = ({className, children}) => {
-    return (<Space className={className} direction="vertical" size={24}>
+    return (<View className={classnames(className, style['info-page'])}>
         {children}
-    </Space>);
+    </View>);
 };
 
 InfoPage.Part = Part;
+InfoPage.Collapse = Collapse;
 export default InfoPage;

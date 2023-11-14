@@ -56,7 +56,8 @@
           "packageName": "@kne/antd-taro"
         }
       ]
-    },{
+    },
+    {
       "title": "popup里面的表单",
       "description": "展示popup里面的表单组件",
       "code": "./popup-form.js",
@@ -117,6 +118,44 @@
       "title": "确认对话框",
       "description": "展示确认对话框",
       "code": "./modal.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "信息展示",
+      "description": "信息展示",
+      "code": "./content.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "复杂信息展示",
+      "description": "复杂信息展示",
+      "code": "./info-page.js",
       "scope": [
         {
           "name": "miniCore",

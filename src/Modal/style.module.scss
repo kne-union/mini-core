@@ -10,6 +10,10 @@
 .content {
   color: var(--adm-color-weak);
   margin-bottom: 64px;
+
+  &.no-title {
+    color: var(--adm-color-text);
+  }
 }
 
 .title {

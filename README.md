@@ -179,8 +179,6 @@ const BaseExample = () => {
                     }
                 }
             },
-          staticData: {
-          }
         }
     }}>
         <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
@@ -445,6 +443,101 @@ const BaseExample = () => {
 
         <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
     </>;
+};
+
+render(<BaseExample/>);
+
+```
+
+- 信息展示
+- 信息展示
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const {Content} = miniCore;
+const {Button} = antd;
+const BaseExample = () => {
+    return <Content list={[{
+        label: '测试', content: '哈哈啊哈哈'
+    }, {
+        label: '测试', content: '哈哈啊哈哈', tips: '哈哈哈哈', action: <Button>查看</Button>
+    }]}/>;
+};
+
+render(<BaseExample/>);
+
+```
+
+- 复杂信息展示
+- 复杂信息展示
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const {InfoPage, Content} = miniCore;
+const {Button, Steps} = antd;
+const BaseExample = () => {
+    return <InfoPage>
+        <InfoPage.Part title="开票信息">
+            <InfoPage.Part>
+                <Content list={[{
+                    label: '开票ID', content: 'IN00001533'
+                }, {
+                    label: '客户名称', content: '自动化测试有限公司'
+                }, {
+                    label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
+                }]}/>
+            </InfoPage.Part>
+            <InfoPage.Part title="发票费用信息">
+                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
+            </InfoPage.Part>
+            <InfoPage.Part title="发票信息">
+                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
+            </InfoPage.Part>
+        </InfoPage.Part>
+        <InfoPage.Part title="开票信息">
+            <InfoPage.Part title="发票费用信息">
+                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
+            </InfoPage.Part>
+            <InfoPage.Part title="发票信息">
+                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
+            </InfoPage.Part>
+        </InfoPage.Part>
+        <InfoPage.Part title="开票信息">
+            <InfoPage.Collapse items={[{
+                key: '1', title: '第一项', children: <Content list={[{
+                    label: '开票ID', content: 'IN00001533'
+                }, {
+                    label: '客户名称', content: '自动化测试有限公司'
+                }, {
+                    label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
+                }]}/>
+            }, {
+                key: '2', title: '第二项', children: '第二项第二项第二项第二项第二项第二项第二项第二项'
+            }, {
+                key: '3', title: '第三项', children: '第三项第三项第三项第三项第三项第三项第三项第三项第三项'
+            }]}/>
+        </InfoPage.Part>
+        <InfoPage.Part title="审批流程">
+            <Steps current={2} items={[{
+                title: '第一步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第二步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第三步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第四步', description: '完成时间：2020-12-01 12:30'
+            }]}/>
+            <Steps direction="vertical" current={2} items={[{
+                title: '第一步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第二步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第三步', description: '完成时间：2020-12-01 12:30'
+            }, {
+                title: '第四步', description: '完成时间：2020-12-01 12:30'
+            }]}/>
+        </InfoPage.Part>
+    </InfoPage>
 };
 
 render(<BaseExample/>);
