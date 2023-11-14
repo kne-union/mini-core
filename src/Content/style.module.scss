@@ -1,0 +1,42 @@
+.content {
+
+}
+
+.content-item {
+  display: flex;
+  font-size: var(--adm-font-size-6);
+  align-items: flex-start;
+}
+
+.content-label {
+  color: var(--adm-color-weak);
+
+  &:after {
+    content: '：';
+  }
+}
+
+.content-content {
+  flex: 1;
+}
+
+.tips {
+  color: var(--adm-color-primary);
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
+.content-action {
+  :global {
+    .adm-button {
+      padding: 0 6px;
+      font-size: var(--adm-font-size-6);
+      border: none;
+      color: var(--adm-color-primary);
+
+      &:active::before {
+        opacity: 0;
+      }
+    }
+  }
+}

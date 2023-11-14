@@ -3,6 +3,7 @@ export {default as Enum} from './Enum';
 export * from './Enum';
 export * as FormInfo from './FormInfo';
 export {default as InfoPage} from './InfoPage';
+export {default as Content} from './Content';
 export {
     CitySelect as CommonCitySelect,
     withPopup as commonWithPopup,

@@ -14,18 +14,23 @@ const Modal = ({className, icon, title, content, onCancel, onConfirm, closeOnMas
                   position="center"
                   hasSafeArea={false}>
         {title && <View className={style['title']}>{icon}<View className={style['title-content']}>{title}</View></View>}
-        <View className={style['content']}>{content}</View>
-        <Grid gap={15}>
-            <Grid.Item span={cancel.span}><Button block onClick={async () => {
-                if ((onCancel && await onCancel()) !== false) {
-                    setOpen(false);
-                }
-            }}>{cancel.text}</Button></Grid.Item>
-            <Grid.Item span={confirm.span}><Button block color='primary' onClick={async () => {
-                if ((onConfirm && await onConfirm()) !== false) {
-                    setOpen(false);
-                }
-            }}>{confirm.text}</Button></Grid.Item>
+        <View className={classnames(style['content'], {
+            [style['no-title']]: !title
+        })}>{content}</View>
+        <Grid gap={15} justify="center">
+            {cancel && <Grid.Item span={cancel.span || Modal.defaultProps.cancel.span}>
+                <Button block onClick={async () => {
+                    if ((onCancel && await onCancel()) !== false) {
+                        setOpen(false);
+                    }
+                }}>{cancel.text || Modal.defaultProps.cancel.text}</Button></Grid.Item>}
+            {confirm && <Grid.Item span={confirm.span || Modal.defaultProps.confirm.span}>
+                <Button block color='primary'
+                        onClick={async () => {
+                            if ((onConfirm && await onConfirm()) !== false) {
+                                setOpen(false);
+                            }
+                        }}>{confirm.text || Modal.defaultProps.confirm.text}</Button></Grid.Item>}
         </Grid>
     </Popup>
 };
@@ -33,17 +38,18 @@ const Modal = ({className, icon, title, content, onCancel, onConfirm, closeOnMas
 Modal.defaultProps = {
     closeOnMaskClick: false,
     icon: <Icon type="warning-tianchong" className="iconfont" color="var(--state-progress)"/>,
-    cancel: {span: 12,text:'取消'},
-    confirm: {span: 12,text:'确定'},
+    cancel: {span: 12, text: '取消'},
+    confirm: {span: 12, text: '确定'},
 };
 
 export default Modal;
 
-export const ModalButton = ({children, buttonProps, ...props}) => {
+export const ModalButton = ({children, buttonProps, className, ...props}) => {
     const [open, setOpen] = useState(false);
+    console.log(className);
     return <>
         {typeof children === 'function' ? children({open: () => setOpen(true), close: () => setOpen(false)}) :
-            <Button {...buttonProps} onClick={() => setOpen(true)}>{children}</Button>}
+            <Button {...buttonProps} calssName={className} onClick={() => setOpen(true)}>{children}</Button>}
         <Modal {...props} open={open} onOpenChange={setOpen}/>
     </>
 };
