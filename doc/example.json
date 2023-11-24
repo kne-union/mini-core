@@ -170,6 +170,62 @@
           "packageName": "@tarojs/components"
         }
       ]
+    },{
+      "title": "评论",
+      "description": "评论",
+      "code": "./comment.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
+    },{
+      "title": "弹出页面",
+      "description": "弹出页面",
+      "code": "./popup-view.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
+    },{
+      "title": "文件预览",
+      "description": "文件预览",
+      "code": "./file.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
+    },{
+      "title": "表格",
+      "description": "表格",
+      "code": "./table.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
     }
   ]
 }

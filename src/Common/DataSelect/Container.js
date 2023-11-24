@@ -12,93 +12,93 @@ import last from 'lodash/last';
 import style from "./style.module.scss";
 
 const SearchList = withFetch(({data, value, onCancel, onChange}) => {
-  if (!(data && data.length > 0)) {
-    return <Empty description={<Space direction="vertical">
-      <View>暂无结果</View>
-      <Button fill="none" color="primary" onClick={onCancel}>返回</Button>
-    </Space>}/>;
-  }
-  return <CheckList multiple value={value || []} onChange={onChange} options={data}/>;
+    if (!(data && data.length > 0)) {
+        return <Empty description={<Space direction="vertical">
+            <View>暂无结果</View>
+            <Button fill="none" color="primary" onClick={onCancel}>返回</Button>
+        </Space>}/>;
+    }
+    return <CheckList multiple value={value || []} onChange={onChange} options={data}/>;
 });
 
 const Container = (props) => {
-  const [searchText, setSearchText] = useState("");
-  const [labelHeight, setLabelHeight] = useState(0);
-  const searchRef = useRef(null);
-  const [value, onChangeBase] = useState(props.defaultValue && props.valueType === 'all' ? props.defaultValue.map(({value}) => value) : props.defaultValue);
+    const [searchText, setSearchText] = useState("");
+    const [labelHeight, setLabelHeight] = useState(0);
+    const searchRef = useRef(null);
+    const [value, onChangeBase] = useState(props.defaultValue && props.valueType === 'all' ? props.defaultValue.map(({value}) => value) : props.defaultValue);
 
-  const changeHandler = (value) => {
-    props.onChange && props.onChange(value && ((value) => {
-      const formatValue = value.map((value) => {
-        const target = props.getTargetItem(value);
-        return target && target.id && Object.assign({}, target, {
-          value, label: get(target, 'label')
-        });
-      }).filter((item) => !!item);
-      return props.valueType === 'all' ? formatValue : formatValue.map((item) => item.id);
-    })(value));
-  };
-  const onChange = (target) => {
-    if (!props.multiple) {
-      const value = target && target.length > 0 ? [last(target)] : [];
-      onChangeBase(value);
-      changeHandler(value);
-      return;
-    }
-    if (target.length > props.maxLength) {
-      showToast({
-        icon: 'none', title: `数量不能超过${props.maxLength}`
-      });
-      return;
-    }
-    onChangeBase(target);
-  };
-
-  return <View className={classnames(style['container'], props.className, {
-    [style['is-single']]: !props.multiple
-  })} style={labelHeight ? {
-    '--label-height': toCSSLength(labelHeight)
-  } : {}}>
-    {props.getSearchApi &&
-      <SearchBar placeholder={props.searchPlaceholder} className={style['search-bar']} ref={searchRef}
-                 onSearch={(value) => {
-                   setSearchText(value);
-                 }} onClear={() => {
-        setSearchText('');
-      }}/>}
-    {searchText && props.getSearchApi ? <ScrollViewVertical className={style['scroller']}>
-      <SearchList {...props.getSearchApi(searchText)} value={value} onCancel={() => {
-        setSearchText('');
-        searchRef.current.clear();
-      }} onChange={(target) => {
-        setSearchText('');
-        onChange(target);
-        searchRef.current.clear();
-      }}/>
-    </ScrollViewVertical> : props.children({value, onChange})}
-    {props.multiple ? <>
-      <SelectedLabel value={value && value.map((id) => {
-        const data = props.getTargetItem(id);
-        return data && {value: id, label: data.label};
-      }).filter((item) => !!item)} maxLength={props.maxLength} onResize={(height) => {
-        setLabelHeight(height);
-      }} onClose={(item) => {
-        const index = value.indexOf(item.value);
-        if (index < 0) {
-          return;
+    const changeHandler = (value) => {
+        props.onChange && props.onChange(value && ((value) => {
+            const formatValue = value.map((value) => {
+                const target = props.getTargetItem(value);
+                return target && target.value && Object.assign({}, target, {
+                    value, label: get(target, 'label')
+                });
+            }).filter((item) => !!item);
+            return props.valueType === 'all' ? formatValue : formatValue.map((item) => item.value);
+        })(value));
+    };
+    const onChange = (target) => {
+        if (!props.multiple) {
+            const value = target && target.length > 0 ? [last(target)] : [];
+            onChangeBase(value);
+            changeHandler(value);
+            return;
         }
-        const newValue = value.slice(0);
-        newValue.splice(index, 1);
-        onChange(newValue);
-      }}/>
-      <SelectedFooter onReset={() => {
-        onChange([]);
-      }} onConfirm={() => {
-        changeHandler(value);
-      }}/>
-      {props.hasSafeArea && <SafeArea position="bottom"/>}
-    </> : (props.hasSafeArea && <SafeArea position="bottom"/>)}
-  </View>
+        if (target.length > props.maxLength) {
+            showToast({
+                icon: 'none', title: `数量不能超过${props.maxLength}`
+            });
+            return;
+        }
+        onChangeBase(target);
+    };
+
+    return <View className={classnames(style['container'], props.className, {
+        [style['is-single']]: !props.multiple
+    })} style={labelHeight ? {
+        '--label-height': toCSSLength(labelHeight)
+    } : {}}>
+        {props.getSearchApi &&
+            <SearchBar placeholder={props.searchPlaceholder} className={style['search-bar']} ref={searchRef}
+                       onSearch={(value) => {
+                           setSearchText(value);
+                       }} onClear={() => {
+                setSearchText('');
+            }}/>}
+        {searchText && props.getSearchApi ? <ScrollViewVertical className={style['scroller']}>
+            <SearchList {...props.getSearchApi(searchText)} value={value} onCancel={() => {
+                setSearchText('');
+                searchRef.current.clear();
+            }} onChange={(target) => {
+                setSearchText('');
+                onChange(target);
+                searchRef.current.clear();
+            }}/>
+        </ScrollViewVertical> : props.children({value, onChange})}
+        {props.multiple ? <>
+            <SelectedLabel value={value && value.map((id) => {
+                const data = props.getTargetItem(id);
+                return data && {value: id, label: data.label};
+            }).filter((item) => !!item)} maxLength={props.maxLength} onResize={(height) => {
+                setLabelHeight(height);
+            }} onClose={(item) => {
+                const index = value.indexOf(item.value);
+                if (index < 0) {
+                    return;
+                }
+                const newValue = value.slice(0);
+                newValue.splice(index, 1);
+                onChange(newValue);
+            }}/>
+            <SelectedFooter onReset={() => {
+                onChange([]);
+            }} onConfirm={() => {
+                changeHandler(value);
+            }}/>
+            {props.hasSafeArea && <SafeArea position="bottom"/>}
+        </> : (props.hasSafeArea && <SafeArea position="bottom"/>)}
+    </View>
 };
 
 export default Container;

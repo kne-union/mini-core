@@ -1,13 +1,12 @@
 import './dayjsPlugins';
 import './common.scss';
 import style from './style.module.scss';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {eventCenter, useLaunch} from '@tarojs/taro';
 import {View} from '@tarojs/components';
 import get from 'lodash/get';
 import {Provider, useGlobalContext as useContext} from "@kne/global-context";
 import classnames from 'classnames';
-import isEqual from 'lodash/isEqual';
 import {PAGE_NO_SCROLL_CHANGE} from '@kne/antd-taro';
 import useRefCallback from "@kne/use-ref-callback";
 import {stateColors} from '../Common';
@@ -36,15 +35,18 @@ export const useGlobalContext = (globalKey) => {
     } : {});
 };
 
-export const SetGlobal = ({globalKey, value, children}) => {
-    const {setGlobal} = useGlobalContext(globalKey);
-    const valueRef = useRef(null);
+export const SetGlobal = ({globalKey, value, needReady, children}) => {
+    const {global, setGlobal} = useGlobalContext(globalKey);
+    const setGlobalHandler = useRefCallback(setGlobal);
+
     useEffect(() => {
-        if (value && !isEqual(valueRef.current, value)) {
-            setGlobal?.(value);
-            valueRef.current = value;
-        }
-    }, [value, setGlobal]);
+        setGlobalHandler(value);
+    }, [value, setGlobalHandler]);
+
+    if (needReady && !global) {
+        return null;
+    }
+
     return children;
 };
 

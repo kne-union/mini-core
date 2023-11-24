@@ -25,8 +25,10 @@
       font-size: var(--adm-font-size-6);
     }
 
-    .adm-step-status-process .adm-step-title {
-      color: var(--adm-color-text);
+    .adm-step-status-process, .adm-step-status-error {
+      .adm-step-title {
+        color: var(--adm-color-text);
+      }
     }
 
     .adm-step-description {
@@ -49,12 +51,13 @@
 
         &:before {
           content: '';
-          width: 16px;
-          height: 16px;
+          width: 50%;
+          height: 50%;
           display: block;
+          border: none;
           background: var(--adm-color-primary);
-          border-radius: 8px;
-          transform: translate(8px, 8px);
+          border-radius: 50%;
+          transform: translate(50%, 50%);
         }
       }
     }
@@ -66,6 +69,22 @@
         border-radius: 14px;
         background: #FFFFFF;
         border: solid 2px var(--adm-color-border);
+      }
+    }
+
+    .adm-step-status-error {
+      .adm-step-icon-dot {
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: transparent;
+
+        &:before {
+          display: block;
+          font-size: 32px;
+          font-family: iconfont !important;
+          content: '\e6cd';
+        }
       }
     }
 
@@ -149,7 +168,6 @@
         background: transparent;
 
         .adm-card-header-title {
-          font-weight: normal;
           font-size: var(--adm-font-size-4);
           color: var(--adm-color-primary);
           background: var(--adm-color-primary-1);

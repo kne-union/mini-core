@@ -56,6 +56,9 @@
   :global {
     .adm-button {
       font-size: var(--adm-font-size-6);
+      padding: 0;
+      border: none;
+      color:var(--adm-color-primary);
     }
   }
 }

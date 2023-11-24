@@ -1,26 +1,19 @@
-import {NavBar, Popup, toCSSLength} from "@kne/antd-taro";
-import React, {useState} from "react";
-import HeaderContainer from "../../HeaderContainer";
+import {Popup} from "@kne/antd-taro";
+import PopupView from '../../PopupView';
+import React from "react";
 import classnames from 'classnames';
 import style from './style.module.scss';
 
 const withFormPopup = (WrappedComponent) => ({open, onClose, title, onChange, catchMove, ...props}) => {
-    const [headerHeight, setHeaderHeight] = useState();
     return <Popup bodyClassName={classnames("react-form__popup", style['component-body'], props.className)}
                   isRootPortal={false}
-                  catchMove={catchMove}
-                  bodyStyle={headerHeight ? {
-                      '--header-container-height': toCSSLength(headerHeight)
-                  } : {}} open={open} onClose={onClose} position="right" hasSafeArea={false}>
-        <HeaderContainer onHeightChange={(height) => {
-            setHeaderHeight(height);
-        }}>
-            <NavBar onBack={onClose}>{title || props.placeholder}</NavBar>
-        </HeaderContainer>
-        {open && <WrappedComponent {...props} onChange={(target) => {
-            onClose();
-            onChange && onChange(target);
-        }}/>}
+                  catchMove={catchMove} open={open} onClose={onClose} position="right" hasSafeArea={false}>
+        <PopupView title={title || props.placeholder} open={open} onClose={onClose}>
+            <WrappedComponent {...props} onChange={(target) => {
+                onClose();
+                onChange && onChange(target);
+            }}/>
+        </PopupView>
     </Popup>
 };
 
