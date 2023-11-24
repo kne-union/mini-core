@@ -184,7 +184,7 @@ page, body, .adm-root-portal {
       --border-bottom: solid 2px var(--adm-color-background-line);
       --padding-left: 32px;
       --padding-right: 32px;
-
+      background: #FFFFFF;
       > .adm-list-item {
         padding-right: 0;
         padding-left: 0;
@@ -295,5 +295,13 @@ page, body, .adm-root-portal {
         content: '\e602';
       }
     }
+  }
+
+  .bg-grey {
+    background: var(--adm-color-background-grey);
+  }
+
+  .padding-16 {
+    padding: 16px;
   }
 }

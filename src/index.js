@@ -52,9 +52,15 @@ export {
 } from './Calendar';
 export {default as HeaderContainer} from './HeaderContainer';
 export {default as AvatarPreview} from './AvatarPreview';
-export {default as OssFile, getOssUrl, withOssFile} from './OssFile';
-export {default as Button, FixView, LoadingButton} from './Button';
+// 这些api已经废弃，请勿再使用
+export {default as OssFile, getOssUrl} from './OssFile';
+
+export {default as FixedView, FixedButton, FixedLoadingButton} from './FixedView';
 export {default as Layout} from './Layout';
 export {default as HighLight, HighLightProvider} from './HighLight';
 export {default as Modal, ModalButton} from './Modal';
+export {default as Comment} from './Comment';
 export {default as preset} from './preset';
+export {default as PopupView, usePopupView} from './PopupView';
+export {default as File, useFilePreview, withFilePreview, withOssFile} from './File';
+export {default as Table} from './Table';

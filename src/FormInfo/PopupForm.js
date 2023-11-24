@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import HeaderContainer from '../HeaderContainer';
-import {FixView} from '../Button';
+import FixedView from '../FixedView';
 import {NavBar, Popup, toCSSLength} from '@kne/antd-taro';
 import useControlValue from "@kne/use-control-value";
 import Form from './Form';
@@ -31,7 +31,7 @@ const PopupForm = ({
             }
         }}>
             {children}
-            <FixView>{footer}</FixView>
+            <FixedView>{footer}</FixedView>
         </Form>
     </Popup>
 };

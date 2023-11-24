@@ -1,9 +1,9 @@
-import {CityEnum, CitySelect as CommonCitySelect, withPopup} from '../../../Common';
-import {withDecoratorList} from '@kne/react-form-antd-taro';
-import React, {useMemo} from "react";
+import {CityEnum, CitySelect as CommonCitySelect} from '../../../Common';
+import React from "react";
 import {View} from "@tarojs/components";
 import classnames from "classnames";
 import style from "../../style.module.scss";
+import createDataSelectField from '../createDataSelectField';
 
 const CitySelectInner = (props) => {
     return <CommonCitySelect {...props} hasSafeArea
@@ -11,10 +11,10 @@ const CitySelectInner = (props) => {
                              defaultValue={props.value || []}/>
 }
 
-const CitySelect = withDecoratorList(({render, placeholder, showPopup, value, valueType}) => {
-    const label = useMemo(() => {
+const CitySelect = createDataSelectField({
+    labelRender: ({value,placeholder, valueType}) => {
         if (!value || !value?.[0]) {
-            return '';
+            return <View className="react-form__placeholder">{placeholder}</View>;
         }
         return <View className={"ellipsis"} split="," size={0}>{(value || []).map((item, index) => {
             const targetValue = valueType === 'all' ? item.value : item;
@@ -22,10 +22,7 @@ const CitySelect = withDecoratorList(({render, placeholder, showPopup, value, va
                 <CityEnum key={targetValue} name={targetValue}/>{index !== value.length - 1 && "，"}
             </>
         })}</View>
-    }, [value, valueType]);
-    return render({
-        label, value: (value || []), placeholder, onClick: showPopup
-    });
-})(withPopup(CitySelectInner));
+    }
+})(CitySelectInner);
 
 export default CitySelect;

@@ -1,0 +1,19 @@
+.file {
+  &:global(.adm-button) {
+    padding: 0 6px;
+    font-size: var(--adm-font-size-6);
+    border: none;
+    color: var(--adm-color-primary);
+
+    &:active::before {
+      opacity: 0;
+    }
+  }
+
+  :global {
+    .iconfont {
+      margin-right: 6px;
+      color: var(--adm-color-light);
+    }
+  }
+}

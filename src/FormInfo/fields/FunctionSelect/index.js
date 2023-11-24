@@ -1,18 +1,18 @@
-import {FunctionEnum, FunctionSelect as CommonFunctionSelect, withPopup} from '../../../Common';
-import {withDecoratorList} from '@kne/react-form-antd-taro';
-import React, {useMemo} from "react";
+import {FunctionEnum, FunctionSelect as CommonFunctionSelect} from '../../../Common';
+import React from "react";
 import {View} from "@tarojs/components";
 import classnames from "classnames";
 import style from "../../style.module.scss";
+import createDataSelectField from '../createDataSelectField';
 
 const FunctionSelectInner = (props) => {
     return <CommonFunctionSelect {...props} hasSafeArea
                                  className={classnames(style['data-select-container'], props.className)}
                                  defaultValue={props.value || []}/>
-}
+};
 
-const FunctionSelect = withDecoratorList(({render, placeholder, showPopup, value, valueType}) => {
-    const label = useMemo(() => {
+const FunctionSelect = createDataSelectField({
+    labelRender: ({value, valueType, placeholder}) => {
         if (!(value && value.length > 0)) {
             return <View className="react-form__placeholder">{placeholder}</View>;
         }
@@ -22,12 +22,8 @@ const FunctionSelect = withDecoratorList(({render, placeholder, showPopup, value
                 <FunctionEnum key={targetValue} name={targetValue}/>{index !== value.length - 1 && "，"}
             </>
         })}</View>
-
-    }, [value, valueType]);
-    return render({
-        label, value: value || [], placeholder, onClick: showPopup
-    });
-})(withPopup(FunctionSelectInner));
+    }
+})(FunctionSelectInner);
 
 FunctionSelect.defaultProps = {
     multiple: true

@@ -13,7 +13,7 @@ const DataSelect = ({data, renderDetail, ...props}) => {
     const {treeData, mapping, treeMapping} = useMemo(() => {
         const {treeData, mapping, treeMapping} = createTreeUtils(new Map(data.map((item) => {
             return [item.code, {
-                ...item, id: item.code, label: item.chName, parentId: item.parentCode || null,
+                ...item, id: item.code, value: item.code, label: item.chName, parentId: item.parentCode || null,
             },];
         })));
         return {
@@ -70,7 +70,7 @@ const dataEnumCache = new Map();
 const DataEnumInner = withFetch(({data, name, type, cache, children, ...props}) => {
     const mapping = useMemo(() => {
         return new Map(data.map((item) => [item.code, {
-            ...item, id: item.code, label: item.chName, parentId: item.parentCode || null,
+            ...item, id: item.code, value: item.code, label: item.chName, parentId: item.parentCode || null,
         }]));
     }, [data]);
 
