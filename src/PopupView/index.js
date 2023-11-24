@@ -4,6 +4,7 @@ import classnames from "classnames";
 import style from "./style.module.scss";
 import HeaderContainer from "../HeaderContainer";
 import {ScrollView} from '@tarojs/components';
+import {Provider as GlobalProvider, useGlobalContext} from "@kne/global-context";
 
 const context = createContext({});
 const {Provider} = context;
@@ -51,20 +52,22 @@ export const PopupViewProvider = ({children}) => {
 
 export const usePopupView = () => {
     const {openPopupView} = useContext(context);
+    const globalContext = useGlobalContext();
     return ({children, ...props}) => {
         const onClose = () => {
             close();
         };
-        const close = openPopupView(<PopupView {...props} open onClose={onClose}>
+        const close = openPopupView(<PopupView {...props} globalContext={globalContext} open onClose={onClose}>
             {typeof children === 'function' ? children({close: onClose}) : children}
         </PopupView>);
         return {close};
     }
 };
 
-const PopupView = ({open, onClose, className, children, title, backArrow}) => {
+const PopupView = ({open, onClose, className, globalContext, children, title, backArrow}) => {
     const [headerHeight, setHeaderHeight] = useState();
-    return <>
+
+    const inner = <>
         <HeaderContainer onHeightChange={(height) => {
             setHeaderHeight(height);
         }}>
@@ -76,7 +79,15 @@ const PopupView = ({open, onClose, className, children, title, backArrow}) => {
         } : {}} scrollY>
             {open && children}
         </ScrollView>
-    </>
+    </>;
+
+    if (!globalContext) {
+        return inner;
+    }
+
+    return <GlobalProvider value={globalContext}>
+        {inner}
+    </GlobalProvider>
 };
 
 PopupView.defaultProps = {
