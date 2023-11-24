@@ -1,8 +1,9 @@
 {
   "name": "@kne/mini-core",
-  "version": "1.0.19",
+  "version": "2.0.0",
   "dependencies": {
     "@kne/antd-taro": "^1.0.14",
+    "@kne/compose": "^0.1.0",
     "@kne/global-context": "^1.0.0",
     "@kne/lodash-wechat": "^4.17.21",
     "@kne/react-fetch": "^1.4.2",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "create": "cross-env MODULES_DEV_BASE_PATH='./src' modules-dev-create",
-    "start": "run-p start:lib start:md start:doc start:example",
+    "start": "npm run build:md &&npm run build:doc && run-p start:lib start:md start:doc start:example",
     "build": "run-s build:lib build:md build:doc build:example",
     "test": "run-s test:unit test:lint test:build",
     "eject": "react-scripts eject",

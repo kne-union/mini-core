@@ -3,8 +3,10 @@ import HeaderContainer from '../HeaderContainer';
 import {GlobalStyle} from '../Global';
 import Taro, {useRouter} from "@tarojs/taro";
 import {Icon, NavBar, SafeArea, TabBar} from '@kne/antd-taro';
+import FixedView from '../FixedView';
 import classnames from "classnames";
 import style from './style.module.scss';
+import {PopupViewProvider} from "../PopupView";
 
 const ToolBar = ({list}) => {
     const listRef = useRef(list);
@@ -17,35 +19,38 @@ const ToolBar = ({list}) => {
             setActiveKey(router.path)
         }
     }, [router.path]);
-    return (<TabBar
-        safeArea
-        className="adm-tab-bar-fixed"
-        items={list}
-        activeKey={activeKey}
-    />)
+    return <FixedView className={style['tab-bar']} noPadding>
+        <TabBar
+            className="adm-tab-bar-fixed"
+            items={list}
+            activeKey={activeKey}
+        />
+    </FixedView>
 };
 
-const Layout = ({children, showToolBar = false, header, toolBar, toolBarList, className}) => {
+const Layout = ({children, header, toolBar, toolBarList}) => {
     const pages = Taro.getCurrentPages();
     const router = useRouter();
     return <GlobalStyle className={classnames(style['layout'], 'layout')}>
-        <HeaderContainer className={header.className} extra={header.extra}>
-            <NavBar back={header.back} backArrow={header.backArrow ||
-                <Icon type={pages.length === 1 ? "huidaoshouye" : "arrow-thin-left"} className="iconfont"/>}
-                    onBack={() => {
-                        if (header.onBack) {
-                            header.onBack(router);
-                            return;
-                        }
-                        Taro.navigateBack({
-                            delta: 1
-                        }).catch(({errMsg}) => {
-                            Taro.switchTab({url: "/pages/index/index"})
-                        })
-                    }}>{header.title}</NavBar>
-        </HeaderContainer>
-        {children}
-        {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
+        <PopupViewProvider>
+            <HeaderContainer className={header.className} extra={header.extra}>
+                <NavBar back={header.back} backArrow={header.backArrow ||
+                    <Icon type={pages.length === 1 ? "huidaoshouye" : "arrow-thin-left"} className="iconfont"/>}
+                        onBack={() => {
+                            if (header.onBack) {
+                                header.onBack(router);
+                                return;
+                            }
+                            Taro.navigateBack({
+                                delta: 1
+                            }).catch(({errMsg}) => {
+                                Taro.switchTab({url: "/pages/index/index"})
+                            })
+                        }}>{header.title}</NavBar>
+            </HeaderContainer>
+            {children}
+            {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
+        </PopupViewProvider>
     </GlobalStyle>;
 };
 
