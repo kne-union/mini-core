@@ -1,7 +1,6 @@
-.popup {
+.popup{
   width: 100%;
 }
-
 .popup-view {
   --safe-bottom: calc(env(safe-area-inset-bottom) * 1);
   --max-height: calc(100vh - var(--header-container-height) - var(--safe-bottom, 0px));

@@ -33,7 +33,7 @@ const Layout = ({children, header, toolBar, toolBarList}) => {
     const router = useRouter();
     return <GlobalStyle className={classnames(style['layout'], 'layout')}>
         <PopupViewProvider>
-            <HeaderContainer className={header.className} extra={header.extra}>
+            {header && <HeaderContainer className={header.className} extra={header.extra}>
                 <NavBar back={header.back} backArrow={header.backArrow ||
                     <Icon type={pages.length === 1 ? "huidaoshouye" : "arrow-thin-left"} className="iconfont"/>}
                         onBack={() => {
@@ -47,11 +47,13 @@ const Layout = ({children, header, toolBar, toolBarList}) => {
                                 Taro.switchTab({url: "/pages/index/index"})
                             })
                         }}>{header.title}</NavBar>
-            </HeaderContainer>
+            </HeaderContainer>}
             {children}
             {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
         </PopupViewProvider>
     </GlobalStyle>;
 };
+
+Layout.defaultProps = {};
 
 export default Layout;

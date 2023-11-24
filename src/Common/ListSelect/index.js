@@ -90,7 +90,7 @@ const ListSelect = (props) => {
   const [labelHeight, setLabelHeight] = useState(0);
   return <MappingProvider>
     <View className={classnames(className, style['list-select'])} style={labelHeight ? {
-    '--label-height': toCSSLength(labelHeight + (api && props.getSearchProps ? 72 : 0))
+    '--label-height': toCSSLength(labelHeight + (api && props.getSearchProps ? 51 : 0))
   } : {}}>
     {api ? <LoadMoreList {...api} className={style['list-select-scroller']} searchText={searchText}
                          getSearchProps={props.getSearchProps}

@@ -1,5 +1,5 @@
 .list-select {
-  --panel-height: calc(var(--max-height) - var(--label-height, 0px) - 100px);
+  --panel-height: calc(var(--max-height) - var(--label-height, 0px));
 
   :global {
     .adm-check-list {
@@ -25,7 +25,7 @@
 }
 
 .list-select-scroller {
-  height: calc(var(--panel-height) - 50px);
+  height: calc(var(--panel-height) - 130px);
 }
 
 .search-bar {
