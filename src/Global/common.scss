@@ -185,6 +185,7 @@ page, body, .adm-root-portal {
       --padding-left: 32px;
       --padding-right: 32px;
       background: #FFFFFF;
+
       > .adm-list-item {
         padding-right: 0;
         padding-left: 0;
@@ -313,9 +314,31 @@ page, body, .adm-root-portal {
 
   .padding-16 {
     padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .padding-h-16 {
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .padding-v-16 {
+    padding: 16px 0;
+    box-sizing: border-box;
   }
 
   .padding-32 {
     padding: 32px;
+    box-sizing: border-box;
+  }
+
+  .padding-h-32 {
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  .padding-v-32 {
+    padding: 16px 0;
+    box-sizing: border-box;
   }
 }
