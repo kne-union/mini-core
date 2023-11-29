@@ -8,7 +8,7 @@ import classnames from "classnames";
 import style from './style.module.scss';
 import {PopupViewProvider} from "../PopupView";
 
-const ToolBar = ({list, noSafeArea}) => {
+const ToolBar = ({list}) => {
     const listRef = useRef(list);
     listRef.current = list;
     const router = useRouter();
@@ -25,7 +25,6 @@ const ToolBar = ({list, noSafeArea}) => {
             items={list}
             activeKey={activeKey}
         />
-        {!noSafeArea && <SafeArea position="bottom"/>}
     </FixedView>
 };
 
