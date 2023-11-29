@@ -297,6 +297,16 @@ page, body, .adm-root-portal {
     }
   }
 
+  .ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--line-clamp, 1);
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+
   .bg-grey {
     background: var(--adm-color-background-grey);
   }

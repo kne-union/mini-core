@@ -8,7 +8,7 @@ import classnames from "classnames";
 import style from './style.module.scss';
 import {PopupViewProvider} from "../PopupView";
 
-const ToolBar = ({list}) => {
+const ToolBar = ({list, noSafeArea}) => {
     const listRef = useRef(list);
     listRef.current = list;
     const router = useRouter();
@@ -25,13 +25,18 @@ const ToolBar = ({list}) => {
             items={list}
             activeKey={activeKey}
         />
+        {!noSafeArea && <SafeArea position="bottom"/>}
     </FixedView>
 };
 
-const Layout = ({children, header, toolBar, toolBarList}) => {
+ToolBar.defaultProps = {
+    noSafeArea: false
+};
+
+const Layout = ({className, children, header, toolBar, toolBarList}) => {
     const pages = Taro.getCurrentPages();
     const router = useRouter();
-    return <GlobalStyle className={classnames(style['layout'], 'layout')}>
+    return <GlobalStyle className={classnames(className, style['layout'], 'layout')}>
         <PopupViewProvider>
             {header && <HeaderContainer className={header.className} extra={header.extra}>
                 <NavBar back={header.back} backArrow={header.backArrow ||
