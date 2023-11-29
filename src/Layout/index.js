@@ -32,7 +32,7 @@ ToolBar.defaultProps = {
     noSafeArea: false
 };
 
-const Layout = ({className, children, header, toolBar, toolBarList}) => {
+const Layout = ({className, children, header, toolBar, toolBarList, hasSafeArea}) => {
     const pages = Taro.getCurrentPages();
     const router = useRouter();
     return <GlobalStyle className={classnames(className, style['layout'], 'layout')}>
@@ -53,11 +53,14 @@ const Layout = ({className, children, header, toolBar, toolBarList}) => {
                         }}>{header.title}</NavBar>
             </HeaderContainer>}
             {children}
-            {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || <SafeArea position="bottom"/>}
+            {toolBar || (toolBarList && <ToolBar list={toolBarList}/>) || (hasSafeArea &&
+                <SafeArea position="bottom"/>)}
         </PopupViewProvider>
     </GlobalStyle>;
 };
 
-Layout.defaultProps = {};
+Layout.defaultProps = {
+    hasSafeArea: true
+};
 
 export default Layout;
