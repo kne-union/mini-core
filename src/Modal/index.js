@@ -13,19 +13,19 @@ const ModalInner = ({title, icon, content, cancel, onCancel, confirm, onConfirm,
             [style['no-title']]: !title
         })}>{content}</View>
         <Grid gap={15} justify="center">
-            {cancel && <Grid.Item span={cancel.span || Modal.defaultProps.cancel.span}>
+            {cancel && <Grid.Item span={cancel.span || ModalInner.defaultProps.cancel.span}>
                 <Button block onClick={async () => {
                     if ((onCancel && await onCancel()) !== false) {
                         onClose();
                     }
-                }}>{cancel.text || Modal.defaultProps.cancel.text}</Button></Grid.Item>}
-            {confirm && <Grid.Item span={confirm.span || Modal.defaultProps.confirm.span}>
+                }}>{cancel.text || ModalInner.defaultProps.cancel.text}</Button></Grid.Item>}
+            {confirm && <Grid.Item span={confirm.span || ModalInner.defaultProps.confirm.span}>
                 <Button block color='primary'
                         onClick={async () => {
                             if ((onConfirm && await onConfirm()) !== false) {
                                 onClose();
                             }
-                        }}>{confirm.text || Modal.defaultProps.confirm.text}</Button></Grid.Item>}
+                        }}>{confirm.text || ModalInner.defaultProps.confirm.text}</Button></Grid.Item>}
         </Grid>
     </>
 };
