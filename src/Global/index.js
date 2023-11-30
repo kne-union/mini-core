@@ -1,7 +1,7 @@
 import './dayjsPlugins';
 import './common.scss';
 import style from './style.module.scss';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {eventCenter, useLaunch} from '@tarojs/taro';
 import {View} from '@tarojs/components';
 import get from 'lodash/get';
@@ -62,7 +62,8 @@ export const usePreset = () => {
 
 const Global = ({preset, children, ...props}) => {
     const basePreset = usePreset();
-    const [global, setGlobal] = useState(Object.assign({}, get(preset, "global")));
+    const globalRef = useRef({});
+    const [global, setGlobal] = useState(Object.assign({}, {globalRef}, get(preset, "global")));
     useLaunch(() => {
         console.log('App launched.')
     }, []);
