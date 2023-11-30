@@ -12,7 +12,7 @@ const {Provider} = context;
 export const PopupViewProvider = ({children}) => {
     const [popupViewList, setPopupViewList] = useState([]);
     return <Provider value={{
-        openPopupView: (children, options) => {
+        openPopup: (children, options) => {
             const current = Object.assign({}, options, {children});
             setPopupViewList((popupViewList) => {
                 const newPopupViewList = popupViewList.slice(0);
@@ -30,44 +30,59 @@ export const PopupViewProvider = ({children}) => {
                     return newPopupViewList;
                 });
             };
-        }, closeCurrentPopupView: () => {
+        }, closeCurrentPopup: () => {
             setPopupViewList((popupViewList) => {
                 const newPopupViewList = popupViewList.slice(0);
                 newPopupViewList.pop();
                 return newPopupViewList;
             });
-        }, closeAllPopupView: () => {
+        }, closeAllPopup: () => {
             setPopupViewList([]);
         }
     }}>
         {children}
-        {popupViewList.map(({bodyClassName, ...props}, index) => {
-            return <Popup position="right" {...props} bodyClassName={classnames(style['popup'], bodyClassName)}
-                          key={index} open
-                          hasSafeArea={false}
-                          catchMove={true} isRootPortal={false}/>
+        {popupViewList.map((props, index) => {
+            return <Popup {...props} key={index} open/>
         })}
     </Provider>
 };
 
-export const usePopupView = () => {
-    const {openPopupView} = useContext(context);
+export const usePopup = (options) => {
+    const {openPopup} = useContext(context);
     const globalContext = useGlobalContext();
-    return ({children, ...props}) => {
-        const onClose = () => {
-            close();
-        };
-        const close = openPopupView(<PopupView {...props} globalContext={globalContext} open onClose={onClose}>
-            {typeof children === 'function' ? children({close: onClose}) : children}
-        </PopupView>);
+    return (children) => {
+        const close = openPopup(<GlobalProvider value={globalContext}>
+            {children}
+        </GlobalProvider>, Object.assign({}, options));
         return {close};
     }
 };
 
-const PopupView = ({open, onClose, className, globalContext, children, title, backArrow}) => {
-    const [headerHeight, setHeaderHeight] = useState();
+export const usePopupView = (options) => {
+    const popup = usePopup(Object.assign({}, options, {
+        position: 'right',
+        bodyClassName: classnames(style['popup-page'], options?.bodyClassName),
+        catchMove: true,
+        isRootPortal: false
+    }));
 
-    const inner = <>
+    return ({children, ...props}) => {
+        const onClose = () => {
+            apis.close();
+        };
+        const apis = popup(<PopupView {...props} open onClose={onClose}>
+            {typeof children === 'function' ? children({
+                close: onClose
+            }) : children}
+        </PopupView>);
+
+        return apis;
+    }
+};
+
+const PopupView = ({open, onClose, className, children, title, backArrow}) => {
+    const [headerHeight, setHeaderHeight] = useState();
+    return <>
         <HeaderContainer onHeightChange={(height) => {
             setHeaderHeight(height);
         }}>
@@ -80,14 +95,6 @@ const PopupView = ({open, onClose, className, globalContext, children, title, ba
             {open && children}
         </ScrollView>
     </>;
-
-    if (!globalContext) {
-        return inner;
-    }
-
-    return <GlobalProvider value={globalContext}>
-        {inner}
-    </GlobalProvider>
 };
 
 PopupView.defaultProps = {
