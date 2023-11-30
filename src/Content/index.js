@@ -8,7 +8,12 @@ import isNil from 'lodash/isNil';
 
 const Content = ({className, empty, list}) => {
     return <Space className={classnames(className, style['content'])} direction="vertical" size={8}>
-        {list.map(({label, content, block, tips, action}, index) => {
+        {list.filter((item) => {
+            if (typeof item.display === "function") {
+                return item.display();
+            }
+            return item.display !== false;
+        }).map(({label, content, block, tips, action}, index) => {
             return <View key={index} className={classnames(style['content-item'], {
                 [style['is-block']]: block
             })}>
