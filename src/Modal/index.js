@@ -79,7 +79,7 @@ export const ModalButton = ({children, buttonProps, className, ...props}) => {
     const [open, setOpen] = useState(false);
     return <>
         {typeof children === 'function' ? children({open: () => setOpen(true), close: () => setOpen(false)}) :
-            <Button {...buttonProps} calssName={className} onClick={() => setOpen(true)}>{children}</Button>}
+            <Button {...buttonProps} className={className} onClick={() => setOpen(true)}>{children}</Button>}
         <Modal {...props} open={open} onOpenChange={setOpen}/>
     </>
 };

@@ -64,3 +64,4 @@ export {default as preset} from './preset';
 export {default as PopupView, usePopupView, usePopup} from './PopupView';
 export {default as File, useFilePreview, withFilePreview, withOssFile} from './File';
 export {default as Table} from './Table';
+export {default as TipsMessage} from './TipsMessage';
