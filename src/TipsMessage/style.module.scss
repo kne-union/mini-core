@@ -1,0 +1,16 @@
+.tips {
+  color: var(--adm-color-primary);
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
+.tips-message {
+  &:global(.adm-button) {
+    padding: 0;
+    border: none;
+    font-size: unset;
+    &:active::before {
+      opacity: 0;
+    }
+  }
+}
