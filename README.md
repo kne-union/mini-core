@@ -113,6 +113,11 @@ const BaseExample = () => {
                 }
             }]}/>
         }}</Enum>
+        <Filter.OptionsBar name="option3" items={[{
+            key: 'city', label: '期望城市', type: 'CitySelect'
+        }, {
+            key: 'currentCity', label: '现居城市', type: 'CitySelect'
+        }]}/>
     </Filter>;
 };
 
@@ -182,9 +187,37 @@ const BaseExample = () => {
         <Form data={{
             'name': "张三",
             'date-range': ['2010-01-01', '2012-01-02'],
-            'test2': [{label: "第三项", value: 3}],
+            'test2': 3,
             'city': ['020'],
-            'industry':["00100d4"],
+            'industry': ["00100d4"],
+            'function': ["001001002"]
+        }} onSubmit={(data) => {
+            console.log(data);
+        }}>
+            <FormPart title="表单标题"
+                      list={[<AdvancedSelect.Item multiple={false} name="test2" label="高级选择"
+                                                  mapping={[{value: 3, label: '第三项'}]}
+                                                  interceptor={["picker-value", "picker-single"]} rule="REQ"
+                                                  getSearchProps={() => {
+                                                      return {};
+                                                  }} api={{
+                          loader: () => {
+                              return {
+                                  pageData: [{label: "第一项", value: 1}, {
+                                      label: "第二项", value: 2, disabled: true
+                                  }, {
+                                      label: "第三项", value: 3,
+                                  },],
+                              };
+                          }
+                      }}/>, <SubmitButton>提交</SubmitButton>]}/>
+        </Form>
+        <Form data={{
+            'name': "张三",
+            'date-range': ['2010-01-01', '2012-01-02'],
+            'test2': [3],
+            'city': ['020'],
+            'industry': ["00100d4"],
             'function': ["001001002"]
         }} onSubmit={(data) => {
             console.log(data);
@@ -198,7 +231,7 @@ const BaseExample = () => {
                           }, {description: '月薪', value: 5}, {description: '周薪', value: 4}, {
                               description: '日薪', value: 3
                           }, {description: '时薪', value: 2}])}/>,
-                          <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" getSearchProps={()=>{
+                          <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" getSearchProps={() => {
                               return {};
                           }} api={{
                               loader: () => {
@@ -211,7 +244,7 @@ const BaseExample = () => {
                                   };
                               }
                           }}/>, <CitySelect.Item name="city" label="城市选择"/>,
-                          <IndustrySelect.Item name="industry" label="行业选择" multiple />,
+                          <IndustrySelect.Item name="industry" label="行业选择" multiple/>,
                           <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
                           <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
                           <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
