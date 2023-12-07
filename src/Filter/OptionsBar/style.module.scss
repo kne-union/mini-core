@@ -125,7 +125,8 @@
   &.is-close {
     position: absolute;
     right: 0;
-    padding: 14px 0;
+    top:0;
+    padding: 10px 0;
 
     &:global {
       &:active::before {

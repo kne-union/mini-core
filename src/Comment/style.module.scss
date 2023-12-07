@@ -1,6 +1,6 @@
 .comment {
   font-size: var(--adm-font-size-4);
-  color:var(--adm-color-text-dafault);
+  color: var(--adm-color-text-dafault);
 }
 
 .comment-header {
@@ -24,9 +24,11 @@
   display: flex;
   line-height: 36px;
   align-items: center;
+  word-break: break-all;
 }
 
 .comment-content {
+  flex: 1;
   &:not(:last-child) {
     border-right: 2px solid var(--adm-color-border);
     padding-right: 24px;
@@ -52,6 +54,7 @@
     color: var(--adm-color-primary);
     padding: 0;
     background: transparent;
+
     &:active::before {
       opacity: 0;
     }

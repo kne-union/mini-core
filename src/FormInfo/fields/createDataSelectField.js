@@ -14,7 +14,7 @@ const createDataSelectField = ({labelRender}) => (WrappedComponents) => {
             "react-form__placeholder": !label
         })} onClick={() => {
             const {close} = popupView({
-                title: 'placeholder', children: <WrappedComponents {...props} onChange={(target) => {
+                title: props.placeholder || '请选择', children: <WrappedComponents {...props} onChange={(target) => {
                     close();
                     onChange && onChange(target);
                 }}/>
