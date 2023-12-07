@@ -18,7 +18,7 @@
 
 .content-label {
   color: var(--adm-color-weak);
-
+  white-space: nowrap;
   &:after {
     content: '：';
   }
@@ -26,6 +26,7 @@
 
 .content-content {
   flex: 1;
+  word-break: break-all;
 }
 
 .content-action {

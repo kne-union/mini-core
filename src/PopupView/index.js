@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState} from 'react';
-import {Icon, NavBar, Popup, toCSSLength} from '@kne/antd-taro';
+import {Icon, NavBar, Popup, SafeArea, toCSSLength} from '@kne/antd-taro';
 import classnames from "classnames";
 import style from "./style.module.scss";
 import HeaderContainer from "../HeaderContainer";
@@ -42,7 +42,7 @@ export const PopupViewProvider = ({children}) => {
     }}>
         {children}
         {popupViewList.map((props, index) => {
-            return <Popup {...props} key={index} open/>
+            return <Popup {...props} key={index} open hasSafeArea={false} isRootPortal={false}/>
         })}
     </Provider>
 };
@@ -62,8 +62,7 @@ export const usePopupView = (options) => {
     const popup = usePopup(Object.assign({}, options, {
         position: 'right',
         bodyClassName: classnames(style['popup-page'], options?.bodyClassName),
-        catchMove: true,
-        isRootPortal: false
+        catchMove: true
     }));
 
     return ({children, ...props}) => {
@@ -80,7 +79,7 @@ export const usePopupView = (options) => {
     }
 };
 
-const PopupView = ({open, onClose, className, children, title, backArrow}) => {
+const PopupView = ({open, onClose, className, children, title, hasSafeArea, backArrow}) => {
     const [headerHeight, setHeaderHeight] = useState();
     return <>
         <HeaderContainer onHeightChange={(height) => {
@@ -94,11 +93,12 @@ const PopupView = ({open, onClose, className, children, title, backArrow}) => {
         } : {}} scrollY>
             {open && children}
         </ScrollView>
+        {hasSafeArea && <SafeArea position="bottom"/>}
     </>;
 };
 
 PopupView.defaultProps = {
-    title: ''
+    title: '', hasSafeArea: false
 };
 
 export default PopupView;

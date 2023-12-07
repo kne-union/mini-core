@@ -32,9 +32,20 @@ interceptors.output.use("file-format", (value) => {
         return [];
     }
     return value.map((item) => ({
-        id: item.id,
-        originalName: item.fileName || item.originalName
+        id: item.id, originalName: item.fileName || item.originalName
     }));
+});
+
+interceptors.output.use("picker-value", (value) => {
+    if (Array.isArray(value)) {
+        return value.map((item) => item.value);
+    }
+
+    if (value.value) {
+        return value.value;
+    }
+
+    return null;
 });
 
 interceptors.input.use("file-format", (value) => {
@@ -42,9 +53,7 @@ interceptors.input.use("file-format", (value) => {
         return [];
     }
     return value.map((item) => ({
-        id: item.id,
-        originalName: item.originalName,
-        fileName: item.fileName,
+        id: item.id, originalName: item.originalName, fileName: item.fileName,
     }));
 });
 

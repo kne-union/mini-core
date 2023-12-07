@@ -60,6 +60,11 @@ const BaseExample = () => {
                 }
             }]}/>
         }}</Enum>
+        <Filter.OptionsBar name="option3" items={[{
+            key: 'city', label: '期望城市', type: 'CitySelect'
+        }, {
+            key: 'currentCity', label: '现居城市', type: 'CitySelect'
+        }]}/>
     </Filter>;
 };
 

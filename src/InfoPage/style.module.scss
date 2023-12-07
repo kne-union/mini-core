@@ -196,7 +196,7 @@
 
     .adm-collapse-panel-header {
       background: var(--adm-color-background-grey);
-      border-bottom: solid 2px var(--adm-color-border);
+      //border-bottom: solid 2px var(--adm-color-border);
 
       .adm-list-item-content-main {
         padding: 16px 0;
@@ -231,5 +231,7 @@
     }
   }
 
-  border: solid 2px var(--adm-color-border);
+  border-left: solid 2px var(--adm-color-border);
+  border-right: solid 2px var(--adm-color-border);
+  border-bottom: solid 2px var(--adm-color-border);
 }
