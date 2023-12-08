@@ -78,7 +78,9 @@ const BaseExample = () => {
                                   },],
                               };
                           }
-                      }}/>, <SubmitButton>提交</SubmitButton>]}/>
+                      }}/>, <Input.Item name="input" label="输入框" display={({formData}) => {
+                          return formData.test2 === 3;
+                      }}></Input.Item>, <SubmitButton>提交</SubmitButton>]}/>
         </Form>
         <Form data={{
             'name': "张三",
