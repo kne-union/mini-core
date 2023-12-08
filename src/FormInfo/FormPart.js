@@ -1,4 +1,4 @@
-import React, {useMemo, useRef} from 'react';
+import React, {useMemo} from 'react';
 import {List} from '@kne/antd-taro';
 import classnames from 'classnames';
 import {useFormContext} from "@kne/react-form-antd-taro";
@@ -10,19 +10,17 @@ import style from './style.module.scss';
 
 const FormPart = ({list, groupArgs, ...props}) => {
     const context = useFormContext();
-    const contentApiRef = useRef(null);
     const contextApi = Object.assign({}, context, groupArgs ? {groupArgs} : {});
-    contentApiRef.current = contextApi;
     const {displayList, hiddenList} = useMemo(() => {
         return groupBy(list.filter((item) => {
             if (typeof item.props.display === "function") {
-                return item.props.display(contentApiRef.current);
+                return item.props.display(contextApi);
             }
             return item.props.display !== false;
         }), (item) => {
             return item.props.hidden ? 'hiddenList' : 'displayList';
         });
-    }, [list]);
+    }, [list, contextApi]);
 
     const renderItem = (item, index) => {
         const key = item.props.name + index || (groupArgs && groupArgs[0] + index) || index;
@@ -48,9 +46,8 @@ const FormPart = ({list, groupArgs, ...props}) => {
 
     return <>
 
-        {props.title &&
-            <ListTitle subtitle={props.subtitle} isSubheading={props.isSubheading}
-                       extra={props.extra}>{props.title}</ListTitle>}
+        {props.title && <ListTitle subtitle={props.subtitle} isSubheading={props.isSubheading}
+                                   extra={props.extra}>{props.title}</ListTitle>}
         <View style={{display: 'none'}}>
             {(hiddenList || []).map(renderItem)}
         </View>
