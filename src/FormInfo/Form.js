@@ -41,7 +41,7 @@ interceptors.output.use("picker-value", (value) => {
         return value.map((item) => item.value);
     }
 
-    if (value.value) {
+    if (value?.value) {
         return value.value;
     }
 

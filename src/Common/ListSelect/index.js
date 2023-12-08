@@ -55,9 +55,6 @@ const useMapping = () => {
 const ListSelectInner = ({options, maxLength, ...props}) => {
     const {value, setValue, appendMapping, onChange} = useMapping();
     useEffect(() => {
-        appendMapping(value);
-    }, [value, appendMapping]);
-    useEffect(() => {
         appendMapping(options);
     }, [options, appendMapping]);
     if (options.length === 0) {
