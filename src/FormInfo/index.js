@@ -56,4 +56,4 @@ export {default as FormList} from './List';
 export {default as FormPart} from './FormPart';
 export {default as Form} from './Form';
 export {default} from './Form';
-export {default as PopupForm} from './PopupForm';
+export {default as usePopupForm} from './usePopupForm';

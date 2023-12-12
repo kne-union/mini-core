@@ -27,15 +27,13 @@ const MappingProvider = ({defaultMapping, defaultValue, onChange, valueType, chi
             return newMapping;
         });
     });
-    const mappingRef = useRef(null);
-    mappingRef.current = mapping;
 
 
     const [value, setValue] = useState((defaultValue || []).map((item) => valueIsTypeAll(item) ? item.value : item));
 
     const valueAll = useMemo(() => {
-        return value.map((item) => mappingRef.current.get(item)).filter((item) => !!item);
-    }, [value]);
+        return value.map((item) => mapping.get(item)).filter((item) => !!item);
+    }, [value, mapping]);
 
     useEffect(() => {
         appendMapping(defaultValue);
@@ -43,7 +41,7 @@ const MappingProvider = ({defaultMapping, defaultValue, onChange, valueType, chi
 
     return <Provider value={{
         value, valueAll, setValue, onChange: (value) => {
-            onChange && onChange(valueType === 'all' ? value.map((item) => mappingRef.current.get(item)).filter((item) => !!item) : value);
+            onChange && onChange(valueType === 'all' ? value.map((item) => mapping.get(item)).filter((item) => !!item) : value);
         }, mapping, appendMapping
     }}>{children}</Provider>
 };

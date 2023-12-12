@@ -14,22 +14,25 @@ const {
     FunctionSelect,
     UserListSelect,
     SubmitButton,
-    PopupForm
+    usePopupForm
 } = FormInfo;
 
 const BaseExample = () => {
-    const [open, setOpen] = useState(false);
-    return <>
-        <Button onClick={() => {
-            setOpen(true);
-        }}>点击弹出popup</Button>
-        <PopupForm open={open} onOpenChange={setOpen} footer={<SubmitButton>提交</SubmitButton>}>
-            <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
+    const popupForm = usePopupForm();
+    return <Button onClick={() => {
+        popupForm({
+            title: '新增表单',
+            formProps: {
+                onSubmit: (data) => {
+                    console.log(data);
+                }
+            },
+            children: <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
                 <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
                 <CitySelect.Item name="city" label="城市"/>, <FunctionSelect.Item name="function" label="职能"/>,
                 <TextArea.Item name="des" label="说明"/>]}/>
-        </PopupForm>
-    </>;
+        });
+    }}>点击弹出popup</Button>;
 };
 
 render(<BaseExample/>);
