@@ -55,7 +55,7 @@ const BaseExample = () => {
         <Form data={{
             'name': "张三",
             'date-range': ['2010-01-01', '2012-01-02'],
-            'test2': 3,
+            'test2': {value: 3, label: '第三项'},
             'city': ['020'],
             'industry': ["00100d4"],
             'function': ["001001002"]
@@ -63,8 +63,7 @@ const BaseExample = () => {
             console.log(data);
         }}>
             <FormPart title="表单标题"
-                      list={[<AdvancedSelect.Item multiple={false} name="test2" label="高级选择"
-                                                  mapping={[{value: 3, label: '第三项'}]}
+                      list={[<AdvancedSelect.Item name="test2" label="高级选择"
                                                   interceptor={["picker-value", "picker-single"]} rule="REQ"
                                                   getSearchProps={() => {
                                                       return {};

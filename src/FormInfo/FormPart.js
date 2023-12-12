@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useRef} from 'react';
 import {List} from '@kne/antd-taro';
 import classnames from 'classnames';
 import {useFormContext} from "@kne/react-form-antd-taro";
@@ -10,17 +10,24 @@ import style from './style.module.scss';
 
 const FormPart = ({list, groupArgs, ...props}) => {
     const context = useFormContext();
-    const contextApi = Object.assign({}, context, groupArgs ? {groupArgs} : {});
+    const formData = context.formData;
+    const openApiRef = useRef(null);
+    openApiRef.current = context.openApi;
+
+    const formApi = useMemo(() => {
+        return {formData, groupArgs, openApi: openApiRef.current};
+    }, [formData, groupArgs]);
+
     const {displayList, hiddenList} = useMemo(() => {
         return groupBy(list.filter((item) => {
             if (typeof item.props.display === "function") {
-                return item.props.display(contextApi);
+                return item.props.display(formApi);
             }
             return item.props.display !== false;
         }), (item) => {
             return item.props.hidden ? 'hiddenList' : 'displayList';
         });
-    }, [list, contextApi]);
+    }, [list, formApi]);
 
     const renderItem = (item, index) => {
         const key = item.props.name + index || (groupArgs && groupArgs[0] + index) || index;
@@ -36,10 +43,10 @@ const FormPart = ({list, groupArgs, ...props}) => {
         }
         return <ComponentItem key={key}
                               {...Object.assign({}, componentProps, typeof targetProps.setExtraProps === "function" ? targetProps.setExtraProps({
-                                  props: componentProps, contextApi,
+                                  props: componentProps, contextApi: formApi,
                               }) : {})}
                               onChange={(...args) => {
-                                  return (item.props.onChange && item.props.onChange(...args, contextApi));
+                                  return (item.props.onChange && item.props.onChange(...args, formApi));
                               }}
         />;
     };

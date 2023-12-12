@@ -187,7 +187,7 @@ const BaseExample = () => {
         <Form data={{
             'name': "张三",
             'date-range': ['2010-01-01', '2012-01-02'],
-            'test2': 3,
+            'test2': {value: 3, label: '第三项'},
             'city': ['020'],
             'industry': ["00100d4"],
             'function': ["001001002"]
@@ -195,8 +195,7 @@ const BaseExample = () => {
             console.log(data);
         }}>
             <FormPart title="表单标题"
-                      list={[<AdvancedSelect.Item multiple={false} name="test2" label="高级选择"
-                                                  mapping={[{value: 3, label: '第三项'}]}
+                      list={[<AdvancedSelect.Item name="test2" label="高级选择"
                                                   interceptor={["picker-value", "picker-single"]} rule="REQ"
                                                   getSearchProps={() => {
                                                       return {};
@@ -306,22 +305,25 @@ const {
     FunctionSelect,
     UserListSelect,
     SubmitButton,
-    PopupForm
+    usePopupForm
 } = FormInfo;
 
 const BaseExample = () => {
-    const [open, setOpen] = useState(false);
-    return <>
-        <Button onClick={() => {
-            setOpen(true);
-        }}>点击弹出popup</Button>
-        <PopupForm open={open} onOpenChange={setOpen} footer={<SubmitButton>提交</SubmitButton>}>
-            <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
+    const popupForm = usePopupForm();
+    return <Button onClick={() => {
+        popupForm({
+            title: '新增表单',
+            formProps: {
+                onSubmit: (data) => {
+                    console.log(data);
+                }
+            },
+            children: <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
                 <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
                 <CitySelect.Item name="city" label="城市"/>, <FunctionSelect.Item name="function" label="职能"/>,
                 <TextArea.Item name="des" label="说明"/>]}/>
-        </PopupForm>
-    </>;
+        });
+    }}>点击弹出popup</Button>;
 };
 
 render(<BaseExample/>);
