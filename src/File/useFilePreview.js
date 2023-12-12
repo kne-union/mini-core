@@ -5,12 +5,13 @@ const useFilePreview = ({originalName, url}) => {
     const [loading, setLoading] = useState(false);
     const type = originalName.split(".")[1];
     const onPreview = useCallback(() => {
+        Taro.showToast({
+            title: '点击' + 'type:' + type + ' ' + ['png', 'jpg', 'jpeg'].includes(type.toLowerCase())
+        });
         setLoading(true);
-        if (['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG'].includes(type)) {
-            Taro.previewMedia({
-                sources: [{
-                    url
-                }]
+        if (['png', 'jpg', 'jpeg'].includes(type.toLowerCase())) {
+            Taro.previewImage({
+                urls: [url]
             })
             setLoading(false);
             return;
@@ -36,7 +37,7 @@ const useFilePreview = ({originalName, url}) => {
                 });
                 setLoading(false);
             }
-        })
+        });
     }, [type, url]);
 
     return {
