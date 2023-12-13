@@ -18,7 +18,7 @@ const propsEqual = (target, origin) => {
         return target.every((item, index) => propsEqual(item, origin[index]));
     }
 
-    if (typeof target === 'object' && typeof origin === 'object' && isEqual(Object.keys(target), Object.keys(origin))) {
+    if (target && origin && typeof target === 'object' && typeof origin === 'object' && isEqual(Object.keys(target), Object.keys(origin))) {
         return Object.keys(target).every((key) => propsEqual(target[key], origin[key]));
     }
 
