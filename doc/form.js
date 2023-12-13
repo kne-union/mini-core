@@ -1,6 +1,7 @@
 const {FormInfo, Global, CommonListTitle} = miniCore;
 const {range} = lodash;
 const {Button} = antd;
+const {useMemo} = React;
 
 const {
     FormPart,
@@ -24,10 +25,32 @@ const {
     InputNumber,
     InputNumberUnit,
     Upload,
-    SubmitButton
+    SubmitButton,
+    useFormContext
 } = FormInfo;
 
 const {useRef} = React;
+
+const FormInner = () => {
+    const {formData} = useFormContext();
+    console.log('FormInner render');
+    return <FormPart title="表单标题"
+                     list={[<AdvancedSelect.Item name="test2" label="高级选择"
+                                                 interceptor={["picker-value", "picker-single"]} rule="REQ"
+                                                 getSearchProps={() => {
+                                                     return {};
+                                                 }} api={{
+                         loader: () => {
+                             return {
+                                 pageData: [{label: "第一项", value: 1}, {
+                                     label: "第二项", value: 2, disabled: true
+                                 }, {
+                                     label: "第三项", value: 3,
+                                 },],
+                             };
+                         }
+                     }}/>, <Input.Item name="input" label="输入框"/>, <SubmitButton>提交</SubmitButton>]}/>;
+};
 
 const BaseExample = () => {
     const listRef = useRef();
@@ -50,8 +73,8 @@ const BaseExample = () => {
             },
         }
     }}>
-        <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
-        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>
+        {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
+        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
         <Form data={{
             'name': "张三",
             'date-range': ['2010-01-01', '2012-01-02'],
@@ -62,26 +85,9 @@ const BaseExample = () => {
         }} onSubmit={(data) => {
             console.log(data);
         }}>
-            <FormPart title="表单标题"
-                      list={[<AdvancedSelect.Item name="test2" label="高级选择"
-                                                  interceptor={["picker-value", "picker-single"]} rule="REQ"
-                                                  getSearchProps={() => {
-                                                      return {};
-                                                  }} api={{
-                          loader: () => {
-                              return {
-                                  pageData: [{label: "第一项", value: 1}, {
-                                      label: "第二项", value: 2, disabled: true
-                                  }, {
-                                      label: "第三项", value: 3,
-                                  },],
-                              };
-                          }
-                      }}/>, <Input.Item name="input" label="输入框" display={({formData}) => {
-                          return formData.test2 === 3;
-                      }}></Input.Item>, <SubmitButton>提交</SubmitButton>]}/>
+            <FormInner/>
         </Form>
-        <Form data={{
+        {/*<Form data={{
             'name': "张三",
             'date-range': ['2010-01-01', '2012-01-02'],
             'test2': [3],
@@ -144,7 +150,7 @@ const BaseExample = () => {
                       itemTitle={({index}) => `第${index + 1}项`}
                       list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                           <Input.Item name="field1" label="字段1"/>]}/>
-        </Form>
+        </Form>*/}
     </Global>;
 }
 

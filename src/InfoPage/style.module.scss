@@ -93,6 +93,10 @@
       top: calc(var(--title-font-size) * 1.5 / 2 + 24px);
     }
 
+    .adm-steps-vertical .adm-step .adm-step-content {
+      width: calc(100% - 48px);
+    }
+
     .adm-steps-horizontal .adm-step .adm-step-indicator::after {
       width: calc(100% - 48px);
       left: calc(50% + 24px);
