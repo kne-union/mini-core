@@ -1,4 +1,4 @@
-import React, {useMemo, useRef} from 'react';
+import React, {useMemo, useRef, createElement, useState, useEffect} from 'react';
 import {List} from '@kne/antd-taro';
 import classnames from 'classnames';
 import {useFormContext} from "@kne/react-form-antd-taro";
@@ -6,7 +6,42 @@ import {View} from '@tarojs/components';
 import groupBy from 'lodash/groupBy';
 import {ListTitle} from '../Common';
 import style from './style.module.scss';
+import useRefCallback from '@kne/use-ref-callback';
+import isEqual from 'lodash/isEqual';
 
+const propsEqual = (target, origin) => {
+    if (typeof target === 'function' && typeof target === 'function') {
+        return true;
+    }
+
+    if (Array.isArray(target) && Array.isArray(origin) && target.length === origin.length) {
+        return target.every((item, index) => propsEqual(item, origin[index]));
+    }
+
+    if (typeof target === 'object' && typeof origin === 'object' && isEqual(Object.keys(target), Object.keys(origin))) {
+        return Object.keys(target).every((key) => propsEqual(target[key], origin[key]));
+    }
+
+    return isEqual(target, origin);
+};
+
+const FormItemRenderer = ({type, onChange, ...props}) => {
+    const prePropsRef = useRef(null);
+    const handlerChange = useRefCallback(onChange);
+    const render = useRefCallback(() => {
+        prePropsRef.current = props;
+        return createElement(type, Object.assign({}, props, {onChange: handlerChange}));
+    });
+    const [formItem, setFormItem] = useState(render);
+
+    useEffect(() => {
+        if (!propsEqual(props, prePropsRef.current)) {
+            setFormItem(render());
+        }
+    }, [props, render]);
+
+    return formItem;
+};
 
 const FormPart = ({list, groupArgs, ...props}) => {
     const context = useFormContext();
@@ -18,8 +53,10 @@ const FormPart = ({list, groupArgs, ...props}) => {
         return {formData, groupArgs, openApi: openApiRef.current};
     }, [formData, groupArgs]);
 
+    const targetList = typeof list === 'function' ? list(formApi) : list;
+
     const {displayList, hiddenList} = useMemo(() => {
-        return groupBy(list.filter((item) => {
+        return groupBy(targetList.filter((item) => {
             if (typeof item.props.display === "function") {
                 return item.props.display(formApi);
             }
@@ -27,7 +64,7 @@ const FormPart = ({list, groupArgs, ...props}) => {
         }), (item) => {
             return item.props.hidden ? 'hiddenList' : 'displayList';
         });
-    }, [list, formApi]);
+    }, [targetList, formApi]);
 
     const renderItem = (item, index) => {
         const key = item.props.name + index || (groupArgs && groupArgs[0] + index) || index;
@@ -41,13 +78,14 @@ const FormPart = ({list, groupArgs, ...props}) => {
         if (targetProps.hasOwnProperty("isBlock")) {
             componentProps["block"] = targetProps.isBlock;
         }
-        return <ComponentItem key={key}
-                              {...Object.assign({}, componentProps, typeof targetProps.setExtraProps === "function" ? targetProps.setExtraProps({
-                                  props: componentProps, contextApi: formApi,
-                              }) : {})}
-                              onChange={(...args) => {
-                                  return (item.props.onChange && item.props.onChange(...args, formApi));
-                              }}
+
+        return <FormItemRenderer key={key} type={item.type}
+                                 {...Object.assign({}, componentProps, typeof targetProps.setExtraProps === "function" ? targetProps.setExtraProps({
+                                     props: componentProps, contextApi: formApi,
+                                 }) : {})}
+                                 onChange={(...args) => {
+                                     return (item.props.onChange && item.props.onChange(...args, formApi));
+                                 }}
         />;
     };
 

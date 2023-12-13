@@ -26,3 +26,4 @@ export {default as FileList} from './FileList';
 export {default as Upload} from './Upload';
 export {default as stateColors, presetStateColors} from './stateColors';
 export {default as ListTitle} from './ListTitle';
+export {default as isWXWork} from './isWXWork';
