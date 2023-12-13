@@ -4,6 +4,7 @@
     font-size: var(--adm-font-size-6);
     border: none;
     color: var(--adm-color-primary);
+    word-break: break-all;
 
     &:active::before {
       opacity: 0;
