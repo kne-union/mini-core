@@ -2,15 +2,20 @@
   border-bottom: solid 2px var(--adm-color-border);
   border-right: solid 2px var(--adm-color-border);
   font-size: var(--adm-font-size-6);
+
+  :global {
+    .adm-grid-item {
+      border-top: solid 2px var(--adm-color-border);
+      border-left: solid 2px var(--adm-color-border);
+    }
+  }
 }
 
 .table-thead {
   background: var(--adm-color-background-grey);
-  color:var(--adm-color-text-secondary);
+  color: var(--adm-color-text-secondary);
 }
 
 .table-col {
   padding: 12px 32px;
-  border-top: solid 2px var(--adm-color-border);
-  border-left: solid 2px var(--adm-color-border);
 }
