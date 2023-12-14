@@ -8,7 +8,7 @@ const TipsMessage = ({className, ...props}) => {
     const modal = useModal();
     return <Button onClick={() => {
         modal(Object.assign({}, {
-            confirm: null, cancel: {text: '知道了'}
+            confirm: null, cancel: {text: '知道了'}, icon: null
         }, props));
     }} className={classnames(className, style['tips-message'])}>
         <Icon type="tishi" className={classnames('iconfont', style['tips'])}/>

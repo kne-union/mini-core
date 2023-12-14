@@ -38,7 +38,9 @@ const BaseExample = () => {
                               <Input.Item name="field1" label="字段1"/>]}/>
                 <Button onClick={() => {
                     popupView({
-                        title: '下一个页面', children: '下一个页面下一个页面下一个页面下一个页面下一个页面'
+                        title: '下一个页面',
+                        children: '下一个页面下一个页面下一个页面下一个页面下一个页面',
+                        hasSafeArea: true,
                     });
                 }}>点击弹出下一个页面</Button>
                 <FixedView>

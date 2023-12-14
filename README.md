@@ -540,7 +540,7 @@ const BaseExample = () => {
                     label: '划转人', block: true, content: <Table dataSource={[{
                         id: 1, name: '哈哈哈', count: 12
                     }, {
-                        id: 2, name: '张三', count: 200
+                        id: 2, name: '张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三', count: 200
                     }]} columns={[{name: 'name', title: '名称'}, {name: 'count', title: '数量'}]}/>
                 }, {
                     label: '备注', content: null
@@ -600,7 +600,7 @@ const BaseExample = () => {
         <InfoPage.Part title="开票信息">
             <InfoPage.Collapse items={[{
                 key: '1', title: '第一项', children: <Content list={[{
-                    label: '开票ID', content: 'IN00001533'
+                    label: '开票ID', content: 'IN00001533', tips: '哈哈哈'
                 }, {
                     label: '客户名称', content: '自动化测试有限公司'
                 }, {
@@ -724,7 +724,9 @@ const BaseExample = () => {
                               <Input.Item name="field1" label="字段1"/>]}/>
                 <Button onClick={() => {
                     popupView({
-                        title: '下一个页面', children: '下一个页面下一个页面下一个页面下一个页面下一个页面'
+                        title: '下一个页面',
+                        children: '下一个页面下一个页面下一个页面下一个页面下一个页面',
+                        hasSafeArea: true,
                     });
                 }}>点击弹出下一个页面</Button>
                 <FixedView>

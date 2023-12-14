@@ -92,8 +92,8 @@ const PopupView = ({open, onClose, className, children, title, hasSafeArea, back
             '--header-container-height': toCSSLength(headerHeight)
         } : {}} scrollY>
             {open && children}
+            {hasSafeArea && <SafeArea position="bottom"/>}
         </ScrollView>
-        {hasSafeArea && <SafeArea position="bottom"/>}
     </>;
 };
 

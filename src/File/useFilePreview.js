@@ -23,13 +23,13 @@ const useFilePreview = ({originalName, url}) => {
                         setLoading(false);
                     }, fail: () => {
                         Taro.showToast({
-                            title: '打开文档失败', duration: 1000
+                            icon: null, title: '打开文档失败', duration: 1000
                         });
                     }
                 })
             }, fail: () => {
                 Taro.showToast({
-                    title: '打开文档失败', duration: 1000
+                    icon: null, title: '打开文档失败', duration: 1000
                 });
                 setLoading(false);
             }

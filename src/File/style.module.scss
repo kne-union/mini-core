@@ -5,7 +5,7 @@
     border: none;
     color: var(--adm-color-primary);
     word-break: break-all;
-
+    text-align: left;
     &:active::before {
       opacity: 0;
     }
