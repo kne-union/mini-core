@@ -2,6 +2,11 @@
   :global {
     .adm-steps {
       padding: 0;
+
+      .adm-step-content .adm-step-title {
+        font-weight: bold;
+        font-size: var(--adm-font-size-6);
+      }
     }
 
     .adm-step-status-finish {
@@ -18,11 +23,6 @@
           content: '\e603';
         }
       }
-    }
-
-    .adm-step-title {
-      font-weight: bold;
-      font-size: var(--adm-font-size-6);
     }
 
     .adm-step-status-process, .adm-step-status-error {
@@ -131,7 +131,7 @@
     }
 
     .adm-card-body {
-      padding: 32px 0;
+      padding: 32px 0 64px;
       font-size: var(--adm-font-size-6);
       word-break: break-all;
       white-space: pre-wrap;
