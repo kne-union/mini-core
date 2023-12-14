@@ -133,10 +133,19 @@
     .adm-card-body {
       padding: 32px 0;
       font-size: var(--adm-font-size-6);
+      word-break: break-all;
     }
   }
 
   .part {
+    .part {
+      &:not(:last-child) {
+        &:after {
+          content: normal;
+        }
+      }
+    }
+
     &:first-child {
       &:global(.no-title) {
         :global(.adm-card-body) {
@@ -177,6 +186,7 @@
           background: var(--adm-color-primary-1);
           border-radius: 24px;
           padding: 8px 16px;
+          word-break: break-all;
         }
 
         &:before {
