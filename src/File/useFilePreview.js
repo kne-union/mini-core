@@ -5,9 +5,6 @@ const useFilePreview = ({originalName, url}) => {
     const [loading, setLoading] = useState(false);
     const type = originalName.split(".")[1];
     const onPreview = useCallback(() => {
-        Taro.showToast({
-            title: '点击' + 'type:' + type + ' ' + ['png', 'jpg', 'jpeg'].includes(type.toLowerCase())
-        });
         setLoading(true);
         if (['png', 'jpg', 'jpeg'].includes(type.toLowerCase())) {
             Taro.previewImage({
@@ -16,7 +13,6 @@ const useFilePreview = ({originalName, url}) => {
             setLoading(false);
             return;
         }
-
         Taro.downloadFile({
             url, success: (res) => {
                 const filePath = res.tempFilePath;
