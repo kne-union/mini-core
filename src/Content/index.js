@@ -21,7 +21,7 @@ const Content = ({className, empty, list}) => {
         <View className={style['content-label']}>{label}</View>
         <View className={style['content-content']}>
           {empty && isNil(content) ? empty : content}
-          {tips && <TipsMessage {...Object.assign({}, typeof tips === 'string' ? {content: tips} : tips)}/>}
+          {tips && <TipsMessage {...Object.assign({}, typeof tips === 'string' ? {content: tips, title: label} : tips)}/>}
         </View>
         {action && <View className={style['content-action']}>{action}</View>}
       </View>
