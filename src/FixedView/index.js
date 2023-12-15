@@ -25,7 +25,7 @@ export const FixedView = ({
                 [style['no-padding']]: noPadding, [style["fixed"]]: !!fixed
             })}>
             <View id={containerId}>
-                <View className={classnames(style['flex'], {
+                <View className={classnames(style['flex'], 'fixed-view-container', {
                     [style[direction]]: !!direction
                 })}>
                     {children}
@@ -42,16 +42,7 @@ FixedView.defaultProps = {
 };
 
 export const FixedButton = ({
-                                block,
-                                onClick,
-                                type,
-                                fixedOpen,
-                                children,
-                                className,
-                                disabled,
-                                size,
-                                loading,
-                                ...props
+                                block, onClick, type, fixedOpen, children, className, disabled, size, loading, ...props
                             }) => {
     return <View
         {...props}
