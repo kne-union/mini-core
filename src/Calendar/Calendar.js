@@ -11,7 +11,7 @@ import MonthSelector from './MonthSelector';
 import WeekTitle from "./WeekTitle";
 import useCalendarValue from "./useCalendarValue";
 
-const Calendar = ({className, ...props}) => {
+const Calendar = ({className, extraOptions, ...props}) => {
     const [isWeekView, setIsWeekView] = useState(true);
     const [monthSelectOpen, setMonthSelectOpen] = useState(false);
     const [value, onChange] = useCalendarValue(props);
@@ -24,11 +24,12 @@ const Calendar = ({className, ...props}) => {
                 {dayjs(value).format('YYYY年MM月')}
                 <Icon className={classnames('iconfont', style['title-icon'])} type="jiantou-tianchong"/>
             </View>
-            <View className={style['title-options']}>
+            <Space className={style['title-options']}>
                 <Button size="small" onClick={() => {
                     onChange(new Date());
                 }}>今天</Button>
-            </View>
+              {extraOptions}
+            </Space>
         </View>
         <View className={style['calendar']}>
             <Popup open={monthSelectOpen} bodyClassName={style['month-selector-body']} hasSafeArea={false}
