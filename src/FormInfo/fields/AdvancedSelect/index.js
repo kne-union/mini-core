@@ -21,8 +21,8 @@ export const labelRender = ({value, placeholder, multiple, options, mapping}) =>
 
     const targetMapping = concat(options || [], mapping || []);
     return multiple ? <View className={classnames('ellipsis')}>
-        {Array.isArray(value) ? (value || []).map((value, index) => {
-            return <>{getValue(value, targetMapping)}{((index !== value.length - 1) ? '，' : '')}</>;
+        {Array.isArray(value) ? (value || []).map((item, index) => {
+          return <>{getValue(item, targetMapping)}{((index !== value.length - 1) ? '，' : '')}</>;
         }) : ''}
     </View> : <View className={classnames('ellipsis')}>
         {Array.isArray(value) ? getValue(value[0], targetMapping) : getValue(value, targetMapping)}
