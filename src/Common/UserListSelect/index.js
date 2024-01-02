@@ -5,8 +5,10 @@ import {Avatar} from '@kne/antd-taro';
 import style from './style.module.scss';
 
 
-const transformUserInfo = ({name, englishName, orgName, uid, gender}) => {
-    return ({
+const transformUserInfo = ({name, englishName, orgName, uid, gender, ...props}) => {
+    return Object.assign({}, props, {
+      uid,
+      orgName,
         label: [englishName, name].filter((item) => !!item).join(' '),
         description: orgName,
         value: uid,
