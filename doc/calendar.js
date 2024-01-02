@@ -58,7 +58,11 @@ const BaseExample = () => {
             }}/>
         </View>
         <View>Calendar:完整日历功能</View>
-        <Calendar value={value} onChange={onChange}/>
+        <Calendar
+          value={value}
+          onChange={onChange}
+          extraOptions={<Button size="small">添加</Button>}
+        />
         <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>
         <CalendarTimeRangeView value={timeRange} startTime="15:00" endTime="21:00" onChange={setTimeRange}/>
         <View>CalendarRangeView:</View>
