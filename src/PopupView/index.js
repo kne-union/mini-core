@@ -1,25 +1,46 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useRef, useState} from 'react';
 import {Icon, NavBar, Popup, SafeArea, toCSSLength} from '@kne/antd-taro';
 import classnames from "classnames";
 import style from "./style.module.scss";
 import HeaderContainer from "../HeaderContainer";
 import {ScrollView} from '@tarojs/components';
 import {Provider as GlobalProvider, useGlobalContext} from "@kne/global-context";
+import uniqueId from 'lodash/uniqueId';
+import last from 'lodash/last';
 
 const context = createContext({});
 const {Provider} = context;
 
+const scrollContext = createContext(0);
+
+const {Provider: ScrollProvider} = scrollContext;
+
 export const PopupViewProvider = ({children}) => {
     const [popupViewList, setPopupViewList] = useState([]);
+    const [scroll, setScroll] = useState({});
+    const currentViewIdRef = useRef(null);
+
     return <Provider value={{
         openPopup: (children, options) => {
-            const current = Object.assign({}, options, {children});
+            const id = uniqueId('popup-');
+            const current = Object.assign({}, options, {
+                children: <GlobalProvider value={options.globalContext}>{typeof children === 'function' ? children({
+                    id, onScroll: (e) => {
+                        const {scrollTop} = e.detail;
+                        if (currentViewIdRef.current === id) {
+                            setScroll((scroll) => {
+                                return Object.assign({}, scroll, {[id]: scrollTop})
+                            });
+                        }
+                    }
+                }) : children}</GlobalProvider>, id
+            });
             setPopupViewList((popupViewList) => {
                 const newPopupViewList = popupViewList.slice(0);
                 newPopupViewList.push(current);
+                currentViewIdRef.current = id;
                 return newPopupViewList;
             });
-
             return () => {
                 setPopupViewList((popupViewList) => {
                     const newPopupViewList = popupViewList.slice(0);
@@ -27,22 +48,25 @@ export const PopupViewProvider = ({children}) => {
                     if (index > -1) {
                         newPopupViewList.splice(index, 1);
                     }
+                    currentViewIdRef.current = last(newPopupViewList)?.id;
                     return newPopupViewList;
                 });
+
+                setScroll((scroll) => {
+                    const newScroll = Object.assign({}, scroll);
+                    delete newScroll[id];
+                    return newScroll;
+                });
             };
-        }, closeCurrentPopup: () => {
-            setPopupViewList((popupViewList) => {
-                const newPopupViewList = popupViewList.slice(0);
-                newPopupViewList.pop();
-                return newPopupViewList;
-            });
         }, closeAllPopup: () => {
             setPopupViewList([]);
+            setScroll([]);
         }
     }}>
         {children}
-        {popupViewList.map((props, index) => {
-            return <Popup {...props} key={index} open hasSafeArea={false} isRootPortal={false}/>
+        {popupViewList.map((props) => {
+            return <ScrollProvider value={scroll[props.id]}><Popup {...props} open key={props.id} hasSafeArea={false}
+                                                                   isRootPortal={false}/></ScrollProvider>
         })}
     </Provider>
 };
@@ -51,25 +75,21 @@ export const usePopup = (options) => {
     const {openPopup} = useContext(context);
     const globalContext = useGlobalContext();
     return (children) => {
-        const close = openPopup(<GlobalProvider value={globalContext}>
-            {children}
-        </GlobalProvider>, Object.assign({}, options));
+        const close = openPopup(children, Object.assign({}, options, {globalContext}));
         return {close};
     }
 };
 
 export const usePopupView = (options) => {
     const popup = usePopup(Object.assign({}, options, {
-        position: 'right',
-        bodyClassName: classnames(style['popup-page'], options?.bodyClassName),
-        catchMove: true
+        position: 'right', bodyClassName: classnames(style['popup-page'], options?.bodyClassName), catchMove: true
     }));
 
     return ({children, ...props}) => {
         const onClose = () => {
             apis.close();
         };
-        const apis = popup(<PopupView {...props} open onClose={onClose}>
+        const apis = popup(({onScroll}) => <PopupView {...props} open onClose={onClose} onScroll={onScroll}>
             {typeof children === 'function' ? children({
                 close: onClose
             }) : children}
@@ -79,8 +99,12 @@ export const usePopupView = (options) => {
     }
 };
 
-const PopupView = ({open, onClose, className, children, title, hasSafeArea, backArrow}) => {
+const PopupView = ({open, onClose, className, children, title, hasSafeArea, backArrow, onScroll}) => {
     const [headerHeight, setHeaderHeight] = useState();
+    const scroll = useContext(scrollContext);
+    if (!open) {
+        return null;
+    }
     return <>
         <HeaderContainer onHeightChange={(height) => {
             setHeaderHeight(height);
@@ -88,10 +112,10 @@ const PopupView = ({open, onClose, className, children, title, hasSafeArea, back
             <NavBar backArrow={backArrow || <Icon type="arrow-thin-left" className="iconfont"/>}
                     onBack={onClose}>{title}</NavBar>
         </HeaderContainer>
-        <ScrollView className={classnames(style['popup-view'], className)} style={headerHeight ? {
+        <ScrollView className={classnames(style['popup-view'], className)} scrollTop={scroll || 0} onScroll={onScroll} style={headerHeight ? {
             '--header-container-height': toCSSLength(headerHeight)
         } : {}} scrollY>
-            {open && children}
+            {children}
             {hasSafeArea && <SafeArea position="bottom"/>}
         </ScrollView>
     </>;
