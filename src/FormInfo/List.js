@@ -65,12 +65,14 @@ const List = forwardRef(({
                     key={key}
                     className={classnames(style["list-item"], 'form-part-list-item')}
                     isSubheading
-                    list={minLength && minLength >= length ? renderList : [...renderList, <Button className={style['list-btn-del']} block onClick={() => {
-                        onRemove(key);
-                        afterDelete && afterDelete(...groupArgs, context);
-                    }} color='danger' fill='none'>
-                        <Icon className="iconfont" type="shanchu"/>{removeText}
-                    </Button>]}
+                    list={minLength && minLength >= length ? renderList : [...renderList, <View>
+                        <Button className={style['list-btn-del']} block onClick={() => {
+                            onRemove(key);
+                            afterDelete && afterDelete(...groupArgs, context);
+                        }} color='danger' fill='none'>
+                            <Icon className="iconfont" type="shanchu"/>{removeText}
+                        </Button>
+                    </View>]}
                     groupArgs={groupArgs}
                     title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
         }}</GroupList>
