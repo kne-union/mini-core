@@ -8,6 +8,7 @@ import {ListTitle} from '../Common';
 import style from './style.module.scss';
 import useRefCallback from '@kne/use-ref-callback';
 import isEqual from 'lodash/isEqual';
+import TipsMessage from '../TipsMessage';
 
 const propsEqual = (target, origin) => {
     if (typeof target === 'function' && typeof target === 'function') {
@@ -79,10 +80,15 @@ const FormPart = ({list, groupArgs, ...props}) => {
             componentProps["block"] = targetProps.isBlock;
         }
 
+        const itemProps = Object.assign({}, componentProps, typeof targetProps.setExtraProps === "function" ? targetProps.setExtraProps({
+            props: componentProps, contextApi: formApi,
+        }) : {});
+
         return <FormItemRenderer key={key} type={item.type}
-                                 {...Object.assign({}, componentProps, typeof targetProps.setExtraProps === "function" ? targetProps.setExtraProps({
-                                     props: componentProps, contextApi: formApi,
-                                 }) : {})}
+                                 {...Object.assign({}, itemProps, itemProps.labelTips ? {
+                                     labelTips: () => <TipsMessage title={itemProps.label}
+                                                                   content={itemProps.labelTips}/>
+                                 } : {})}
                                  onChange={(...args) => {
                                      return (item.props.onChange && item.props.onChange(...args, formApi));
                                  }}

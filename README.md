@@ -218,6 +218,9 @@ const BaseExample = () => {
             console.log(data);
         }}>
             <FormInner/>
+            <FormList title="列表" ref={listRef} name="list" minLength={1}
+                      list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈"/>, <Input.Item name="field0" label="字段"/>,
+                          <Input.Item name="field1" label="字段1"/>]}/>
         </Form>
         {/*<Form data={{
             'name': "张三",
