@@ -727,7 +727,7 @@ const BaseExample = () => {
                     listRef.current.add();
                 }}>添加</Button>}>工作经历</CommonListTitle>
                 <FormList ref={listRef} name="list" minLength={1}
-                          list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
+                          list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈哈哈"/>, <Input.Item name="field0" label="字段"/>,
                               <Input.Item name="field1" label="字段1"/>]}/>
                 <Button onClick={() => {
                     popupView({
