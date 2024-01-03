@@ -7,6 +7,7 @@ import {ScrollView} from '@tarojs/components';
 import {Provider as GlobalProvider, useGlobalContext} from "@kne/global-context";
 import uniqueId from 'lodash/uniqueId';
 import last from 'lodash/last';
+import {useDebounce} from 'use-debounce';
 
 const context = createContext({});
 const {Provider} = context;
@@ -19,6 +20,7 @@ export const PopupViewProvider = ({children}) => {
     const [popupViewList, setPopupViewList] = useState([]);
     const [scroll, setScroll] = useState({});
     const currentViewIdRef = useRef(null);
+    const [scrollY] = useDebounce(scroll, 300);
 
     return <Provider value={{
         openPopup: (children, options) => {
@@ -65,8 +67,8 @@ export const PopupViewProvider = ({children}) => {
     }}>
         {children}
         {popupViewList.map((props) => {
-            return <ScrollProvider value={scroll[props.id]}><Popup {...props} open key={props.id} hasSafeArea={false}
-                                                                   isRootPortal={false}/></ScrollProvider>
+            return <ScrollProvider value={scrollY[props.id]}><Popup {...props} open key={props.id} hasSafeArea={false}
+                                                                    isRootPortal={false}/></ScrollProvider>
         })}
     </Provider>
 };
@@ -112,7 +114,8 @@ const PopupView = ({open, onClose, className, children, title, hasSafeArea, back
             <NavBar backArrow={backArrow || <Icon type="arrow-thin-left" className="iconfont"/>}
                     onBack={onClose}>{title}</NavBar>
         </HeaderContainer>
-        <ScrollView className={classnames(style['popup-view'], className)} scrollTop={scroll || 0} onScroll={onScroll} style={headerHeight ? {
+        <ScrollView className={classnames(style['popup-view'], className)} scrollTop={scroll || 0}
+                    onScroll={onScroll} style={headerHeight ? {
             '--header-container-height': toCSSLength(headerHeight)
         } : {}} scrollY>
             {children}
