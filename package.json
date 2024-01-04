@@ -77,7 +77,7 @@
     "@babel/runtime": "^7.7.7",
     "@kne/md-doc": "^0.1.8",
     "@kne/microbundle": "^0.15.5",
-    "@kne/mini-example": "^0.1.2",
+    "@kne/mini-example": "^0.1.4",
     "@kne/modules-dev": "^0.1.14",
     "@tarojs/components": "^3.6.15",
     "@tarojs/helper": "3.6.15",
