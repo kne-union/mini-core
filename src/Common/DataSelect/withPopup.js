@@ -7,7 +7,7 @@ import style from './style.module.scss';
 const withFormPopup = (WrappedComponent) => ({open, onClose, title, onChange, catchMove, ...props}) => {
     return <Popup bodyClassName={classnames("react-form__popup", style['component-body'], props.className)}
                   isRootPortal={false}
-                  catchMove={catchMove} open={open} onClose={onClose} position="right" hasSafeArea={false}>
+                  catchMove={catchMove} open={open} position="right" hasSafeArea={false}>
         <PopupView title={title || props.placeholder} open={open} onClose={onClose}>
             <WrappedComponent {...props} onChange={(target) => {
                 onClose();

@@ -1,4 +1,4 @@
-const {usePopupView, FormInfo, FixedView, CommonListTitle} = miniCore;
+const {usePopupView, FormInfo, FixedView, CommonListTitle, Warning} = miniCore;
 const {Button} = antd;
 
 const {
@@ -25,6 +25,7 @@ const BaseExample = () => {
                 console.log(data);
                 close();
             }}>
+                <Warning>警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示</Warning>
                 <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
                     <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
                     <CitySelect.Item name="city" label="城市"/>, <FunctionSelect.Item name="function" label="职能"/>,

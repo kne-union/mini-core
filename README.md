@@ -13,12 +13,14 @@ npm i --save @kne/mini-core
 
 这里填写组件概要说明
 
+表单控件，自带数据域管理。包含数据录入、校验以及对应样式
+
 
 ### 示例
 
 #### 示例代码
 
-- 这里填写示例标题
+- 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
 
@@ -26,6 +28,20 @@ npm i --save @kne/mini-core
 const {StateTag} = miniCore;
 const BaseExample = () => {
     return <StateTag type="primary">哈哈哈</StateTag>;
+};
+
+render(<BaseExample/>);
+
+```
+
+- 警告提示
+- 这里填写示例说明
+- miniCore(@kne/mini-core),lodash(lodash)
+
+```jsx
+const {Warning} = miniCore;
+const BaseExample = () => {
+    return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
 };
 
 render(<BaseExample/>);
@@ -691,7 +707,7 @@ render(<BaseExample/>);
 - miniCore(@kne/mini-core),antd(@kne/antd-taro)
 
 ```jsx
-const {usePopupView, FormInfo, FixedView, CommonListTitle} = miniCore;
+const {usePopupView, FormInfo, FixedView, CommonListTitle, Warning} = miniCore;
 const {Button} = antd;
 
 const {
@@ -718,6 +734,7 @@ const BaseExample = () => {
                 console.log(data);
                 close();
             }}>
+                <Warning>警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示</Warning>
                 <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
                     <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
                     <CitySelect.Item name="city" label="城市"/>, <FunctionSelect.Item name="function" label="职能"/>,
@@ -795,6 +812,9 @@ render(<BaseExample/>);
 
 ### API
 
-|属性名|说明|类型|默认值|
-|  ---  | ---  | --- | --- |
+### FormInfo
+
+| 属性名 | 说明 | 类型 | 默认值 |
+|-----|----|----|-----|
+| a   | b  | c  | d   |
 

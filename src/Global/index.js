@@ -9,7 +9,7 @@ import {Provider, useGlobalContext as useContext} from "@kne/global-context";
 import classnames from 'classnames';
 import {PAGE_NO_SCROLL_CHANGE} from '@kne/antd-taro';
 import useRefCallback from "@kne/use-ref-callback";
-import {stateColors} from '../Common';
+import {stateColors, warningColors} from '../Common';
 import transform from 'lodash/transform';
 import merge from 'lodash/merge';
 
@@ -82,9 +82,13 @@ export const GlobalStyle = (props) => {
         });
     }, [setGlobal]);
     return <View className={classnames(style["container"], props.className)}
-                 style={transform(stateColors, (result, value, key) => {
+                 style={Object.assign({}, transform(stateColors, (result, value, key) => {
                      result[`--state-${key}`] = value;
-                 }, {})}>{props.children}</View>;
+                     result[`--state-${key}-06`] = value + '0F';
+                 }, {}), transform(warningColors, (result, value, key) => {
+                     result[`--warning-${key}`] = value;
+                     result[`--warning-${key}-06`] = value + '0F';
+                 }, {}))}>{props.children}</View>;
 };
 
 export default Global;

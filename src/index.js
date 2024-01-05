@@ -65,3 +65,4 @@ export {default as PopupView, usePopupView, usePopup} from './PopupView';
 export {default as File, useFilePreview, withFilePreview, withOssFile} from './File';
 export {default as Table} from './Table';
 export {default as TipsMessage} from './TipsMessage';
+export {default as Warning} from './Warning';
