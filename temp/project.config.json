@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "dist/",
-  "description": "示例程序",
+  "description": "mini-core示例程序",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -31,6 +31,6 @@
     "ignore": [],
     "include": []
   },
-  "projectname": "example",
-  "appid": "wx916441e6e0d8ffe9"
+  "projectname": "min-core",
+  "appid": "wxcc0ca8fef24b7bfd"
 }

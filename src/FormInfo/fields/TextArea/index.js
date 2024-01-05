@@ -42,7 +42,7 @@ const TextAreaPopup = withDecoratorList(({render, placeholder, showPopup, ellips
         return <View style={{'--line-clamp': ellipsisRows}} className={classnames('ellipsis')}>
             {value}
         </View>;
-    }, [value]);
+    }, [ellipsisRows, value]);
     return render({
         label, value, placeholder, onClick: showPopup
     });
