@@ -2,9 +2,24 @@
   "isFull": false,
   "list": [
     {
-      "title": "这里填写示例标题",
+      "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        }
+      ]
+    },
+    {
+      "title": "警告提示",
+      "description": "这里填写示例说明",
+      "code": "./warning.js",
       "scope": [
         {
           "name": "miniCore",
