@@ -11,9 +11,102 @@ npm i --save @kne/mini-core
 
 ### 概述
 
-这里填写组件概要说明
+# 安装
 
-表单控件，自带数据域管理。包含数据录入、校验以及对应样式
+```shell
+npm i --save @kne/mini-core
+```
+
+***mini-core*** 是一个Taro的高级组件库，它有别于 ***@kne/antd-taro*** 只提供简单的UI交互组件，它旨在解决toB类小程序应用中的复杂场景问题，例如：
+
+1. 主题色问题
+2. Layout问题
+3. 弹出页面问题
+4. 表单问题
+5. 列表下来加载问题
+6. 详情页展示问题
+7. 筛选项问题
+8. 登录用户信息问题
+9. 显示项权限问题
+10. 枚举值问题
+11. 解决了项目中的components开发及调试问题
+
+它按照目前主流的形式解决了以上问题，可以作为一个应用的底层。
+它提供了相对较大的组件粒度，也对应用做出了一定程度的规范。使用它能快速构建这一类型的小程序。
+它提供了一个components的开发及调试环境和文档编写规范，可以使项目拥有一个良好的组件开发流程和规范，避免和业务混淆在一起
+
+# 使用脚手架
+
+你可以使用Taro官方提供的脚手架初始化项目
+
+```shell
+npm install -g @tarojs/cli
+```
+
+```shell
+taro init myApp
+```
+
+或者使用npx执行
+
+```shell
+npx @tarojs/cli init myApp
+```
+
+初始化完成之后安装***mini-core***包
+
+```shell
+npm i --save @kne/mini-core
+```
+
+然后安装example演示程序及components所需包
+
+```shell
+npm i --save-dev @kne/mini-example @kne/md-doc
+```
+
+package.json的scripts中添加对应的启动命令
+
+```json
+{
+  "init": "mini-example install && create-md && mini-example build",
+  "start": "npm run build:md &&npm run build:doc && run-p dev:weapp start:md start:doc start:example",
+  "build": "run-s build:weapp build:md build:doc build:example",
+  "build:weapp": "taro build --type weapp",
+  "dev:weapp": "cross-env NODE_ENV=production npm run build:weapp -- --watch",
+  "build:md": "create-md",
+  "start:md": "create-md --watch",
+  "build:doc": "mini-example build",
+  "start:doc": "mini-example start",
+  "build:example": "cd example && npm run build:weapp",
+  "build:example:dd": "cd example && npm run build:dd",
+  "start:example": "cd example && cross-env NODE_ENV=production npm run build:weapp -- --watch"
+}
+```
+
+# 示例程序的使用
+
+1. 新建components目录
+2. 新建文件 项目根目录/temp/config/alias.js 并添加
+3. 按照examples规则在doc文件夹下完成对应的示例程序
+4. 执行npm run start
+5. 在小程序调试工具中打开 项目根目录/example 进行组件示例调试
+
+```js
+module.exports = {
+    '@components': require.resolve('../../src/components'),
+};
+```
+
+# 最佳实践
+
+我们推荐把所有复杂逻辑都封装成组件放在components文件夹里，并且在doc里面完成对应的文档和示例，在pages里面调用时只包含简单的组件组合以及少量参数的传递。不要把业务写在pages里面，因为那通常不可维护。
+
+把组件里面的api调用参数及逻辑全部放在项目的preset.js里面。
+
+在开发阶段，通过mock接口数据来完成components里面具体业务组件的编写，不要硬依赖后端api。
+
+components内的组件命名尽量可以看出派生关系和业务所属。
 
 
 ### 示例
@@ -183,7 +276,7 @@ const FormInner = () => {
     const {formData} = useFormContext();
     console.log('FormInner render');
     return <FormPart title="表单标题"
-                     list={[<AdvancedSelect.Item name="test2" label="高级选择"
+                     list={[<AdvancedSelect.Item readOnly name="test2" label="高级选择"
                                                  interceptor={["picker-value", "picker-single"]} rule="REQ"
                                                  getSearchProps={() => {
                                                      return {};
@@ -812,9 +905,130 @@ render(<BaseExample/>);
 
 ### API
 
+### Global
+
+### Filter
+
+### InfoPage
+
+### Enum
+
 ### FormInfo
 
-| 属性名 | 说明 | 类型 | 默认值 |
-|-----|----|----|-----|
-| a   | b  | c  | d   |
+#### FormInfo{FormPart}
+
+用以显示一个表单部分，可以包含对该段表单片段的说明
+
+| 属性名          | 说明                   | 类型      | 默认值   |
+|--------------|----------------------|---------|-------|
+| list         | 表单组件列表，一般为一个Field的数组 | array   | []    |
+| title        | 标题，说明该部分表单的内容        | string  | -     |
+| subtitle     | 子标题，辅助说明             | string  | -     |
+| isSubheading | 是否使标题显示为一个二级标题       | boolean | false |
+
+#### FormInfo{List}
+
+| 属性名           | 说明                                                | 类型              | 默认值  |
+|---------------|---------------------------------------------------|-----------------|------|
+| list          | 表单组件列表，一般为一个Field的数组                              | array           | []   |
+| name          | groupName，用来将该段表单的数据放置在对应的formData中               | string          | -    |
+| title         | 标题，说明该部分表单的内容                                     | string          | -    |
+| subtitle      | 子标题，辅助说明                                          | string          | -    |
+| addText       | 添加按钮文案                                            | string          | 添加   |
+| removeText    | 删除按钮文案                                            | string          | 删除   |
+| minLength     | 最小个数，表单初始化会至少显示minLength条，实际条数等于minLength时将隐藏删除按钮 | number          | -    |
+| maxLength     | 最大个数，实际条数等于maxLength时将隐藏添加按钮                      | number          | -    |
+| isUnshift     | 新增时，新一条表单时添加到表单列表最前面还是最后面                         | boolean         | true |
+| defaultLength | 初始化需要显示几段表单列表                                     | number          | -    |
+| itemTitle     | 表单列表的二级title生成规则                                  | function,string | -    |
+
+#### FormInfo{fields:{AdvancedSelect}}
+
+高级列表选择器
+
+#### FormInfo{fields:{AutoComplete}}
+
+自动完成选择器
+
+#### FormInfo{fields:{Avatar}}
+
+头像或图片上传
+
+#### FormInfo{fields:{Calendar}}
+
+复杂日期选择器
+
+#### FormInfo{fields:{CardType}}
+
+证件类型选择和证件号码输入
+
+#### FormInfo{fields:{CitySelect}}
+
+城市选择
+
+#### FormInfo{fields:{FunctionSelect}}
+
+职能选择
+
+#### FormInfo{fields:{IndustrySelect}}
+
+行业选择
+
+#### FormInfo{fields:{InputNumber}}
+
+数字输入
+
+#### FormInfo{fields:{InputNumberUnit}}
+
+带单位数字输入
+
+#### FormInfo{fields:{PhoneNumber}}
+
+手机号输入
+
+#### FormInfo{fields:{SalaryInput}}
+
+薪资输入
+
+#### FormInfo{fields:{TextArea}}
+
+多行文本
+
+#### FormInfo{fields:{Upload}}
+
+文件上传
+
+#### FormInfo{fields:{UserListSelect}}
+
+用户选择
+
+### Permission
+
+### Modal
+
+### PopupView
+
+### FixedView
+
+### HeaderContainer
+
+### Highlight
+
+### File
+
+### Content
+
+### StateTag
+
+### TipsMessage
+
+### Warning
+
+### Calendar
+
+### AvatarPreview
+
+### Comment
+
+### Table
 

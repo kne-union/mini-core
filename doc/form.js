@@ -35,7 +35,7 @@ const FormInner = () => {
     const {formData} = useFormContext();
     console.log('FormInner render');
     return <FormPart title="表单标题"
-                     list={[<AdvancedSelect.Item name="test2" label="高级选择"
+                     list={[<AdvancedSelect.Item readOnly name="test2" label="高级选择"
                                                  interceptor={["picker-value", "picker-single"]} rule="REQ"
                                                  getSearchProps={() => {
                                                      return {};
