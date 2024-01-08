@@ -35,6 +35,29 @@
 | defaultLength | 初始化需要显示几段表单列表                                     | number          | -    |
 | itemTitle     | 表单列表的二级title生成规则                                  | function,string | -    |
 
+#### FormInfo{fields}
+
+表单的Field组件集合
+
+此处将所有Field的共同参数作出说明，后面的具体Field将不包含这些共同部分
+
+| 属性名         | 说明                                                | 类型              | 默认值   |
+|-------------|---------------------------------------------------|-----------------|-------|
+| name        | 表单字段的名称，将作为formData的属性的一部分                        | string          | -     |
+| label       | 表单字段的显示文案，用以向用户说明字段的作用                            | string          | -     |
+| rule        | 表单字段的校验规则，以空格分开，在表单字段触发校验时串行执行校验规则，全部通过时允许提交      | string          | -     |
+| labelTips   | 字段提示说明，用来向用户补充说明字段的一些注意事项                         | string,function | -     |
+| labelHidden | 是否隐藏label显示                                       | boolean         | false |
+| labelRender | 一般情况label为string，当需要展示一个react组件时需要再传入该参数用以修饰label | function        | -     |
+
+Field.Item
+
+当Field需要放在FormPart或者List中，需要以此方法形式调用（目前的UI规范规定必须以此种方式调用Field，不推荐直接调用Field）如
+
+```jsx
+<AdvancedSelect.Item name="name" label="label" rule="rule"/>
+```
+
 #### FormInfo{fields:{AdvancedSelect}}
 
 高级列表选择器
