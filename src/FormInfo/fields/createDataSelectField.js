@@ -7,11 +7,11 @@ import {hooks, withItem} from "@kne/react-form-antd-taro";
 const {useDecorator} = hooks;
 
 const createDataSelectField = ({labelRender}) => (WrappedComponents) => {
-    const Field = ({className, onChange, ...props}) => {
+    const Field = ({className, onChange, readOnly, disabled, ...props}) => {
         const label = labelRender(props);
         const popupView = usePopupView();
         return <View className={classnames(className, 'react-form_decorator-item', {
-            "react-form__placeholder": !label
+            "react-form__placeholder": !label, "is-read-only": readOnly, 'is-disabled': disabled
         })} onClick={() => {
             const {close} = popupView({
                 title: props.placeholder || '请选择', children: <WrappedComponents {...props} onChange={(target) => {
