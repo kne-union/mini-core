@@ -4,7 +4,7 @@ import AutoComplete from './fields/AutoComplete';
 import CitySelect from './fields/CitySelect';
 import TextArea from './fields/TextArea';
 import FunctionSelect from "./fields/FunctionSelect";
-import IndustrySelect from "./fields/IndustryInput";
+import IndustrySelect from "./fields/IndustrySelect";
 import PhoneNumber from './fields/PhoneNumber';
 import Avatar from './fields/Avatar';
 import SalaryInput from './fields/SalaryInput';
