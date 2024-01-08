@@ -262,6 +262,14 @@ page, body, .adm-root-portal {
           position: relative;
           padding-right: 44px;
 
+          &.is-read-only, &.is-disabled {
+            pointer-events: none;
+          }
+
+          &.is-disabled {
+            color: var(--adm-color-weak);
+          }
+
           :global(.adm-space-horizontal) {
             overflow: hidden;
             display: -webkit-box;
