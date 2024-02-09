@@ -264,6 +264,10 @@ page, body, .adm-root-portal {
 
           &.is-read-only, &.is-disabled {
             pointer-events: none;
+
+            &:after {
+              opacity: 0;
+            }
           }
 
           &.is-disabled {
