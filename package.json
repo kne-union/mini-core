@@ -40,7 +40,7 @@
     "build:example": "cd example && npm run build:weapp",
     "start:example": "cd example && cross-env NODE_ENV=production npm run build:weapp -- --watch",
     "deploy": "gh-pages -d example/build",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss}'"
   },
   "browserslist": [
     "last 3 versions",
@@ -68,7 +68,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
       "prettier --config .prettierrc --write",
       "git add"
     ]
