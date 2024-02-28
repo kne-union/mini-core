@@ -20,7 +20,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm i --legacy-peer-deps
       - run: npm run build
-      - run: npx
+      - run: npx @kne/miniprogram-tools
         env:
           PROJECT_DIR: ./example
           APP_ID: wxae849489ee6c1994
