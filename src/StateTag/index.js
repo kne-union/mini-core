@@ -1,25 +1,19 @@
-import React, {useMemo} from "react";
+import React from "react";
 import classnames from "classnames";
 import {View} from "@tarojs/components";
-import {stateColors as tagTypeEnum} from '../Common';
 
 import style from "./style.module.scss";
 
 const StateTag = ({
                       showBorder, text, children, type, showBackground, className, onClick
                   }) => {
-    const tagColor = useMemo(() => ({
-        color: tagTypeEnum?.[type]?.color || tagTypeEnum[type],
-        borderColor: tagTypeEnum?.[type]?.borderColor || tagTypeEnum[type],
-    }), [type]);
-
     return (<View
         style={{
-            background: showBackground ? tagColor.color + "0F" : "none",
-            color: tagColor.color,
-            border: showBorder ? `2px solid ${tagColor.borderColor}` : "none",
+            background: showBackground ? `var(--state-${type}-06)` : 'none',
+            color: `var(--state-${type})`,
+            border: showBorder ? `2px solid var(--state-${type})` : "none",
         }}
-        className={classnames(style["state-tag"], className,)}
+        className={classnames(style["state-tag"], className)}
         onClick={onClick}
     >
         {text || children}
