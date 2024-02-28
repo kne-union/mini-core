@@ -6,7 +6,7 @@ const stateColors = {
     danger: "#D14343",
     info: "#155ACF",
     other: "#6740C3",
-    primary: "#5CB8B2"
+    primary: "#4F185A"
 };
 
 export default stateColors;

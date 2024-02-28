@@ -85,6 +85,7 @@ export const GlobalStyle = (props) => {
                  style={Object.assign({}, transform(stateColors, (result, value, key) => {
                      result[`--state-${key}`] = value;
                      result[`--state-${key}-06`] = value + '0F';
+
                  }, {}), transform(warningColors, (result, value, key) => {
                      result[`--warning-${key}`] = value;
                      result[`--warning-${key}-06`] = value + '0F';

@@ -4,7 +4,6 @@ $class-prefix-selector: 'adm-selector';
 $class-prefix-nav-bar: 'adm-nav-bar';
 $class-prefix-input-number: 'adm-input-number';
 $class-prefix-icon: 'adm-icon';
-
 $primary-color: #4F185A;
 
 page, body, .adm-root-portal {
@@ -13,7 +12,7 @@ page, body, .adm-root-portal {
   --adm-font-size-13: 48px;
   font-size: var(--adm-font-size-6);
 
-  --adm-color-primary: $primary-color;
+  --adm-color-primary: #{$primary-color};
   --adm-color-info: #165DFF;
   --adm-color-text-dafault: #222222;
   --adm-color-background-line: #F1F1F1;
