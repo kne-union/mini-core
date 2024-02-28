@@ -23,7 +23,6 @@ jobs:
         run: npx @kne/miniprogram-tools qrcode
         env:
           APP_ID: wxae849489ee6c1994
-          PRIVATE_KEY: ${{ secrets.KNEUNION_PRIVATE_KEY }}
           SECRET: ${{secrets.KNEUNION_SECRET}}
       - name: Deploy to GH Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
