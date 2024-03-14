@@ -4,6 +4,7 @@ $class-prefix-selector: 'adm-selector';
 $class-prefix-nav-bar: 'adm-nav-bar';
 $class-prefix-input-number: 'adm-input-number';
 $class-prefix-icon: 'adm-icon';
+$primary-color: #4F185A;
 
 page, body, .adm-root-portal {
   --adm-font-size-11: 38px;
@@ -11,14 +12,14 @@ page, body, .adm-root-portal {
   --adm-font-size-13: 48px;
   font-size: var(--adm-font-size-6);
 
-  --adm-color-primary: #5CB8B2;
+  --adm-color-primary: #{$primary-color};
   --adm-color-info: #165DFF;
   --adm-color-text-dafault: #222222;
   --adm-color-background-line: #F1F1F1;
   --adm-color-background-grey: #F8F8F8;
   --adm-color-background-light-1: #f1f1f1;
   --adm-color-background-light: #f3f3f3;
-  --adm-color-background-primary-opacity-1: #{rgba(#5cb8b2, 0.1)};
+  --adm-color-background-primary-opacity-1: #{rgba($primary-color, 0.1)};
   --adm-color-info-opacity-06: #{rgba(#155ACF, 0.06)};
   --adm-color-border: #eeeeee;
   --adm-button-border-color: #cccccc;
@@ -26,7 +27,7 @@ page, body, .adm-root-portal {
   --adm-button-border-radius: 4px;
 
   @for $i from 1 through 10 {
-    --adm-color-primary-#{$i}: #{rgba(#5cb8b2, $i / 10)};
+    --adm-color-primary-#{$i}: #{rgba($primary-color, $i / 10)};
   }
 
   .#{$class-prefix-nav-bar} {
