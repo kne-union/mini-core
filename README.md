@@ -398,6 +398,46 @@ render(<BaseExample />);
 
 ```
 
+- Enum 枚举值
+- Enum 展示获取枚举值和批量获取枚举值
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Enum } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>基础用法</View>
+      <Enum loading={null} moduleName="degreeEnum" name={30} />
+    </Space>
+    <Space direction={"vertical"}>
+      <View>返回值自定义</View>
+      <Enum moduleName="experienceEnum" name={'0-1'}>
+        {({description}) => {
+          return 'experienceEnum-' + description;
+        }}
+      </Enum>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>展示 Enum 所有值</View>
+      <Enum moduleName="experienceEnum">
+        {experienceEnum => (
+          <Space>
+            {experienceEnum.map(item => <View>{item.description}</View>)}
+          </Space>
+        )}
+      </Enum>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
@@ -420,20 +460,6 @@ render(<BaseExample/>);
 const {Warning} = miniCore;
 const BaseExample = () => {
     return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 枚举值
-- 展示获取枚举值和批量获取枚举值
-- miniCore(@kne/mini-core)
-
-```jsx
-const {Enum} = miniCore;
-const BaseExample = () => {
-    return <Enum loading={null} moduleName="degreeEnum" name={30}/>;
 };
 
 render(<BaseExample/>);

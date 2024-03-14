@@ -90,6 +90,25 @@
       ]
     },
     {
+      "title": "Enum 枚举值",
+      "description": "Enum 展示获取枚举值和批量获取枚举值",
+      "code": "./enum.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -116,17 +135,6 @@
         {
           "name": "lodash",
           "packageName": "lodash"
-        }
-      ]
-    },
-    {
-      "title": "枚举值",
-      "description": "展示获取枚举值和批量获取枚举值",
-      "code": "./enum.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
         }
       ]
     },
