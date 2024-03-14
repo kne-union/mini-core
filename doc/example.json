@@ -2,6 +2,25 @@
   "isFull": false,
   "list": [
     {
+      "title": "AvatarPreview 头像预览",
+      "description": "AvatarPreview 头像预览",
+      "code": "./avatar-preview.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
