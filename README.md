@@ -113,7 +113,7 @@ components内的组件命名尽量可以看出派生关系和业务所属。
 - miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
 
 ```jsx
-const { AvatarPreview } = miniCore;
+const { Global, AvatarPreview } = miniCore;
 const { Space, Button } = antd;
 const { View } = tarojsComponents;
 const { showToast } = tarojsTaro;
@@ -121,22 +121,34 @@ const { showToast } = tarojsTaro;
 const demoAvatarImages = "https://avatars.githubusercontent.com/u/37367461?v=4";
 
 const BaseExample = () => {
-  return (
-    <Space direction="vertical" size={30}>
-      <Space direction={"vertical"}>
-        <View>基础用法</View>
-        <AvatarPreview value={demoAvatarImages} />
+  return (<Global preset={{
+      apis: {
+        file: {
+          getFileUrl: {
+            loader: ({params}) => {
+              return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
+            }
+          }
+        }
+      }
+    }}>
+      <Space direction="vertical" size={30}>
+        <Space direction={"vertical"}>
+          <View>基础用法</View>
+          <AvatarPreview value={demoAvatarImages} />
+        </Space>
+
+        <Space direction={"vertical"}>
+          <View>点击事件</View>
+          <AvatarPreview
+            value={demoAvatarImages}
+            onClick={() => {
+              showToast({ icon: "none", title: "点击事件。。。" });
+            }}
+          />
+        </Space>
       </Space>
-      <Space direction={"vertical"}>
-        <View>点击事件</View>
-        <AvatarPreview
-          value={demoAvatarImages}
-          onClick={() => {
-            showToast({icon: 'none', title: '点击事件。。。'})
-          }}
-        />
-      </Space>
-    </Space>
+    </Global>
   );
 };
 
@@ -432,6 +444,44 @@ const BaseExample = () => {
       </Enum>
     </Space>
   </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- File 文件预览
+- File 文件预览
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Global, File } = miniCore;
+const { Space, Icon } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return <Global preset={{
+    apis: {
+      file: {
+        getFileUrl: {
+          loader: ({ params }) => {
+            return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
+          }
+        }
+      }
+    }
+  }}>
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <File value="xxxxx" originalName="预览文件.jpg" />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>修改文件图标</View>
+        <File value="xxxxx" originalName="预览文件.jpg" icon={<Icon className="iconfont" type="tianjia" />} />
+      </Space>
+    </Space>
+  </Global>;
 };
 
 render(<BaseExample />);
@@ -1017,32 +1067,6 @@ const BaseExample = () => {
             </Form>
         });
     }}>点击弹出</Button>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 文件预览
-- 文件预览
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
-
-```jsx
-const {Global, File} = miniCore;
-const BaseExample = () => {
-    return <Global preset={{
-        apis: {
-            file: {
-                getFileUrl: {
-                    loader: ({params}) => {
-                        return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
-                    }
-                }
-            }
-        }
-    }}>
-        <File value="xxxxx" originalName="预览文件.jpg"/>
-    </Global>;
 };
 
 render(<BaseExample/>);
