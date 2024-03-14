@@ -1,6 +1,7 @@
 const { AvatarPreview } = miniCore;
 const { Space, Button } = antd;
-const { View, showToast } = tarojsComponents;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
 
 const demoAvatarImages = "https://avatars.githubusercontent.com/u/37367461?v=4";
 

@@ -110,12 +110,13 @@ components内的组件命名尽量可以看出派生关系和业务所属。
 
 - AvatarPreview 头像预览
 - AvatarPreview 头像预览
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
 
 ```jsx
 const { AvatarPreview } = miniCore;
 const { Space, Button } = antd;
-const { View, showToast } = tarojsComponents;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
 
 const demoAvatarImages = "https://avatars.githubusercontent.com/u/37367461?v=4";
 
@@ -258,6 +259,78 @@ const BaseExample = () => {
         setOpen4(true);
       }}>点击弹出</Button>
       <CalendarTimeRangePopup open={open4} onOpenChange={setOpen4} value={timeRange} onChange={setTimeRange} />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- Comment 评论
+- Comment 评论
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
+
+```jsx
+const { Comment } = miniCore;
+const { Space, Button } = antd;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
+
+const BaseExample = () => {
+  return <Space direction="vertical" size={30}>
+    <Space direction="vertical">
+      <View>基础用法</View>
+      <Comment user={{ name: "张三" }} time={new Date()}>
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>添加事件</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        action={<Button onClick={() => {
+          showToast({ icon: "none", title: "点击撤回..." });
+        }}>撤回</Button>}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>自定义标题</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        title={"添加了备注"}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>自定义时间格式</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        timeFormat={"YYYY-MM-DD"}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>添加 Extra 区域内容</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        action={<Button onClick={() => {
+          showToast({ icon: "none", title: "点击撤回..." });
+        }}>撤回</Button>}
+        title={"添加了备注"}
+        timeFormat={"YYYY-MM-DD"}
+        extra={<View>这里是Extra</View>}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
     </Space>
   </Space>;
 };
@@ -817,30 +890,6 @@ const BaseExample = () => {
             }]}/>
         </InfoPage.Part>
     </InfoPage>
-};
-
-render(<BaseExample/>);
-
-```
-
-- 评论
-- 评论
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
-
-```jsx
-const {Comment} = miniCore;
-const {Space, Button} = antd;
-
-
-const BaseExample = () => {
-    return <Space direction="vertical">
-        <Comment user={{name: '张三'}} time={new Date()}>
-            评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-        </Comment>
-        <Comment user={{name: '张三'}} time={new Date()} action={<Button>撤回</Button>}>
-            评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-        </Comment>
-    </Space>;
 };
 
 render(<BaseExample/>);

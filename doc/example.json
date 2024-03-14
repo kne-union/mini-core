@@ -17,6 +17,10 @@
         {
           "name": "tarojsComponents",
           "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
         }
       ]
     },
@@ -40,6 +44,29 @@
         {
           "name": "dayjs",
           "packageName": "dayjs"
+        }
+      ]
+    },
+    {
+      "title": "Comment 评论",
+      "description": "Comment 评论",
+      "code": "./comment.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
         }
       ]
     },
@@ -204,21 +231,8 @@
           "packageName": "@tarojs/components"
         }
       ]
-    },{
-      "title": "评论",
-      "description": "评论",
-      "code": "./comment.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        }
-      ]
-    },{
+    },
+    {
       "title": "弹出页面",
       "description": "弹出页面",
       "code": "./popup-view.js",
@@ -232,7 +246,8 @@
           "packageName": "@kne/antd-taro"
         }
       ]
-    },{
+    },
+    {
       "title": "文件预览",
       "description": "文件预览",
       "code": "./file.js",
@@ -246,7 +261,8 @@
           "packageName": "@kne/antd-taro"
         }
       ]
-    },{
+    },
+    {
       "title": "表格",
       "description": "表格",
       "code": "./table.js",
