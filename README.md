@@ -108,6 +108,386 @@ components内的组件命名尽量可以看出派生关系和业务所属。
 
 #### 示例代码
 
+- AvatarPreview 头像预览
+- AvatarPreview 头像预览
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
+
+```jsx
+const { Global, AvatarPreview } = miniCore;
+const { Space, Button } = antd;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
+
+const demoAvatarImages = "https://avatars.githubusercontent.com/u/37367461?v=4";
+
+const BaseExample = () => {
+  return (<Global preset={{
+      apis: {
+        file: {
+          getFileUrl: {
+            loader: ({params}) => {
+              return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
+            }
+          }
+        }
+      }
+    }}>
+      <Space direction="vertical" size={30}>
+        <Space direction={"vertical"}>
+          <View>基础用法</View>
+          <AvatarPreview value={demoAvatarImages} />
+        </Space>
+
+        <Space direction={"vertical"}>
+          <View>点击事件</View>
+          <AvatarPreview
+            value={demoAvatarImages}
+            onClick={() => {
+              showToast({ icon: "none", title: "点击事件。。。" });
+            }}
+          />
+        </Space>
+      </Space>
+    </Global>
+  );
+};
+
+render(<BaseExample />);
+
+```
+
+- Calendar 日历
+- 展示日历组件
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),dayjs(dayjs)
+
+```jsx
+const {
+  Calendar,
+  CalendarMonthView,
+  CalendarMonthSelector,
+  CalendarMonthSwiper,
+  CalendarTimeStepView,
+  CalendarTimeLengthView,
+  CalendarView,
+  CalendarTimeRangeView,
+  CalendarTimeRangePopup,
+  CalendarRangeView,
+  CalendarPopup,
+  CalendarRangePopup,
+  CalendarTimeStepPopup
+} = miniCore;
+const { Space, Button } = antd;
+const { useState } = React;
+const { View } = tarojsComponents;
+const BaseExample = () => {
+  const [value, onChange] = useState(new Date());
+  const [time, onTimeChange] = useState("09:15");
+  const [timeLength, setTimeLength] = useState(60);
+  const [timeRange, setTimeRange] = useState([new Date(), new Date(Date.now() + 60 * 60 * 1000)]);
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
+  return <Space direction="vertical" size={30}>
+    <Space direction="vertical">
+      <View>CalendarMonthView:展示一个月日期</View>
+      <CalendarMonthView current={value} onChange={onChange} minDate="2020-10-01" maxDate="2030-01-01"
+                         marks={["2023-10-01", "2023-09-30"]} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarTimeStepView:展示一个时间段选择</View>
+      <View>已选：{time}</View>
+      <View style={{ "--picker-height": "400px" }}>
+        <CalendarTimeStepView value={time} onChange={onTimeChange} />
+      </View>
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarTimeLengthView:展示一个时长选择 </View>
+      <View>已选：{timeLength}分钟</View>
+      <View style={{ "--picker-height": "400px" }}>
+        <CalendarTimeLengthView value={timeLength} onChange={setTimeLength} />
+      </View>
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarMonthSelector:展示月份选择</View>
+      <View style={{ "--month-selector-height": "200px" }}>
+        <CalendarMonthSelector value={value} minDate="2020-10-01" maxDate="2030-01-01" onChange={onChange} />
+      </View>
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarMonthSwiper:展示一个月日期并且可以左右滑动切换月份</View>
+      <CalendarMonthSwiper current={value} onChange={onChange} minDate="2020" maxDate="2030-01-01"
+                           marks={["2023-10-01", "2023-09-30"]} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarView:完整日历视图</View>
+      <View style={{ "--month-selector-height": "600px" }}>
+        <CalendarView value={value} onChange={onChange} disabledDate={(date) => {
+          return dayjs(date).format("YYYY-MM-DD") === "2023-09-15";
+        }} />
+      </View>
+    </Space>
+    <Space direction="vertical">
+      <View>Calendar:完整日历功能</View>
+      <Calendar
+        value={value}
+        onChange={onChange}
+        extraOptions={<Button size="small">添加</Button>}
+      />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarTimeRangeView:时间段选择器</View>
+      <View>已选：{dayjs(timeRange[0]).format("YYYY-MM-DD HH:mm")}~{dayjs(timeRange[1]).format("YYYY-MM-DD HH:mm")}</View>
+      <CalendarTimeRangeView value={timeRange} startTime="15:00" endTime="21:00" onChange={setTimeRange} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarRangeView:</View>
+      <CalendarRangeView />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarTimeStepPopup:展示一个时间段选择弹窗</View>
+      <Button onClick={() => {
+        setOpen(true);
+      }}>点击弹出</Button>
+      <CalendarTimeStepPopup open={open} onOpenChange={setOpen} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarPopup:展示一个日期选择弹窗</View>
+      <Button onClick={() => {
+        setOpen2(true);
+      }}>点击弹出</Button>
+      <CalendarPopup open={open2} onOpenChange={setOpen2} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarRangePopup:展示一个日期范围选择弹窗</View>
+      <Button onClick={() => {
+        setOpen3(true);
+      }}>点击弹出</Button>
+      <CalendarRangePopup open={open3} onOpenChange={setOpen3} />
+    </Space>
+    <Space direction="vertical">
+      <View>CalendarTimeRangePopup:展示一个日期时间段范围选择弹窗</View>
+      <Button onClick={() => {
+        setOpen4(true);
+      }}>点击弹出</Button>
+      <CalendarTimeRangePopup open={open4} onOpenChange={setOpen4} value={timeRange} onChange={setTimeRange} />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- Comment 评论
+- Comment 评论
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
+
+```jsx
+const { Comment } = miniCore;
+const { Space, Button } = antd;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
+
+const BaseExample = () => {
+  return <Space direction="vertical" size={30}>
+    <Space direction="vertical">
+      <View>基础用法</View>
+      <Comment user={{ name: "张三" }} time={new Date()}>
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>添加事件</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        action={<Button onClick={() => {
+          showToast({ icon: "none", title: "点击撤回..." });
+        }}>撤回</Button>}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>自定义标题</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        title={"添加了备注"}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>自定义时间格式</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        timeFormat={"YYYY-MM-DD"}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+    <Space direction="vertical">
+      <View>添加 Extra 区域内容</View>
+      <Comment
+        user={{ name: "张三" }}
+        time={new Date()}
+        action={<Button onClick={() => {
+          showToast({ icon: "none", title: "点击撤回..." });
+        }}>撤回</Button>}
+        title={"添加了备注"}
+        timeFormat={"YYYY-MM-DD"}
+        extra={<View>这里是Extra</View>}
+      >
+        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+      </Comment>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- Content 信息展示
+- Content 信息展示
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Content, TipsMessage } = miniCore;
+const { Button, Space } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>基础用法</View>
+      <Content
+        list={[
+          { label: "测试", content: "哈哈啊哈哈" },
+          { label: "测试", content: "哈哈啊哈哈", tips: "哈哈哈哈", action: <Button>查看</Button> },
+          { label: "tips", content: <TipsMessage content="哈哈哈哈" title="我是一个title" icon={null} /> }
+        ]}
+      />
+    </Space>
+    <Space direction={"vertical"}>
+      <View>数据为空时展示</View>
+      <Content
+        empty={"-此处是空数据-"}
+        list={[
+          { label: "测试" },
+          { label: "测试", tips: "哈哈哈哈" }
+        ]}
+      />
+    </Space>
+    <Space direction={"vertical"}>
+      <View>内容单独一行显示</View>
+      <Content
+        empty={"-"}
+        list={[
+          { label: "测试" },
+          { label: "测试", content: "哈哈啊哈哈", tips: "哈哈哈哈", block: true }
+        ]}
+      />
+    </Space>
+    <Space direction={"vertical"}>
+      <View>数据展示判断</View>
+      <Content
+        empty={"-"}
+        list={[
+          { label: "测试1", content: '哈哈啊哈哈' },
+          { label: "测试2", content: "哈哈啊哈哈", display: false },
+          { label: "测试3", content: "哈哈啊哈哈", display: () => true }
+        ]}
+      />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- Enum 枚举值
+- Enum 展示获取枚举值和批量获取枚举值
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Enum } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>基础用法</View>
+      <Enum loading={null} moduleName="degreeEnum" name={30} />
+    </Space>
+    <Space direction={"vertical"}>
+      <View>返回值自定义</View>
+      <Enum moduleName="experienceEnum" name={'0-1'}>
+        {({description}) => {
+          return 'experienceEnum-' + description;
+        }}
+      </Enum>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>展示 Enum 所有值</View>
+      <Enum moduleName="experienceEnum">
+        {experienceEnum => (
+          <Space>
+            {experienceEnum.map(item => <View>{item.description}</View>)}
+          </Space>
+        )}
+      </Enum>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- File 文件预览
+- File 文件预览
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Global, File } = miniCore;
+const { Space, Icon } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return <Global preset={{
+    apis: {
+      file: {
+        getFileUrl: {
+          loader: ({ params }) => {
+            return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
+          }
+        }
+      }
+    }
+  }}>
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <File value="xxxxx" originalName="预览文件.jpg" />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>修改文件图标</View>
+        <File value="xxxxx" originalName="预览文件.jpg" icon={<Icon className="iconfont" type="tianjia" />} />
+      </Space>
+    </Space>
+  </Global>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
@@ -130,20 +510,6 @@ render(<BaseExample/>);
 const {Warning} = miniCore;
 const BaseExample = () => {
     return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 枚举值
-- 展示获取枚举值和批量获取枚举值
-- miniCore(@kne/mini-core)
-
-```jsx
-const {Enum} = miniCore;
-const BaseExample = () => {
-    return <Enum loading={null} moduleName="degreeEnum" name={30}/>;
 };
 
 render(<BaseExample/>);
@@ -473,107 +839,6 @@ const BaseExample = () => {
 render(<BaseExample/>);
 ```
 
-- 日历
-- 展示日历组件
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),dayjs(dayjs)
-
-```jsx
-const {
-    Calendar,
-    CalendarMonthView,
-    CalendarMonthSelector,
-    CalendarMonthSwiper,
-    CalendarWeekTitle,
-    CalendarWeekView,
-    CalendarTimeStepView,
-    CalendarTimeLengthView,
-    CalendarView,
-    CalendarTimeRangeView,
-    CalendarTimeRangePopup,
-    CalendarRangeView,
-    CalendarPopup,
-    CalendarRangePopup,
-    CalendarTimeStepPopup
-} = miniCore;
-const {Space, Button} = antd;
-const {useState} = React;
-const {View} = tarojsComponents;
-const BaseExample = () => {
-    const [value, onChange] = useState(new Date());
-    const [time, onTimeChange] = useState('09:15');
-    const [timeLength, setTimeLength] = useState(60);
-    const [timeRange, setTimeRange] = useState([new Date(), new Date(Date.now() + 60 * 60 * 1000)]);
-    const [open, setOpen] = useState(false);
-    const [open2, setOpen2] = useState(false);
-    const [open3, setOpen3] = useState(false);
-    const [open4, setOpen4] = useState(false);
-    return <Space direction="vertical">
-        <View>CalendarWeekTitle:展示星期文案</View>
-        <CalendarWeekTitle/>
-        <View>CalendarWeekView:展示一个周日期</View>
-        <CalendarWeekView current={value} onChange={onChange} minDate="2020-10-01" maxDate="2030-01-01"
-                          marks={['2023-10-01', '2023-09-30']}/>
-        <View>CalendarMonthView:展示一个月日期</View>
-        <CalendarMonthView current={value} onChange={onChange} minDate="2020-10-01" maxDate="2030-01-01"
-                           marks={['2023-10-01', '2023-09-30']}/>
-        <View>CalendarTimeStepView:展示一个时间段选择 {time}</View>
-        <View style={{'--picker-height': '400px'}}>
-            <CalendarTimeStepView value={time} onChange={onTimeChange}/>
-        </View>
-        <View>CalendarTimeLengthView:展示一个时长选择 {timeLength}分钟</View>
-        <View style={{'--picker-height': '400px'}}>
-            <CalendarTimeLengthView value={timeLength} onChange={setTimeLength}/>
-        </View>
-        <View>CalendarMonthSelector:展示月份选择</View>
-        <View style={{'--month-selector-height': '200px'}}>
-            <CalendarMonthSelector value={value} minDate="2020-10-01" maxDate="2030-01-01" onChange={onChange}/>
-        </View>
-        <View>CalendarMonthSwiper:展示一个月日期并且可以左右滑动切换月份</View>
-        <CalendarMonthSwiper current={value} onChange={onChange} minDate="2020" maxDate="2030-01-01"
-                             marks={['2023-10-01', '2023-09-30']}/>
-        <View>CalendarView:完整日历视图</View>
-        <View style={{'--month-selector-height': '600px'}}>
-            <CalendarView value={value} onChange={onChange} disabledDate={(date) => {
-                return dayjs(date).format('YYYY-MM-DD') === '2023-09-15';
-            }}/>
-        </View>
-        <View>Calendar:完整日历功能</View>
-        <Calendar
-          value={value}
-          onChange={onChange}
-          extraOptions={<Button size="small">添加</Button>}
-        />
-        <View>CalendarTimeRangeView:时间段选择器 {dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm')}~{dayjs(timeRange[1]).format('YYYY-MM-DD HH:mm')}</View>
-        <CalendarTimeRangeView value={timeRange} startTime="15:00" endTime="21:00" onChange={setTimeRange}/>
-        <View>CalendarRangeView:</View>
-        <CalendarRangeView/>
-        <View>CalendarTimeRangePopup:</View>
-        <Button onClick={() => {
-            setOpen(true);
-        }}>点击弹出</Button>
-        <CalendarTimeRangePopup open={open} onOpenChange={setOpen} value={timeRange} onChange={setTimeRange}/>
-        <View>CalendarPopup:</View>
-        <Button onClick={() => {
-            setOpen2(true);
-        }}>点击弹出</Button>
-        <CalendarPopup open={open2} onOpenChange={setOpen2}/>
-        <View>CalendarRangePopup:</View>
-        <Button onClick={() => {
-            setOpen3(true);
-        }}>点击弹出</Button>
-        <View>CalendarTimeStepPopup:展示一个时间段选择弹窗</View>
-        <Button onClick={() => {
-            setOpen4(true);
-        }}>点击弹出</Button>
-        <CalendarTimeStepPopup open={open4} onOpenChange={setOpen4}/>
-        <CalendarRangePopup open={open3} onOpenChange={setOpen3}/>
-    </Space>;
-};
-
-render(<BaseExample/>);
-
-```
-
 - 确认对话框
 - 展示确认对话框
 - miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
@@ -603,27 +868,6 @@ const BaseExample = () => {
         <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
         <ExampleUseModal />
     </>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 信息展示
-- 信息展示
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
-
-```jsx
-const {Content, TipsMessage} = miniCore;
-const {Button} = antd;
-const BaseExample = () => {
-  return <Content list={[{
-    label: '测试', content: '哈哈啊哈哈'
-  }, {
-    label: '测试', content: '哈哈啊哈哈', tips: '哈哈哈哈', action: <Button>查看</Button>
-  },{
-    label:'tips',content:<TipsMessage content="哈哈哈哈" title="我是一个title" icon={null}/>
-  }]}/>;
 };
 
 render(<BaseExample/>);
@@ -766,30 +1010,6 @@ render(<BaseExample/>);
 
 ```
 
-- 评论
-- 评论
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
-
-```jsx
-const {Comment} = miniCore;
-const {Space, Button} = antd;
-
-
-const BaseExample = () => {
-    return <Space direction="vertical">
-        <Comment user={{name: '张三'}} time={new Date()}>
-            评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-        </Comment>
-        <Comment user={{name: '张三'}} time={new Date()} action={<Button>撤回</Button>}>
-            评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-        </Comment>
-    </Space>;
-};
-
-render(<BaseExample/>);
-
-```
-
 - 弹出页面
 - 弹出页面
 - miniCore(@kne/mini-core),antd(@kne/antd-taro)
@@ -847,32 +1067,6 @@ const BaseExample = () => {
             </Form>
         });
     }}>点击弹出</Button>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 文件预览
-- 文件预览
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
-
-```jsx
-const {Global, File} = miniCore;
-const BaseExample = () => {
-    return <Global preset={{
-        apis: {
-            file: {
-                getFileUrl: {
-                    loader: ({params}) => {
-                        return "https://attachment.test.fatalent.cn/attachment/Q0ol94kBBZgnCXyZKG1Y.jpg?Expires=1700814537&OSSAccessKeyId=LTAI5tAfbu2aBppB3jMj1kMt&Signature=KcJHlI8FDYMolFQFxacGzhoaA1A%3D";
-                    }
-                }
-            }
-        }
-    }}>
-        <File value="xxxxx" originalName="预览文件.jpg"/>
-    </Global>;
 };
 
 render(<BaseExample/>);

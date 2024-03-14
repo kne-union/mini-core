@@ -2,6 +2,132 @@
   "isFull": false,
   "list": [
     {
+      "title": "AvatarPreview 头像预览",
+      "description": "AvatarPreview 头像预览",
+      "code": "./avatar-preview.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
+        }
+      ]
+    },
+    {
+      "title": "Calendar 日历",
+      "description": "展示日历组件",
+      "code": "./calendar.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "dayjs",
+          "packageName": "dayjs"
+        }
+      ]
+    },
+    {
+      "title": "Comment 评论",
+      "description": "Comment 评论",
+      "code": "./comment.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
+        }
+      ]
+    },
+    {
+      "title": "Content 信息展示",
+      "description": "Content 信息展示",
+      "code": "./content.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "Enum 枚举值",
+      "description": "Enum 展示获取枚举值和批量获取枚举值",
+      "code": "./enum.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "File 文件预览",
+      "description": "File 文件预览",
+      "code": "./file.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -28,17 +154,6 @@
         {
           "name": "lodash",
           "packageName": "lodash"
-        }
-      ]
-    },
-    {
-      "title": "枚举值",
-      "description": "展示获取枚举值和批量获取枚举值",
-      "code": "./enum.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
         }
       ]
     },
@@ -107,51 +222,9 @@
       ]
     },
     {
-      "title": "日历",
-      "description": "展示日历组件",
-      "code": "./calendar.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
-        },
-        {
-          "name": "dayjs",
-          "packageName": "dayjs"
-        }
-      ]
-    },
-    {
       "title": "确认对话框",
       "description": "展示确认对话框",
       "code": "./modal.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
-        }
-      ]
-    },
-    {
-      "title": "信息展示",
-      "description": "信息展示",
-      "code": "./content.js",
       "scope": [
         {
           "name": "miniCore",
@@ -185,21 +258,8 @@
           "packageName": "@tarojs/components"
         }
       ]
-    },{
-      "title": "评论",
-      "description": "评论",
-      "code": "./comment.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        }
-      ]
-    },{
+    },
+    {
       "title": "弹出页面",
       "description": "弹出页面",
       "code": "./popup-view.js",
@@ -213,21 +273,8 @@
           "packageName": "@kne/antd-taro"
         }
       ]
-    },{
-      "title": "文件预览",
-      "description": "文件预览",
-      "code": "./file.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        }
-      ]
-    },{
+    },
+    {
       "title": "表格",
       "description": "表格",
       "code": "./table.js",

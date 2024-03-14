@@ -3,8 +3,8 @@ import style from './style.module.scss';
 import {View} from "@tarojs/components";
 import classnames from "classnames";
 import get from 'lodash/get';
-import {CitySelect, ListSelect, UserListSelect, FunctionSelect, IndustrySelect, ScrollHeader} from '../../Common';
-import {Popup, toCSSLength, Icon, Button} from "@kne/antd-taro";
+import {CitySelect, ListSelect, UserListSelect, FunctionSelect, IndustrySelect} from '../../Common';
+import {Popup, toCSSLength, Icon, Button, ScrollHeader} from "@kne/antd-taro";
 import Taro from "@tarojs/taro";
 
 const componentsMap = {CitySelect, ListSelect, UserListSelect, FunctionSelect, IndustrySelect};
