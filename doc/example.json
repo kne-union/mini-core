@@ -128,6 +128,158 @@
       ]
     },
     {
+      "title": "Filter 筛选",
+      "description": "Filter 展示条件筛选器",
+      "code": "./filter.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "FixedView 底部固定视图容器",
+      "description": "FixedView 底部固定视图容器",
+      "code": "./fixed-view.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "FormInfo 表单",
+      "description": "FormInfo 展示表单组件",
+      "code": "./form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "HeaderContainer 页面头部容器",
+      "description": "HeaderContainer 页面头部容器",
+      "code": "./header-container.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "HighLight 高亮",
+      "description": "HighLight 展示搜索高亮",
+      "code": "./highLight.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "InfoPage 复杂信息展示",
+      "description": "InfoPage 复杂信息展示",
+      "code": "./info-page.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "Layout 布局",
+      "description": "Layout 布局",
+      "code": "./layout.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "Modal 确认对话框",
+      "description": "Modal 展示确认对话框",
+      "code": "./modal.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -158,36 +310,6 @@
       ]
     },
     {
-      "title": "筛选",
-      "description": "展示条件筛选器",
-      "code": "./filter.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        }
-      ]
-    },
-    {
-      "title": "表单",
-      "description": "展示表单组件",
-      "code": "./form.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "lodash",
-          "packageName": "lodash"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        }
-      ]
-    },
-    {
       "title": "popup里面的表单",
       "description": "展示popup里面的表单组件",
       "code": "./popup-form.js",
@@ -203,59 +325,6 @@
         {
           "name": "antd",
           "packageName": "@kne/antd-taro"
-        }
-      ]
-    },
-    {
-      "title": "高亮",
-      "description": "展示搜索高亮",
-      "code": "./highLight.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
-        }
-      ]
-    },
-    {
-      "title": "确认对话框",
-      "description": "展示确认对话框",
-      "code": "./modal.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
-        }
-      ]
-    },
-    {
-      "title": "复杂信息展示",
-      "description": "复杂信息展示",
-      "code": "./info-page.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
         }
       ]
     },

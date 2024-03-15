@@ -427,9 +427,9 @@ const BaseExample = () => {
     </Space>
     <Space direction={"vertical"}>
       <View>返回值自定义</View>
-      <Enum moduleName="experienceEnum" name={'0-1'}>
-        {({description}) => {
-          return 'experienceEnum-' + description;
+      <Enum moduleName="experienceEnum" name={"0-1"}>
+        {({ description }) => {
+          return "experienceEnum-" + description;
         }}
       </Enum>
     </Space>
@@ -437,8 +437,23 @@ const BaseExample = () => {
       <View>展示 Enum 所有值</View>
       <Enum moduleName="experienceEnum">
         {experienceEnum => (
-          <Space>
+          <Space split={','} size={0}>
             {experienceEnum.map(item => <View>{item.description}</View>)}
+          </Space>
+        )}
+      </Enum>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>Enum 一次加载多个</View>
+      <Enum moduleName={["experienceEnum", "political"]}>
+        {([experienceEnum, political]) => (
+          <Space direction={'vertical'}>
+            <Space split={','} size={0}>
+              {experienceEnum.map(item => <View>{item.description}</View>)}
+            </Space>
+            <Space split={','} size={0}>
+              {political.map(item => <View>{item.description}</View>)}
+            </Space>
           </Space>
         )}
       </Enum>
@@ -488,6 +503,594 @@ render(<BaseExample />);
 
 ```
 
+- Filter 筛选
+- Filter 展示条件筛选器
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Enum, Filter } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+const { useState } = React;
+
+const stateBarItems = [
+  { key: "all", children: "全部" },
+  { key: "progress", children: "进展中" },
+  { key: "stop", children: "暂停" },
+  { key: "close", children: "关闭" },
+  { key: "other1", children: "其他1" },
+  { key: "other2", children: "其他2" },
+  { key: "other3", children: "其他3" },
+  { key: "other4", children: "其他4超长超长超长超长" },
+  { key: "other5", children: "其他5" }
+];
+
+const optionsBarItems = ({ degreeEnum, political }) => [
+  { key: "mine", label: "我上传的", type: "SwitchButton" },,
+  {
+    key: "political",
+    label: "政治面貌",
+    type: "ListSelect",
+    api: {
+      loader: () => {
+        return {
+          pageData: political.map(({ value, description }) => ({
+            value, label: description
+          }))
+        };
+      }
+    }
+  },
+  { key: "city", label: "期望城市", type: "CitySelect" },
+  { key: "currentCity", label: "现居城市", type: "CitySelect" },
+  { key: "function", label: "职能", type: "FunctionSelect" },
+  { key: "industry", label: "行业", type: "IndustrySelect" },
+  {
+    key: "positionUser",
+    label: "职位负责人",
+    type: "UserListSelect",
+    apis: {
+      getUserList: {
+        loader: () => {
+          return {
+            pageData: degreeEnum.map(({ value, description }) => ({
+              uid: value, name: description, description
+            }))
+          };
+        }
+      }
+    }
+  }
+];
+
+const BaseExample = () => {
+  const [filter, setFilter] = useState({});
+  const [filter2, setFilter2] = useState({});
+  const [filter3, setFilter3] = useState({});
+  const [filter4, setFilter4] = useState({state: "stop", option2: {mine: true, political: [{value: "中共党员", label: "中共党员"}]}});
+
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>Filter 组合</View>
+      <Filter filter={filter4} onChange={setFilter4}>
+        <Filter.SearchBar name="keyword" />
+        <Filter.StateBar name="state" items={stateBarItems} />
+        <Enum loading={null} moduleName={["degreeEnum", "political"]}>
+          {([degreeEnum, political]) => {
+            return <Filter.OptionsBar name="option2" items={optionsBarItems({ degreeEnum, political })} />;
+          }}
+        </Enum>
+        <Filter.OptionsBar
+          name="option3"
+          items={[
+            { key: "city", label: "期望城市", type: "CitySelect" },
+            { key: "currentCity", label: "现居城市", type: "CitySelect" }
+          ]}
+        />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>SearchBar</View>
+      <Filter filter={filter} onChange={setFilter}>
+        <Filter.SearchBar name="keyword" />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>StateBar</View>
+      <Filter filter={filter2} onChange={setFilter2}>
+        <Filter.StateBar name="state" items={stateBarItems} />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>OptionsBar</View>
+      <Filter filter={filter3} onChange={setFilter3}>
+        <Filter.OptionsBar
+          name="option3"
+          items={[
+            { key: "city", label: "期望城市", type: "CitySelect" },
+            { key: "currentCity", label: "现居城市", type: "CitySelect" }
+          ]}
+        />
+      </Filter>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- FixedView 底部固定视图容器
+- FixedView 底部固定视图容器
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const {FixedView,FixedButton, FixedLoadingButton} = miniCore;
+const {Space} = antd;
+const {View} = tarojsComponents;
+
+const BaseExample = () => {
+    return (
+      <FixedView
+        noPadding
+        hasSafeArea
+        direction={'vertical'}
+        fixBottomExtra={<Space direction={'vertical'}><View>fixBottomExtra</View><View>fixBottomExtra2</View></Space>}
+      >
+        哈哈哈
+        <Space>
+          <FixedButton type='default'>FixedButton</FixedButton>
+          <FixedButton type='primary'>FixedButton</FixedButton>
+        </Space>
+        <FixedLoadingButton loading type='primary'>FixedLoadingButton</FixedLoadingButton>
+      </FixedView>
+    );
+};
+
+render(<BaseExample/>);
+
+```
+
+- FormInfo 表单
+- FormInfo 展示表单组件
+- miniCore(@kne/mini-core),lodash(lodash),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { FormInfo, Global, CommonListTitle } = miniCore;
+const { range } = lodash;
+const { Space, Button } = antd;
+const { useMemo } = React;
+const { View } = tarojsComponents;
+
+const {
+  FormPart,
+  FormList,
+  Form,
+  Input,
+  SalaryInput,
+  PhoneNumber,
+  CardType,
+  Picker,
+  AdvancedSelect,
+  AutoComplete,
+  CalendarTimeRange,
+  Calendar,
+  CitySelect,
+  IndustrySelect,
+  FunctionSelect,
+  TimeStep,
+  CalendarRange,
+  UserListSelect,
+  InputNumber,
+  InputNumberUnit,
+  Upload,
+  SubmitButton,
+  useFormContext
+} = FormInfo;
+
+const { useRef } = React;
+
+const BaseExample = () => {
+  const listRef = useRef();
+  return <Global preset={{
+    apis: {
+      baseURL: "https://erc.test.fatalent.cn", resume: {
+        ossUpload: {
+          url: "/api/v1/attachment/upload"
+        }
+      }, user: {
+        getUserList: {
+          loader: () => {
+            return {
+              pageData: range(0, 20).map((index) => ({
+                uid: index, name: `用户${index}`, description: `用户${index}`
+              }))
+            };
+          }
+        }
+      }
+    },
+    enums: {
+      cardTypeEnum: [
+        { "value": 1, "description": "身份证" },
+        { "value": 2, "description": "护照" }
+      ]
+    }
+  }}>
+    {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
+        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <Form
+          data={{
+            "name": "张三",
+            "date-range": ["2010-01-01", "2012-01-02"],
+            "test2": [3],
+            "city": ["020"],
+            "industry": ["00100d4"],
+            "function": ["001001002"]
+          }}
+          onSubmit={(data) => {
+            console.log(data);
+          }}
+        >
+          <FormPart
+            title="表单标题"
+            list={[
+              <Input.Item label="姓名" name="name" rule="REQ LEN-0-10" />,
+              <Picker.DateRangePicker.Item name="date-range" label="时间段" />,
+              <PhoneNumber.Item name="phone" label="手机" />,
+              <CardType.Item name="id-card" label="身份证" />,
+              <SalaryInput.Item name="salary" label="薪资" hasMonth typeEnum={({ render }) => render([{
+                description: "年薪", value: 6
+              }, { description: "月薪", value: 5 }, { description: "周薪", value: 4 }, {
+                description: "日薪", value: 3
+              }, { description: "时薪", value: 2 }])} />,
+              <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" getSearchProps={() => {
+                return {};
+              }} api={{
+                loader: () => {
+                  return {
+                    pageData: [{ label: "第一项", value: 1 }, {
+                      label: "第二项", value: 2, disabled: true
+                    }, {
+                      label: "第三项", value: 3
+                    }]
+                  };
+                }
+              }} />,
+              <CitySelect.Item name="city" label="城市选择" />,
+              <IndustrySelect.Item name="industry" label="行业选择" multiple />,
+              <FunctionSelect.Item name="function" label="职能选择" multiple={false} />,
+              <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ" />,
+              <InputNumber.Item name="number" label="数字" addonAfter="元" step={2} />,
+              <InputNumberUnit.Item name="date" label="试用期" />,
+              <Calendar.Item name="time2" label="时间" />, <TimeStep.Item name="timeStep" label="时间2" />,
+              <CalendarRange.Item name="time3" label="时间段" />,
+              <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden />,
+              <UserListSelect.Item name="user" label="用户" rule="REQ" />,
+              <Upload.Item name="attachment" label="附件" rule="REQ" />,
+              <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
+                loader: ({ data }) => {
+                  return {
+                    pageData: [{
+                      label: "第一项" + data.searchText, value: 1
+                    }, { label: "第二项" + data.searchText, value: 2, disabled: true }, {
+                      label: "第三项" + data.searchText, value: 3
+                    }]
+                  };
+                }
+              }} />,
+              <SubmitButton>提交</SubmitButton>
+            ]}
+          />
+          <CommonListTitle
+            subtitle="(填写工作经历)"
+            extra={<Button fill="none" onClick={() => {
+              listRef.current.add();
+            }}>添加</Button>}
+          >
+            工作经历
+          </CommonListTitle>
+          <FormList
+            title="列表1"
+            ref={listRef}
+            name="list"
+            minLength={1}
+            list={[
+              <Input.Item name="name" label="名称" labelTips="哈哈哈哈" />,
+              <Input.Item name="field0" label="字段" />,
+              <Input.Item name="field1" label="字段1" />
+            ]}
+          />
+          <FormList
+            name="列表2"
+            title="list2"
+            subtitle="副标题"
+            minLength={1}
+            itemTitle={({ index }) => `第${index + 1}项`}
+            list={[
+              <Input.Item name="name" label="名称" />,
+              <Input.Item name="field0" label="字段" />,
+              <Input.Item name="field1" label="字段1" />
+            ]}
+          />
+        </Form>
+      </Space>
+    </Space>
+  </Global>;
+};
+
+render(<BaseExample />);
+
+```
+
+- HeaderContainer 页面头部容器
+- HeaderContainer 页面头部容器
+- miniCore(@kne/mini-core),tarojsComponents(@tarojs/components)
+
+```jsx
+const { HeaderContainer } = miniCore;
+const { View } = tarojsComponents;
+const BaseExample = () => {
+  return <HeaderContainer
+    bgColor={'#ff8f1f'}
+    extra={<View>extra</View>}
+  >
+    哈哈哈
+  </HeaderContainer>;
+};
+
+render(<BaseExample />);
+
+```
+
+- HighLight 高亮
+- HighLight 展示搜索高亮
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { HighLight, HighLightProvider } = miniCore;
+const { View } = tarojsComponents;
+const { Space } = antd;
+
+const BaseExample = () => {
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>默认标签</View>
+      <HighLightProvider keyword="东北">
+        <HighLight text="我的家在东北，松花江上呀！" />
+      </HighLightProvider>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>自定义容器标签</View>
+      <HighLightProvider keyword={["项目需求分析", "新的技术栈"]}>
+        <HighLight tagName={View}
+                   text="工作描述: 参与项目需求分析,业务模块划分↵学习一些新的技术栈↵部分功能模块代码的实现↵对自身完成代码进行简单测试↵对于电商项目的核心业务有一定经验↵后端开发RabbitMQJavaMySQLRedisSpringCloudElasticsearch微服务架构" />
+      </HighLightProvider>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>忽略大小写</View>
+      <HighLightProvider keyword={["哈尔滨", "信息", "abs wang"]}>
+        <HighLight tagName={View} text="ABs Wang我的家在东北，松花江上呀！哈尔滨真美，信息通达" />
+      </HighLightProvider>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+```
+
+- InfoPage 复杂信息展示
+- InfoPage 复杂信息展示
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { InfoPage, Content, Comment, Table } = miniCore;
+const { Button, Steps, Space } = antd;
+const { View } = tarojsComponents;
+
+const contentList = [
+  { label: "开票ID", content: "IN00001533" },
+  { label: "客户名称", content: "自动化测试有限公司" },
+  { label: "合同", content: "onsiteRPO合同", action: <Button>预览</Button> },
+  {
+    label: "划转人",
+    block: true,
+    content: <Table
+      dataSource={[
+        { id: 1, name: "哈哈哈", count: 12 },
+        { id: 2, name: "张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三", count: 200 }
+      ]}
+      columns={[{ name: "name", title: "名称" }, { name: "count", title: "数量" }]}
+    />
+  },
+  { label: "备注", content: null }
+];
+
+const stepsItems = [{
+  title: "第一步", description: "完成时间：2020-12-01 12:30"
+}, {
+  title: "第二步", description: "完成时间：2020-12-01 12:30"
+}, {
+  title: "第三步", description: "完成时间：2020-12-01 12:30"
+}, {
+  title: "第四步", description: "完成时间：2020-12-01 12:30"
+}];
+
+const BaseExample = () => {
+  return (
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <InfoPage>
+          <InfoPage.Part title="开票信息">
+            <InfoPage.Part>
+              <Content list={contentList} />
+            </InfoPage.Part>
+          </InfoPage.Part>
+        </InfoPage>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>带有副标题</View>
+        <InfoPage>
+          <InfoPage.Part title="开票信息">
+            <InfoPage.Part title="发票费用信息">
+              <InfoPage.Part>
+                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
+              </InfoPage.Part>
+              <InfoPage.Part title="开票信息详情">
+                <Content list={contentList} />
+              </InfoPage.Part>
+            </InfoPage.Part>
+          </InfoPage.Part>
+        </InfoPage>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>折叠面板</View>
+        <InfoPage.Part title="开票信息">
+          <InfoPage.Collapse items={[{
+            key: "1", title: "第一项", children: <Content list={[{
+              label: "开票ID", content: "IN00001533", tips: "哈哈哈"
+            }, {
+              label: "客户名称", content: "自动化测试有限公司"
+            }, {
+              label: "合同", content: "onsiteRPO合同", action: <Button>预览</Button>
+            }]} />
+          }, {
+            key: "2", title: "第二项", children: "第二项第二项第二项第二项第二项第二项第二项第二项"
+          }, {
+            key: "3", title: "第三项", children: "第三项第三项第三项第三项第三项第三项第三项第三项第三项"
+          }]} />
+        </InfoPage.Part>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>内容自定义</View>
+        <InfoPage>
+          <InfoPage.Part title="审批流程">
+            <Steps current={2} items={stepsItems} />
+            <Steps direction="vertical" current={2} items={stepsItems} />
+            <Steps
+              direction="vertical"
+              current={2}
+              items={[{
+                title: "第一步",
+                description: <Space direction="vertical">
+                  <Comment user={{ name: "张三" }} time={new Date()}>
+                    评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+                  </Comment>
+                  <Comment user={{ name: "张三" }} time={new Date()} action={<Button>撤回</Button>}>
+                    评论评论评论评论评论评论评论评论评论评论评论评论评论评论
+                  </Comment>
+                </Space>
+              },
+                { title: "第二步", description: "完成时间：2020-12-01 12:30" },
+                { title: "第三步", status: "error", description: "完成时间：2020-12-01 12:30" },
+                { title: "第四步", description: "完成时间：2020-12-01 12:30" }
+              ]}
+            />
+          </InfoPage.Part>
+        </InfoPage>
+      </Space>
+    </Space>
+  );
+};
+
+render(<BaseExample />);
+
+```
+
+- Layout 布局
+- Layout 布局
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Layout } = miniCore;
+const { View } = tarojsComponents;
+const { Icon } = antd;
+const BaseExample = () => {
+  return <Layout
+    hasSafeArea
+    toolbarList={[{
+      key: '/pages/index/index',
+      icon: (active) => active ? <Icon type="tabgongzuotai-xuanzhong" className={'iconfont'}/> :
+        <Icon type="tabgongzuotai-moren" className={'iconfont'}/>,
+      title: '首页',
+      pagePath: '/pages/index/index'
+    }, {
+      key: '/pages/components/index',
+      icon: (active) => active ? <Icon type="tabzhiwei-xuanzhong" className={'iconfont'}/> :
+        <Icon type="tabzhiwei-moren" className={'iconfont'}/>,
+      title: '组件示例',
+      pagePath: '/pages/components/index'
+    }]}
+    header={{
+      title: "layout",
+      bgColor: '#ff8f1f',
+      extra: <View>extra</View>,
+      backArrow: <Icon type="arrow-bold-left" className="iconfont nav-bar-icon"/>
+    }}
+  >
+    哈哈哈
+  </Layout>;
+};
+
+render(<BaseExample />);
+
+```
+
+- Modal 确认对话框
+- Modal 展示确认对话框
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Modal, ModalButton, useModal } = miniCore;
+const { useState } = React;
+const { Button, Space } = antd;
+const { View } = tarojsComponents;
+
+const ExampleUseModal = () => {
+  const modal = useModal();
+  return <Button onClick={() => {
+    modal({
+      title: "确认解除微信关联？", content: "解除后，将无法直接通过企业微信发起聊天。"
+    });
+  }}>按钮</Button>;
+};
+
+const BaseExample = () => {
+  const [open, setOpen] = useState(false);
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>基础用法</View>
+      <View>
+        <Button onClick={() => {
+          setOpen(true);
+        }}>按钮</Button>
+        <Modal
+          open={open}
+          onOpenChange={setOpen}
+          title="确认解除微信关联？"
+          content="解除后，将无法直接通过企业微信发起聊天。"
+        />
+      </View>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>ModalButton</View>
+      <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>useModal Hook 调用</View>
+      <ExampleUseModal />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
@@ -511,253 +1114,6 @@ const {Warning} = miniCore;
 const BaseExample = () => {
     return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
 };
-
-render(<BaseExample/>);
-
-```
-
-- 筛选
-- 展示条件筛选器
-- miniCore(@kne/mini-core)
-
-```jsx
-const {Enum, Filter} = miniCore;
-const {useState} = React;
-
-const BaseExample = () => {
-    const [filter, setFilter] = useState({});
-    return <Filter filter={filter} onChange={setFilter}>
-        <Filter.SearchBar name="keyword"/>
-        <Filter.StateBar name="state" items={[{
-            key: 'all', children: '全部'
-        }, {
-            key: 'progress', children: '进展中'
-        }, {
-            key: 'stop', children: '暂停'
-        }, {
-            key: 'close', children: '关闭'
-        }, {
-            key: 'other1', children: '其他1'
-        }, {
-            key: 'other2', children: '其他2'
-        }, {
-            key: 'other3', children: '其他3'
-        }, {
-            key: 'other4', children: '其他4超长超长超长超长'
-        }, {
-            key: 'other5', children: '其他5'
-        }]}/>
-        <Enum loading={null}
-              moduleName={["degreeEnum", "political", "positionStateEnum"]}>{([degreeEnum, political, positionStateEnum]) => {
-            return <Filter.OptionsBar name="option2" items={[{
-                key: 'city', label: '期望城市', type: 'CitySelect'
-            }, {
-                key: 'currentCity', label: '现居城市', type: 'CitySelect'
-            }, {
-                key: 'function', label: '职能', type: 'FunctionSelect'
-            }, {
-                key: 'industry', label: '行业', type: 'IndustrySelect'
-            }, {
-                key: 'mine', label: '我上传的', type: 'SwitchButton'
-            }, {
-                key: 'positionUser', label: '职位负责人', type: 'UserListSelect', apis: {
-                    getUserList: {
-                        loader: () => {
-                            return {
-                                pageData: degreeEnum.map(({value, description}) => ({
-                                    uid: value, name: description, description
-                                }))
-                            }
-                        }
-                    }
-                }
-            }, {
-                key: 'political', label: '政治面貌', type: "ListSelect", api: {
-                    loader: () => {
-                        return {
-                            pageData: political.map(({value, description}) => ({
-                                value, label: description
-                            }))
-                        }
-                    }
-                }
-            }]}/>
-        }}</Enum>
-        <Filter.OptionsBar name="option3" items={[{
-            key: 'city', label: '期望城市', type: 'CitySelect'
-        }, {
-            key: 'currentCity', label: '现居城市', type: 'CitySelect'
-        }]}/>
-    </Filter>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 表单
-- 展示表单组件
-- miniCore(@kne/mini-core),lodash(lodash),antd(@kne/antd-taro)
-
-```jsx
-const {FormInfo, Global, CommonListTitle} = miniCore;
-const {range} = lodash;
-const {Button} = antd;
-const {useMemo} = React;
-
-const {
-    FormPart,
-    FormList,
-    Form,
-    Input,
-    SalaryInput,
-    PhoneNumber,
-    CardType,
-    Picker,
-    AdvancedSelect,
-    AutoComplete,
-    CalendarTimeRange,
-    Calendar,
-    CitySelect,
-    IndustrySelect,
-    FunctionSelect,
-    TimeStep,
-    CalendarRange,
-    UserListSelect,
-    InputNumber,
-    InputNumberUnit,
-    Upload,
-    SubmitButton,
-    useFormContext
-} = FormInfo;
-
-const {useRef} = React;
-
-const FormInner = () => {
-    const {formData} = useFormContext();
-    console.log('FormInner render');
-    return <FormPart title="表单标题"
-                     list={[<AdvancedSelect.Item readOnly name="test2" label="高级选择"
-                                                 interceptor={["picker-value", "picker-single"]} rule="REQ"
-                                                 getSearchProps={() => {
-                                                     return {};
-                                                 }} api={{
-                         loader: () => {
-                             return {
-                                 pageData: [{label: "第一项", value: 1}, {
-                                     label: "第二项", value: 2, disabled: true
-                                 }, {
-                                     label: "第三项", value: 3,
-                                 },],
-                             };
-                         }
-                     }}/>, <Input.Item name="input" label="输入框"/>, <SubmitButton>提交</SubmitButton>]}/>;
-};
-
-const BaseExample = () => {
-    const listRef = useRef();
-    return <Global preset={{
-        apis: {
-            baseURL: 'https://erc.test.fatalent.cn', resume: {
-                ossUpload: {
-                    url: '/api/v1/attachment/upload'
-                }
-            }, user: {
-                getUserList: {
-                    loader: () => {
-                        return {
-                            pageData: range(0, 20).map((index) => ({
-                                uid: index, name: `用户${index}`, description: `用户${index}`
-                            }))
-                        }
-                    }
-                }
-            },
-        }
-    }}>
-        {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
-        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
-        <Form data={{
-            'name': "张三",
-            'date-range': ['2010-01-01', '2012-01-02'],
-            'test2': {value: 3, label: '第三项'},
-            'city': ['020'],
-            'industry': ["00100d4"],
-            'function': ["001001002"]
-        }} onSubmit={(data) => {
-            console.log(data);
-        }}>
-            <FormInner/>
-            <FormList title="列表" ref={listRef} name="list" minLength={1}
-                      list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈"/>, <Input.Item name="field0" label="字段"/>,
-                          <Input.Item name="field1" label="字段1"/>]}/>
-        </Form>
-        {/*<Form data={{
-            'name': "张三",
-            'date-range': ['2010-01-01', '2012-01-02'],
-            'test2': [3],
-            'city': ['020'],
-            'industry': ["00100d4"],
-            'function': ["001001002"]
-        }} onSubmit={(data) => {
-            console.log(data);
-        }}>
-            <FormPart title="表单标题"
-                      list={[<Input.Item label="姓名" name="name" rule="REQ LEN-0-10"/>,
-                          <Picker.DateRangePicker.Item name="date-range" label="时间段"/>,
-                          <PhoneNumber.Item name="phone" label="手机"/>, <CardType.Item name="id-card" label="身份证"/>,
-                          <SalaryInput.Item name="salary" label="薪资" hasMonth typeEnum={({render}) => render([{
-                              description: '年薪', value: 6
-                          }, {description: '月薪', value: 5}, {description: '周薪', value: 4}, {
-                              description: '日薪', value: 3
-                          }, {description: '时薪', value: 2}])}/>,
-                          <AdvancedSelect.Item name="test2" label="高级选择" rule="REQ" getSearchProps={() => {
-                              return {};
-                          }} api={{
-                              loader: () => {
-                                  return {
-                                      pageData: [{label: "第一项", value: 1}, {
-                                          label: "第二项", value: 2, disabled: true
-                                      }, {
-                                          label: "第三项", value: 3,
-                                      },],
-                                  };
-                              }
-                          }}/>, <CitySelect.Item name="city" label="城市选择"/>,
-                          <IndustrySelect.Item name="industry" label="行业选择" multiple/>,
-                          <FunctionSelect.Item name="function" label="职能选择" multiple={false}/>,
-                          <CalendarTimeRange.Item name="time" label="面试时间" rule="REQ"/>,
-                          <InputNumber.Item name="number" label="数字" addonAfter="元" step={2}/>,
-                          <InputNumberUnit.Item name="date" label="试用期"/>,
-                          <Calendar.Item name="time2" label="时间"/>, <TimeStep.Item name="timeStep" label="时间2"/>,
-                          <CalendarRange.Item name="time3" label="时间段"/>,
-                          <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
-                          <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
-                          <Upload.Item name="attachment" label="附件" rule="REQ"/>,
-                          <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
-                              loader: ({data}) => {
-                                  return {
-                                      pageData: [{
-                                          label: "第一项" + data.searchText, value: 1
-                                      }, {label: "第二项" + data.searchText, value: 2, disabled: true}, {
-                                          label: "第三项" + data.searchText, value: 3,
-                                      },],
-                                  };
-                              }
-                          }}/>, <SubmitButton>提交</SubmitButton>]}/>
-            <CommonListTitle subtitle="(填写工作经历)" extra={<Button fill="none" onClick={() => {
-                listRef.current.add();
-            }}>添加</Button>}>工作经历</CommonListTitle>
-            <FormList ref={listRef} name="list" minLength={1}
-                      list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
-                          <Input.Item name="field1" label="字段1"/>]}/>
-            <FormList name="list2" title="list2" subtitle="副标题" minLength={1}
-                      itemTitle={({index}) => `第${index + 1}项`}
-                      list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
-                          <Input.Item name="field1" label="字段1"/>]}/>
-        </Form>*/}
-    </Global>;
-}
 
 render(<BaseExample/>);
 
@@ -803,207 +1159,6 @@ const BaseExample = () => {
                 <TextArea.Item name="des" label="说明"/>]}/>
         });
     }}>点击弹出popup</Button>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 高亮
-- 展示搜索高亮
-- miniCore(@kne/mini-core),tarojsComponents(@tarojs/components)
-
-```jsx
-const {HighLight, HighLightProvider} = miniCore;
-const {View} = tarojsComponents;
-
-const BaseExample = () => {
-  return <View>
-    <View>示例1：默认标签</View>
-    <HighLightProvider keyword="东北">
-      <HighLight text="我的家在东北，松花江上呀！"/>
-    </HighLightProvider>
-    <View style={{height: '30px'}}></View>
-    <View>示例2：自定义容器标签</View>
-    <HighLightProvider keyword={["项目需求分析", "新的技术栈"]}>
-      <HighLight tagName={View} text="工作描述: 参与项目需求分析,业务模块划分↵学习一些新的技术栈↵部分功能模块代码的实现↵对自身完成代码进行简单测试↵对于电商项目的核心业务有一定经验↵后端开发RabbitMQJavaMySQLRedisSpringCloudElasticsearch微服务架构"/>
-    </HighLightProvider>
-    <View style={{height: '30px'}}></View>
-    <View>示例2：忽略大小写</View>
-    <HighLightProvider keyword={["哈尔滨", "信息", "abs wang"]}>
-      <HighLight tagName={View} text="ABs Wang我的家在东北，松花江上呀！哈尔滨真美，信息通达"/>
-    </HighLightProvider>
-  </View>
-};
-
-render(<BaseExample/>);
-```
-
-- 确认对话框
-- 展示确认对话框
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
-
-```jsx
-const {Modal, ModalButton, useModal} = miniCore;
-const {useState} = React;
-const {Button} = antd;
-
-const ExampleUseModal = () => {
-    const modal = useModal();
-    return <Button onClick={() => {
-        modal({
-            title: '确认解除微信关联？', content: '解除后，将无法直接通过企业微信发起聊天。'
-        });
-    }}>按钮</Button>;
-};
-const BaseExample = () => {
-    const [open, setOpen] = useState(false);
-    return <>
-        <Button onClick={() => {
-            setOpen(true);
-        }}>按钮</Button>
-        <Modal open={open} onOpenChange={setOpen} title="确认解除微信关联？"
-               content="解除后，将无法直接通过企业微信发起聊天。"/>
-
-        <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
-        <ExampleUseModal />
-    </>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 复杂信息展示
-- 复杂信息展示
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
-
-```jsx
-const {InfoPage, Content, Comment, Table} = miniCore;
-const {Button, Steps, Space} = antd;
-const BaseExample = () => {
-    return <InfoPage>
-        <InfoPage.Part title="开票信息">
-            <InfoPage.Part>
-                <Content list={[{
-                    label: '开票ID', content: 'IN00001533'
-                }, {
-                    label: '客户名称', content: '自动化测试有限公司'
-                }, {
-                    label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
-                }, {
-                    label: '划转人', block: true, content: <Table dataSource={[{
-                        id: 1, name: '哈哈哈', count: 12
-                    }, {
-                        id: 2, name: '张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三张三', count: 200
-                    }]} columns={[{name: 'name', title: '名称'}, {name: 'count', title: '数量'}]}/>
-                }, {
-                    label: '备注', content: null
-                }]}/>
-            </InfoPage.Part>
-            <InfoPage.Part title="发票费用信息">
-                <InfoPage.Part>
-                    发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
-                </InfoPage.Part>
-                <InfoPage.Part>
-                    <Content list={[{
-                        label: '开票ID', content: 'IN00001533'
-                    }, {
-                        label: '客户名称', content: '自动化测试有限公司'
-                    }, {
-                        label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
-                    }, {
-                        label: '划转人', block: true, content: <Table dataSource={[{
-                            id: 1, name: '哈哈哈', count: 12
-                        }, {
-                            id: 2, name: '张三', count: 200
-                        }]} columns={[{name: 'name', title: '名称'}, {name: 'count', title: '数量'}]}/>
-                    }, {
-                        label: '备注', content: null
-                    }]}/>
-                </InfoPage.Part>
-                <InfoPage.Part>
-                    <Content list={[{
-                        label: '开票ID', content: 'IN00001533'
-                    }, {
-                        label: '客户名称', content: '自动化测试有限公司'
-                    }, {
-                        label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
-                    }, {
-                        label: '划转人', block: true, content: <Table dataSource={[{
-                            id: 1, name: '哈哈哈', count: 12
-                        }, {
-                            id: 2, name: '张三', count: 200
-                        }]} columns={[{name: 'name', title: '名称'}, {name: 'count', title: '数量'}]}/>
-                    }, {
-                        label: '备注', content: null
-                    }]}/>
-                </InfoPage.Part>
-            </InfoPage.Part>
-            <InfoPage.Part title="发票信息">
-                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
-            </InfoPage.Part>
-        </InfoPage.Part>
-        <InfoPage.Part title="开票信息">
-            <InfoPage.Part title="发票费用信息">
-                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
-            </InfoPage.Part>
-            <InfoPage.Part title="发票信息">
-                发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息发票费用信息
-            </InfoPage.Part>
-        </InfoPage.Part>
-        <InfoPage.Part title="开票信息">
-            <InfoPage.Collapse items={[{
-                key: '1', title: '第一项', children: <Content list={[{
-                    label: '开票ID', content: 'IN00001533', tips: '哈哈哈'
-                }, {
-                    label: '客户名称', content: '自动化测试有限公司'
-                }, {
-                    label: '合同', content: 'onsiteRPO合同', action: <Button>预览</Button>
-                }]}/>
-            }, {
-                key: '2', title: '第二项', children: '第二项第二项第二项第二项第二项第二项第二项第二项'
-            }, {
-                key: '3', title: '第三项', children: '第三项第三项第三项第三项第三项第三项第三项第三项第三项'
-            }]}/>
-        </InfoPage.Part>
-        <InfoPage.Part title="审批流程">
-            <Steps current={2} items={[{
-                title: '第一步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第二步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第三步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第四步', description: '完成时间：2020-12-01 12:30'
-            }]}/>
-            <Steps direction="vertical" current={2} items={[{
-                title: '第一步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第二步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第三步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第四步', description: '完成时间：2020-12-01 12:30'
-            }]}/>
-            <Steps direction="vertical" current={2} items={[{
-                title: '第一步', description: <Space direction="vertical">
-                    <Comment user={{name: '张三'}} time={new Date()}>
-                        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-                    </Comment>
-                    <Comment user={{name: '张三'}} time={new Date()} action={<Button>撤回</Button>}>
-                        评论评论评论评论评论评论评论评论评论评论评论评论评论评论
-                    </Comment>
-                </Space>
-            }, {
-                title: '第二步', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第三步', status: 'error', description: '完成时间：2020-12-01 12:30'
-            }, {
-                title: '第四步', description: '完成时间：2020-12-01 12:30'
-            }]}/>
-        </InfoPage.Part>
-    </InfoPage>
 };
 
 render(<BaseExample/>);
