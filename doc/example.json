@@ -147,6 +147,25 @@
       ]
     },
     {
+      "title": "FixedView 底部固定视图容器",
+      "description": "FixedView 底部固定视图容器",
+      "code": "./fixed-view.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
