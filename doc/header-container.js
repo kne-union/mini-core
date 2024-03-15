@@ -1,5 +1,4 @@
 const { HeaderContainer } = miniCore;
-const { Space } = antd;
 const { View } = tarojsComponents;
 const BaseExample = () => {
   return <HeaderContainer

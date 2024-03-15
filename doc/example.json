@@ -198,6 +198,21 @@
           "packageName": "@kne/mini-core"
         },
         {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
+      "title": "HighLight 高亮",
+      "description": "HighLight 展示搜索高亮",
+      "code": "./highLight.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
           "name": "antd",
           "packageName": "@kne/antd-taro"
         },
@@ -253,21 +268,6 @@
         {
           "name": "antd",
           "packageName": "@kne/antd-taro"
-        }
-      ]
-    },
-    {
-      "title": "高亮",
-      "description": "展示搜索高亮",
-      "code": "./highLight.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
         }
       ]
     },
