@@ -189,6 +189,25 @@
       ]
     },
     {
+      "title": "HeaderContainer 页面头部容器",
+      "description": "HeaderContainer 页面头部容器",
+      "code": "./header-container.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",

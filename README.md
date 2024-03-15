@@ -826,6 +826,27 @@ render(<BaseExample />);
 
 ```
 
+- HeaderContainer 页面头部容器
+- HeaderContainer 页面头部容器
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { HeaderContainer } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+const BaseExample = () => {
+  return <HeaderContainer
+    bgColor={'#ff8f1f'}
+    extra={<View>extra</View>}
+  >
+    哈哈哈
+  </HeaderContainer>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
