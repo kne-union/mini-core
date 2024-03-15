@@ -427,9 +427,9 @@ const BaseExample = () => {
     </Space>
     <Space direction={"vertical"}>
       <View>返回值自定义</View>
-      <Enum moduleName="experienceEnum" name={'0-1'}>
-        {({description}) => {
-          return 'experienceEnum-' + description;
+      <Enum moduleName="experienceEnum" name={"0-1"}>
+        {({ description }) => {
+          return "experienceEnum-" + description;
         }}
       </Enum>
     </Space>
@@ -437,8 +437,23 @@ const BaseExample = () => {
       <View>展示 Enum 所有值</View>
       <Enum moduleName="experienceEnum">
         {experienceEnum => (
-          <Space>
+          <Space split={','} size={0}>
             {experienceEnum.map(item => <View>{item.description}</View>)}
+          </Space>
+        )}
+      </Enum>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>Enum 一次加载多个</View>
+      <Enum moduleName={["experienceEnum", "political"]}>
+        {([experienceEnum, political]) => (
+          <Space direction={'vertical'}>
+            <Space split={','} size={0}>
+              {experienceEnum.map(item => <View>{item.description}</View>)}
+            </Space>
+            <Space split={','} size={0}>
+              {political.map(item => <View>{item.description}</View>)}
+            </Space>
           </Space>
         )}
       </Enum>
@@ -488,6 +503,123 @@ render(<BaseExample />);
 
 ```
 
+- Filter 筛选
+- Filter 展示条件筛选器
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Enum, Filter } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+const { useState } = React;
+
+const stateBarItems = [
+  { key: "all", children: "全部" },
+  { key: "progress", children: "进展中" },
+  { key: "stop", children: "暂停" },
+  { key: "close", children: "关闭" },
+  { key: "other1", children: "其他1" },
+  { key: "other2", children: "其他2" },
+  { key: "other3", children: "其他3" },
+  { key: "other4", children: "其他4超长超长超长超长" },
+  { key: "other5", children: "其他5" }
+];
+
+const optionsBarItems = ({ degreeEnum, political }) => [
+  { key: "mine", label: "我上传的", type: "SwitchButton" },,
+  {
+    key: "political",
+    label: "政治面貌",
+    type: "ListSelect",
+    api: {
+      loader: () => {
+        return {
+          pageData: political.map(({ value, description }) => ({
+            value, label: description
+          }))
+        };
+      }
+    }
+  },
+  { key: "city", label: "期望城市", type: "CitySelect" },
+  { key: "currentCity", label: "现居城市", type: "CitySelect" },
+  { key: "function", label: "职能", type: "FunctionSelect" },
+  { key: "industry", label: "行业", type: "IndustrySelect" },
+  {
+    key: "positionUser",
+    label: "职位负责人",
+    type: "UserListSelect",
+    apis: {
+      getUserList: {
+        loader: () => {
+          return {
+            pageData: degreeEnum.map(({ value, description }) => ({
+              uid: value, name: description, description
+            }))
+          };
+        }
+      }
+    }
+  }
+];
+
+const BaseExample = () => {
+  const [filter, setFilter] = useState({});
+  const [filter2, setFilter2] = useState({});
+  const [filter3, setFilter3] = useState({});
+  const [filter4, setFilter4] = useState({state: "stop", option2: {mine: true, political: [{value: "中共党员", label: "中共党员"}]}});
+
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>Filter 组合</View>
+      <Filter filter={filter4} onChange={setFilter4}>
+        <Filter.SearchBar name="keyword" />
+        <Filter.StateBar name="state" items={stateBarItems} />
+        <Enum loading={null} moduleName={["degreeEnum", "political"]}>
+          {([degreeEnum, political]) => {
+            return <Filter.OptionsBar name="option2" items={optionsBarItems({ degreeEnum, political })} />;
+          }}
+        </Enum>
+        <Filter.OptionsBar
+          name="option3"
+          items={[
+            { key: "city", label: "期望城市", type: "CitySelect" },
+            { key: "currentCity", label: "现居城市", type: "CitySelect" }
+          ]}
+        />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>SearchBar</View>
+      <Filter filter={filter} onChange={setFilter}>
+        <Filter.SearchBar name="keyword" />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>StateBar</View>
+      <Filter filter={filter2} onChange={setFilter2}>
+        <Filter.StateBar name="state" items={stateBarItems} />
+      </Filter>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>OptionsBar</View>
+      <Filter filter={filter3} onChange={setFilter3}>
+        <Filter.OptionsBar
+          name="option3"
+          items={[
+            { key: "city", label: "期望城市", type: "CitySelect" },
+            { key: "currentCity", label: "现居城市", type: "CitySelect" }
+          ]}
+        />
+      </Filter>
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
@@ -510,85 +642,6 @@ render(<BaseExample/>);
 const {Warning} = miniCore;
 const BaseExample = () => {
     return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 筛选
-- 展示条件筛选器
-- miniCore(@kne/mini-core)
-
-```jsx
-const {Enum, Filter} = miniCore;
-const {useState} = React;
-
-const BaseExample = () => {
-    const [filter, setFilter] = useState({});
-    return <Filter filter={filter} onChange={setFilter}>
-        <Filter.SearchBar name="keyword"/>
-        <Filter.StateBar name="state" items={[{
-            key: 'all', children: '全部'
-        }, {
-            key: 'progress', children: '进展中'
-        }, {
-            key: 'stop', children: '暂停'
-        }, {
-            key: 'close', children: '关闭'
-        }, {
-            key: 'other1', children: '其他1'
-        }, {
-            key: 'other2', children: '其他2'
-        }, {
-            key: 'other3', children: '其他3'
-        }, {
-            key: 'other4', children: '其他4超长超长超长超长'
-        }, {
-            key: 'other5', children: '其他5'
-        }]}/>
-        <Enum loading={null}
-              moduleName={["degreeEnum", "political", "positionStateEnum"]}>{([degreeEnum, political, positionStateEnum]) => {
-            return <Filter.OptionsBar name="option2" items={[{
-                key: 'city', label: '期望城市', type: 'CitySelect'
-            }, {
-                key: 'currentCity', label: '现居城市', type: 'CitySelect'
-            }, {
-                key: 'function', label: '职能', type: 'FunctionSelect'
-            }, {
-                key: 'industry', label: '行业', type: 'IndustrySelect'
-            }, {
-                key: 'mine', label: '我上传的', type: 'SwitchButton'
-            }, {
-                key: 'positionUser', label: '职位负责人', type: 'UserListSelect', apis: {
-                    getUserList: {
-                        loader: () => {
-                            return {
-                                pageData: degreeEnum.map(({value, description}) => ({
-                                    uid: value, name: description, description
-                                }))
-                            }
-                        }
-                    }
-                }
-            }, {
-                key: 'political', label: '政治面貌', type: "ListSelect", api: {
-                    loader: () => {
-                        return {
-                            pageData: political.map(({value, description}) => ({
-                                value, label: description
-                            }))
-                        }
-                    }
-                }
-            }]}/>
-        }}</Enum>
-        <Filter.OptionsBar name="option3" items={[{
-            key: 'city', label: '期望城市', type: 'CitySelect'
-        }, {
-            key: 'currentCity', label: '现居城市', type: 'CitySelect'
-        }]}/>
-    </Filter>;
 };
 
 render(<BaseExample/>);
