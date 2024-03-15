@@ -166,6 +166,29 @@
       ]
     },
     {
+      "title": "FormInfo 表单",
+      "description": "FormInfo 展示表单组件",
+      "code": "./form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -192,25 +215,6 @@
         {
           "name": "lodash",
           "packageName": "lodash"
-        }
-      ]
-    },
-    {
-      "title": "表单",
-      "description": "展示表单组件",
-      "code": "./form.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "lodash",
-          "packageName": "lodash"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
         }
       ]
     },
