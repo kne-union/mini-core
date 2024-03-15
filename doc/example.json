@@ -223,6 +223,25 @@
       ]
     },
     {
+      "title": "InfoPage 复杂信息展示",
+      "description": "InfoPage 复杂信息展示",
+      "code": "./info-page.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -275,25 +294,6 @@
       "title": "确认对话框",
       "description": "展示确认对话框",
       "code": "./modal.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
-        }
-      ]
-    },
-    {
-      "title": "复杂信息展示",
-      "description": "复杂信息展示",
-      "code": "./info-page.js",
       "scope": [
         {
           "name": "miniCore",
