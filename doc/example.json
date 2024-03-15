@@ -261,6 +261,25 @@
       ]
     },
     {
+      "title": "Modal 确认对话框",
+      "description": "Modal 展示确认对话框",
+      "code": "./modal.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -306,25 +325,6 @@
         {
           "name": "antd",
           "packageName": "@kne/antd-taro"
-        }
-      ]
-    },
-    {
-      "title": "确认对话框",
-      "description": "展示确认对话框",
-      "code": "./modal.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        },
-        {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
         }
       ]
     },

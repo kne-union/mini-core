@@ -1040,6 +1040,57 @@ render(<BaseExample />);
 
 ```
 
+- Modal 确认对话框
+- Modal 展示确认对话框
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Modal, ModalButton, useModal } = miniCore;
+const { useState } = React;
+const { Button, Space } = antd;
+const { View } = tarojsComponents;
+
+const ExampleUseModal = () => {
+  const modal = useModal();
+  return <Button onClick={() => {
+    modal({
+      title: "确认解除微信关联？", content: "解除后，将无法直接通过企业微信发起聊天。"
+    });
+  }}>按钮</Button>;
+};
+
+const BaseExample = () => {
+  const [open, setOpen] = useState(false);
+  return <Space direction={"vertical"} size={30}>
+    <Space direction={"vertical"}>
+      <View>基础用法</View>
+      <View>
+        <Button onClick={() => {
+          setOpen(true);
+        }}>按钮</Button>
+        <Modal
+          open={open}
+          onOpenChange={setOpen}
+          title="确认解除微信关联？"
+          content="解除后，将无法直接通过企业微信发起聊天。"
+        />
+      </View>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>ModalButton</View>
+      <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>useModal Hook 调用</View>
+      <ExampleUseModal />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
 - 状态标签
 - 这里填写示例说明
 - miniCore(@kne/mini-core),lodash(lodash)
@@ -1108,41 +1159,6 @@ const BaseExample = () => {
                 <TextArea.Item name="des" label="说明"/>]}/>
         });
     }}>点击弹出popup</Button>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 确认对话框
-- 展示确认对话框
-- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
-
-```jsx
-const {Modal, ModalButton, useModal} = miniCore;
-const {useState} = React;
-const {Button} = antd;
-
-const ExampleUseModal = () => {
-    const modal = useModal();
-    return <Button onClick={() => {
-        modal({
-            title: '确认解除微信关联？', content: '解除后，将无法直接通过企业微信发起聊天。'
-        });
-    }}>按钮</Button>;
-};
-const BaseExample = () => {
-    const [open, setOpen] = useState(false);
-    return <>
-        <Button onClick={() => {
-            setOpen(true);
-        }}>按钮</Button>
-        <Modal open={open} onOpenChange={setOpen} title="确认解除微信关联？"
-               content="解除后，将无法直接通过企业微信发起聊天。"/>
-
-        <ModalButton title="确认解除微信关联？" content="解除后，将无法直接通过企业微信发起聊天。">点击弹出</ModalButton>
-        <ExampleUseModal />
-    </>;
 };
 
 render(<BaseExample/>);
