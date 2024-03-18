@@ -371,8 +371,8 @@
       ]
     },
     {
-      "title": "警告提示",
-      "description": "这里填写示例说明",
+      "title": "Warning 警告提示",
+      "description": "Warning 警告提示",
       "code": "./warning.js",
       "scope": [
         {
@@ -380,8 +380,12 @@
           "packageName": "@kne/mini-core"
         },
         {
-          "name": "lodash",
-          "packageName": "lodash"
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
         }
       ]
     }
