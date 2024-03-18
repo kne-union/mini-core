@@ -1,8 +1,8 @@
 {
   "name": "@kne/mini-core",
-  "version": "2.0.28",
+  "version": "2.0.29",
   "dependencies": {
-    "@kne/antd-taro": "^1.0.18",
+    "@kne/antd-taro": "^1.0.28",
     "@kne/compose": "^0.1.0",
     "@kne/global-context": "^1.0.0",
     "@kne/lodash-wechat": "^4.17.21",

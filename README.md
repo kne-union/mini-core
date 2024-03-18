@@ -685,12 +685,15 @@ const {
   InputNumberUnit,
   Upload,
   SubmitButton,
-  useFormContext
+  useFormContext,
+  usePopupForm,
+  TextArea
 } = FormInfo;
 
 const { useRef } = React;
 
 const BaseExample = () => {
+  const popupForm = usePopupForm();
   const listRef = useRef();
   return <Global preset={{
     apis: {
@@ -720,6 +723,26 @@ const BaseExample = () => {
     {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
         <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
     <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>弹出表单</View>
+        <Button onClick={() => {
+          popupForm({
+            title: "新增表单",
+            formProps: {
+              onSubmit: (data) => {
+                console.log(data);
+              }
+            },
+            children: <FormPart list={[
+              <Input.Item name="name" label="姓名" rule="REQ" />,
+              <CalendarTimeRange.Item name="time" label="时间" rule="REQ" />,
+              <CitySelect.Item name="city" label="城市" />,
+              <FunctionSelect.Item name="function" label="职能" />,
+              <TextArea.Item name="des" label="说明" />
+            ]} />
+          });
+        }}>点击弹出popup</Button>
+      </Space>
       <Space direction={"vertical"}>
         <View>基础用法</View>
         <Form
@@ -785,6 +808,15 @@ const BaseExample = () => {
               <SubmitButton>提交</SubmitButton>
             ]}
           />
+        </Form>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>列表</View>
+        <Form
+          onSubmit={(data) => {
+            console.log(data);
+          }}
+        >
           <CommonListTitle
             subtitle="(填写工作经历)"
             extra={<Button fill="none" onClick={() => {
@@ -796,7 +828,7 @@ const BaseExample = () => {
           <FormList
             title="列表1"
             ref={listRef}
-            name="list"
+            name="list1"
             minLength={1}
             list={[
               <Input.Item name="name" label="名称" labelTips="哈哈哈哈" />,
@@ -805,8 +837,8 @@ const BaseExample = () => {
             ]}
           />
           <FormList
-            name="列表2"
-            title="list2"
+            name="list2"
+            title="列表2"
             subtitle="副标题"
             minLength={1}
             itemTitle={({ index }) => `第${index + 1}项`}
@@ -816,6 +848,7 @@ const BaseExample = () => {
               <Input.Item name="field1" label="字段1" />
             ]}
           />
+          <SubmitButton>提交</SubmitButton>
         </Form>
       </Space>
     </Space>
@@ -1091,42 +1124,14 @@ render(<BaseExample />);
 
 ```
 
-- 状态标签
-- 这里填写示例说明
-- miniCore(@kne/mini-core),lodash(lodash)
-
-```jsx
-const {StateTag} = miniCore;
-const BaseExample = () => {
-    return <StateTag type="primary">哈哈哈</StateTag>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 警告提示
-- 这里填写示例说明
-- miniCore(@kne/mini-core),lodash(lodash)
-
-```jsx
-const {Warning} = miniCore;
-const BaseExample = () => {
-    return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- popup里面的表单
-- 展示popup里面的表单组件
+- Popup Form 弹出表单页面
+- Popup Form 展示popup里面的表单组件
 - miniCore(@kne/mini-core),lodash(lodash),antd(@kne/antd-taro)
 
 ```jsx
-const {FormInfo, HeaderContainer, FixView} = miniCore;
+const {FormInfo, HeaderContainer} = miniCore;
 const {range} = lodash;
-const {Button, Popup, NavBar} = antd;
+const {Button, Popup} = antd;
 
 const {useState} = React;
 
@@ -1165,84 +1170,318 @@ render(<BaseExample/>);
 
 ```
 
-- 弹出页面
-- 弹出页面
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
+- Popup View 弹出页面
+- Popup View 弹出页面
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
 
 ```jsx
-const {usePopupView, FormInfo, FixedView, CommonListTitle, Warning} = miniCore;
-const {Button} = antd;
+const { usePopupView, FormInfo, FixedView, CommonListTitle, Warning } = miniCore;
+const { Space, Button } = antd;
+const { Text } = tarojsComponents;
 
 const {
-    Form,
-    FormList,
-    FormPart,
-    Input,
-    TextArea,
-    CalendarTimeRange,
-    CitySelect,
-    IndustrySelect,
-    FunctionSelect,
-    SubmitButton,
+  Form,
+  FormList,
+  FormPart,
+  Input,
+  TextArea,
+  CalendarTimeRange,
+  CitySelect,
+  IndustrySelect,
+  FunctionSelect,
+  SubmitButton
 } = FormInfo;
 
-const {useRef} = React;
+const { useRef } = React;
 
-const BaseExample = () => {
-    const popupView = usePopupView();
-    const listRef = useRef();
-    return <Button onClick={() => {
-        const {close} = popupView({
-            className: 'bg-grey', title: '欢迎页面', children: <Form onSubmit={(data) => {
-                console.log(data);
-                close();
-            }}>
-                <Warning>警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示</Warning>
-                <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ"/>,
-                    <CalendarTimeRange.Item name="time" label="时间" rule="REQ"/>,
-                    <CitySelect.Item name="city" label="城市"/>, <FunctionSelect.Item name="function" label="职能"/>,
-                    <IndustrySelect.Item name="industry" label="行业选择" multiple/>,
-                    <TextArea.Item name="des" label="说明"/>]}/>
-                <CommonListTitle subtitle="(填写工作经历)" extra={<Button onClick={() => {
-                    listRef.current.add();
-                }}>添加</Button>}>工作经历</CommonListTitle>
-                <FormList ref={listRef} name="list" minLength={1}
-                          list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈哈哈"/>, <Input.Item name="field0" label="字段"/>,
-                              <Input.Item name="field1" label="字段1"/>]}/>
-                <Button onClick={() => {
-                    popupView({
-                        title: '下一个页面',
-                        children: '下一个页面下一个页面下一个页面下一个页面下一个页面',
-                        hasSafeArea: true,
-                    });
-                }}>点击弹出下一个页面</Button>
-                <FixedView>
-                    <SubmitButton>提交</SubmitButton>
-                </FixedView>
-            </Form>
-        });
-    }}>点击弹出</Button>;
+const PopupViewButton = ({ position }) => {
+  const popupView = usePopupView({ position });
+  return (
+    <Button key={position} onClick={() => {
+      popupView({
+        title: position,
+        children: <Text>从{position}弹出</Text>
+      });
+    }}>从{position}弹出</Button>
+  );
 };
 
-render(<BaseExample/>);
+const BaseExample = () => {
+  const popupView = usePopupView();
+  const listRef = useRef();
+  return (
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <Text>基础用法</Text>
+        <Button onClick={() => {
+          popupView({
+            title: "基础用法",
+            children: <Text>基础用法弹窗</Text>
+          });
+        }}>点击弹出</Button>
+      </Space>
+      <Space direction={"vertical"}>
+        <Text>自定义弹出方向</Text>
+        <Space wrap>
+          {
+            ["center", "top", "bottom", "left", "right"].map(position => (
+              <PopupViewButton key={position} position={position} />
+            ))
+          }
+        </Space>
+      </Space>
+      <Space direction={"vertical"}>
+        <Text>联合表单</Text>
+        <Button onClick={() => {
+          const { close } = popupView({
+            className: "bg-grey", title: "欢迎页面", children: <Form onSubmit={(data) => {
+              console.log(data);
+              close();
+            }}>
+              <Warning>警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示警告提示</Warning>
+              <FormPart list={[<Input.Item name="name" label="姓名" rule="REQ" />,
+                <CalendarTimeRange.Item name="time" label="时间" rule="REQ" />,
+                <CitySelect.Item name="city" label="城市" />, <FunctionSelect.Item name="function" label="职能" />,
+                <IndustrySelect.Item name="industry" label="行业选择" multiple />,
+                <TextArea.Item name="des" label="说明" />]} />
+              <CommonListTitle subtitle="(填写工作经历)" extra={<Button onClick={() => {
+                listRef.current.add();
+              }}>添加</Button>}>工作经历</CommonListTitle>
+              <FormList ref={listRef} name="list" minLength={1}
+                        list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈哈哈" />,
+                          <Input.Item name="field0" label="字段" />,
+                          <Input.Item name="field1" label="字段1" />]} />
+              <Button onClick={() => {
+                popupView({
+                  title: "下一个页面",
+                  children: "下一个页面下一个页面下一个页面下一个页面下一个页面",
+                  hasSafeArea: true
+                });
+              }}>点击弹出下一个页面</Button>
+              <FixedView>
+                <SubmitButton>提交</SubmitButton>
+              </FixedView>
+            </Form>
+          });
+        }}>点击弹出</Button>
+      </Space>
+    </Space>
+  );
+};
+
+render(<BaseExample />);
 
 ```
 
-- 表格
-- 表格
-- miniCore(@kne/mini-core),antd(@kne/antd-taro)
+- StateTag 状态标签
+- StateTag 状态标签
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
 
 ```jsx
-const {Table} = miniCore;
+const { StateTag } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+
 const BaseExample = () => {
-    return <Table dataSource={[{
-        id: 1, name: '哈哈哈', count: 12
-    }, {
-        id: 2, name: '张三', count: 200
-    }]} columns={[{name: 'name', title: '名称'}, {name: 'count', title: '数量'}]}/>;
+  return (
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <StateTag type="primary">哈哈哈</StateTag>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>不同类型</View>
+        <Space wrap>
+          {
+            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
+              <StateTag key={type} type={type}>{type}</StateTag>
+            ))
+          }
+        </Space>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>不展示背景色</View>
+        <Space wrap>
+          {
+            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
+              <StateTag key={type} type={type} showBackground={false}>{type}</StateTag>
+            ))
+          }
+        </Space>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>展示边框</View>
+        <Space wrap>
+          {
+            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
+              <StateTag key={type} type={type} showBorder>{type}</StateTag>
+            ))
+          }
+        </Space>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>文案传值</View>
+        <Space wrap>
+          {
+            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
+              <StateTag key={type} type={type} showBorder text={type} />
+            ))
+          }
+        </Space>
+      </Space>
+    </Space>
+  );
 };
 
-render(<BaseExample/>);
+render(<BaseExample />);
+
+```
+
+- Table 表格
+- Table 表格
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Table } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+
+const dataSource = [
+  { id: 1, name: "哈哈哈", count: 12 },
+  { id: 2, name: "张三", count: 200 },
+  { id: 3, name: "李四", count: 100 }
+];
+
+const columns = [
+  { name: "name", title: "名称" },
+  { name: "count", title: "数量" }
+];
+
+const BaseExample = () => {
+  return (
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <Table dataSource={dataSource} columns={columns} />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>多列</View>
+        <Table
+          dataSource={dataSource}
+          columns={[{ name: "id", title: "ID" }].concat(columns)}
+        />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>自定义rowKey</View>
+        <Table rowKey={"name"} dataSource={dataSource} columns={columns} />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>自定义列渲染</View>
+        <Table
+          dataSource={dataSource}
+          columns={[{
+            name: "id",
+            title: "ID",
+            render: (record, {dataSource, column}) => {
+              console.log(record, dataSource, column);
+              return record.id + '-' +  record.name
+            }
+          }].concat(columns)}
+        />
+      </Space>
+    </Space>
+  );
+};
+
+render(<BaseExample />);
+
+```
+
+- TipsMessage 提示信息
+- TipsMessage 提示信息
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { TipsMessage } = miniCore;
+const { Space, Icon } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return (
+    <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>基础用法</View>
+        <TipsMessage
+          content={"客户下任一合同包含Hands-off条款，该客户即受Hands-off限制。默认按照最严格的赔偿责任及条款描述提交审批。"}
+          title={"Hands-off信息"}
+        />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>自定义弹窗 Title 图标</View>
+        <TipsMessage
+          content={"客户下任一合同包含Hands-off条款，该客户即受Hands-off限制。默认按照最严格的赔偿责任及条款描述提交审批。"}
+          title={"Hands-off信息"}
+          icon={<Icon type="tabzhiwei-xuanzhong" className={'iconfont'} />}
+        />
+      </Space>
+      <Space direction={"vertical"}>
+        <View>取消确认按钮</View>
+        <TipsMessage
+          content={"客户下任一合同包含Hands-off条款，该客户即受Hands-off限制。默认按照最严格的赔偿责任及条款描述提交审批。"}
+          title={"Hands-off信息"}
+          cancel={{ span: 10, text: "Cancel" }}
+          confirm={{ span: 14, text: "Confirm" }}
+        />
+      </Space>
+    </Space>
+  );
+};
+
+render(<BaseExample />);
+
+```
+
+- Warning 警告提示
+- Warning 警告提示
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { Warning } = miniCore;
+const { Space } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  return (
+    <Space direction={'vertical'} size={30}>
+      <Space direction={'vertical'}>
+        <View>基础用法</View>
+        <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
+      </Space>
+      <Space direction={'vertical'}>
+        <View>不同类型</View>
+        <Space direction={'vertical'}>
+          {
+            ['success', 'info', 'error', 'warning', ].map(type => (
+              <Warning key={type} type={type}>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
+            ))
+          }
+        </Space>
+      </Space>
+      <Space direction={'vertical'}>
+        <View>文字颜色根据类型改变</View>
+        <Space direction={'vertical'}>
+          {
+            ['success', 'info', 'error', 'warning', ].map(type => (
+              <Warning key={type} type={type} fontColorful>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
+            ))
+          }
+        </Space>
+      </Space>
+    </Space>
+  );
+};
+
+render(<BaseExample />);
 
 ```
 

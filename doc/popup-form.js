@@ -1,6 +1,6 @@
-const {FormInfo, HeaderContainer, FixView} = miniCore;
+const {FormInfo, HeaderContainer} = miniCore;
 const {range} = lodash;
-const {Button, Popup, NavBar} = antd;
+const {Button, Popup} = antd;
 
 const {useState} = React;
 
