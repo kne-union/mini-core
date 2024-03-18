@@ -327,8 +327,12 @@
           "packageName": "@kne/mini-core"
         },
         {
-          "name": "lodash",
-          "packageName": "lodash"
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
         }
       ]
     },

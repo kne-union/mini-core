@@ -10,7 +10,7 @@ const BaseExample = () => {
         <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
       </Space>
       <Space direction={'vertical'}>
-        <View>类型</View>
+        <View>不同类型</View>
         <Space direction={'vertical'}>
           {
             ['success', 'info', 'error', 'warning', ].map(type => (
