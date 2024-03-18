@@ -1,5 +1,5 @@
 import React, {useId} from 'react';
-import ScrollHeader from '../../Common/ScrollHeader';
+import { ScrollHeader } from '@kne/antd-taro';
 import style from './style.module.scss';
 import {View} from "@tarojs/components";
 import classnames from 'classnames';
