@@ -352,6 +352,25 @@
       ]
     },
     {
+      "title": "TipsMessage 提示信息",
+      "description": "TipsMessage 提示信息",
+      "code": "./tips-message.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "警告提示",
       "description": "这里填写示例说明",
       "code": "./warning.js",
