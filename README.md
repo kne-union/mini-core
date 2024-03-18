@@ -685,12 +685,15 @@ const {
   InputNumberUnit,
   Upload,
   SubmitButton,
-  useFormContext
+  useFormContext,
+  usePopupForm,
+  TextArea
 } = FormInfo;
 
 const { useRef } = React;
 
 const BaseExample = () => {
+  const popupForm = usePopupForm();
   const listRef = useRef();
   return <Global preset={{
     apis: {
@@ -720,6 +723,26 @@ const BaseExample = () => {
     {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
         <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
     <Space direction={"vertical"} size={30}>
+      <Space direction={"vertical"}>
+        <View>弹出表单</View>
+        <Button onClick={() => {
+          popupForm({
+            title: "新增表单",
+            formProps: {
+              onSubmit: (data) => {
+                console.log(data);
+              }
+            },
+            children: <FormPart list={[
+              <Input.Item name="name" label="姓名" rule="REQ" />,
+              <CalendarTimeRange.Item name="time" label="时间" rule="REQ" />,
+              <CitySelect.Item name="city" label="城市" />,
+              <FunctionSelect.Item name="function" label="职能" />,
+              <TextArea.Item name="des" label="说明" />
+            ]} />
+          });
+        }}>点击弹出popup</Button>
+      </Space>
       <Space direction={"vertical"}>
         <View>基础用法</View>
         <Form
@@ -785,6 +808,15 @@ const BaseExample = () => {
               <SubmitButton>提交</SubmitButton>
             ]}
           />
+        </Form>
+      </Space>
+      <Space direction={"vertical"}>
+        <View>列表</View>
+        <Form
+          onSubmit={(data) => {
+            console.log(data);
+          }}
+        >
           <CommonListTitle
             subtitle="(填写工作经历)"
             extra={<Button fill="none" onClick={() => {
@@ -796,7 +828,7 @@ const BaseExample = () => {
           <FormList
             title="列表1"
             ref={listRef}
-            name="list"
+            name="list1"
             minLength={1}
             list={[
               <Input.Item name="name" label="名称" labelTips="哈哈哈哈" />,
@@ -805,8 +837,8 @@ const BaseExample = () => {
             ]}
           />
           <FormList
-            name="列表2"
-            title="list2"
+            name="list2"
+            title="列表2"
             subtitle="副标题"
             minLength={1}
             itemTitle={({ index }) => `第${index + 1}项`}
@@ -816,6 +848,7 @@ const BaseExample = () => {
               <Input.Item name="field1" label="字段1" />
             ]}
           />
+          <SubmitButton>提交</SubmitButton>
         </Form>
       </Space>
     </Space>
@@ -1091,42 +1124,14 @@ render(<BaseExample />);
 
 ```
 
-- 状态标签
-- 这里填写示例说明
-- miniCore(@kne/mini-core),lodash(lodash)
-
-```jsx
-const {StateTag} = miniCore;
-const BaseExample = () => {
-    return <StateTag type="primary">哈哈哈</StateTag>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- 警告提示
-- 这里填写示例说明
-- miniCore(@kne/mini-core),lodash(lodash)
-
-```jsx
-const {Warning} = miniCore;
-const BaseExample = () => {
-    return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
-};
-
-render(<BaseExample/>);
-
-```
-
-- popup里面的表单
-- 展示popup里面的表单组件
+- Popup Form 弹出表单页面
+- Popup Form 展示popup里面的表单组件
 - miniCore(@kne/mini-core),lodash(lodash),antd(@kne/antd-taro)
 
 ```jsx
-const {FormInfo, HeaderContainer, FixView} = miniCore;
+const {FormInfo, HeaderContainer} = miniCore;
 const {range} = lodash;
-const {Button, Popup, NavBar} = antd;
+const {Button, Popup} = antd;
 
 const {useState} = React;
 
@@ -1165,8 +1170,8 @@ render(<BaseExample/>);
 
 ```
 
-- 弹出页面
-- 弹出页面
+- Popup View 弹出页面
+- Popup View 弹出页面
 - miniCore(@kne/mini-core),antd(@kne/antd-taro)
 
 ```jsx
@@ -1222,6 +1227,34 @@ const BaseExample = () => {
             </Form>
         });
     }}>点击弹出</Button>;
+};
+
+render(<BaseExample/>);
+
+```
+
+- 状态标签
+- 这里填写示例说明
+- miniCore(@kne/mini-core),lodash(lodash)
+
+```jsx
+const {StateTag} = miniCore;
+const BaseExample = () => {
+    return <StateTag type="primary">哈哈哈</StateTag>;
+};
+
+render(<BaseExample/>);
+
+```
+
+- 警告提示
+- 这里填写示例说明
+- miniCore(@kne/mini-core),lodash(lodash)
+
+```jsx
+const {Warning} = miniCore;
+const BaseExample = () => {
+    return <Warning>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>;
 };
 
 render(<BaseExample/>);

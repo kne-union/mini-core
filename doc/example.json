@@ -280,6 +280,40 @@
       ]
     },
     {
+      "title": "Popup Form 弹出表单页面",
+      "description": "Popup Form 展示popup里面的表单组件",
+      "code": "./popup-form.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "lodash",
+          "packageName": "lodash"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
+    },
+    {
+      "title": "Popup View 弹出页面",
+      "description": "Popup View 弹出页面",
+      "code": "./popup-view.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        }
+      ]
+    },
+    {
       "title": "状态标签",
       "description": "这里填写示例说明",
       "code": "./base.js",
@@ -306,40 +340,6 @@
         {
           "name": "lodash",
           "packageName": "lodash"
-        }
-      ]
-    },
-    {
-      "title": "popup里面的表单",
-      "description": "展示popup里面的表单组件",
-      "code": "./popup-form.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "lodash",
-          "packageName": "lodash"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
-        }
-      ]
-    },
-    {
-      "title": "弹出页面",
-      "description": "弹出页面",
-      "code": "./popup-view.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
         }
       ]
     },
