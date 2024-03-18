@@ -333,6 +333,25 @@
       ]
     },
     {
+      "title": "Table 表格",
+      "description": "Table 表格",
+      "code": "./table.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "警告提示",
       "description": "这里填写示例说明",
       "code": "./warning.js",
@@ -344,21 +363,6 @@
         {
           "name": "lodash",
           "packageName": "lodash"
-        }
-      ]
-    },
-    {
-      "title": "表格",
-      "description": "表格",
-      "code": "./table.js",
-      "scope": [
-        {
-          "name": "miniCore",
-          "packageName": "@kne/mini-core"
-        },
-        {
-          "name": "antd",
-          "packageName": "@kne/antd-taro"
         }
       ]
     }
