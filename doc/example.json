@@ -310,6 +310,10 @@
         {
           "name": "antd",
           "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
         }
       ]
     },
