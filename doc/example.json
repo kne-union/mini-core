@@ -318,9 +318,9 @@
       ]
     },
     {
-      "title": "状态标签",
-      "description": "这里填写示例说明",
-      "code": "./base.js",
+      "title": "StateTag 状态标签",
+      "description": "StateTag 状态标签",
+      "code": "./state-tag.js",
       "scope": [
         {
           "name": "miniCore",

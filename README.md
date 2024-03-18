@@ -1273,17 +1273,18 @@ render(<BaseExample />);
 
 ```
 
-- 状态标签
-- 这里填写示例说明
+- StateTag 状态标签
+- StateTag 状态标签
 - miniCore(@kne/mini-core),lodash(lodash)
 
 ```jsx
-const {StateTag} = miniCore;
+const { StateTag } = miniCore;
+
 const BaseExample = () => {
-    return <StateTag type="primary">哈哈哈</StateTag>;
+  return <StateTag type="primary">哈哈哈</StateTag>;
 };
 
-render(<BaseExample/>);
+render(<BaseExample />);
 
 ```
 
