@@ -94,6 +94,33 @@
       ]
     },
     {
+      "title": "FetchList 获取并显示列表",
+      "description": "FetchList 获取并显示列表",
+      "code": "./fetch-list.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
+        },
+        {
+          "name": "mockData",
+          "packageName": "@mock"
+        }
+      ]
+    },
+    {
       "title": "Content 信息展示",
       "description": "Content 信息展示",
       "code": "./content.js",
