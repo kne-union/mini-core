@@ -2,7 +2,7 @@
   "isFull": false,
   "list": [
     {
-      "title": "AvatarPreview 头像预览",
+      "title": "AvatarPreview 照片预览",
       "description": "AvatarPreview 头像预览",
       "code": "./avatar-preview.js",
       "scope": [
@@ -48,8 +48,8 @@
       ]
     },
     {
-      "title": "Comment 评论",
-      "description": "Comment 评论",
+      "title": "Comment 评论列表",
+      "description": "Comment 评论列表",
       "code": "./comment.js",
       "scope": [
         {

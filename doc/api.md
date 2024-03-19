@@ -272,10 +272,6 @@ Field.Item
 
 警告文案
 
-### Calendar
-
-日历
-
 ### AvatarPreview 照片预览
 
 | 属性名     | 说明     | 类型                                | 默认值 |
@@ -283,7 +279,20 @@ Field.Item
 | value   | 头像链接   | string                            | -   |
 | onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
 
+### Calendar
+
+日历
+
 ### Comment 评论列表
+
+| 属性名        | 说明      | 类型                  | 默认值                   |
+|------------|---------|---------------------|-----------------------|
+| user       | 行为用户    | {name: string}      | {}                    |
+| title      | 列表标题    | string              | '添加了评论'               |
+| time       | 列表时间    | PickerDate          | -                     |
+| timeFormat | 列表时间格式  | string              | 'YYYY-MM-DD HH:mm:ss' |
+| action     | 列表项动作按钮 | ReactNode           | -                     |
+| extra      | 列表项右侧区域 | ReactNode \| string | -                     |
 
 ### Table
 
