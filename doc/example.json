@@ -368,6 +368,25 @@
       ]
     },
     {
+      "title": "ScrollLoader 滚动加载",
+      "description": "ScrollLoader 滚动加载",
+      "code": "./scroll-loader.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        }
+      ]
+    },
+    {
       "title": "StateTag 状态标签",
       "description": "StateTag 状态标签",
       "code": "./state-tag.js",
