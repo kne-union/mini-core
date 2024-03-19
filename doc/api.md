@@ -133,8 +133,8 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 ```js
 const popupForm = usePopupForm();
 
-const {close} = popupForm({
-    title, formProps, children
+const { close } = popupForm({
+  title, formProps, children
 });
 ```
 
@@ -165,7 +165,7 @@ Field.Item
 当Field需要放在FormPart或者List中，需要以此方法形式调用（目前的UI规范规定必须以此种方式调用Field，不推荐直接调用Field）如
 
 ```jsx
-<AdvancedSelect.Item name="name" label="label" rule="rule"/>
+<AdvancedSelect.Item name="name" label="label" rule="rule" />
 ```
 
 #### FormInfo{fields:{AdvancedSelect}}
@@ -232,7 +232,6 @@ Field.Item
 
 权限判断
 
-
 ### Modal
 
 模态对话框
@@ -277,13 +276,14 @@ Field.Item
 
 日历
 
-### AvatarPreview
+### AvatarPreview 照片预览
 
-照片预览
+| 属性名     | 说明     | 类型                                | 默认值 |
+|---------|--------|-----------------------------------|-----|
+| value   | 头像链接   | string                            | -   |
+| onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
 
-### Comment
-
-评论列表
+### Comment 评论列表
 
 ### Table
 
