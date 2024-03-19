@@ -2025,10 +2025,6 @@ Field.Item
 
 文件显示及预览
 
-### Content
-
-内容展示
-
 ### StateTag
 
 状态标签
@@ -2048,9 +2044,7 @@ Field.Item
 | value   | 头像链接   | string                            | -   |
 | onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
 
-### Calendar
-
-日历
+### Calendar 日历
 
 ### Comment 评论列表
 
@@ -2062,6 +2056,26 @@ Field.Item
 | timeFormat | 列表时间格式  | string              | 'YYYY-MM-DD HH:mm:ss' |
 | action     | 列表项动作按钮 | ReactNode           | -                     |
 | extra      | 列表项右侧区域 | ReactNode \| string | -                     |
+
+### Content 内容展示
+
+#### 属性
+
+| 属性名   | 说明      | 类型                  | 默认值 |
+|-------|---------|---------------------|-----|
+| empty | 数据为空时展示 | ReactNode \| string | '-' |
+| list  | 每条内容数据  | ContentItem[]       | []  |
+
+#### ContentItem
+
+| 属性名     | 说明             | 类型                    | 默认值 |
+|---------|----------------|-----------------------|-----|
+| display | 数据为空时展示        | boolean \| () => void | -   |
+| label   | 内容标题文案         | ReactNode \| string   | -   |
+| content | 内容数据           | ReactNode \| string   | -   |
+| block   | 是否将内容数据渲染为块级元素 | boolean               | -   |
+| tips    | 文案提示           | ReactNode \| string   | -   |
+| action  | 单条内容动作         | ReactNode             | -   |
 
 ### Table
 
