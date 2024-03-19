@@ -108,7 +108,7 @@ components内的组件命名尽量可以看出派生关系和业务所属。
 
 #### 示例代码
 
-- AvatarPreview 头像预览
+- AvatarPreview 照片预览
 - AvatarPreview 头像预览
 - miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
 
@@ -279,8 +279,8 @@ render(<BaseExample />);
 
 ```
 
-- Comment 评论
-- Comment 评论
+- Comment 评论列表
+- Comment 评论列表
 - miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
 
 ```jsx
@@ -348,6 +348,233 @@ const BaseExample = () => {
 };
 
 render(<BaseExample />);
+
+```
+
+- Common 通用组件
+- Common 通用组件
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro)
+
+```jsx
+const {
+  CommonIsJSON: isJSON,
+  CommonAutoComplete,
+  CommonFileList,
+  CommonListTitle,
+  CommonLoadingView,
+  CommonSelectedFooter,
+  CommonSelectedLabel,
+} = miniCore;
+const { Space, Icon } = antd;
+const { View } = tarojsComponents;
+const { showToast } = tarojsTaro;
+
+const data = "data";
+const dataJson = {
+  "title": "Warning 警告提示",
+  "description": "Warning 警告提示",
+  "code": "./warning.js",
+  "scope": [
+    {
+      "name": "miniCore",
+      "packageName": "@kne/mini-core"
+    },
+    {
+      "name": "antd",
+      "packageName": "@kne/antd-taro"
+    },
+    {
+      "name": "tarojsComponents",
+      "packageName": "@tarojs/components"
+    }
+  ]
+};
+
+const fileList = [
+  { fileName: "file1", id: "1" },
+  { originalName: "file2", id: "2" }
+];
+
+const SubTitle = ({ children }) => {
+  return <View style="font-size: 16px">{children}</View>;
+};
+
+const BaseExample = () => {
+  return <Space direction="vertical" size={30}>
+    <Space direction="vertical">
+      <View>CommonIsJSON</View>
+      <Space direction="vertical">
+        <View>{(!!isJSON(data)).toString()}</View>
+        <View>{(!!isJSON(dataJson)).toString()}</View>
+      </Space>
+    </Space>
+    <Space direction="vertical">
+      <View>AutoComplete</View>
+      <SubTitle>输入框自动完成功能。</SubTitle>
+      <CommonAutoComplete placeholder={"AutoComplete--"} />
+    </Space>
+    <Space direction="vertical">
+      <View>FileList</View>
+      <SubTitle>基础用法</SubTitle>
+      <CommonFileList list={fileList} />
+      <SubTitle>可删除</SubTitle>
+      <CommonFileList
+        list={fileList}
+        apis={{
+          onDelete: ({ id, fileName, originalName }) => {
+            showToast({
+              icon: "none",
+              title: `ID为${id}的文件${fileName || originalName}被点击删除...`
+            });
+          }
+        }}
+      />
+    </Space>
+    <Space direction="vertical">
+      <View>ListTitle</View>
+      <Space direction={"vertical"}>
+        <SubTitle>基础用法</SubTitle>
+        <CommonListTitle>标题</CommonListTitle>
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>副标题</SubTitle>
+        <CommonListTitle subtitle={"副标题"}>标题</CommonListTitle>
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>extra</SubTitle>
+        <CommonListTitle
+          subtitle={"副标题"}
+          extra={<Icon
+            type="arrow-bold-right"
+            className="iconfont nav-bar-icon"
+            onClick={() => {
+              showToast({ icon: "none", title: "点击 Extra" });
+            }}
+          />}
+        >
+          标题
+        </CommonListTitle>
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>内标题</SubTitle>
+        <CommonListTitle subtitle={"副标题"} isSubheading>标题</CommonListTitle>
+      </Space>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>LoadingView</View>
+      <Space direction={"vertical"}>
+        <SubTitle>基础用法</SubTitle>
+        <CommonLoadingView />
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>自定义加载文案</SubTitle>
+        <CommonLoadingView>CommonLoadingView...</CommonLoadingView>
+      </Space>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>SelectedFooter</View>
+      <Space direction={"vertical"}>
+        <SubTitle>基础用法</SubTitle>
+        <CommonSelectedFooter />
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>修改底部按钮文案</SubTitle>
+        <CommonSelectedFooter confirmText={"Confirm"} resetText={"Cancel"} />
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>添加按钮事件</SubTitle>
+        <CommonSelectedFooter
+          confirmText={"Confirm"}
+          onConfirm={() => {
+            showToast({icon: 'none', title: 'on click confirm...'})
+          }}
+          resetText={"Reset"}
+          onReset={() => {
+            showToast({icon: 'none', title: 'on click reset...'})
+          }}
+        />
+      </Space>
+      <Space direction={"vertical"}>
+        <SubTitle>只展示一个按钮</SubTitle>
+        <CommonSelectedFooter showReset={false} />
+        <CommonSelectedFooter showConfirm={false} />
+      </Space>
+    </Space>
+    <Space direction={"vertical"}>
+      <View>SelectedLabel</View>
+      <CommonSelectedLabel
+        maxLength={10}
+        value={[{ label: "测试", value: "1" }, { label: "文案", value: "2" }]}
+        onClose={({label, value}) => {
+          showToast({
+            icon: 'none',
+            title: `值为“${value}”、Label为“${label}”的数据被点击删除...`
+          })
+        }}
+      />
+    </Space>
+  </Space>;
+};
+
+render(<BaseExample />);
+
+```
+
+- FetchList 获取并显示列表
+- FetchList 获取并显示列表
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components),tarojsTaro(@tarojs/taro),mockData(@mock)
+
+```jsx
+const { CommonFetchList, Global, usePreset } = miniCore;
+const { Space, Avatar } = antd;
+const { View } = tarojsComponents;
+
+const BaseExample = () => {
+  const { apis } = usePreset();
+  return <Space direction="vertical" size={30}>
+    <Space direction="vertical">
+      <View>基础用法</View>
+      <CommonFetchList showTotalCount {...apis.user.getUserList}>
+        {
+          ({ pageData }) => {
+            return (
+              <Space direction="vertical" style={{ padding: "10px 0", boxSizing: "border-box" }}>
+                {
+                  pageData.map(item => (
+                    <Space key={item.id} style={{ border: "1px solid #ddd", padding: "10px", boxSizing: "border-box", width: '100%' }}>
+                      <Avatar gender={item.gender} />
+                      <View>
+                        <View>Name: {[item.name, item.englishName].join("，")}</View>
+                        <View>Gender: {item.gender}</View>
+                        <View>Email: {item.email}</View>
+                      </View>
+                    </Space>
+                  ))
+                }
+              </Space>
+            );
+          }
+        }
+      </CommonFetchList>
+    </Space>
+  </Space>;
+};
+
+render(<Global
+  preset={{
+    apis: {
+      baseURL: "https://erc.test.fatalent.cn",
+      user: {
+        getUserList: {
+          loader: () => {
+            return mockData.userList.data;
+          }
+        }
+      }
+    }
+  }}>
+  <BaseExample />
+</Global>);
 
 ```
 
@@ -1273,6 +1500,58 @@ render(<BaseExample />);
 
 ```
 
+- ScrollLoader 滚动加载
+- ScrollLoader 滚动加载
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
+
+```jsx
+const { CommonScrollLoader } = miniCore;
+const {Space} = antd;
+const {View} = tarojsComponents;
+
+const ScrollLoaderInner = () => {
+  return (
+    <Space direction={'vertical'}>
+      {
+        ['one', 'two'].map(item => (
+          <View key={item} style={{padding: '10px', boxSizing: 'border-box', border: '1px solid #ddd'}}>
+            {item}
+          </View>
+        ))
+      }
+    </Space>
+  )
+}
+
+const BaseExample = () => {
+  return (
+    <Space direction={'vertical'} size={30}>
+      <Space direction={'vertical'}>
+        <View>基础用法</View>
+        <CommonScrollLoader>
+          <ScrollLoaderInner />
+        </CommonScrollLoader>
+      </Space>
+      <Space direction={'vertical'}>
+        <View>加载中</View>
+        <CommonScrollLoader isLoading loadingTips={'正在加载数据...'}>
+          <ScrollLoaderInner />
+        </CommonScrollLoader>
+      </Space>
+      <Space direction={'vertical'}>
+        <View>没有更多数据</View>
+        <CommonScrollLoader noMore completeTips={'加载已完成，没有更多数据了'}>
+          <ScrollLoaderInner />
+        </CommonScrollLoader>
+      </Space>
+    </Space>
+  )
+};
+
+render(<BaseExample />);
+
+```
+
 - StateTag 状态标签
 - StateTag 状态标签
 - miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsComponents(@tarojs/components)
@@ -1508,6 +1787,60 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 |--------|------------|--------|-----|
 | preset | 全局preset设置 | object | {}  |
 
+### AvatarPreview 照片预览
+
+#### 属性
+
+| 属性名     | 说明     | 类型                                | 默认值 |
+|---------|--------|-----------------------------------|-----|
+| value   | 头像链接   | string                            | -   |
+| onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
+
+### Calendar 日历
+
+### Comment 评论列表
+
+#### 属性
+
+| 属性名        | 说明      | 类型                  | 默认值                   |
+|------------|---------|---------------------|-----------------------|
+| user       | 行为用户    | {name: string}      | {}                    |
+| title      | 列表标题    | string              | '添加了评论'               |
+| time       | 列表时间    | PickerDate          | -                     |
+| timeFormat | 列表时间格式  | string              | 'YYYY-MM-DD HH:mm:ss' |
+| action     | 列表项动作按钮 | ReactNode           | -                     |
+| extra      | 列表项右侧区域 | ReactNode \| string | -                     |
+
+### Content 内容展示
+
+#### 属性
+
+| 属性名   | 说明      | 类型                  | 默认值 |
+|-------|---------|---------------------|-----|
+| empty | 数据为空时展示 | ReactNode \| string | '-' |
+| list  | 每条内容数据  | ContentItem[]       | []  |
+
+#### ContentItem
+
+| 属性名     | 说明             | 类型                    | 默认值 |
+|---------|----------------|-----------------------|-----|
+| display | 数据为空时展示        | boolean \| () => void | -   |
+| label   | 内容标题文案         | ReactNode \| string   | -   |
+| content | 内容数据           | ReactNode \| string   | -   |
+| block   | 是否将内容数据渲染为块级元素 | boolean               | -   |
+| tips    | 文案提示           | ReactNode \| string   | -   |
+| action  | 单条内容动作         | ReactNode             | -   |
+
+### Enum 显示或获取枚举值
+
+| 属性名        | 说明                                                                               | 类型                                                     | 默认值                          |
+|------------|----------------------------------------------------------------------------------|--------------------------------------------------------|------------------------------|
+| moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string \| string[]                                     | -                            |
+| name       | 枚举值的key，用来从moduleName的枚举值列表中获取对应key的值，传入该参数时moduleName不能为数组，不传时可以获取到整个枚举列表       | string                                                 | -                            |
+| children   | 获取到枚举值，当组件有name传入时获取name所对应的枚举值，如果没有name传入则获取到整个枚举列表，如果moduleName为数组获取到对应的多个枚举列表 | ({description})=> void \| ({enum1, enum2, ...})=> void | ({description})=>description |
+| loading    | 加载枚举值期间显示内容                                                                      | jsx                                                    | null                         |
+| force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean                                                | false                        |
+
 ### Filter
 
 一般放在页面顶部作为条件筛选
@@ -1571,18 +1904,6 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | onChange         | 折叠面板展开或收起时触发事件                   | function  | -   |
 | items            | 折叠面板内容为{key,title,children}格式的数组 | array     | []  |
 
-### Enum
-
-显示或获取枚举值
-
-| 属性名        | 说明                                                                               | 类型           | 默认值                          |
-|------------|----------------------------------------------------------------------------------|--------------|------------------------------|
-| moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string,array | -                            |
-| name       | 枚举值的key，用来从moduleName的枚举值列表中获取对应key的值，传入该参数时moduleName不能为数组，不传时可以获取到整个枚举列表       | string       | -                            |
-| children   | 获取到枚举值，当组件有name传入时获取name所对应的枚举值，如果没有name传入则获取到整个枚举列表，如果moduleName为数组获取到对应的多个枚举列表 | function     | ({description})=>description |
-| loading    | 加载枚举值期间显示内容                                                                      | jsx          | null                         |
-| force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean      | false                        |
-
 ### FormInfo
 
 ***@kne/react-form-antd-taro*** 的再封装，实现了基本的Form样式和风格，统一和限制了调用方法，使写法更加统一规范，实现了一些复杂选择数据的Field组件
@@ -1623,8 +1944,8 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 ```js
 const popupForm = usePopupForm();
 
-const {close} = popupForm({
-    title, formProps, children
+const { close } = popupForm({
+  title, formProps, children
 });
 ```
 
@@ -1655,7 +1976,7 @@ Field.Item
 当Field需要放在FormPart或者List中，需要以此方法形式调用（目前的UI规范规定必须以此种方式调用Field，不推荐直接调用Field）如
 
 ```jsx
-<AdvancedSelect.Item name="name" label="label" rule="rule"/>
+<AdvancedSelect.Item name="name" label="label" rule="rule" />
 ```
 
 #### FormInfo{fields:{AdvancedSelect}}
@@ -1722,7 +2043,6 @@ Field.Item
 
 权限判断
 
-
 ### Modal
 
 模态对话框
@@ -1747,10 +2067,6 @@ Field.Item
 
 文件显示及预览
 
-### Content
-
-内容展示
-
 ### StateTag
 
 状态标签
@@ -1762,18 +2078,6 @@ Field.Item
 ### Warning
 
 警告文案
-
-### Calendar
-
-日历
-
-### AvatarPreview
-
-照片预览
-
-### Comment
-
-评论列表
 
 ### Table
 
