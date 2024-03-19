@@ -71,6 +71,29 @@
       ]
     },
     {
+      "title": "Common 通用组件",
+      "description": "Common 通用组件",
+      "code": "./common.js",
+      "scope": [
+        {
+          "name": "miniCore",
+          "packageName": "@kne/mini-core"
+        },
+        {
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsComponents",
+          "packageName": "@tarojs/components"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
+        }
+      ]
+    },
+    {
       "title": "Content 信息展示",
       "description": "Content 信息展示",
       "code": "./content.js",
