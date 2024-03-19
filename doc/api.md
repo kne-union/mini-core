@@ -18,6 +18,60 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 |--------|------------|--------|-----|
 | preset | 全局preset设置 | object | {}  |
 
+### AvatarPreview 照片预览
+
+#### 属性
+
+| 属性名     | 说明     | 类型                                | 默认值 |
+|---------|--------|-----------------------------------|-----|
+| value   | 头像链接   | string                            | -   |
+| onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
+
+### Calendar 日历
+
+### Comment 评论列表
+
+#### 属性
+
+| 属性名        | 说明      | 类型                  | 默认值                   |
+|------------|---------|---------------------|-----------------------|
+| user       | 行为用户    | {name: string}      | {}                    |
+| title      | 列表标题    | string              | '添加了评论'               |
+| time       | 列表时间    | PickerDate          | -                     |
+| timeFormat | 列表时间格式  | string              | 'YYYY-MM-DD HH:mm:ss' |
+| action     | 列表项动作按钮 | ReactNode           | -                     |
+| extra      | 列表项右侧区域 | ReactNode \| string | -                     |
+
+### Content 内容展示
+
+#### 属性
+
+| 属性名   | 说明      | 类型                  | 默认值 |
+|-------|---------|---------------------|-----|
+| empty | 数据为空时展示 | ReactNode \| string | '-' |
+| list  | 每条内容数据  | ContentItem[]       | []  |
+
+#### ContentItem
+
+| 属性名     | 说明             | 类型                    | 默认值 |
+|---------|----------------|-----------------------|-----|
+| display | 数据为空时展示        | boolean \| () => void | -   |
+| label   | 内容标题文案         | ReactNode \| string   | -   |
+| content | 内容数据           | ReactNode \| string   | -   |
+| block   | 是否将内容数据渲染为块级元素 | boolean               | -   |
+| tips    | 文案提示           | ReactNode \| string   | -   |
+| action  | 单条内容动作         | ReactNode             | -   |
+
+### Enum 显示或获取枚举值
+
+| 属性名        | 说明                                                                               | 类型                                                     | 默认值                          |
+|------------|----------------------------------------------------------------------------------|--------------------------------------------------------|------------------------------|
+| moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string \| string[]                                     | -                            |
+| name       | 枚举值的key，用来从moduleName的枚举值列表中获取对应key的值，传入该参数时moduleName不能为数组，不传时可以获取到整个枚举列表       | string                                                 | -                            |
+| children   | 获取到枚举值，当组件有name传入时获取name所对应的枚举值，如果没有name传入则获取到整个枚举列表，如果moduleName为数组获取到对应的多个枚举列表 | ({description})=> void \| ({enum1, enum2, ...})=> void | ({description})=>description |
+| loading    | 加载枚举值期间显示内容                                                                      | jsx                                                    | null                         |
+| force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean                                                | false                        |
+
 ### Filter
 
 一般放在页面顶部作为条件筛选
@@ -80,18 +134,6 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | defaultActiveKey | 打开的折叠面板key,在需要非受控时使用             | array,any | -   |
 | onChange         | 折叠面板展开或收起时触发事件                   | function  | -   |
 | items            | 折叠面板内容为{key,title,children}格式的数组 | array     | []  |
-
-### Enum
-
-显示或获取枚举值
-
-| 属性名        | 说明                                                                               | 类型           | 默认值                          |
-|------------|----------------------------------------------------------------------------------|--------------|------------------------------|
-| moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string,array | -                            |
-| name       | 枚举值的key，用来从moduleName的枚举值列表中获取对应key的值，传入该参数时moduleName不能为数组，不传时可以获取到整个枚举列表       | string       | -                            |
-| children   | 获取到枚举值，当组件有name传入时获取name所对应的枚举值，如果没有name传入则获取到整个枚举列表，如果moduleName为数组获取到对应的多个枚举列表 | function     | ({description})=>description |
-| loading    | 加载枚举值期间显示内容                                                                      | jsx          | null                         |
-| force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean      | false                        |
 
 ### FormInfo
 
@@ -267,46 +309,6 @@ Field.Item
 ### Warning
 
 警告文案
-
-### AvatarPreview 照片预览
-
-| 属性名     | 说明     | 类型                                | 默认值 |
-|---------|--------|-----------------------------------|-----|
-| value   | 头像链接   | string                            | -   |
-| onClick | 头像点击事件 | (event: React.MouseEvent) => void | -   |
-
-### Calendar 日历
-
-### Comment 评论列表
-
-| 属性名        | 说明      | 类型                  | 默认值                   |
-|------------|---------|---------------------|-----------------------|
-| user       | 行为用户    | {name: string}      | {}                    |
-| title      | 列表标题    | string              | '添加了评论'               |
-| time       | 列表时间    | PickerDate          | -                     |
-| timeFormat | 列表时间格式  | string              | 'YYYY-MM-DD HH:mm:ss' |
-| action     | 列表项动作按钮 | ReactNode           | -                     |
-| extra      | 列表项右侧区域 | ReactNode \| string | -                     |
-
-### Content 内容展示
-
-#### 属性
-
-| 属性名   | 说明      | 类型                  | 默认值 |
-|-------|---------|---------------------|-----|
-| empty | 数据为空时展示 | ReactNode \| string | '-' |
-| list  | 每条内容数据  | ContentItem[]       | []  |
-
-#### ContentItem
-
-| 属性名     | 说明             | 类型                    | 默认值 |
-|---------|----------------|-----------------------|-----|
-| display | 数据为空时展示        | boolean \| () => void | -   |
-| label   | 内容标题文案         | ReactNode \| string   | -   |
-| content | 内容数据           | ReactNode \| string   | -   |
-| block   | 是否将内容数据渲染为块级元素 | boolean               | -   |
-| tips    | 文案提示           | ReactNode \| string   | -   |
-| action  | 单条内容动作         | ReactNode             | -   |
 
 ### Table
 
