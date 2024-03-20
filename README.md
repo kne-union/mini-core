@@ -1283,23 +1283,21 @@ const BaseExample = () => {
   return <Layout
     hasSafeArea
     toolbarList={[{
-      key: '/pages/index/index',
-      icon: (active) => active ? <Icon type="tabgongzuotai-xuanzhong" className={'iconfont'}/> :
-        <Icon type="tabgongzuotai-moren" className={'iconfont'}/>,
-      title: '首页',
-      pagePath: '/pages/index/index'
+      key: "/pages/index/index",
+      icon: (active) => active ? <Icon type="tabgongzuotai-xuanzhong" className={"iconfont"} /> :
+        <Icon type="tabgongzuotai-moren" className={"iconfont"} />,
+      title: "首页"
     }, {
-      key: '/pages/components/index',
-      icon: (active) => active ? <Icon type="tabzhiwei-xuanzhong" className={'iconfont'}/> :
-        <Icon type="tabzhiwei-moren" className={'iconfont'}/>,
-      title: '组件示例',
-      pagePath: '/pages/components/index'
+      key: "/pages/components/index",
+      icon: (active) => active ? <Icon type="tabzhiwei-xuanzhong" className={"iconfont"} /> :
+        <Icon type="tabzhiwei-moren" className={"iconfont"} />,
+      title: "组件示例"
     }]}
     header={{
       title: "layout",
-      bgColor: '#ff8f1f',
+      bgColor: "#ff8f1f",
       extra: <View>extra</View>,
-      backArrow: <Icon type="arrow-bold-left" className="iconfont nav-bar-icon"/>
+      backArrow: <Icon type="arrow-bold-left" className="iconfont nav-bar-icon" />
     }}
   >
     哈哈哈
@@ -1922,73 +1920,6 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | fixBottomExtra | 固定在底部的额外显示 | ReactNode | -     |
 | className      | 自定义类名      | string    | -     |
 
-### HeaderContainer 导航头
-
-#### 属性
-
-| 属性名            | 说明                      | 类型                       | 默认值 |
-|----------------|-------------------------|--------------------------|-----|
-| bgColor        | 背景色                     | string                   | -   |
-| extra          | 额外展示的内容                 | ReactNode                | -   |
-| onHeightChange | 当HeaderContainer高度改变时触发 | (height: number) => void | -   |
-
-### HighLight 文字高亮
-
-#### 属性
-
-| 属性名       | 说明         | 类型     | 默认值  |
-|-----------|------------|--------|------|
-| text      | 高亮区域内所有的内容 | string | -    |
-| tagName   | 高亮关键字包裹Tag | string | Text |
-| className | 自定义类名      | string | -    |
-
-#### HighLightProvider
-
-#### 属性
-
-| 属性名                | 说明       | 类型      | 默认值  |
-|--------------------|----------|---------|------|
-| keyword            | 需要高亮度关键字 | string  | -    |
-| caseSensitive      | 区分大小写    | boolean | true |
-| highlightClassName | 自定义类名    | string  | -    |
-
-### InfoPage 显示复杂数据
-
-#### 属性
-
-| 属性名       | 说明    | 类型     | 默认值 |
-|-----------|-------|--------|-----|
-| className | 自定义类名 | string | -   |
-
-#### InfoPage.Part 带标题内容
-
-放置于InfoPage内部显示，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
-
-| 属性名   | 说明             | 类型     | 默认值 |
-|-------|----------------|--------|-----|
-| title | 标题             | string | -   |
-| extra | 额外操作，显示于标题行最右侧 | jsx    | -   |
-
-#### InfoPage.Collapse 折叠面板
-
-放置于InfoPage内部显示
-
-| 属性名              | 说明                   | 类型                     | 默认值 |
-|------------------|----------------------|------------------------|-----|
-| title            | 标题                   | string                 | -   |
-| activeKey        | 打开的折叠面板key           | array,any              | []  |
-| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用 | array,any              | -   |
-| onChange         | 折叠面板展开或收起时触发事件       | function               | -   |
-| items            | 折叠面板内容列表             | InfoPageCollapseItem[] | []  |
-
-#### InfoPageCollapseItem
-
-| 属性名      | 说明                    | 类型                  | 默认值 |
-|----------|-----------------------|---------------------|-----|
-| key      | 折叠面板key               | string              | -   |
-| title    | 标题                    | ReactNode \| string | -   |
-| children | 放置在Collapse中的children | ReactNode \| string | -   |
-
 ### FormInfo
 
 ***@kne/react-form-antd-taro*** 的再封装，实现了基本的Form样式和风格，统一和限制了调用方法，使写法更加统一规范，实现了一些复杂选择数据的Field组件
@@ -2124,13 +2055,106 @@ Field.Item
 
 用户选择
 
-### Permission
+### HeaderContainer 导航头
 
-权限判断
+#### 属性
+
+| 属性名            | 说明                      | 类型                       | 默认值 |
+|----------------|-------------------------|--------------------------|-----|
+| bgColor        | 背景色                     | string                   | -   |
+| extra          | 额外展示的内容                 | ReactNode                | -   |
+| onHeightChange | 当HeaderContainer高度改变时触发 | (height: number) => void | -   |
+
+### HighLight 文字高亮
+
+#### 属性
+
+| 属性名       | 说明         | 类型     | 默认值  |
+|-----------|------------|--------|------|
+| text      | 高亮区域内所有的内容 | string | -    |
+| tagName   | 高亮关键字包裹Tag | string | Text |
+| className | 自定义类名      | string | -    |
+
+#### HighLightProvider
+
+#### 属性
+
+| 属性名                | 说明       | 类型      | 默认值  |
+|--------------------|----------|---------|------|
+| keyword            | 需要高亮度关键字 | string  | -    |
+| caseSensitive      | 区分大小写    | boolean | true |
+| highlightClassName | 自定义类名    | string  | -    |
+
+### InfoPage 显示复杂数据
+
+#### 属性
+
+| 属性名       | 说明    | 类型     | 默认值 |
+|-----------|-------|--------|-----|
+| className | 自定义类名 | string | -   |
+
+#### InfoPage.Part 带标题内容
+
+放置于InfoPage内部显示，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
+
+| 属性名   | 说明             | 类型     | 默认值 |
+|-------|----------------|--------|-----|
+| title | 标题             | string | -   |
+| extra | 额外操作，显示于标题行最右侧 | jsx    | -   |
+
+#### InfoPage.Collapse 折叠面板
+
+放置于InfoPage内部显示
+
+| 属性名              | 说明                   | 类型                     | 默认值 |
+|------------------|----------------------|------------------------|-----|
+| title            | 标题                   | string                 | -   |
+| activeKey        | 打开的折叠面板key           | array,any              | []  |
+| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用 | array,any              | -   |
+| onChange         | 折叠面板展开或收起时触发事件       | function               | -   |
+| items            | 折叠面板内容列表             | InfoPageCollapseItem[] | []  |
+
+#### InfoPageCollapseItem
+
+| 属性名      | 说明                    | 类型                  | 默认值 |
+|----------|-----------------------|---------------------|-----|
+| key      | 折叠面板key               | string              | -   |
+| title    | 标题                    | ReactNode \| string | -   |
+| children | 放置在Collapse中的children | ReactNode \| string | -   |
+
+### Layout 布局
+
+#### 属性
+
+| 属性名         | 说明       | 类型                | 默认值  |
+|-------------|----------|-------------------|------|
+| header      | 页面导航头    | LayoutHeaderProps | -    |
+| toolBar     | 底部工具栏    | ReactNode         | -    |
+| toolBarList | 标题       | TabBarItem[]      | -    |
+| hasSafeArea | 是否显示安全区域 | boolean           | true |
+
+#### LayoutHeaderProps
+
+| 属性名       | 说明                           | 类型                           | 默认值 |
+|-----------|------------------------------|------------------------------|-----|
+| title     | 导航头部内容                       | string \| ReactNode          | -   |
+| bgColor   | 同 HeaderContainer 中的 bgColor | string                       | -   |
+| extra     | 同 HeaderContainer 中的 extra   | ReactNode                    | -   |
+| backArrow | 返回按钮                         | ReactNode                    | -   |
+| onBack    | 返回事件                         | (router: RouterInfo) => void | -   |
+| className | 自定义类名                        | string                       | -   |
+
+#### TabBarItem
+
+同 @kne/antd-taro 中的 TabBar 参数。
 
 ### Modal
 
 模态对话框
+
+### Permission
+
+权限判断
 
 ### PopupView
 
