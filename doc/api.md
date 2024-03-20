@@ -84,42 +84,51 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | originalName | 文件名称 | string    | -                                         |
 | value        | 文件ID | string    | -                                         |
 
-### Filter
+### Filter 条件筛选
 
-一般放在页面顶部作为条件筛选
+一般放在页面顶部
+
+#### 属性
 
 | 属性名      | 说明          | 类型       | 默认值 |
 |----------|-------------|----------|-----|
 | filter   | 筛选器的值       | object   | {}  |
 | onChange | 筛选器值修改时触发执行 | function | -   |
 
-#### Filter.SearchBar
+#### Filter.SearchBar 关键字文本搜索
 
-一般放在Filter顶部，负责关键字文本搜索部分
+一般放在Filter顶部
 
-| 属性名  | 说明                 | 类型     | 默认值 |
-|------|--------------------|--------|-----|
-| name | 筛选器的key，会赋值给filter | string | -   |
+| 属性名               | 说明                 | 类型                      | 默认值 |
+|-------------------|--------------------|-------------------------|-----|
+| name              | 筛选器的key，会赋值给filter | string                  | -   |
+| searchPlaceholder | 输入框为空时占位符          | string                  | -   |
+| onChange          | 点击搜索或输入Enter键时触发执行 | (value: string) => void | -   |
 
-#### Filter.StateBar
+#### Filter.StateBar 状态筛选
 
-负责状态筛选
+| 属性名   | 说明                 | 类型                                          | 默认值 |
+|-------|--------------------|---------------------------------------------|-----|
+| name  | 筛选器的key，会赋值给filter | string                                      | -   |
+| items | 状态列表               | {key: string,children: ReactNode\|string}[] | []  |
 
-| 属性名   | 说明                        | 类型     | 默认值 |
-|-------|---------------------------|--------|-----|
-| name  | 筛选器的key，会赋值给filter        | string | -   |
-| items | 状态列表，为{key,children}结构的数组 | array  | []  |
+#### Filter.OptionsBar 复杂多条件筛选
 
-#### Filter.OptionsBar
+| 属性名   | 说明                 | 类型                                                                      | 默认值 |
+|-------|--------------------|-------------------------------------------------------------------------|-----|
+| name  | 筛选器的key，会赋值给filter | string                                                                  | -   |
+| items | 状态列表               | {key: string,label: string,type: string,className:string,api: Object}[] | []  |
 
-负责复杂多条件筛选
+#### OptionsBarItem
 
-| 属性名   | 说明                          | 类型     | 默认值 |
-|-------|-----------------------------|--------|-----|
-| name  | 筛选器的key，会赋值给filter          | string | -   |
-| items | 状态列表，为{key,label,type}结构的数组 | array  | []  |
+| 属性名       | 说明                 | 类型                                                                         | 默认值 |
+|-----------|--------------------|----------------------------------------------------------------------------|-----|
+| key       | 筛选器的key，会赋值给filter | string                                                                     | -   |
+| label     | 筛选条件的名称            | string                                                                     | -   |
+| type      | 筛选条件的类型            | CitySelect \|ListSelect \|UserListSelect \|FunctionSelect \|IndustrySelect | -   |
+| className | 自定义筛选条件样式          | string                                                                     | -   |
+| api       | 筛选条件需要远程获取数据时的接口   | string                                                                     | -   |
 
-* type可选值: CitySelect, ListSelect, UserListSelect, FunctionSelect, IndustrySelect
 * 其他所需参数和对应type的组件参数一致
 
 ### InfoPage
