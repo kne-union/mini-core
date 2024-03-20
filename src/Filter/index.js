@@ -24,6 +24,7 @@ const withFilter = (WrappedComponent, others) => ({name, ...props}) => {
   return <WrappedComponent {...Object.assign({}, props, {
     [mergedOthers.value]: filter[name], [mergedOthers.onChange]: (value) => {
       onChange(Object.assign({}, filter, {[name]: value}));
+      props.onChange && props.onChange(value);
     }
   })}/>
 };

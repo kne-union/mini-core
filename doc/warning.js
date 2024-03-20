@@ -13,7 +13,7 @@ const BaseExample = () => {
         <View>不同类型</View>
         <Space direction={'vertical'}>
           {
-            ['success', 'info', 'error', 'warning', ].map(type => (
+            ['success', 'info', 'error', 'warning'].map(type => (
               <Warning key={type} type={type}>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
             ))
           }
@@ -23,7 +23,7 @@ const BaseExample = () => {
         <View>文字颜色根据类型改变</View>
         <Space direction={'vertical'}>
           {
-            ['success', 'info', 'error', 'warning', ].map(type => (
+            ['success', 'info', 'error', 'warning'].map(type => (
               <Warning key={type} type={type} fontColorful>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
             ))
           }

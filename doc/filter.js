@@ -16,7 +16,7 @@ const stateBarItems = [
 ];
 
 const optionsBarItems = ({ degreeEnum, political }) => [
-  { key: "mine", label: "我上传的", type: "SwitchButton" },,
+  { key: "mine", label: "我上传的", type: "SwitchButton" },
   {
     key: "political",
     label: "政治面貌",
@@ -82,7 +82,13 @@ const BaseExample = () => {
     <Space direction={"vertical"}>
       <View>SearchBar</View>
       <Filter filter={filter} onChange={setFilter}>
-        <Filter.SearchBar name="keyword" />
+        <Filter.SearchBar
+          name="keyword"
+          searchPlaceholder={'searchPlaceholder'}
+          onChange={(props) => {
+            console.log(props);
+          }}
+        />
       </Filter>
     </Space>
     <Space direction={"vertical"}>
