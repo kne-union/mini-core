@@ -478,6 +478,26 @@ const { close } = popupView(PopupViewProps)
 | text           | 标签文案      | string \| ReactNode                                                                            | -         |
 | onClick        | 点击标签时触发   | () => void                                                                                     | -         |
 
+### Table 表格
+
+#### 属性
+
+| 属性名        | 说明                      | 类型                                 | 默认值  |
+|------------|-------------------------|------------------------------------|------|
+| rowKey     | 表格行 key 的取值，可以是字符串或一个函数 | string \| function(record): string | 'id' |
+| dataSource | 数据数组                    | object[]                           | []   |
+| columns    | 表格列的配置描述，具体项见下表         | ColumnsType[]                      | -    |
+| className  | 自定义类名                   | string                             | -    |
+
+#### ColumnsType
+
+| 属性名     | 说明                                   | 类型                                   |
+|---------|--------------------------------------|--------------------------------------|
+| name    | 列数据在数据项中对应的路径                        | string                               |
+| title   | 列头显示文字                               | string \| ReactNode                  |
+| render  | 生成复杂数据的渲染函数，参数分别为当前行数据，列表数据，当前列的配置描述 | (item, {dataSource, column}) => void |
+| valueOf | 生成复杂数据的渲染函数，参数为当前行数据                 | (item) => void                       |
+
 ### TipsMessage
 
 提示消息
@@ -485,7 +505,3 @@ const { close } = popupView(PopupViewProps)
 ### Warning
 
 警告文案
-
-### Table
-
-表格
