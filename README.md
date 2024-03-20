@@ -1748,7 +1748,7 @@ const BaseExample = () => {
         <View>不同类型</View>
         <Space direction={'vertical'}>
           {
-            ['success', 'info', 'error', 'warning', ].map(type => (
+            ['success', 'info', 'error', 'warning'].map(type => (
               <Warning key={type} type={type}>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
             ))
           }
@@ -1758,7 +1758,7 @@ const BaseExample = () => {
         <View>文字颜色根据类型改变</View>
         <Space direction={'vertical'}>
           {
-            ['success', 'info', 'error', 'warning', ].map(type => (
+            ['success', 'info', 'error', 'warning'].map(type => (
               <Warning key={type} type={type} fontColorful>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</Warning>
             ))
           }
@@ -2179,16 +2179,16 @@ Field.Item
 
 #### ModalInnerProps
 
-| 属性名       | 说明        | 类型                      | 默认值   |
-|-----------|-----------|-------------------------|-------|
-| title     | 标题        | string                  | -     |
-| icon      | 标题左侧图标    | ReactNode               | -     |
-| content   | 内容        | ReactNode \| string     | -     |
-| cancel    | 取消按钮      | ModalCancelConfirmProps | false |
-| onCancel  | 点击取消按钮时触发 | () => void              | -     |
-| confirm   | 确认按钮      | ModalCancelConfirmProps | false |
-| onConfirm | 点击确认按钮时触发 | () => void              | -     |
-| onClose   | 关闭弹窗时触发   | () => void              | -     |
+| 属性名       | 说明        | 类型                  | 默认值   |
+|-----------|-----------|---------------------|-------|
+| title     | 标题        | string              | -     |
+| icon      | 标题左侧图标    | ReactNode           | -     |
+| content   | 内容        | ReactNode \| string | -     |
+| cancel    | 取消按钮      | ModalCancelProps    | false |
+| onCancel  | 点击取消按钮时触发 | () => void          | -     |
+| confirm   | 确认按钮      | ModalConfirmProps   | false |
+| onConfirm | 点击确认按钮时触发 | () => void          | -     |
+| onClose   | 关闭弹窗时触发   | () => void          | -     |
 
 #### ModalCancelProps
 
@@ -2275,11 +2275,39 @@ const { close } = popupView(PopupViewProps)
 | render  | 生成复杂数据的渲染函数，参数分别为当前行数据，列表数据，当前列的配置描述 | (item, {dataSource, column}) => void |
 | valueOf | 生成复杂数据的渲染函数，参数为当前行数据                 | (item) => void                       |
 
-### TipsMessage
+### TipsMessage 提示消息
 
-提示消息
+#### 属性
 
-### Warning
+| 属性名     | 说明   | 类型                      | 默认值                                    |
+|---------|------|-------------------------|----------------------------------------|
+| content | 弹出内容 | ReactNode               | -                                      |
+| title   | 弹出头  | ReactNode               | -                                      |
+| icon    | 图标   | ReactNode               | Icon type="tishi" className='iconfont' |
+| cancel  | 取消按钮 | TipsMessageCancelProps  | false                                  |
+| confirm | 确认按钮 | TipsMessageConfirmProps | false                                  |
 
-警告文案
+#### TipsMessageCancelProps
+
+| 属性名  | 说明   | 类型     | 默认值   |
+|------|------|--------|-------|
+| text | 按钮文案 | string | '知道了' |
+| span | 跨度   | number | 12    |
+
+#### TipsMessageConfirmProps
+
+| 属性名  | 说明   | 类型     | 默认值 |
+|------|------|--------|-----|
+| text | 按钮文案 | string | -   |
+| span | 跨度   | number | 12  |
+
+### Warning 警告
+
+#### 属性
+
+| 属性名          | 说明    | 类型                                          | 默认值       |
+|--------------|-------|---------------------------------------------|-----------|
+| type         | 按钮文案  | 'success' \| 'info' \| 'error' \| 'warning' | 'warning' |
+| fontColorful | 跨度    | boolean                                     | false     |
+| className    | 自定义类名 | string                                      | -         |
 
