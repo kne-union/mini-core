@@ -177,26 +177,38 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 
 #### 属性
 
-#### InfoPage.Part
+| 属性名       | 说明    | 类型     | 默认值 |
+|-----------|-------|--------|-----|
+| className | 自定义类名 | string | -   |
 
-放置于InfoPage内部显示带标题内容，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
+#### InfoPage.Part 带标题内容
+
+放置于InfoPage内部显示，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
 
 | 属性名   | 说明             | 类型     | 默认值 |
 |-------|----------------|--------|-----|
 | title | 标题             | string | -   |
 | extra | 额外操作，显示于标题行最右侧 | jsx    | -   |
 
-#### InfoPage.Collapse
+#### InfoPage.Collapse 折叠面板
 
-放置于InfoPage内部显示止折叠面板
+放置于InfoPage内部显示
 
-| 属性名              | 说明                               | 类型        | 默认值 |
-|------------------|----------------------------------|-----------|-----|
-| title            | 标题                               | string    | -   |
-| activeKey        | 打开的折叠面板key                       | array,any | []  |
-| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用             | array,any | -   |
-| onChange         | 折叠面板展开或收起时触发事件                   | function  | -   |
-| items            | 折叠面板内容为{key,title,children}格式的数组 | array     | []  |
+| 属性名              | 说明                   | 类型                     | 默认值 |
+|------------------|----------------------|------------------------|-----|
+| title            | 标题                   | string                 | -   |
+| activeKey        | 打开的折叠面板key           | array,any              | []  |
+| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用 | array,any              | -   |
+| onChange         | 折叠面板展开或收起时触发事件       | function               | -   |
+| items            | 折叠面板内容列表             | InfoPageCollapseItem[] | []  |
+
+#### InfoPageCollapseItem
+
+| 属性名      | 说明                    | 类型                  | 默认值 |
+|----------|-----------------------|---------------------|-----|
+| key      | 折叠面板key               | string              | -   |
+| title    | 标题                    | ReactNode \| string | -   |
+| children | 放置在Collapse中的children | ReactNode \| string | -   |
 
 ### FormInfo
 
