@@ -64,6 +64,8 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 
 ### Enum 显示或获取枚举值
 
+#### 属性
+
 | 属性名        | 说明                                                                               | 类型                                                     | 默认值                          |
 |------------|----------------------------------------------------------------------------------|--------------------------------------------------------|------------------------------|
 | moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string \| string[]                                     | -                            |
@@ -72,68 +74,74 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | loading    | 加载枚举值期间显示内容                                                                      | jsx                                                    | null                         |
 | force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean                                                | false                        |
 
-### Filter
+### File 文件显示及预览
 
-一般放在页面顶部作为条件筛选
+#### 属性
+
+| 属性名          | 说明   | 类型        | 默认值                                       |
+|--------------|------|-----------|-------------------------------------------|
+| icon         | 文件图标 | ReactNode | Icon className="iconfont" type={"fujian"} |
+| originalName | 文件名称 | string    | -                                         |
+| value        | 文件ID | string    | -                                         |
+
+### Filter 条件筛选
+
+一般放在页面顶部
+
+#### 属性
 
 | 属性名      | 说明          | 类型       | 默认值 |
 |----------|-------------|----------|-----|
 | filter   | 筛选器的值       | object   | {}  |
 | onChange | 筛选器值修改时触发执行 | function | -   |
 
-#### Filter.SearchBar
+#### Filter.SearchBar 关键字文本搜索
 
-一般放在Filter顶部，负责关键字文本搜索部分
+一般放在Filter顶部
 
-| 属性名  | 说明                 | 类型     | 默认值 |
-|------|--------------------|--------|-----|
-| name | 筛选器的key，会赋值给filter | string | -   |
+| 属性名               | 说明                 | 类型                      | 默认值 |
+|-------------------|--------------------|-------------------------|-----|
+| name              | 筛选器的key，会赋值给filter | string                  | -   |
+| searchPlaceholder | 输入框为空时占位符          | string                  | -   |
+| onChange          | 点击搜索或输入Enter键时触发执行 | (value: string) => void | -   |
 
-#### Filter.StateBar
+#### Filter.StateBar 状态筛选
 
-负责状态筛选
+| 属性名   | 说明                 | 类型                                          | 默认值 |
+|-------|--------------------|---------------------------------------------|-----|
+| name  | 筛选器的key，会赋值给filter | string                                      | -   |
+| items | 状态列表               | {key: string,children: ReactNode\|string}[] | []  |
 
-| 属性名   | 说明                        | 类型     | 默认值 |
-|-------|---------------------------|--------|-----|
-| name  | 筛选器的key，会赋值给filter        | string | -   |
-| items | 状态列表，为{key,children}结构的数组 | array  | []  |
+#### Filter.OptionsBar 复杂多条件筛选
 
-#### Filter.OptionsBar
+| 属性名   | 说明                 | 类型                                                                      | 默认值 |
+|-------|--------------------|-------------------------------------------------------------------------|-----|
+| name  | 筛选器的key，会赋值给filter | string                                                                  | -   |
+| items | 状态列表               | {key: string,label: string,type: string,className:string,api: Object}[] | []  |
 
-负责复杂多条件筛选
+#### OptionsBarItem
 
-| 属性名   | 说明                          | 类型     | 默认值 |
-|-------|-----------------------------|--------|-----|
-| name  | 筛选器的key，会赋值给filter          | string | -   |
-| items | 状态列表，为{key,label,type}结构的数组 | array  | []  |
+| 属性名       | 说明                 | 类型                                                                         | 默认值 |
+|-----------|--------------------|----------------------------------------------------------------------------|-----|
+| key       | 筛选器的key，会赋值给filter | string                                                                     | -   |
+| label     | 筛选条件的名称            | string                                                                     | -   |
+| type      | 筛选条件的类型            | CitySelect \|ListSelect \|UserListSelect \|FunctionSelect \|IndustrySelect | -   |
+| className | 自定义筛选条件样式          | string                                                                     | -   |
+| api       | 筛选条件需要远程获取数据时的接口   | string                                                                     | -   |
 
-* type可选值: CitySelect, ListSelect, UserListSelect, FunctionSelect, IndustrySelect
 * 其他所需参数和对应type的组件参数一致
 
-### InfoPage
+### FixedView 浮动层
 
-用以显示复杂数据
+#### 属性
 
-#### InfoPage.Part
-
-放置于InfoPage内部显示带标题内容，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
-
-| 属性名   | 说明             | 类型     | 默认值 |
-|-------|----------------|--------|-----|
-| title | 标题             | string | -   |
-| extra | 额外操作，显示于标题行最右侧 | jsx    | -   |
-
-#### InfoPage.Collapse
-
-放置于InfoPage内部显示止折叠面板
-
-| 属性名              | 说明                               | 类型        | 默认值 |
-|------------------|----------------------------------|-----------|-----|
-| title            | 标题                               | string    | -   |
-| activeKey        | 打开的折叠面板key                       | array,any | []  |
-| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用             | array,any | -   |
-| onChange         | 折叠面板展开或收起时触发事件                   | function  | -   |
-| items            | 折叠面板内容为{key,title,children}格式的数组 | array     | []  |
+| 属性名            | 说明         | 类型        | 默认值   |
+|----------------|------------|-----------|-------|
+| noPadding      | 不要内间距      | boolean   | false |
+| hasSafeArea    | 是否需要底部安全距离 | boolean   | true  |
+| fixed          | 是否固定在底部    | boolean   | true  |
+| fixBottomExtra | 固定在底部的额外显示 | ReactNode | -     |
+| className      | 自定义类名      | string    | -     |
 
 ### FormInfo
 
@@ -270,46 +278,258 @@ Field.Item
 
 用户选择
 
-### Permission
+### HeaderContainer 导航头
 
-权限判断
+#### 属性
 
-### Modal
+| 属性名            | 说明                      | 类型                       | 默认值 |
+|----------------|-------------------------|--------------------------|-----|
+| bgColor        | 背景色                     | string                   | -   |
+| extra          | 额外展示的内容                 | ReactNode                | -   |
+| onHeightChange | 当HeaderContainer高度改变时触发 | (height: number) => void | -   |
 
-模态对话框
+### HighLight 文字高亮
 
-### PopupView
+#### 属性
 
-弹出页面
+| 属性名       | 说明         | 类型     | 默认值  |
+|-----------|------------|--------|------|
+| text      | 高亮区域内所有的内容 | string | -    |
+| tagName   | 高亮关键字包裹Tag | string | Text |
+| className | 自定义类名      | string | -    |
 
-### FixedView
+#### HighLightProvider
 
-浮动层
+#### 属性
 
-### HeaderContainer
+| 属性名                | 说明       | 类型      | 默认值  |
+|--------------------|----------|---------|------|
+| keyword            | 需要高亮度关键字 | string  | -    |
+| caseSensitive      | 区分大小写    | boolean | true |
+| highlightClassName | 自定义类名    | string  | -    |
 
-导航头
+### InfoPage 显示复杂数据
 
-### Highlight
+#### 属性
 
-文字高亮
+| 属性名       | 说明    | 类型     | 默认值 |
+|-----------|-------|--------|-----|
+| className | 自定义类名 | string | -   |
 
-### File
+#### InfoPage.Part 带标题内容
 
-文件显示及预览
+放置于InfoPage内部显示，如果InfoPage.Part内部再放置InfoPage.Part显示为二级标题，再放置一层则不显示标题
 
-### StateTag
+| 属性名   | 说明             | 类型     | 默认值 |
+|-------|----------------|--------|-----|
+| title | 标题             | string | -   |
+| extra | 额外操作，显示于标题行最右侧 | jsx    | -   |
 
-状态标签
+#### InfoPage.Collapse 折叠面板
 
-### TipsMessage
+放置于InfoPage内部显示
 
-提示消息
+| 属性名              | 说明                   | 类型                     | 默认值 |
+|------------------|----------------------|------------------------|-----|
+| title            | 标题                   | string                 | -   |
+| activeKey        | 打开的折叠面板key           | array,any              | []  |
+| defaultActiveKey | 打开的折叠面板key,在需要非受控时使用 | array,any              | -   |
+| onChange         | 折叠面板展开或收起时触发事件       | function               | -   |
+| items            | 折叠面板内容列表             | InfoPageCollapseItem[] | []  |
 
-### Warning
+#### InfoPageCollapseItem
 
-警告文案
+| 属性名      | 说明                    | 类型                  | 默认值 |
+|----------|-----------------------|---------------------|-----|
+| key      | 折叠面板key               | string              | -   |
+| title    | 标题                    | ReactNode \| string | -   |
+| children | 放置在Collapse中的children | ReactNode \| string | -   |
 
-### Table
+### Layout 布局
 
-表格
+#### 属性
+
+| 属性名         | 说明       | 类型                | 默认值  |
+|-------------|----------|-------------------|------|
+| header      | 页面导航头    | LayoutHeaderProps | -    |
+| toolBar     | 底部工具栏    | ReactNode         | -    |
+| toolBarList | 标题       | TabBarItem[]      | -    |
+| hasSafeArea | 是否显示安全区域 | boolean           | true |
+
+#### LayoutHeaderProps
+
+| 属性名       | 说明                           | 类型                           | 默认值 |
+|-----------|------------------------------|------------------------------|-----|
+| title     | 导航头部内容                       | string \| ReactNode          | -   |
+| bgColor   | 同 HeaderContainer 中的 bgColor | string                       | -   |
+| extra     | 同 HeaderContainer 中的 extra   | ReactNode                    | -   |
+| backArrow | 返回按钮                         | ReactNode                    | -   |
+| onBack    | 返回事件                         | (router: RouterInfo) => void | -   |
+| className | 自定义类名                        | string                       | -   |
+
+#### TabBarItem
+
+同 @kne/antd-taro 中的 TabBar 参数。
+
+### Modal 模态对话框
+
+#### Modal
+
+##### 属性 extend ModalInnerProps
+
+| 属性名              | 说明             | 类型                      | 默认值   |
+|------------------|----------------|-------------------------|-------|
+| open             | 是否可见           | boolean                 | false |
+| onOpenChange     | 打开关闭 Modal 时触发 | (open: boolean) => void | -     |
+| closeOnMaskClick | 点击背景蒙层后是否关闭    | boolean                 | false |
+
+#### ModalButton
+
+##### 属性 extend Modal
+
+| 属性名         | 说明   | 类型                               | 默认值 |
+|-------------|------|----------------------------------|-----|
+| children    | 按钮文案 | string \| ReactNode              | -   |
+| buttonProps | 按钮属性 | 参考 @kne/antd-taro 的 Button props | -   |
+
+#### useModal
+
+##### 属性 extend @kne/antd-taro Popup & ModalInnerProps
+
+| 属性名              | 说明          | 类型      | 默认值   |
+|------------------|-------------|---------|-------|
+| closeOnMaskClick | 点击背景蒙层后是否关闭 | boolean | false |
+
+#### ModalInnerProps
+
+| 属性名       | 说明        | 类型                  | 默认值   |
+|-----------|-----------|---------------------|-------|
+| title     | 标题        | string              | -     |
+| icon      | 标题左侧图标    | ReactNode           | -     |
+| content   | 内容        | ReactNode \| string | -     |
+| cancel    | 取消按钮      | ModalCancelProps    | false |
+| onCancel  | 点击取消按钮时触发 | () => void          | -     |
+| confirm   | 确认按钮      | ModalConfirmProps   | false |
+| onConfirm | 点击确认按钮时触发 | () => void          | -     |
+| onClose   | 关闭弹窗时触发   | () => void          | -     |
+
+#### ModalCancelProps
+
+| 属性名  | 说明   | 类型     | 默认值  |
+|------|------|--------|------|
+| text | 按钮文案 | string | '取消' |
+| span | 跨度   | number | 12   |
+
+#### ModalConfirmProps
+
+| 属性名  | 说明   | 类型     | 默认值  |
+|------|------|--------|------|
+| text | 按钮文案 | string | '确定' |
+| span | 跨度   | number | 12   |
+
+### Permission 权限判断
+
+#### 属性
+
+| 属性名      | 说明                      | 类型                                                                      | 默认值            |
+|----------|-------------------------|-------------------------------------------------------------------------|----------------|
+| type     | 类型                      | 'hidden' \| 'error'                                                     | '确定'           |
+| message  | 当 type 为 'error' 时的提示文案 | ReactNode                                                               | '您暂无权限，请联系管理员' |
+| request  | 需要的权限点                  | string[]                                                                | -              |
+| children | 权限通过展示的内容               | ReactNode \| (idPass: boolean, type: string, request: string[]) => void | -              |
+
+### PopupView 弹出页面
+
+#### 属性 extend ModalInnerProps
+
+| 属性名         | 说明                           | 类型              | 默认值   |
+|-------------|------------------------------|-----------------|-------|
+| open        | 是否可见                         | boolean         | false |
+| onClose     | 打开关闭弹出页面时触发                  | () => void      | false |
+| title       | 弹出页面顶部文案                     | ReactNode       | -     |
+| backArrow   | 返回按钮                         | ReactNode       | -     |
+| hasSafeArea | 是否需要底部安全距离                   | boolean         | true  |
+| onScroll    | 页面滚动时触发                      | (event) => void | -     |
+| scrollTop   | 设置scrollTop属性时，页面会滚动内容到指定的位置 | number          | 0     |
+| children    | 弹出页面的内容                      | ReactNode       | -     |
+
+#### usePopupView
+
+##### 属性 extend @kne/antd-taro Popup
+
+使用方法
+
+```jsx
+const popupView = usePopupView();
+// 或者
+// const popupView = usePopupView(PopupProps:{});
+const { close } = popupView(PopupViewProps)
+```
+
+### StateTag 状态标签
+
+#### 属性
+
+| 属性名            | 说明        | 类型                                                                                             | 默认值       |
+|----------------|-----------|------------------------------------------------------------------------------------------------|-----------|
+| type           | 状态类型      | "default" \| "result" \| "success" \| "progress" \| "danger" \| "info" \| "other" \| "primary" | 'default' |
+| showBackground | 是否展示标签背景色 | boolean                                                                                        | true      |
+| showBorder     | 是否展示标签边框  | boolean                                                                                        | false     |
+| text           | 标签文案      | string \| ReactNode                                                                            | -         |
+| onClick        | 点击标签时触发   | () => void                                                                                     | -         |
+
+### Table 表格
+
+#### 属性
+
+| 属性名        | 说明                      | 类型                                 | 默认值  |
+|------------|-------------------------|------------------------------------|------|
+| rowKey     | 表格行 key 的取值，可以是字符串或一个函数 | string \| function(record): string | 'id' |
+| dataSource | 数据数组                    | object[]                           | []   |
+| columns    | 表格列的配置描述，具体项见下表         | ColumnsType[]                      | -    |
+| className  | 自定义类名                   | string                             | -    |
+
+#### ColumnsType
+
+| 属性名     | 说明                                   | 类型                                   |
+|---------|--------------------------------------|--------------------------------------|
+| name    | 列数据在数据项中对应的路径                        | string                               |
+| title   | 列头显示文字                               | string \| ReactNode                  |
+| render  | 生成复杂数据的渲染函数，参数分别为当前行数据，列表数据，当前列的配置描述 | (item, {dataSource, column}) => void |
+| valueOf | 生成复杂数据的渲染函数，参数为当前行数据                 | (item) => void                       |
+
+### TipsMessage 提示消息
+
+#### 属性
+
+| 属性名     | 说明   | 类型                      | 默认值                                    |
+|---------|------|-------------------------|----------------------------------------|
+| content | 弹出内容 | ReactNode               | -                                      |
+| title   | 弹出头  | ReactNode               | -                                      |
+| icon    | 图标   | ReactNode               | Icon type="tishi" className='iconfont' |
+| cancel  | 取消按钮 | TipsMessageCancelProps  | false                                  |
+| confirm | 确认按钮 | TipsMessageConfirmProps | false                                  |
+
+#### TipsMessageCancelProps
+
+| 属性名  | 说明   | 类型     | 默认值   |
+|------|------|--------|-------|
+| text | 按钮文案 | string | '知道了' |
+| span | 跨度   | number | 12    |
+
+#### TipsMessageConfirmProps
+
+| 属性名  | 说明   | 类型     | 默认值 |
+|------|------|--------|-----|
+| text | 按钮文案 | string | -   |
+| span | 跨度   | number | 12  |
+
+### Warning 警告
+
+#### 属性
+
+| 属性名          | 说明    | 类型                                          | 默认值       |
+|--------------|-------|---------------------------------------------|-----------|
+| type         | 按钮文案  | 'success' \| 'info' \| 'error' \| 'warning' | 'warning' |
+| fontColorful | 跨度    | boolean                                     | false     |
+| className    | 自定义类名 | string                                      | -         |
