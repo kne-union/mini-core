@@ -2204,9 +2204,16 @@ Field.Item
 | text | 按钮文案 | string | '确定' |
 | span | 跨度   | number | 12   |
 
-### Permission
+### Permission 权限判断
 
-权限判断
+#### 属性
+
+| 属性名      | 说明                      | 类型                                                                      | 默认值            |
+|----------|-------------------------|-------------------------------------------------------------------------|----------------|
+| type     | 类型                      | 'hidden' \| 'error'                                                     | '确定'           |
+| message  | 当 type 为 'error' 时的提示文案 | ReactNode                                                               | '您暂无权限，请联系管理员' |
+| request  | 需要的权限点                  | string[]                                                                | -              |
+| children | 权限通过展示的内容               | ReactNode \| (idPass: boolean, type: string, request: string[]) => void | -              |
 
 ### PopupView
 
