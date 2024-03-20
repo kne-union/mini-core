@@ -377,11 +377,11 @@ Field.Item
 
 ##### 属性 extend ModalInnerProps
 
-| 属性名              | 说明             | 类型      | 默认值   |
-|------------------|----------------|---------|-------|
-| open             | 是否可见           | boolean | false |
-| onOpenChange     | 打开关闭 Modal 时触发 | boolean | false |
-| closeOnMaskClick | 点击背景蒙层后是否关闭    | boolean | false |
+| 属性名              | 说明             | 类型                      | 默认值   |
+|------------------|----------------|-------------------------|-------|
+| open             | 是否可见           | boolean                 | false |
+| onOpenChange     | 打开关闭 Modal 时触发 | (open: boolean) => void | -     |
+| closeOnMaskClick | 点击背景蒙层后是否关闭    | boolean                 | false |
 
 #### ModalButton
 
@@ -438,9 +438,33 @@ Field.Item
 | request  | 需要的权限点                  | string[]                                                                | -              |
 | children | 权限通过展示的内容               | ReactNode \| (idPass: boolean, type: string, request: string[]) => void | -              |
 
-### PopupView
+### PopupView 弹出页面
 
-弹出页面
+#### 属性 extend ModalInnerProps
+
+| 属性名         | 说明                           | 类型              | 默认值   |
+|-------------|------------------------------|-----------------|-------|
+| open        | 是否可见                         | boolean         | false |
+| onClose     | 打开关闭弹出页面时触发                  | () => void      | false |
+| title       | 弹出页面顶部文案                     | ReactNode       | -     |
+| backArrow   | 返回按钮                         | ReactNode       | -     |
+| hasSafeArea | 是否需要底部安全距离                   | boolean         | true  |
+| onScroll    | 页面滚动时触发                      | (event) => void | -     |
+| scrollTop   | 设置scrollTop属性时，页面会滚动内容到指定的位置 | number          | 0     |
+| children    | 弹出页面的内容                      | ReactNode       | -     |
+
+#### usePopupView
+
+##### 属性 extend @kne/antd-taro Popup
+
+使用方法
+
+```jsx
+const popupView = usePopupView();
+// 或者
+// const popupView = usePopupView(PopupProps:{});
+const { close } = popupView(PopupViewProps)
+```
 
 ### StateTag
 
