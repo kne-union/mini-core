@@ -1833,6 +1833,8 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 
 ### Enum 显示或获取枚举值
 
+#### 属性
+
 | 属性名        | 说明                                                                               | 类型                                                     | 默认值                          |
 |------------|----------------------------------------------------------------------------------|--------------------------------------------------------|------------------------------|
 | moduleName | 枚举值的名字，在preset设置的枚举对象的key,当其为数组时可以一次性获取多个枚举值列表                                   | string \| string[]                                     | -                            |
@@ -1840,6 +1842,16 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | children   | 获取到枚举值，当组件有name传入时获取name所对应的枚举值，如果没有name传入则获取到整个枚举列表，如果moduleName为数组获取到对应的多个枚举列表 | ({description})=> void \| ({enum1, enum2, ...})=> void | ({description})=>description |
 | loading    | 加载枚举值期间显示内容                                                                      | jsx                                                    | null                         |
 | force      | 在加载枚举列表时，如果之前已经加载过了默认会直接获取上次加载缓存的枚举列表，当该参数为true时则会忽略缓存从新获取枚举值列表数据                | boolean                                                | false                        |
+
+### File 文件显示及预览
+
+#### 属性
+
+| 属性名          | 说明   | 类型        | 默认值                                       |
+|--------------|------|-----------|-------------------------------------------|
+| icon         | 文件图标 | ReactNode | Icon className="iconfont" type={"fujian"} |
+| originalName | 文件名称 | string    | -                                         |
+| value        | 文件ID | string    | -                                         |
 
 ### Filter
 
@@ -2062,10 +2074,6 @@ Field.Item
 ### Highlight
 
 文字高亮
-
-### File
-
-文件显示及预览
 
 ### StateTag
 
