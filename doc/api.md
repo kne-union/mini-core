@@ -371,9 +371,61 @@ Field.Item
 
 同 @kne/antd-taro 中的 TabBar 参数。
 
-### Modal
+### Modal 模态对话框
 
-模态对话框
+#### Modal
+
+##### 属性 extend ModalInnerProps
+
+| 属性名              | 说明             | 类型      | 默认值   |
+|------------------|----------------|---------|-------|
+| open             | 是否可见           | boolean | false |
+| onOpenChange     | 打开关闭 Modal 时触发 | boolean | false |
+| closeOnMaskClick | 点击背景蒙层后是否关闭    | boolean | false |
+
+#### ModalButton
+
+##### 属性 extend Modal
+
+| 属性名         | 说明   | 类型                               | 默认值 |
+|-------------|------|----------------------------------|-----|
+| children    | 按钮文案 | string \| ReactNode              | -   |
+| buttonProps | 按钮属性 | 参考 @kne/antd-taro 的 Button props | -   |
+
+#### useModal
+
+##### 属性 extend @kne/antd-taro Popup & ModalInnerProps
+
+| 属性名              | 说明          | 类型      | 默认值   |
+|------------------|-------------|---------|-------|
+| closeOnMaskClick | 点击背景蒙层后是否关闭 | boolean | false |
+
+#### ModalInnerProps
+
+| 属性名       | 说明        | 类型                      | 默认值   |
+|-----------|-----------|-------------------------|-------|
+| title     | 标题        | string                  | -     |
+| icon      | 标题左侧图标    | ReactNode               | -     |
+| content   | 内容        | ReactNode \| string     | -     |
+| cancel    | 取消按钮      | ModalCancelConfirmProps | false |
+| onCancel  | 点击取消按钮时触发 | () => void              | -     |
+| confirm   | 确认按钮      | ModalCancelConfirmProps | false |
+| onConfirm | 点击确认按钮时触发 | () => void              | -     |
+| onClose   | 关闭弹窗时触发   | () => void              | -     |
+
+#### ModalCancelProps
+
+| 属性名  | 说明   | 类型     | 默认值  |
+|------|------|--------|------|
+| text | 按钮文案 | string | '取消' |
+| span | 跨度   | number | 12   |
+
+#### ModalConfirmProps
+
+| 属性名  | 说明   | 类型     | 默认值  |
+|------|------|--------|------|
+| text | 按钮文案 | string | '确定' |
+| span | 跨度   | number | 12   |
 
 ### Permission
 
