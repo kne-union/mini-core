@@ -524,6 +524,12 @@ const { close } = popupView(PopupViewProps)
 | text | 按钮文案 | string | -   |
 | span | 跨度   | number | 12  |
 
-### Warning
+### Warning 警告
 
-警告文案
+#### 属性
+
+| 属性名          | 说明    | 类型                                          | 默认值       |
+|--------------|-------|---------------------------------------------|-----------|
+| type         | 按钮文案  | 'success' \| 'info' \| 'error' \| 'warning' | 'warning' |
+| fontColorful | 跨度    | boolean                                     | false     |
+| className    | 自定义类名 | string                                      | -         |
