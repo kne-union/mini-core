@@ -466,9 +466,17 @@ const popupView = usePopupView();
 const { close } = popupView(PopupViewProps)
 ```
 
-### StateTag
+### StateTag 状态标签
 
-状态标签
+#### 属性
+
+| 属性名            | 说明        | 类型                                                                                             | 默认值       |
+|----------------|-----------|------------------------------------------------------------------------------------------------|-----------|
+| type           | 状态类型      | "default" \| "result" \| "success" \| "progress" \| "danger" \| "info" \| "other" \| "primary" | 'default' |
+| showBackground | 是否展示标签背景色 | boolean                                                                                        | true      |
+| showBorder     | 是否展示标签边框  | boolean                                                                                        | false     |
+| text           | 标签文案      | string \| ReactNode                                                                            | -         |
+| onClick        | 点击标签时触发   | () => void                                                                                     | -         |
 
 ### TipsMessage
 
