@@ -1906,6 +1906,18 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 
 * 其他所需参数和对应type的组件参数一致
 
+### FixedView 浮动层
+
+#### 属性
+
+| 属性名            | 说明         | 类型        | 默认值   |
+|----------------|------------|-----------|-------|
+| noPadding      | 不要内间距      | boolean   | false |
+| hasSafeArea    | 是否需要底部安全距离 | boolean   | true  |
+| fixed          | 是否固定在底部    | boolean   | true  |
+| fixBottomExtra | 固定在底部的额外显示 | ReactNode | -     |
+| className      | 自定义类名      | string    | -     |
+
 ### InfoPage
 
 用以显示复杂数据
@@ -2077,10 +2089,6 @@ Field.Item
 ### PopupView
 
 弹出页面
-
-### FixedView
-
-浮动层
 
 ### HeaderContainer
 
