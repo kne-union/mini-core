@@ -1918,9 +1918,19 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | fixBottomExtra | 固定在底部的额外显示 | ReactNode | -     |
 | className      | 自定义类名      | string    | -     |
 
-### InfoPage
+### HeaderContainer 导航头
 
-用以显示复杂数据
+#### 属性
+
+| 属性名            | 说明                      | 类型                       | 默认值 |
+|----------------|-------------------------|--------------------------|-----|
+| bgColor        | 背景色                     | string                   | -   |
+| extra          | 额外展示的内容                 | ReactNode                | -   |
+| onHeightChange | 当HeaderContainer高度改变时触发 | (height: number) => void | -   |
+
+### InfoPage 显示复杂数据
+
+#### 属性
 
 #### InfoPage.Part
 
@@ -2089,10 +2099,6 @@ Field.Item
 ### PopupView
 
 弹出页面
-
-### HeaderContainer
-
-导航头
 
 ### Highlight
 
