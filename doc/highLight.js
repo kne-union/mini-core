@@ -19,7 +19,11 @@ const BaseExample = () => {
     </Space>
     <Space direction={"vertical"}>
       <View>忽略大小写</View>
-      <HighLightProvider keyword={["哈尔滨", "信息", "abs wang"]}>
+      <HighLightProvider keyword={["哈尔滨", "信息", "abs", "wang"]}>
+        <HighLight tagName={View} text="ABs Wang我的家在东北，松花江上呀！哈尔滨真美，信息通达" />
+      </HighLightProvider>
+      <View>区分大小写</View>
+      <HighLightProvider keyword={["哈尔滨", "信息", "abs", "Wang"]} caseSensitive>
         <HighLight tagName={View} text="ABs Wang我的家在东北，松花江上呀！哈尔滨真美，信息通达" />
       </HighLightProvider>
     </Space>

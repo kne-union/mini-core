@@ -153,6 +153,26 @@ formInfo: FormInfo组件会从此获取应用的Form预设配置
 | extra          | 额外展示的内容                 | ReactNode                | -   |
 | onHeightChange | 当HeaderContainer高度改变时触发 | (height: number) => void | -   |
 
+### HighLight 文字高亮
+
+#### 属性
+
+| 属性名       | 说明         | 类型     | 默认值  |
+|-----------|------------|--------|------|
+| text      | 高亮区域内所有的内容 | string | -    |
+| tagName   | 高亮关键字包裹Tag | string | Text |
+| className | 自定义类名      | string | -    |
+
+#### HighLightProvider
+
+#### 属性
+
+| 属性名                | 说明       | 类型      | 默认值  |
+|--------------------|----------|---------|------|
+| keyword            | 需要高亮度关键字 | string  | -    |
+| caseSensitive      | 区分大小写    | boolean | true |
+| highlightClassName | 自定义类名    | string  | -    |
+
 ### InfoPage 显示复杂数据
 
 #### 属性
@@ -324,10 +344,6 @@ Field.Item
 ### PopupView
 
 弹出页面
-
-### Highlight
-
-文字高亮
 
 ### StateTag
 
