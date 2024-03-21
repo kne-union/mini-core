@@ -8,13 +8,11 @@ jobs:
   node-npm:
     if: github.event.pull_request.merged == true
     uses: kne-union/actions/.github/workflows/publish-miniprogram-libs-workflow.yml@master
-    secrets:
-      PRIVATE_KEY: ${{ secrets.KNEUNION_PRIVATE_KEY }}
-      TOKEN_SECRET: ${{ secrets.KNEUNION_SECRET }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      ADMIN_TOKEN: ${{secrets.ADMIN_TOKEN}}
+    secrets: inherit
     with:
       package_name: '@kne/mini-core'
       APP_ID: wxae849489ee6c1994
+      PRIVATE_KEY: ${{ secrets.KNEUNION_PRIVATE_KEY }}
+      TOKEN_SECRET: ${{ secrets.KNEUNION_SECRET }}
 
 
