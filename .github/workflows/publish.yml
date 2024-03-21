@@ -12,7 +12,7 @@ jobs:
     with:
       package_name: '@kne/mini-core'
       APP_ID: wxae849489ee6c1994
-      PRIVATE_KEY: ${{ secrets.KNEUNION_PRIVATE_KEY }}
-      TOKEN_SECRET: ${{ secrets.KNEUNION_SECRET }}
+      PRIVATE_KEY_NAME: KNEUNION_PRIVATE_KEY
+      TOKEN_SECRET_NAME: TOKEN_SECRET_NAME
 
 
