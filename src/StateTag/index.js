@@ -11,7 +11,7 @@ const StateTag = ({
         style={{
             background: showBackground ? `var(--state-${type}-06)` : 'none',
             color: `var(--state-${type})`,
-            border: showBorder ? `2px solid var(--state-${type})` : "none",
+            border: showBorder ? `1px solid var(--state-${type})` : "none",
         }}
         className={classnames(style["state-tag"], className)}
         onClick={onClick}

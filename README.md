@@ -1062,15 +1062,28 @@ render(<BaseExample />);
 
 - HeaderContainer 页面头部容器
 - HeaderContainer 页面头部容器
-- miniCore(@kne/mini-core),tarojsComponents(@tarojs/components)
+- miniCore(@kne/mini-core),antd(@kne/antd-taro),tarojsTaro(@tarojs/taro)
 
 ```jsx
 const { HeaderContainer } = miniCore;
-const { View } = tarojsComponents;
+const { Space, Icon } = antd;
+const Taro = tarojsTaro;
+
 const BaseExample = () => {
   return <HeaderContainer
-    bgColor={'#ff8f1f'}
-    extra={<View>extra</View>}
+    bgColor={'#6740C3'}
+    extra={<Space>
+      <Icon
+        type={"arrow-thin-left"}
+        className="iconfont"
+        onClick={() => Taro.navigateBack({
+          delta: 1
+        }).catch(({ errMsg }) => {
+          Taro.switchTab({ url: "/pages/index/index" });
+        })}
+      />
+      返回
+    </Space>}
   >
     哈哈哈
   </HeaderContainer>;
@@ -1567,19 +1580,10 @@ const BaseExample = () => {
       <Space direction={"vertical"}>
         <View>展示边框</View>
         <Space wrap>
+          <StateTag type="primary" showBorder text="类型: Primary" />
           {
             ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
-              <StateTag key={type} type={type} showBorder>{type}</StateTag>
-            ))
-          }
-        </Space>
-      </Space>
-      <Space direction={"vertical"}>
-        <View>文案传值</View>
-        <Space wrap>
-          {
-            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
-              <StateTag key={type} type={type} showBorder text={type} />
+              <StateTag key={type} type={type} showBorder text={`${type}`} />
             ))
           }
         </Space>

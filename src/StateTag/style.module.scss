@@ -4,8 +4,8 @@
   border-radius: var(--adm-radius-l);
   font-weight: 400;
   color: #155ACF;
-  line-height: 32px;
   font-size: var(--adm-font-size-4);
-  display: inline-block;
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
 }

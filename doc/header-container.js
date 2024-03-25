@@ -1,9 +1,22 @@
 const { HeaderContainer } = miniCore;
-const { View } = tarojsComponents;
+const { Space, Icon } = antd;
+const Taro = tarojsTaro;
+
 const BaseExample = () => {
   return <HeaderContainer
-    bgColor={'#ff8f1f'}
-    extra={<View>extra</View>}
+    bgColor={'#6740C3'}
+    extra={<Space>
+      <Icon
+        type={"arrow-thin-left"}
+        className="iconfont"
+        onClick={() => Taro.navigateBack({
+          delta: 1
+        }).catch(({ errMsg }) => {
+          Taro.switchTab({ url: "/pages/index/index" });
+        })}
+      />
+      返回
+    </Space>}
   >
     哈哈哈
   </HeaderContainer>;
