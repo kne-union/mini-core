@@ -248,8 +248,12 @@
           "packageName": "@kne/mini-core"
         },
         {
-          "name": "tarojsComponents",
-          "packageName": "@tarojs/components"
+          "name": "antd",
+          "packageName": "@kne/antd-taro"
+        },
+        {
+          "name": "tarojsTaro",
+          "packageName": "@tarojs/taro"
         }
       ]
     },
