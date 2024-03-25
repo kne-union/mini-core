@@ -54,61 +54,29 @@ const optionsBarItems = ({ degreeEnum, political }) => [
 ];
 
 const BaseExample = () => {
-  const [filter, setFilter] = useState({});
-  const [filter2, setFilter2] = useState({});
-  const [filter3, setFilter3] = useState({});
-  const [filter4, setFilter4] = useState({state: "stop", option2: {mine: true, political: [{value: "中共党员", label: "中共党员"}]}});
+  const [filter4, setFilter4] = useState({
+    state: "stop",
+    option2: { mine: true, political: [{ value: "中共党员", label: "中共党员" }] }
+  });
 
   return <Space direction={"vertical"} size={30}>
-    <Space direction={"vertical"}>
-      <View>Filter 组合</View>
-      <Filter filter={filter4} onChange={setFilter4}>
-        <Filter.SearchBar name="keyword" />
-        <Filter.StateBar name="state" items={stateBarItems} />
-        <Enum loading={null} moduleName={["degreeEnum", "political"]}>
-          {([degreeEnum, political]) => {
-            return <Filter.OptionsBar name="option2" items={optionsBarItems({ degreeEnum, political })} />;
-          }}
-        </Enum>
-        <Filter.OptionsBar
-          name="option3"
-          items={[
-            { key: "city", label: "期望城市", type: "CitySelect" },
-            { key: "currentCity", label: "现居城市", type: "CitySelect" }
-          ]}
-        />
-      </Filter>
-    </Space>
-    <Space direction={"vertical"}>
-      <View>SearchBar</View>
-      <Filter filter={filter} onChange={setFilter}>
-        <Filter.SearchBar
-          name="keyword"
-          searchPlaceholder={'searchPlaceholder'}
-          onChange={(props) => {
-            console.log(props);
-          }}
-        />
-      </Filter>
-    </Space>
-    <Space direction={"vertical"}>
-      <View>StateBar</View>
-      <Filter filter={filter2} onChange={setFilter2}>
-        <Filter.StateBar name="state" items={stateBarItems} />
-      </Filter>
-    </Space>
-    <Space direction={"vertical"}>
-      <View>OptionsBar</View>
-      <Filter filter={filter3} onChange={setFilter3}>
-        <Filter.OptionsBar
-          name="option3"
-          items={[
-            { key: "city", label: "期望城市", type: "CitySelect" },
-            { key: "currentCity", label: "现居城市", type: "CitySelect" }
-          ]}
-        />
-      </Filter>
-    </Space>
+    <View>Filter 组合</View>
+    <Filter filter={filter4} onChange={setFilter4}>
+      <Filter.SearchBar name="keyword" />
+      <Filter.StateBar name="state" items={stateBarItems} />
+      <Enum loading={null} moduleName={["degreeEnum", "political"]}>
+        {([degreeEnum, political]) => {
+          return <Filter.OptionsBar name="option2" items={optionsBarItems({ degreeEnum, political })} />;
+        }}
+      </Enum>
+      <Filter.OptionsBar
+        name="option3"
+        items={[
+          { key: "city", label: "期望城市", type: "CitySelect" },
+          { key: "currentCity", label: "现居城市", type: "CitySelect" }
+        ]}
+      />
+    </Filter>
   </Space>;
 };
 
