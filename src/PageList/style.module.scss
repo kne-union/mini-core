@@ -1,0 +1,23 @@
+.border-box{
+  .bottom-info-view{
+    border-top: solid 2px var(--adm-color-background-light-1);
+  }
+}
+
+.bottom-info-view {
+  height: 104px;
+  line-height: 104px;
+  text-align: center;
+  color: var(--adm-color-weak);
+  font-size: var(--adm-font-size-6);
+}
+
+.result-info {
+  padding-top: 16px;
+  padding-bottom: 32px;
+  text-align: center;
+  line-height: 40px;
+  color: var(--adm-color-text-secondary);
+  border-bottom: solid 2px var(--adm-color-background-light-1);
+  font-size: var(--adm-font-size-6);
+}
