@@ -66,3 +66,4 @@ export {default as File, useFilePreview, withFilePreview, withOssFile} from './F
 export {default as Table} from './Table';
 export {default as TipsMessage} from './TipsMessage';
 export {default as Warning} from './Warning';
+export {default as PageList} from './PageList';
