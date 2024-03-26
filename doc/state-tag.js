@@ -32,19 +32,10 @@ const BaseExample = () => {
       <Space direction={"vertical"}>
         <View>展示边框</View>
         <Space wrap>
+          <StateTag type="primary" showBorder text="类型: Primary" />
           {
             ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
-              <StateTag key={type} type={type} showBorder>{type}</StateTag>
-            ))
-          }
-        </Space>
-      </Space>
-      <Space direction={"vertical"}>
-        <View>文案传值</View>
-        <Space wrap>
-          {
-            ["default", "result", "success", "progress", "danger", "info", "other", "primary"].map(type => (
-              <StateTag key={type} type={type} showBorder text={type} />
+              <StateTag key={type} type={type} showBorder text={`${type}`} />
             ))
           }
         </Space>
