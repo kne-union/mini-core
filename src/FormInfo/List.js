@@ -58,23 +58,23 @@ const List = forwardRef(({
         className,
         allowAdd,
         add: addItem,
-        children: <GroupList name={name} defaultLength={defaultLength} ref={groupRef}>{(...groupArgs) => {
+        children: <GroupList name={name} defaultLength={minLength || defaultLength} ref={groupRef}>{(...groupArgs) => {
             const [key, {index, onRemove, length}] = groupArgs;
             const renderList = typeof list === "function" ? list(...groupArgs, context) : list;
             return <FormPart
-                    key={key}
-                    className={classnames(style["list-item"], 'form-part-list-item')}
-                    isSubheading
-                    list={minLength && minLength >= length ? renderList : [...renderList, <View>
-                        <Button className={style['list-btn-del']} block onClick={() => {
-                            onRemove(key);
-                            afterDelete && afterDelete(...groupArgs, context);
-                        }} color='danger' fill='none'>
-                            <Icon className="iconfont" type="shanchu"/>{removeText}
-                        </Button>
-                    </View>]}
-                    groupArgs={groupArgs}
-                    title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
+                key={key}
+                className={classnames(style["list-item"], 'form-part-list-item')}
+                isSubheading
+                list={minLength && minLength >= length ? renderList : [...renderList, <View>
+                    <Button className={style['list-btn-del']} block onClick={() => {
+                        onRemove(key);
+                        afterDelete && afterDelete(...groupArgs, context);
+                    }} color='danger' fill='none'>
+                        <Icon className="iconfont" type="shanchu"/>{removeText}
+                    </Button>
+                </View>]}
+                groupArgs={groupArgs}
+                title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
         }}</GroupList>
     })}/>;
 });

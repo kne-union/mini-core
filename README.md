@@ -887,6 +887,7 @@ const {
   Upload,
   SubmitButton,
   useFormContext,
+    SubList,
   usePopupForm,
   TextArea
 } = FormInfo;
@@ -1049,6 +1050,19 @@ const BaseExample = () => {
               <Input.Item name="field1" label="字段1" />
             ]}
           />
+            <FormList
+                name="list2"
+                title="列表2"
+                subtitle="副标题"
+                minLength={1}
+                itemTitle={({index}) => `第${index + 1}项`}
+                list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
+                    <Input.Item name="field1" label="字段1"/>,<SubList name="sub-list" title="子列表" itemTitle={({index}) => `第${index + 1}项`} minLength={2} list={[
+                        <Input.Item name="name" label="名称"/>,
+                        <Input.Item name="field0" label="字段"/>,
+                        <Input.Item name="field1" label="字段1"/>
+                    ]}/>]}
+            />
           <SubmitButton>提交</SubmitButton>
         </Form>
       </Space>

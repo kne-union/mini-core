@@ -74,3 +74,21 @@
     }
   }
 }
+
+.sub-list {
+  :global {
+    .react-form__field-component {
+      padding-right: 0 !important;
+
+      &:after {
+        content: normal !important;
+      }
+    }
+  }
+}
+
+.sub-list-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
