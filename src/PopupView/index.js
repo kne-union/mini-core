@@ -16,27 +16,27 @@ const scrollContext = createContext(0);
 const {Provider: ScrollProvider} = scrollContext;
 
 const PopupView = ({open, onClose, className, children, title, hasSafeArea, backArrow, onScroll, scrollTop}) => {
-  const [headerHeight, setHeaderHeight] = useState();
-  const scroll = useContext(scrollContext);
-  if (!open) {
-    return null;
-  }
-  return <>
-    <HeaderContainer onHeightChange={(height) => {
-      setHeaderHeight(height);
-    }}>
-      <NavBar backArrow={backArrow || <Icon type="arrow-thin-left" className="iconfont"/>}
-              onBack={onClose}>{title}</NavBar>
-    </HeaderContainer>
-    <ScrollView className={classnames(style['popup-view'], className)}
-                scrollTop={(Number.isInteger(scrollTop) ? scrollTop : scroll) || 0}
-                onScroll={onScroll} style={headerHeight ? {
-      '--header-container-height': toCSSLength(headerHeight)
-    } : {}} scrollY>
-      {children}
-      {hasSafeArea && <SafeArea position="bottom"/>}
-    </ScrollView>
-  </>;
+    const [headerHeight, setHeaderHeight] = useState();
+    const scroll = useContext(scrollContext);
+    if (!open) {
+        return null;
+    }
+    return <>
+        <HeaderContainer onHeightChange={(height) => {
+            setHeaderHeight(height);
+        }}>
+            <NavBar backArrow={backArrow || <Icon type="arrow-thin-left" className="iconfont"/>}
+                    onBack={onClose}>{title}</NavBar>
+        </HeaderContainer>
+        <ScrollView className={classnames(style['popup-view'], className)}
+                    scrollTop={(Number.isInteger(scrollTop) ? scrollTop : scroll) || 0}
+                    onScroll={onScroll} style={headerHeight ? {
+            '--header-container-height': toCSSLength(headerHeight)
+        } : {}} scrollY>
+            {children}
+            {hasSafeArea && <SafeArea position="bottom"/>}
+        </ScrollView>
+    </>;
 };
 
 export const PopupViewProvider = ({children}) => {
@@ -85,7 +85,6 @@ export const PopupViewProvider = ({children}) => {
     }}>
         {children}
         {popupViewList.map((props) => {
-          console.log(props)
             return <ScrollProvider value={scrollY[props.id]}><Popup {...props} open key={props.id} hasSafeArea={false}
                                                                     isRootPortal={false}/></ScrollProvider>
         })}
@@ -103,8 +102,8 @@ export const usePopup = (options) => {
 
 export const usePopupView = (options) => {
     const popup = usePopup(Object.assign({}, {
-        position: 'right', bodyClassName: classnames(style['popup-page'], options?.bodyClassName), catchMove: true
-    }, options));
+        position: 'right', catchMove: true
+    }, options, {bodyClassName: classnames(style['popup-page'], options?.bodyClassName)}));
 
     return ({children, ...props}) => {
         const onClose = () => {
