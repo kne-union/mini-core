@@ -13,7 +13,7 @@ import {View} from '@tarojs/components';
 
 const SubListInner = ({list, extraProps, value, onChange}) => {
     const {title, subtitle, name, ...props} = Object.assign({}, extraProps);
-    return <Form data={Object.assign({}, {[name]: value || []})} onSubmit={(data) => {
+    return <Form debug data={Object.assign({}, {[name]: value || []})} onSubmit={(data) => {
         onChange(data[name]);
     }}>
         <List {...props} name={name} list={list} title={title} subtitle={subtitle}/>
@@ -40,12 +40,12 @@ const SubListItem = createDataSelectField({
     }
 })(SubListInner).Item;
 
-const SubList = ({list, title, placeholder, name, editText, ...props}) => {
+const SubList = ({list, listProps: defaultListProps, title, placeholder, name, editText, ...props}) => {
     const listProps = useMemo(() => {
-        return list.map(({props}) => {
+        return defaultListProps || (Array.isArray(list) ? list.map(({props}) => {
             return {label: props.label, name: props.name};
-        });
-    }, [list]);
+        }) : []);
+    }, [defaultListProps, list]);
     const fieldItemApi = useRef(null);
     return <SubListItem className={style['sub-list']} label={title} title={<View className={style['sub-list-title']}>
         <View>{title}</View>
