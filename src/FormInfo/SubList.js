@@ -45,7 +45,7 @@ const SubListItem = createDataSelectField({
     }
 })(SubListInner).Item;
 
-const SubList = ({list, listProps: defaultListProps, title, placeholder, name, editText, ...props}) => {
+const SubList = ({list, listProps: defaultListProps, title, placeholder, name, editText, onChange, ...props}) => {
     const listProps = useMemo(() => {
         return defaultListProps || (Array.isArray(list) ? list.map(({props}) => {
             return {label: props.label, name: props.name, render: props.contentRender};
@@ -60,7 +60,7 @@ const SubList = ({list, listProps: defaultListProps, title, placeholder, name, e
             <Icon className="iconfont" type="bianji"/>
             {editText}
         </Button>}</View>
-    </View>}
+    </View>} onChange={onChange}
                         list={typeof list === 'function' ? (...args) => list(...args).map((item) => omit(item, ['contentRender'])) : list.map((item) => omit(item, ['contentRender']))}
                         name={name} placeholder={title}
                         listProps={listProps}
