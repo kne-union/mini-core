@@ -38,7 +38,7 @@ const List = forwardRef(({
 
     const addItem = useRefCallback(() => {
         if (typeof beforeAdd === "function" ? beforeAdd(name, context) !== false : true) {
-            groupRef.current.onAdd({isUnshift: isUnshift});
+            groupRef.current.onAdd({isUnshift});
         }
     });
     useImperativeHandle(listRef, () => {
@@ -47,7 +47,7 @@ const List = forwardRef(({
                 if (!allowAddRef.current) {
                     return;
                 }
-                addItem({isUnshift: isUnshift});
+                addItem({isUnshift});
             }
         };
     }, [isUnshift, addItem]);
@@ -58,7 +58,7 @@ const List = forwardRef(({
         className,
         allowAdd,
         add: addItem,
-        children: <GroupList name={name} defaultLength={minLength || defaultLength} ref={groupRef}>{(...groupArgs) => {
+        children: <GroupList name={name} defaultLength={minLength || defaultLength} ref={groupRef} isReverse={isUnshift}>{(...groupArgs) => {
             const [key, {index, onRemove, length}] = groupArgs;
             const renderList = typeof list === "function" ? list(...groupArgs, context) : list;
             return <FormPart
