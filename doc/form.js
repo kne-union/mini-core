@@ -183,14 +183,14 @@ const BaseExample = () => {
                         itemTitle={({index}) => `第${index + 1}项`}
                         list={[<Input.Item name="name" label="名称"/>, <Input.Item name="field0" label="字段"/>,
                             <Input.Item name="field1" label="字段1"/>,
-                            <SubList name="sub-list" title="子列表" itemTitle={({index}) => `第${index + 1}项`} listProps={[{
-                                label: '名称', name: 'name'
-                            }, {
-                                label: '字段', name: 'field0'
-                            }, {
-                                label: '字段1', name: 'field1'
-                            }]} minLength={2} list={() => [<Input.Item name="name" label="名称"/>,
-                                <Input.Item name="field0" label="字段"/>, <Input.Item name="field1" label="字段1"/>]}/>]}
+                            <SubList name="sub-list" title="子列表" itemTitle={({index}) => `第${index + 1}项`}
+                                     listProps={[{
+                                         label: '名称', contentRender: ({value}) => `我是${value.name}-${value.field0}`
+                                     }, {
+                                         label: '字段1', name: 'field1'
+                                     }]} minLength={2} list={() => [<Input.Item name="name" label="名称"/>,
+                                <Input.Item name="field0" label="字段"/>,
+                                <Input.Item name="field1" label="字段1"/>]}/>]}
                     />
                     <SubmitButton>提交</SubmitButton>
                 </Form>
