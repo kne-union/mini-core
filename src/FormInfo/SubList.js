@@ -8,12 +8,13 @@ import FixedView from "../FixedView";
 import InfoPage from '../InfoPage';
 import Content from '../Content';
 import get from 'lodash/get';
+import omit from 'lodash/omit';
 import {Button, Icon} from '@kne/antd-taro';
 import {View} from '@tarojs/components';
 
 const SubListInner = ({list, extraProps, value, onChange}) => {
     const {title, subtitle, name, ...props} = Object.assign({}, extraProps);
-    return <Form debug data={Object.assign({}, {[name]: value || []})} onSubmit={(data) => {
+    return <Form data={Object.assign({}, {[name]: value || []})} onSubmit={(data) => {
         onChange(data[name]);
     }}>
         <List {...props} name={name} list={list} title={title} subtitle={subtitle}/>
@@ -31,8 +32,12 @@ const SubListItem = createDataSelectField({
                 return {
                     key: index,
                     title: typeof extraProps.itemTitle === "function" ? extraProps.itemTitle({index}) : extraProps.itemTitle,
-                    children: <Content list={listProps.map(({name, label}) => {
-                        return {label, content: get(value, [index, name], '-')}
+                    children: <Content list={listProps.map(({name, label, contentRender}) => {
+                        return {
+                            label, content: typeof contentRender === 'function' ? contentRender({
+                                value: get(value, `[${index}]${name ? `.${name}` : ''}`), label
+                            }) : get(value, `[${index}].${name}`, '-')
+                        }
                     })}/>
                 };
             })}/>
@@ -43,7 +48,7 @@ const SubListItem = createDataSelectField({
 const SubList = ({list, listProps: defaultListProps, title, placeholder, name, editText, ...props}) => {
     const listProps = useMemo(() => {
         return defaultListProps || (Array.isArray(list) ? list.map(({props}) => {
-            return {label: props.label, name: props.name};
+            return {label: props.label, name: props.name, render: props.contentRender};
         }) : []);
     }, [defaultListProps, list]);
     const fieldItemApi = useRef(null);
@@ -55,7 +60,11 @@ const SubList = ({list, listProps: defaultListProps, title, placeholder, name, e
             <Icon className="iconfont" type="bianji"/>
             {editText}
         </Button>}</View>
-    </View>} list={list} name={name} placeholder={title} listProps={listProps} popupClassName="bg-grey"
+    </View>}
+                        list={typeof list === 'function' ? (...args) => list(...args).map((item) => omit(item, ['contentRender'])) : list.map((item) => omit(item, ['contentRender']))}
+                        name={name} placeholder={title}
+                        listProps={listProps}
+                        popupClassName="bg-grey"
                         rule={(value) => {
                             if (props.minLength && Number.isInteger(props.minLength) && !(value && value.length >= props.minLength)) {
                                 return {
