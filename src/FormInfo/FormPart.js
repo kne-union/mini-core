@@ -1,4 +1,4 @@
-import React, {useMemo, useRef, createElement, useState, useEffect} from 'react';
+import React, {createElement, useEffect, useMemo, useRef, useState} from 'react';
 import {List} from '@kne/antd-taro';
 import classnames from 'classnames';
 import {useFormContext} from "@kne/react-form-antd-taro";
@@ -44,15 +44,15 @@ const FormItemRenderer = ({type, onChange, ...props}) => {
     return formItem;
 };
 
-const FormPart = ({list, groupArgs, ...props}) => {
+const FormPart = ({list, groupOptions, ...props}) => {
     const context = useFormContext();
     const formData = context.formData;
     const openApiRef = useRef(null);
     openApiRef.current = context.openApi;
 
     const formApi = useMemo(() => {
-        return {formData, groupArgs, openApi: openApiRef.current};
-    }, [formData, groupArgs]);
+        return {formData, groupOptions, openApi: openApiRef.current};
+    }, [formData, groupOptions]);
 
     const targetList = typeof list === 'function' ? list(formApi) : list;
 
@@ -68,8 +68,8 @@ const FormPart = ({list, groupArgs, ...props}) => {
     }, [targetList, formApi]);
 
     const renderItem = (item, index) => {
-        const key = item.props.name + index || (groupArgs && groupArgs[0] + index) || index;
-        const targetProps = {}, componentProps = Object.assign({}, item.props), ComponentItem = item.type;
+        const key = item.props.name + index || (groupOptions ? groupOptions.id : '' + index) || index;
+        const targetProps = {}, componentProps = Object.assign({}, item.props);
         ["display", "hidden", "setExtraProps",].forEach((key) => {
             if (item.props.hasOwnProperty(key)) {
                 targetProps[key] = item.props[key];
