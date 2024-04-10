@@ -951,8 +951,8 @@ const BaseExample = () => {
             cardTypeEnum: [{"value": 1, "description": "身份证"}, {"value": 2, "description": "护照"}]
         }
     }}>
-        {/*<CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
-        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>*/}
+        <CommonListTitle subtitle="(至少填写一段工作经历)" extra="添加">工作经历</CommonListTitle>
+        <CommonListTitle subtitle="(至少填写一段工作经历)" isSubheading extra="添加">工作经历</CommonListTitle>
         <Space direction={"vertical"} size={30}>
             <Space direction={"vertical"}>
                 <View>弹出表单</View>
@@ -1037,10 +1037,9 @@ const BaseExample = () => {
             </Space>
             <Space direction={"vertical"}>
                 <View>列表</View>
-                <Form
-                    onSubmit={(data) => {
-                        console.log(data);
-                    }}
+                <Form onSubmit={(data) => {
+                          console.log(data);
+                      }}
                 >
                     <CommonListTitle
                         subtitle="(填写工作经历)"
@@ -1055,6 +1054,7 @@ const BaseExample = () => {
                         ref={listRef}
                         name="list1"
                         minLength={1}
+                        itemTitle={({index}) => `第${index + 1}项`}
                         list={[<Input.Item name="name" label="名称" labelTips="哈哈哈哈"/>,
                             <Input.Item name="field0" label="字段"/>, <Input.Item name="field1" label="字段1"/>]}
                     />
@@ -1068,8 +1068,8 @@ const BaseExample = () => {
                             <Input.Item name="field1" label="字段1"/>]}
                     />
                     <FormList
-                        name="list2"
-                        title="列表2"
+                        name="list3"
+                        title="列表3"
                         subtitle="副标题"
                         minLength={1}
                         itemTitle={({index}) => `第${index + 1}项`}
@@ -1088,11 +1088,10 @@ const BaseExample = () => {
                                              label: '字段1', name: 'field1'
                                          }]} minLength={2}
                                          list={() => [<Input.Item name="name" label="名称"
-                                                                                   onChange={() => {
-                                                                                       console.log('xxxx', parentForm.current);
-                                                                                   }}/>,
-                                             <Input.Item name="field0" label="字段"/>,
-                                             <Input.Item name="field1" label="字段1"/>]} />];
+                                                                  onChange={() => {
+                                                                      console.log('xxxx', parentForm.current);
+                                                                  }}/>, <Input.Item name="field0" label="字段"/>,
+                                             <Input.Item name="field1" label="字段1"/>]}/>];
                         }}
                     />
                     <SubmitButton>提交</SubmitButton>

@@ -38,7 +38,7 @@ const List = forwardRef(({
 
     const addItem = useRefCallback(() => {
         if (typeof beforeAdd === "function" ? beforeAdd(name, context) !== false : true) {
-            groupRef.current.onAdd({isUnshift});
+            groupRef.current.onAdd();
         }
     });
     useImperativeHandle(listRef, () => {
@@ -47,10 +47,10 @@ const List = forwardRef(({
                 if (!allowAddRef.current) {
                     return;
                 }
-                addItem({isUnshift});
+                addItem();
             }
         };
-    }, [isUnshift, addItem]);
+    }, [addItem]);
     return <OuterType {...Object.assign({}, outer.props, {
         title,
         subtitle,
@@ -58,9 +58,10 @@ const List = forwardRef(({
         className,
         allowAdd,
         add: addItem,
-        children: <GroupList name={name} defaultLength={minLength || defaultLength} ref={groupRef} isReverse={isUnshift}>{(...groupArgs) => {
-            const [key, {index, onRemove, length}] = groupArgs;
-            const renderList = typeof list === "function" ? list(...groupArgs, context) : list;
+        children: <GroupList name={name} defaultLength={minLength || defaultLength} ref={groupRef}
+                             reverseOrder={isUnshift}>{(groupOptions) => {
+            const {id: key, index, onRemove, length} = groupOptions;
+            const renderList = typeof list === "function" ? list(key, groupOptions, context) : list;
             return <FormPart
                 key={key}
                 className={classnames(style["list-item"], 'form-part-list-item')}
@@ -68,12 +69,12 @@ const List = forwardRef(({
                 list={minLength && minLength >= length ? renderList : [...renderList, <View>
                     <Button className={style['list-btn-del']} block onClick={() => {
                         onRemove(key);
-                        afterDelete && afterDelete(...groupArgs, context);
+                        afterDelete && afterDelete(key, groupOptions, context);
                     }} color='danger' fill='none'>
                         <Icon className="iconfont" type="shanchu"/>{removeText}
                     </Button>
                 </View>]}
-                groupArgs={groupArgs}
+                groupOptions={groupOptions}
                 title={typeof itemTitle === "function" ? itemTitle({index, key, onRemove}) : itemTitle}/>
         }}</GroupList>
     })}/>;
