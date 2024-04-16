@@ -1,6 +1,6 @@
 {
   "name": "@kne/mini-core",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "dependencies": {
     "@kne/antd-taro": "^1.0.35",
     "@kne/compose": "^0.1.0",
@@ -26,7 +26,8 @@
     "build": "run-s build:lib build:md build:doc build:example",
     "test": "run-s test:unit test:lint test:build",
     "eject": "react-scripts eject",
-    "init": "mini-example install && create-md && mini-example build",
+    "init": "husky && npm run init-example",
+    "init-example": "mini-example install && create-md && mini-example build",
     "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment --alias lodash=@kne/lodash-wechat --assertType inline",
     "build:md": "create-md",
     "start:md": "create-md --watch",
@@ -39,8 +40,8 @@
     "build:doc": "mini-example build",
     "build:example": "cd example && npm run build:weapp",
     "start:example": "cd example && cross-env NODE_ENV=production npm run build:weapp -- --watch",
-    "deploy": "gh-pages -d example/build",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss}'"
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss}'",
+    "lint-staged": "npx lint-staged"
   },
   "browserslist": [
     "last 3 versions",
@@ -77,8 +78,8 @@
     "@babel/runtime": "^7.7.7",
     "@kne/md-doc": "^0.1.8",
     "@kne/microbundle": "^0.15.5",
-    "@kne/mini-example": "^0.1.11",
-    "@kne/modules-dev": "^2.0.6",
+    "@kne/mini-example": "^0.1.12",
+    "@kne/modules-dev": "^2.0.20",
     "@tarojs/components": "3.6.23",
     "@tarojs/helper": "3.6.23",
     "@tarojs/plugin-framework-react": "3.6.23",
@@ -88,8 +89,7 @@
     "@tarojs/shared": "3.6.23",
     "@tarojs/taro": "3.6.23",
     "cross-env": "^7.0.3",
-    "gh-pages": "^3.2.3",
-    "husky": "^7.0.4",
+    "husky": "^9.0.11",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
