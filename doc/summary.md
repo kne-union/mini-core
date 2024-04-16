@@ -1,3 +1,5 @@
+<img title="" src="https://www.kne-union.top/static-data/mini-core/index.jpg" alt="" style="margin: 2em auto;display: block; width: 200px; height: 200px">
+
 ***mini-core*** 是一个Taro的高级组件库，它有别于 ***@kne/antd-taro*** 只提供简单的UI交互组件，它旨在解决toB类小程序应用中的复杂场景问题，例如：
 
 1. 主题色问题
@@ -19,52 +21,20 @@
 
 #### 使用脚手架
 
-你可以使用Taro官方提供的脚手架初始化项目
+1. 执行初始化命令
 
 ```shell
-npm install -g @tarojs/cli
+npx @kne/npm-tools init [project-name]
 ```
+
+2. 选择 WeChat Miniprogram Project 模板
+
+3. 执行启动命令
 
 ```shell
-taro init myApp
+npm run start
 ```
 
-或者使用npx执行
-
-```shell
-npx @tarojs/cli init myApp
-```
-
-初始化完成之后安装***mini-core***包
-
-```shell
-npm i --save @kne/mini-core
-```
-
-然后安装example演示程序及components所需包
-
-```shell
-npm i --save-dev @kne/mini-example @kne/md-doc
-```
-
-package.json的scripts中添加对应的启动命令
-
-```json
-{
-  "init": "mini-example install && create-md && mini-example build",
-  "start": "npm run build:md &&npm run build:doc && run-p dev:weapp start:md start:doc start:example",
-  "build": "run-s build:weapp build:md build:doc build:example",
-  "build:weapp": "taro build --type weapp",
-  "dev:weapp": "cross-env NODE_ENV=production npm run build:weapp -- --watch",
-  "build:md": "create-md",
-  "start:md": "create-md --watch",
-  "build:doc": "mini-example build",
-  "start:doc": "mini-example start",
-  "build:example": "cd example && npm run build:weapp",
-  "build:example:dd": "cd example && npm run build:dd",
-  "start:example": "cd example && cross-env NODE_ENV=production npm run build:weapp -- --watch"
-}
-```
 
 #### 示例程序的使用
 
