@@ -989,7 +989,7 @@ const BaseExample = () => {
                             <Calendar.Item name="time2" label="时间"/>, <TimeStep.Item name="timeStep" label="时间2"/>,
                             <CalendarRange.Item name="time3" label="时间段"/>,
                             <CalendarTimeRange.Item name="time2" label="面试时间2" rule="REQ" durationHidden/>,
-                            <UserListSelect.Item name="user" label="用户" rule="REQ"/>,
+                            <UserListSelect.Item name="user" label="用户" rule="REQ" disabledValues={[1, 2, 3]}/>,
                             <Upload.Item name="attachment" label="附件" rule="REQ"/>,
                             <AutoComplete.Item name="school" label="学校" rule="REQ" api={{
                                 loader: ({data}) => {
@@ -1008,8 +1008,8 @@ const BaseExample = () => {
             <Space direction={"vertical"}>
                 <View>列表</View>
                 <Form onSubmit={(data) => {
-                          console.log(data);
-                      }}
+                    console.log(data);
+                }}
                 >
                     <CommonListTitle
                         subtitle="(填写工作经历)"

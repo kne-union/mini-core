@@ -4,30 +4,32 @@ $class-prefix-selector: 'adm-selector';
 $class-prefix-nav-bar: 'adm-nav-bar';
 $class-prefix-input-number: 'adm-input-number';
 $class-prefix-icon: 'adm-icon';
-$primary-color: #4F185A;
+$primary-color: #4f185a;
 
-page, body, .adm-root-portal {
+page,
+body,
+.adm-root-portal {
   --adm-font-size-11: 38px;
   --adm-font-size-12: 40px;
   --adm-font-size-13: 48px;
   font-size: var(--adm-font-size-6);
 
   --adm-color-primary: #{$primary-color};
-  --adm-color-info: #165DFF;
+  --adm-color-info: #165dff;
   --adm-color-text-dafault: #222222;
-  --adm-color-background-line: #F1F1F1;
-  --adm-color-background-grey: #F8F8F8;
+  --adm-color-background-line: #f1f1f1;
+  --adm-color-background-grey: #f8f8f8;
   --adm-color-background-light-1: #f1f1f1;
   --adm-color-background-light: #f3f3f3;
   --adm-color-background-primary-opacity-1: #{rgba($primary-color, 0.1)};
-  --adm-color-info-opacity-06: #{rgba(#155ACF, 0.06)};
+  --adm-color-info-opacity-06: #{rgba(#155acf, 0.06)};
   --adm-color-border: #eeeeee;
   --adm-button-border-color: #cccccc;
 
   --adm-button-border-radius: 4px;
 
   @for $i from 1 through 10 {
-    --adm-color-primary-#{$i}: #{rgba($primary-color, $i / 10)};
+    --adm-color-primary-#{$i}: #{rgba($primary-color, calc($i / 10))};
   }
 
   .#{$class-prefix-nav-bar} {
@@ -126,11 +128,11 @@ page, body, .adm-root-portal {
       align-items: center;
       //height: 32px;
       .adm-icon {
-        font-family: "iconfont" !important;
+        font-family: 'iconfont' !important;
         color: var(--adm-color-weak);
 
         &:before {
-          content: "\e677";
+          content: '\e677';
         }
       }
     }
@@ -149,11 +151,12 @@ page, body, .adm-root-portal {
   .#{$class-prefix-selector}-item {
     border: solid 2px transparent;
     padding: 12px 22px;
-    background: #F3F3F3;
+    background: #f3f3f3;
     box-sizing: border-box;
 
-    &.#{$class-prefix-selector}-item-multiple-active, &.#{$class-prefix-selector}-item-active {
-      background: #FFFFFF;
+    &.#{$class-prefix-selector}-item-multiple-active,
+    &.#{$class-prefix-selector}-item-active {
+      background: #ffffff;
       border-color: var(--adm-color-primary);
     }
   }
@@ -166,7 +169,6 @@ page, body, .adm-root-portal {
     }
 
     .#{$class-prefix-input-number}-right {
-
       .#{$class-prefix-icon}:before {
         content: '\e60d' !important;
       }
@@ -174,7 +176,8 @@ page, body, .adm-root-portal {
   }
 
   .react-form {
-    .input-placeholder, .textarea-placeholder {
+    .input-placeholder,
+    .textarea-placeholder {
       font-size: var(--adm-font-size-8);
       color: var(--adm-color-light);
     }
@@ -185,18 +188,17 @@ page, body, .adm-root-portal {
       --border-bottom: solid 2px var(--adm-color-background-line);
       --padding-left: 32px;
       --padding-right: 32px;
-      background: #FFFFFF;
+      background: #ffffff;
 
       > .adm-list-item {
         padding-right: 0;
         padding-left: 0;
 
-
         &:after {
           left: 0;
           width: 100%;
           opacity: 1;
-          background: #F1F1F1;
+          background: #f1f1f1;
           bottom: 0;
           border-bottom: none;
         }
@@ -206,20 +208,20 @@ page, body, .adm-root-portal {
 
           &:after {
             left: 0;
-            background: #D14343;
+            background: #d14343;
           }
         }
 
         &.is-req {
           .adm-list-item-title {
             &:before {
-              font-family: "iconfont" !important;
-              content: "\e614";
+              font-family: 'iconfont' !important;
+              content: '\e614';
               position: relative;
               font-size: var(--adm-font-size-2);
               transform: none;
               margin-right: 4px;
-              color: #D14343;
+              color: #d14343;
               font-weight: 400;
             }
           }
@@ -229,7 +231,7 @@ page, body, .adm-root-portal {
           background-color: transparent;
 
           &:after {
-            background: #F1F1F1;
+            background: #f1f1f1;
             border-bottom: none;
           }
         }
@@ -263,7 +265,8 @@ page, body, .adm-root-portal {
           position: relative;
           padding-right: 44px;
 
-          &.is-read-only, &.is-disabled {
+          &.is-read-only,
+          &.is-disabled {
             pointer-events: none;
 
             &:after {
@@ -288,7 +291,7 @@ page, body, .adm-root-portal {
           &:after {
             position: absolute;
             font-family: 'iconfont' !important;
-            content: "\e60a";
+            content: '\e60a';
             font-size: var(--adm-font-size-6);
             color: var(--adm-color-light);
             right: 0;
