@@ -3,7 +3,7 @@ import './common.scss';
 import style from './style.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { eventCenter, useLaunch } from '@tarojs/taro';
-import { PageMeta, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import get from 'lodash/get';
 import { Provider, useGlobalContext as useContext } from '@kne/global-context';
 import classnames from 'classnames';
@@ -101,28 +101,28 @@ export const GlobalStyle = props => {
     });
   }, [setGlobal]);
   return (
-    <View className={classnames(style['container'], props.className)}>
-      <PageMeta
-        pageStyle={Object.assign(
-          {},
-          transform(
-            stateColors,
-            (result, value, key) => {
-              result[`--state-${key}`] = value;
-              result[`--state-${key}-06`] = value + '0F';
-            },
-            {}
-          ),
-          transform(
-            warningColors,
-            (result, value, key) => {
-              result[`--warning-${key}`] = value;
-              result[`--warning-${key}-06`] = value + '0F';
-            },
-            {}
-          )
-        )}
-      />
+    <View
+      className={classnames(style['container'], props.className)}
+      style={Object.assign(
+        {},
+        transform(
+          stateColors,
+          (result, value, key) => {
+            result[`--state-${key}`] = value;
+            result[`--state-${key}-06`] = value + '0F';
+          },
+          {}
+        ),
+        transform(
+          warningColors,
+          (result, value, key) => {
+            result[`--warning-${key}`] = value;
+            result[`--warning-${key}-06`] = value + '0F';
+          },
+          {}
+        )
+      )}
+    >
       {props.children}
     </View>
   );
