@@ -83,7 +83,8 @@ const ListSelectInner = ({ options, maxLength, disabledValues, ...props }) => {
         !props.multiple && onChange(value);
       }}
       options={options.map(item => {
-        return Object.assign({}, item, typeof disabledValues === 'function' ? disabledValues(item) : disabledValues.indexOf(item.value) > -1 ? { disabled: true } : {});
+        const formatDisabledValues = typeof disabledValues === 'function' ? disabledValues(item) : disabledValues || [];
+        return Object.assign({}, item, formatDisabledValues.indexOf(item.value) > -1 ? { disabled: true } : {});
       })}
     />
   );
